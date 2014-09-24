@@ -7,6 +7,7 @@
 //
 
 #import "TTEntityComponent.h"
+#import "TTPropertyComponent.h"
 
 @class TTEntity;
 
@@ -19,6 +20,11 @@
 
 - (BOOL) addEntity: (TTEntity *) entity;
 - (BOOL) addEntities: (NSArray *) entities;
+
 - (BOOL) removeEntity: (TTEntity *) entity;
+
+- (void) sort;
+- (void) sort: (NSComparator) comparison;
+- (void) sortBy: (TTPropertyComponent *) propertyComponent;
 
 @end

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 #import "TTEntityGroupingComponent.h"
-#import "TTPropertyComponent.h"
 
 @interface TTDeckGroupingComponent : TTEntityGroupingComponent <NSCoding, NSCopying>
 
@@ -17,10 +16,6 @@
 @property (readonly) TTEntity *top;
 
 - (void) shuffle;
-
-- (void) sort;
-- (void) sort: (NSComparator) comparison;
-- (void) sortBy: (TTPropertyComponent *) propertyComponent;
 
 // removes from deck
 - (TTEntity *) drawCard: (TTEntity *) card;

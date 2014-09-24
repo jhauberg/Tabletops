@@ -102,29 +102,4 @@
     }
 }
 
-- (void) sort {
-    // todo: default to sorting by 'like'-ness, where similar ones go together.
-}
-
-- (void) sortBy: (TTPropertyComponent *) propertyComponent {
-    [_entities sortUsingComparator: ^NSComparisonResult(id left, id right) {
-        TTEntity *entity = (TTEntity *)left;
-        TTEntity *otherEntity = (TTEntity *)right;
-
-        TTPropertyComponent *property = [entity getComponentLike: propertyComponent];
-        TTPropertyComponent *otherProperty = [otherEntity getComponentLike: propertyComponent];
-
-        if (property && otherProperty) {
-            return [property compare:
-                    otherProperty];
-        }
-        
-        return NSOrderedAscending;
-    }];
-}
-
-- (void) sort: (NSComparator) comparison {
-    [_entities sortUsingComparator: comparison];
-}
-
 @end
