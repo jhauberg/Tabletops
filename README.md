@@ -1,4 +1,4 @@
-# Tabletops
+![icon](icon.png)
 
 I wanted a tool for conveniently making, and playing, board-game prototypes, without going through all the hassles of printing and paper cutting.
 
