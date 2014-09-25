@@ -10,7 +10,7 @@
 
 #import "TTEntityComponent.h"
 
-typedef BOOL (^TTEntityConditional)(TTEntityComponent *component);
+typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 
 @interface TTEntity : NSObject <NSCoding, NSCopying>
 
@@ -20,12 +20,12 @@ typedef BOOL (^TTEntityConditional)(TTEntityComponent *component);
 - (BOOL) removeComponent: (TTEntityComponent *) component;
 
 - (id) getComponentOfType: (Class) type;
-- (id) getComponentOfType: (Class) type matching: (TTEntityConditional) condition;
+- (id) getComponentOfType: (Class) type matching: (TTEntityComponentConditional) condition;
 
 - (NSArray *) getComponentsOfType: (Class) type;
 
 - (id) getComponentLike: (TTEntityComponent *) otherComponent;
-- (id) getComponentLike: (TTEntityComponent *) otherComponent matching: (TTEntityConditional) condition;
+- (id) getComponentLike: (TTEntityComponent *) otherComponent matching: (TTEntityComponentConditional) condition;
 
 - (BOOL) isLike: (TTEntity *) otherEntity;
 
