@@ -8,6 +8,9 @@
 
 #import "TTDieRepresentation.h"
 
+NSString* const kTTDieRepresentationSidesKey = @"sides";
+NSString* const kTTDieRepresentationSideImagesKey = @"side_images";
+
 @implementation TTDieRepresentation
 
 @synthesize sideImages = _sideImages;
@@ -23,8 +26,8 @@
 
 - (id) initWithCoder: (NSCoder *) decoder {
     if ((self = [super init])) {
-        _sides = [decoder decodeObjectForKey: @"sides"];
-        _sideImages = [decoder decodeObjectForKey: @"side_images"];
+        _sides = [decoder decodeObjectForKey: kTTDieRepresentationSidesKey];
+        _sideImages = [decoder decodeObjectForKey: kTTDieRepresentationSideImagesKey];
         _upside = [_sides firstObject];
     }
     
@@ -32,8 +35,8 @@
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
-    [encoder encodeObject: _sides forKey: @"sides"];
-    [encoder encodeObject: _sideImages forKey: @"side_images"];
+    [encoder encodeObject: _sides forKey: kTTDieRepresentationSidesKey];
+    [encoder encodeObject: _sideImages forKey: kTTDieRepresentationSideImagesKey];
 }
 
 - (id) copyWithZone: (NSZone *) zone {
@@ -54,9 +57,11 @@
     if (self.sides) {
         if (sideImages) {
             if ([sideImages count] < self.sides.count) {
-                NSLog(@"too few sideImages");
+                [NSException raise: @"Too few side images specified"
+                            format: @"Must specify %lu images", self.sides.count];
             } else if ([sideImages count] > self.sides.count) {
-                NSLog(@"too many sideImages. sides.count = %lu", self.sides.count);
+                [NSException raise: @"Too many side images specified"
+                            format: @"Must specify %lu images", self.sides.count];
             } else {
                 _sideImages = sideImages;
             }
@@ -74,7 +79,7 @@
     
     _upside = result;
     
-    return result;
+    return self.upside;
 }
 
 - (BOOL) isEqual: (id) object {

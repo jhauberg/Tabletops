@@ -18,6 +18,7 @@
 @property (strong) NSArray *sideImages;
 
 - (id) initWithSides: (NSArray *) sides;
+
 - (id) roll;
 
 @end
