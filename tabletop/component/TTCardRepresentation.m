@@ -11,6 +11,7 @@
 NSString* const kTTCardRepresentationFrontImageKey = @"front_image";
 NSString* const kTTCardRepresentationBackImageKey = @"back_image";
 NSString* const kTTCardRepresentationIsFlippedKey = @"is_flipped";
+NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 
 @implementation TTCardRepresentation
 
@@ -19,6 +20,7 @@ NSString* const kTTCardRepresentationIsFlippedKey = @"is_flipped";
         _frontImage = [decoder decodeObjectForKey: kTTCardRepresentationFrontImageKey];
         _backImage = [decoder decodeObjectForKey: kTTCardRepresentationBackImageKey];
         _isFlipped = [decoder decodeBoolForKey: kTTCardRepresentationIsFlippedKey];
+        _isTapped = [decoder decodeBoolForKey: kTTCardRepresentationIsTappedKey];
     }
     
     return self;
@@ -28,6 +30,7 @@ NSString* const kTTCardRepresentationIsFlippedKey = @"is_flipped";
     [encoder encodeObject: _frontImage forKey: kTTCardRepresentationFrontImageKey];
     [encoder encodeObject: _backImage forKey: kTTCardRepresentationBackImageKey];
     [encoder encodeBool: _isFlipped forKey: kTTCardRepresentationIsFlippedKey];
+    [encoder encodeBool: _isTapped forKey: kTTCardRepresentationIsTappedKey];
 }
 
 - (id) copyWithZone: (NSZone *) zone {
@@ -39,6 +42,10 @@ NSString* const kTTCardRepresentationIsFlippedKey = @"is_flipped";
         
         if (self.isFlipped) {
             [component flip];
+        }
+        
+        if (self.isTapped) {
+            [component tap];
         }
     }
     
@@ -52,6 +59,10 @@ NSString* const kTTCardRepresentationIsFlippedKey = @"is_flipped";
 
 - (void) flip {
     _isFlipped = !_isFlipped;
+}
+
+- (void) tap {
+    _isTapped = !_isTapped;
 }
 
 - (BOOL) isEqual: (id) object {
@@ -68,7 +79,7 @@ NSString* const kTTCardRepresentationIsFlippedKey = @"is_flipped";
 
 - (NSString *) description {
     return [NSString stringWithFormat:
-            @"%@ %@%@", [super description], self.visibleImage, self.isFlipped ? @" (flipped)" : @""];
+            @"%@ %@%@", [super description], self.visibleImage, self.isTapped ? @" (tapped)" : @""];
 }
 
 @end

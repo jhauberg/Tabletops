@@ -18,7 +18,9 @@
 @property (readonly) id visibleImage;
 
 @property (readonly) BOOL isFlipped;
+@property (readonly) BOOL isTapped;
 
 - (void) flip;
+- (void) tap;
 
 @end
