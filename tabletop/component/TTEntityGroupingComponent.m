@@ -100,7 +100,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
                     otherProperty];
         }
         
-        return NSOrderedAscending;
+        return NSOrderedSame;
     }];
 }
 

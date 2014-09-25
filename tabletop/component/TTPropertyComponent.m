@@ -42,7 +42,7 @@ NSString* const kTTPropertyComponentValueKey = @"value";
 }
 
 - (NSComparisonResult) compare: (TTPropertyComponent *) otherProperty {
-    if (![self isEqual: otherProperty]) {
+    if ([self isLike: otherProperty]) {
         if ([self.value isKindOfClass: [NSNumber class]] &&
             [otherProperty.value isKindOfClass: [NSNumber class]]) {
             return [((NSNumber *)self.value) compare:

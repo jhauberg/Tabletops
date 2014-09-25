@@ -17,7 +17,6 @@
 
 - (void) shuffle;
 
-// removes from deck
 - (TTEntity *) drawCard: (TTEntity *) card;
 
 - (TTEntity *) drawCardFromTop;
