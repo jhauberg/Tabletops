@@ -15,6 +15,21 @@ NSString* const kTTEntityComponentsKey = @"components";
     NSMutableArray *_components;
 }
 
++ (TTEntity *) entity {
+    return [[TTEntity alloc] init];
+}
+
++ (TTEntity *) entityWithComponents: (NSArray *) components {
+    TTEntity *entity = [TTEntity entity];
+    
+    for (TTEntityComponent *component in components) {
+        [entity addComponent:
+         component];
+    }
+    
+    return entity;
+}
+
 - (id) init {
     if ((self = [super init])) {
         _components = [[NSMutableArray alloc] init];

@@ -14,6 +14,9 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 
 @interface TTEntity : NSObject <NSCoding, NSCopying>
 
++ (TTEntity *) entity;
++ (TTEntity *) entityWithComponents: (NSArray *) components;
+
 @property (readonly) NSArray *components;
 
 - (BOOL) addComponent: (TTEntityComponent *) component;
