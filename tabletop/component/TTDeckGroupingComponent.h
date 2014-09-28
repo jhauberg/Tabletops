@@ -19,16 +19,16 @@
 
 - (void) shuffle;
 
-- (TTEntity *) drawCardAtIndex: (NSUInteger) index;
+- (TTEntity *) drawAtIndex: (NSUInteger) index;
 
-- (TTEntity *) drawCard: (TTEntity *) card;
+- (TTEntity *) draw: (TTEntity *) card;
 
-- (TTEntity *) drawCardFromTop;
-- (TTEntity *) drawCardFromBottom;
-- (TTEntity *) drawCardAtRandom;
+- (TTEntity *) drawFromTop;
+- (TTEntity *) drawFromBottom;
+- (TTEntity *) drawAtRandom;
 
-- (NSArray *) drawCardsFromTop: (NSUInteger) amount;
-- (NSArray *) drawCardsFromBottom: (NSUInteger) amount;
-- (NSArray *) drawCardsAtRandom: (NSUInteger) amount;
+- (NSArray *) drawFromTop: (NSUInteger) amount;
+- (NSArray *) drawFromBottom: (NSUInteger) amount;
+- (NSArray *) drawAtRandom: (NSUInteger) amount;
 
 @end

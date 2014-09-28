@@ -25,6 +25,7 @@
 
 - (void) sort;
 - (void) sort: (NSComparator) comparison;
+
 - (void) sortBy: (TTPropertyComponent *) propertyComponent;
 
 @end

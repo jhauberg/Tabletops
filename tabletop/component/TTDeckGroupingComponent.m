@@ -52,7 +52,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return [_entities firstObject];
 }
 
-- (TTEntity *) drawCardAtIndex: (NSUInteger) index {
+- (TTEntity *) drawAtIndex: (NSUInteger) index {
     TTEntity *card = nil;
     
     if (index < _entities.count) {
@@ -77,12 +77,12 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return card;
 }
 
-- (TTEntity *) drawCard: (TTEntity *) card {
+- (TTEntity *) draw: (TTEntity *) card {
     if (card) {
         NSUInteger indexOfCard = [_entities indexOfObject: card];
         
         if (indexOfCard != NSNotFound) {
-            return [self drawCardAtIndex:
+            return [self drawAtIndex:
                     indexOfCard];
         }
     }
@@ -90,22 +90,22 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return nil;
 }
 
-- (TTEntity *) drawCardFromTop {
-    return [self drawCard:
+- (TTEntity *) drawFromTop {
+    return [self draw:
             self.top];
 }
 
-- (TTEntity *) drawCardFromBottom {
-    return [self drawCard:
+- (TTEntity *) drawFromBottom {
+    return [self draw:
             self.bottom];
 }
 
-- (NSArray *) drawCardsFromTop: (NSUInteger) amount {
+- (NSArray *) drawFromTop: (NSUInteger) amount {
     NSMutableArray *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
         [cards addObject:
-         [self drawCard:
+         [self draw:
           self.top]];
     }
     
@@ -113,12 +113,12 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
             cards];
 }
 
-- (NSArray *) drawCardsFromBottom: (NSUInteger) amount {
+- (NSArray *) drawFromBottom: (NSUInteger) amount {
     NSMutableArray *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
         [cards addObject:
-         [self drawCard:
+         [self draw:
           self.bottom]];
     }
     
@@ -126,17 +126,17 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
             cards];
 }
 
-- (TTEntity *) drawCardAtRandom {
-    return [self drawCardAtIndex:
+- (TTEntity *) drawAtRandom {
+    return [self drawAtIndex:
             rand() % [_entities count]];
 }
 
-- (NSArray *) drawCardsAtRandom: (NSUInteger) amount {
+- (NSArray *) drawAtRandom: (NSUInteger) amount {
     NSMutableArray *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
         [cards addObject:
-         [self drawCardAtRandom]];
+         [self drawAtRandom]];
     }
     
     return [NSArray arrayWithArray:
