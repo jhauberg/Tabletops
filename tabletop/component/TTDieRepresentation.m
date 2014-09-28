@@ -25,7 +25,7 @@ NSString* const kTTDieRepresentationSideImagesKey = @"side_images";
 }
 
 - (id) initWithCoder: (NSCoder *) decoder {
-    if ((self = [super init])) {
+    if ((self = [super initWithCoder: decoder])) {
         _sides = [decoder decodeObjectForKey: kTTDieRepresentationSidesKey];
         _sideImages = [decoder decodeObjectForKey: kTTDieRepresentationSideImagesKey];
         _upside = [_sides firstObject];

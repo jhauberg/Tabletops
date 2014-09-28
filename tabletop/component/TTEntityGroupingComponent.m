@@ -24,7 +24,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (id) initWithCoder: (NSCoder *) decoder {
-    if ((self = [super init])) {
+    if ((self = [super initWithCoder: decoder])) {
         _entities = [decoder decodeObjectForKey: kTTEntityGroupingComponentEntitiesKey];
     }
     

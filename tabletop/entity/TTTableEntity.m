@@ -26,7 +26,7 @@
 }
 
 - (id) initWithCoder: (NSCoder *) decoder {
-    if ((self = [super init])) {
+    if ((self = [super initWithCoder: decoder])) {
         _grouping = [decoder decodeObjectForKey: @"grouping"];
     }
     

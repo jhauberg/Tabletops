@@ -23,7 +23,7 @@ NSString* const kTTPropertyComponentValueKey = @"value";
 }
 
 - (id) initWithCoder: (NSCoder *) decoder {
-    if ((self = [super init])) {
+    if ((self = [super initWithCoder: decoder])) {
         _name = [decoder decodeObjectForKey: kTTPropertyComponentNameKey];
         _value = [decoder decodeObjectForKey: kTTPropertyComponentValueKey];
     }
