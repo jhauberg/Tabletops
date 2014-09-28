@@ -10,12 +10,14 @@
 #import "TTCardRepresentation.h"
 #import "TTEntity.h"
 
+NSString* const kTTDeckGroupingComponentAddsFaceDownKey = @"adds_face_down";
 NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 
 @implementation TTDeckGroupingComponent
 
 - (id) init {
     if (((self = [super init]))) {
+        self.addsFaceDown = YES;
         self.drawsFaceUp = YES;
     }
     
@@ -24,6 +26,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 
 - (id) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
+        self.addsFaceDown = [decoder decodeBoolForKey: kTTDeckGroupingComponentAddsFaceDownKey];
         self.drawsFaceUp = [decoder decodeBoolForKey: kTTDeckGroupingComponentDrawsFaceUpKey];
     }
     
@@ -31,6 +34,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [encoder encodeBool: _addsFaceDown forKey: kTTDeckGroupingComponentAddsFaceDownKey];
     [encoder encodeBool: _drawsFaceUp forKey: kTTDeckGroupingComponentDrawsFaceUpKey];
 }
 
@@ -38,10 +42,28 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     TTDeckGroupingComponent *component = [super copyWithZone: zone];
     
     if (component) {
+        component.addsFaceDown = self.addsFaceDown;
         component.drawsFaceUp = self.drawsFaceUp;
     }
     
     return component;
+}
+
+- (BOOL) addEntity: (TTEntity *) entity {
+    BOOL result = [super addEntity: entity];
+    
+    if (self.addsFaceDown) {
+        TTCardRepresentation *cardRepresentation = [entity getComponentOfType:
+                                                    [TTCardRepresentation class]];
+        
+        if (cardRepresentation) {
+            if (!cardRepresentation.isFlipped) {
+                [cardRepresentation flip];
+            }
+        }
+    }
+    
+    return result;
 }
 
 - (TTEntity *) top {

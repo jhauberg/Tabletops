@@ -15,6 +15,7 @@
 @property (readonly) TTEntity *bottom;
 @property (readonly) TTEntity *top;
 
+@property (assign) BOOL addsFaceDown;
 @property (assign) BOOL drawsFaceUp;
 
 - (void) shuffle;
