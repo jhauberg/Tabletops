@@ -7,9 +7,42 @@
 //
 
 #import "TTDeckGroupingComponent.h"
+#import "TTCardRepresentation.h"
 #import "TTEntity.h"
 
+NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
+
 @implementation TTDeckGroupingComponent
+
+- (id) init {
+    if (((self = [super init]))) {
+        self.drawsFaceUp = YES;
+    }
+    
+    return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder {
+    if ((self = [super initWithCoder: decoder])) {
+        self.drawsFaceUp = [decoder decodeBoolForKey: kTTDeckGroupingComponentDrawsFaceUpKey];
+    }
+    
+    return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder {
+    [encoder encodeBool: _drawsFaceUp forKey: kTTDeckGroupingComponentDrawsFaceUpKey];
+}
+
+- (id) copyWithZone: (NSZone *) zone {
+    TTDeckGroupingComponent *component = [super copyWithZone: zone];
+    
+    if (component) {
+        component.drawsFaceUp = self.drawsFaceUp;
+    }
+    
+    return component;
+}
 
 - (TTEntity *) top {
     return [_entities lastObject];
@@ -19,30 +52,52 @@
     return [_entities firstObject];
 }
 
-- (TTEntity *) drawCard: (TTEntity *) card {
-    if ([_entities containsObject: card]) {
-        [_entities removeObject: card];
+- (TTEntity *) drawCardAtIndex: (NSUInteger) index {
+    TTEntity *card = nil;
+    
+    if (index < _entities.count) {
+        card = [_entities objectAtIndex: index];
         
-        return card;
+        if (card) {
+            [_entities removeObjectAtIndex: index];
+            
+            if (self.drawsFaceUp) {
+                TTCardRepresentation *cardRepresentation = [card getComponentOfType:
+                                                            [TTCardRepresentation class]];
+                
+                if (cardRepresentation) {
+                    if (cardRepresentation.isFlipped) {
+                        [cardRepresentation flip];
+                    }
+                }
+            }
+        }
+    }
+    
+    return card;
+}
+
+- (TTEntity *) drawCard: (TTEntity *) card {
+    if (card) {
+        NSUInteger indexOfCard = [_entities indexOfObject: card];
+        
+        if (indexOfCard != NSNotFound) {
+            return [self drawCardAtIndex:
+                    indexOfCard];
+        }
     }
     
     return nil;
 }
 
 - (TTEntity *) drawCardFromTop {
-    TTEntity *topCard = self.top;
-    
-    [_entities removeObject: topCard];
-    
-    return topCard;
+    return [self drawCard:
+            self.top];
 }
 
 - (TTEntity *) drawCardFromBottom {
-    TTEntity *bottomCard = self.bottom;
-    
-    [_entities removeObject: bottomCard];
-    
-    return bottomCard;
+    return [self drawCard:
+            self.bottom];
 }
 
 - (NSArray *) drawCardsFromTop: (NSUInteger) amount {
@@ -86,10 +141,6 @@
     
     return [NSArray arrayWithArray:
             cards];
-}
-
-- (TTEntity *) drawCardAtIndex: (NSUInteger) index {
-    return [_entities objectAtIndex: index];
 }
 
 - (void) shuffle {

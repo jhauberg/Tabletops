@@ -15,14 +15,17 @@
 @property (readonly) TTEntity *bottom;
 @property (readonly) TTEntity *top;
 
+@property (assign) BOOL drawsFaceUp;
+
 - (void) shuffle;
+
+- (TTEntity *) drawCardAtIndex: (NSUInteger) index;
 
 - (TTEntity *) drawCard: (TTEntity *) card;
 
 - (TTEntity *) drawCardFromTop;
 - (TTEntity *) drawCardFromBottom;
 - (TTEntity *) drawCardAtRandom;
-- (TTEntity *) drawCardAtIndex: (NSUInteger) index;
 
 - (NSArray *) drawCardsFromTop: (NSUInteger) amount;
 - (NSArray *) drawCardsFromBottom: (NSUInteger) amount;
