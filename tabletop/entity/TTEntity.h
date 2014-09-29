@@ -27,6 +27,8 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 
 - (NSArray *) getComponentsOfType: (Class) type;
 
+- (id) getComponentLikeType: (Class) type;
+
 - (id) getComponentLike: (TTEntityComponent *) otherComponent;
 - (id) getComponentLike: (TTEntityComponent *) otherComponent matching: (TTEntityComponentConditional) condition;
 

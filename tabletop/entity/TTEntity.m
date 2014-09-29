@@ -119,6 +119,16 @@ NSString* const kTTEntityComponentsKey = @"components";
             components];
 }
 
+- (id) getComponentLikeType: (Class) type {
+    for (TTEntityComponent *component in _components) {
+        if ([component isKindOfClass: type]) {
+            return component;
+        }
+    }
+    
+    return nil;
+}
+
 - (id) getComponentLike: (TTEntityComponent *) otherComponent {
     return [self getComponentLike: otherComponent
                          matching: nil];
