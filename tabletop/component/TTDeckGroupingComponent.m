@@ -52,14 +52,13 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 - (BOOL) addEntity: (TTEntity *) entity {
     BOOL result = [super addEntity: entity];
     
-    if (self.addsFaceDown) {
-        TTCardRepresentation *cardRepresentation = [entity getComponentOfType:
-                                                    [TTCardRepresentation class]];
-        
-        if (cardRepresentation) {
-            if (!cardRepresentation.isFlipped) {
-                [cardRepresentation flip];
-            }
+    TTCardRepresentation *cardRepresentation = [entity getComponentOfType:
+                                                [TTCardRepresentation class]];
+    
+    if (cardRepresentation) {
+        if ((self.addsFaceDown && !cardRepresentation.isFlipped) ||
+            (!self.addsFaceDown && cardRepresentation.isFlipped)) {
+            [cardRepresentation flip];
         }
     }
     
@@ -82,15 +81,13 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
         
         if (card) {
             [_entities removeObjectAtIndex: index];
-            
-            if (self.drawsFaceUp) {
-                TTCardRepresentation *cardRepresentation = [card getComponentOfType:
-                                                            [TTCardRepresentation class]];
-                
-                if (cardRepresentation) {
-                    if (cardRepresentation.isFlipped) {
-                        [cardRepresentation flip];
-                    }
+
+            TTCardRepresentation *cardRepresentation = [card getComponentOfType:
+                                                        [TTCardRepresentation class]];
+            if (cardRepresentation) {
+                if ((self.drawsFaceUp && cardRepresentation.isFlipped) ||
+                    (!self.drawsFaceUp && !cardRepresentation.isFlipped)) {
+                    [cardRepresentation flip];
                 }
             }
         }
