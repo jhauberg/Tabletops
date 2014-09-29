@@ -83,6 +83,15 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return YES;
 }
 
+- (BOOL) moveEntity: (TTEntity *) entity fromGrouping: (TTEntityGroupingComponent *) grouping {
+    if ([grouping removeEntity: entity] &&
+        [self addEntity: entity]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (void) sort {
     // todo: default to sorting by 'like'-ness, where similar ones go together.
 }

@@ -23,6 +23,8 @@
 
 - (BOOL) removeEntity: (TTEntity *) entity;
 
+- (BOOL) moveEntity: (TTEntity *) entity fromGrouping: (TTEntityGroupingComponent *) grouping;
+
 - (void) sort;
 - (void) sort: (NSComparator) comparison;
 
