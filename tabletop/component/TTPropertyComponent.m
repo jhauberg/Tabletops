@@ -71,6 +71,9 @@ NSString* const kTTPropertyComponentValueKey = @"value";
     return NSOrderedSame;
 }
 
+/**
+ A different property component is considered to be equal to the receiver only if both name and value are the same.
+ */
 - (BOOL) isEqual: (id) object {
     if ([super isEqual: object]) {
         TTPropertyComponent *otherPropertyComponent = (TTPropertyComponent *)object;
@@ -83,6 +86,9 @@ NSString* const kTTPropertyComponentValueKey = @"value";
     return NO;
 }
 
+/**
+ A different property component is considered to be like the receiver only if the name is the same.
+ */
 - (BOOL) isLike: (TTEntityComponent *) otherComponent {
     if ([super isLike: otherComponent]) {
         TTPropertyComponent *otherPropertyComponent = (TTPropertyComponent *)otherComponent;

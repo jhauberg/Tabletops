@@ -32,6 +32,9 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 - (id) getComponentLike: (TTEntityComponent *) otherComponent;
 - (id) getComponentLike: (TTEntityComponent *) otherComponent matching: (TTEntityComponentConditional) condition;
 
+/**
+ Determines whether an entity is similar to the receiver.
+ */
 - (BOOL) isLike: (TTEntity *) otherEntity;
 
 @end

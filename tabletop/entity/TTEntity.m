@@ -146,10 +146,14 @@ NSString* const kTTEntityComponentsKey = @"components";
     return nil;
 }
 
+/**
+ Similarity, or 'like'-ness, is determined by whether the entity has the same types of components with the same values.
+ */
 - (BOOL) isLike: (TTEntity *) otherEntity {
     if ([otherEntity isKindOfClass: [self class]]) {
-        // Note the checking of equality against each component, NOT whether they're 'like' each other.
+        // Note the checking of equality against each component, and NOT whether they're 'like' each other.
         // An entity is ONLY like another entity if all components are equal; an entity is NEVER equal to another entity.
+        // Imagine two cards of the same type; they are treated the same, but they are still two cards.
         return [self.components isEqualToArray:
                 otherEntity.components];
     }
