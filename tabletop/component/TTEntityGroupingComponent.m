@@ -32,6 +32,8 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
     [encoder encodeObject: _entities forKey: kTTEntityGroupingComponentEntitiesKey];
 }
 

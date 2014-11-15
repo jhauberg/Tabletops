@@ -32,6 +32,8 @@ NSString* const kTTPropertyComponentValueKey = @"value";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
     [encoder encodeObject: _name forKey: kTTPropertyComponentNameKey];
     [encoder encodeObject: _value forKey: kTTPropertyComponentValueKey];
 }

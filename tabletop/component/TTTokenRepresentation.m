@@ -21,6 +21,8 @@ NSString* const kTTTokenRepresentationImageKey = @"image";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
     [encoder encodeObject: _image forKey: kTTTokenRepresentationImageKey];
 }
 

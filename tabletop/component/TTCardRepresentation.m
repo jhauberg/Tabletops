@@ -27,6 +27,8 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
     [encoder encodeObject: _frontImage forKey: kTTCardRepresentationFrontImageKey];
     [encoder encodeObject: _backImage forKey: kTTCardRepresentationBackImageKey];
     [encoder encodeBool: _isFlipped forKey: kTTCardRepresentationIsFlippedKey];

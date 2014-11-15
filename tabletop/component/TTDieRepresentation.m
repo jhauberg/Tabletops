@@ -35,6 +35,8 @@ NSString* const kTTDieRepresentationSideImagesKey = @"side_images";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
     [encoder encodeObject: _sides forKey: kTTDieRepresentationSidesKey];
     [encoder encodeObject: _sideImages forKey: kTTDieRepresentationSideImagesKey];
 }

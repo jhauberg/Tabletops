@@ -36,6 +36,8 @@ NSString* const kTTDeckEntityGroupingKey = @"grouping";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
     [encoder encodeObject: _grouping forKey: kTTDeckEntityGroupingKey];
 }
 

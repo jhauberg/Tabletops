@@ -30,6 +30,8 @@ NSString* const kTTAreaGroupingComponentAreaKey = @"area";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
     [encoder encodeRect: _area forKey: kTTAreaGroupingComponentAreaKey];
 }
 

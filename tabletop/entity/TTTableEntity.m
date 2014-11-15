@@ -34,6 +34,8 @@
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
     [encoder encodeObject: _grouping forKey: @"grouping"];
 }
 

@@ -21,6 +21,8 @@ NSString* const kTTRepresentationComponentPositionKey = @"position";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
     [encoder encodePoint: _position forKey: kTTRepresentationComponentPositionKey];
 }
 

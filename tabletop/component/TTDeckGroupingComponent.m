@@ -34,6 +34,8 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
     [encoder encodeBool: _addsFaceDown forKey: kTTDeckGroupingComponentAddsFaceDownKey];
     [encoder encodeBool: _drawsFaceUp forKey: kTTDeckGroupingComponentDrawsFaceUpKey];
 }
