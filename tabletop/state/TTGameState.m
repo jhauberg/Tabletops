@@ -8,7 +8,21 @@
 
 #import "TTGameState.h"
 
+NSString* const kTTGameStateDefaultFilename = @"state";
+
+NSString* const kTTGameStateTableKey = @"table";
+
 @implementation TTGameState
+
++ (TTGameState *) restore {
+    return [TTGameState restoreFromFile:
+            kTTGameStateDefaultFilename];
+}
+
++ (TTGameState *) restoreFromFile: (NSString*) path {
+    return (TTGameState *)[NSKeyedUnarchiver unarchiveObjectWithFile:
+                           path];
+}
 
 - (id) init {
     if ((self = [super init])) {
@@ -20,14 +34,14 @@
 
 - (id) initWithCoder: (NSCoder *) decoder {
     if ((self = [super init])) {
-        _table = [decoder decodeObjectForKey: @"table"];
+        _table = [decoder decodeObjectForKey: kTTGameStateTableKey];
     }
     
     return self;
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
-    [encoder encodeObject: _table forKey: @"table"];
+    [encoder encodeObject: _table forKey: kTTGameStateTableKey];
 }
 
 - (BOOL) save {
@@ -36,6 +50,16 @@
 }
 
 - (BOOL) saveAsHumanlyReadable: (BOOL) humanlyReadable {
+    return [self saveToFile: kTTGameStateDefaultFilename
+          asHumanlyReadable: humanlyReadable];
+}
+
+- (BOOL) saveToFile: (NSString *) path {
+    return [self saveToFile: path
+          asHumanlyReadable: NO];
+}
+
+- (BOOL) saveToFile: (NSString *) path asHumanlyReadable: (BOOL) humanlyReadable {
     NSData *data = nil;
     
     if (humanlyReadable) {
@@ -44,9 +68,12 @@
         NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:
                                      mutableData];
         
-        [archiver setOutputFormat: NSPropertyListXMLFormat_v1_0];
+        [archiver setOutputFormat:
+         NSPropertyListXMLFormat_v1_0];
+        
         [archiver encodeObject: self
-                        forKey: @"state"];
+                        forKey: path];
+        
         [archiver finishEncoding];
         
         data = [NSData dataWithData:
@@ -56,16 +83,20 @@
                 self];
     }
     
-    NSError *error = nil;
-    
-    if (!error) {
-        [data writeToFile: @"state"
+    if (data) {
+        NSError *error = nil;
+        
+        [data writeToFile: path
                   options: NSDataWritingAtomic
                     error: &error];
         
+        if (error) {
+            NSLog(@"error: %@", error);
+            
+            return NO;
+        }
+        
         return YES;
-    } else {
-        NSLog(@"error: %@", error);
     }
     
     return NO;
@@ -74,11 +105,6 @@
 - (NSString *) description {
     return [NSString stringWithFormat:
             @"\nTable: %@", [_table description]];
-}
-
-+ (TTGameState *) restore {
-    return (TTGameState *)[NSKeyedUnarchiver unarchiveObjectWithFile:
-                           @"state"];
 }
 
 @end

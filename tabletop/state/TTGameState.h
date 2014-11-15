@@ -13,10 +13,14 @@
 @interface TTGameState : NSObject <NSCoding>
 
 + (TTGameState *) restore;
++ (TTGameState *) restoreFromFile: (NSString*) path;
 
 @property (readonly) TTTableEntity *table;
 
 - (BOOL) save;
 - (BOOL) saveAsHumanlyReadable: (BOOL) humanlyReadable;
+
+- (BOOL) saveToFile: (NSString *) path;
+- (BOOL) saveToFile: (NSString *) path asHumanlyReadable: (BOOL) humanlyReadable;
 
 @end
