@@ -10,6 +10,7 @@
 
 NSString* const kTTDieRepresentationSidesKey = @"sides";
 NSString* const kTTDieRepresentationSideImagesKey = @"side_images";
+NSString* const kTTDieRepresentationUpsideKey = @"upside";
 
 @implementation TTDieRepresentation
 
@@ -28,7 +29,7 @@ NSString* const kTTDieRepresentationSideImagesKey = @"side_images";
     if ((self = [super initWithCoder: decoder])) {
         _sides = [decoder decodeObjectForKey: kTTDieRepresentationSidesKey];
         _sideImages = [decoder decodeObjectForKey: kTTDieRepresentationSideImagesKey];
-        _upside = [_sides firstObject];
+        _upside = [decoder decodeObjectForKey: kTTDieRepresentationUpsideKey];
     }
     
     return self;
@@ -39,6 +40,7 @@ NSString* const kTTDieRepresentationSideImagesKey = @"side_images";
     
     [encoder encodeObject: _sides forKey: kTTDieRepresentationSidesKey];
     [encoder encodeObject: _sideImages forKey: kTTDieRepresentationSideImagesKey];
+    [encoder encodeObject: _upside forKey: kTTDieRepresentationUpsideKey];
 }
 
 - (id) copyWithZone: (NSZone *) zone {
@@ -81,16 +83,21 @@ NSString* const kTTDieRepresentationSideImagesKey = @"side_images";
     
     _upside = result;
     
-    return self.upside;
+    return _upside;
 }
 
+/**
+ A different die component is considered to be equal to the receiver only if all sides, side images and
+ current side facing up are all the same.
+ */
 - (BOOL) isEqual: (id) object {
     if ([super isEqual: object]) {
         TTDieRepresentation *otherDieRepresentation = (TTDieRepresentation *)object;
         
         return
             [self.sides isEqualToArray: otherDieRepresentation.sides] &&
-            [self.sideImages isEqualToArray: otherDieRepresentation.sideImages];
+            [self.sideImages isEqualToArray: otherDieRepresentation.sideImages] &&
+            [self.upside isEqual: otherDieRepresentation.upside];
     }
     
     return NO;
