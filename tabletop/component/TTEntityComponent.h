@@ -11,7 +11,7 @@
 @interface TTEntityComponent : NSObject <NSCoding, NSCopying>
 
 /**
- Determines whether a component is similar to the receiver.
+ Determine whether a component is similar to the receiver.
  */
 - (BOOL) isLike: (TTEntityComponent *) otherComponent;
 

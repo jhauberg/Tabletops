@@ -12,8 +12,8 @@
 
 @interface TTCardRepresentation : TTRepresentationComponent <NSCoding, NSCopying>
 
-@property (strong) id frontImage;
-@property (strong) id backImage;
+@property (strong) NSString *frontImage;
+@property (strong) NSString *backImage;
 
 @property (readonly) id visibleImage;
 

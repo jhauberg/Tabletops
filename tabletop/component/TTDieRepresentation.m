@@ -44,7 +44,8 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTDieRepresentation *component = [[[self class] allocWithZone: zone] initWithSides: self.sides];
+    TTDieRepresentation *component = [[[self class] allocWithZone: zone] initWithSides:
+                                      self.sides];
     
     if (component) {
         component.sideImages = self.sideImages;
@@ -107,8 +108,9 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     NSMutableArray *sidesAndImages = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < [self.sides count]; i++) {
+        NSString *sideImage = [self.sideImages objectAtIndex: i];
+
         id side = [self.sides objectAtIndex: i];
-        id sideImage = [self.sideImages objectAtIndex: i];
         
         [sidesAndImages addObject:
          [NSString stringWithFormat:

@@ -147,7 +147,7 @@ NSString* const kTTEntityComponentsKey = @"components";
 }
 
 /**
- Similarity, or 'like'-ness, is determined by whether the entity has the same types of components with the same values.
+ Determines similarity, or 'like'-ness, by whether the entity has the same types of components with the same values.
  */
 - (BOOL) isLike: (TTEntity *) otherEntity {
     if ([otherEntity isKindOfClass: [self class]]) {

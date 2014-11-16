@@ -75,8 +75,8 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
         TTCardRepresentation *otherCardRepresentation = (TTCardRepresentation *)object;
         
         return
-            [self.frontImage isEqual: otherCardRepresentation.frontImage] &&
-            [self.backImage isEqual: otherCardRepresentation.backImage];
+            [self.frontImage isEqualToString: otherCardRepresentation.frontImage] &&
+            [self.backImage isEqualToString: otherCardRepresentation.backImage];
     }
     
     return NO;

@@ -18,6 +18,9 @@
 @property (assign) BOOL addsFaceDown;
 @property (assign) BOOL drawsFaceUp;
 
+/**
+ Shuffle the order that the entities occur in.
+ */
 - (void) shuffle;
 
 - (TTEntity *) drawAtIndex: (NSUInteger) index;

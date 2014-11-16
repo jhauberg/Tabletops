@@ -40,7 +40,8 @@ NSString* const kTTTokenRepresentationImageKey = @"image";
     if ([super isEqual: object]) {
         TTTokenRepresentation *otherTokenRepresentation = (TTTokenRepresentation *)object;
         
-        return [self.image isEqual: otherTokenRepresentation.image];
+        return [self.image isEqualToString:
+                otherTokenRepresentation.image];
     }
     
     return NO;

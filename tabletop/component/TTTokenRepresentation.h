@@ -10,6 +10,6 @@
 
 @interface TTTokenRepresentation : TTRepresentationComponent <NSCoding, NSCopying>
 
-@property (strong) id image;
+@property (strong) NSString *image;
 
 @end
