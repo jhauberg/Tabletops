@@ -28,6 +28,13 @@
 - (void) sort;
 - (void) sort: (NSComparator) comparison;
 
+/**
+ Sort entities by a specific property.
+ */
 - (void) sortBy: (TTPropertyComponent *) propertyComponent;
+/**
+ Sort entities by specific properties, in order.
+ */
+- (void) sortByComponents: (NSArray *) propertyComponents;
 
 @end
