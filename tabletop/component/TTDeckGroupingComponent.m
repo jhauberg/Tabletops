@@ -67,6 +67,36 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return result;
 }
 
+- (void) sort {
+    [_entities sortUsingComparator: ^NSComparisonResult(id left, id right) {
+        TTEntity *entity = (TTEntity *)left;
+        TTEntity *otherEntity = (TTEntity *)right;
+        
+        TTCardRepresentation *cardRepresentation = [entity getComponentOfType:
+                                                    [TTCardRepresentation class]];
+        TTCardRepresentation *otherCardRepresentation = [otherEntity getComponentOfType:
+                                                         [TTCardRepresentation class]];
+        
+        if (cardRepresentation && otherCardRepresentation) {
+            NSInteger comparison = [cardRepresentation.backImage compare:
+                                    otherCardRepresentation.backImage];
+            
+            if (comparison != NSOrderedSame) {
+                return comparison;
+            }
+            
+            comparison = [cardRepresentation.frontImage compare:
+                          otherCardRepresentation.frontImage];
+            
+            if (comparison != NSOrderedSame) {
+                return comparison;
+            }
+        }
+        
+        return NSOrderedSame;
+    }];
+}
+
 - (TTEntity *) top {
     return [_entities lastObject];
 }
