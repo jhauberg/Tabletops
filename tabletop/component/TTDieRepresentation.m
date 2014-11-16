@@ -15,6 +15,7 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
 @implementation TTDieRepresentation
 
 @synthesize sideImages = _sideImages;
+@synthesize upside = _upside;
 
 - (id) initWithSides: (NSArray *) sides {
     if ((self = [super init])) {
@@ -23,6 +24,21 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     }
 
     return self;
+}
+
+- (id<NSObject, NSCoding, NSCopying>) upside {
+    return _upside;
+}
+
+- (void) setUpside: (id<NSObject, NSCopying, NSCoding>) upside {
+    if (![self.sides containsObject: upside]) {
+        [NSException raise: @"Invalid side"
+                    format: @"Must be a side on the die"];
+        
+        return;
+    }
+    
+    _upside = upside;
 }
 
 - (id) initWithCoder: (NSCoder *) decoder {
@@ -49,6 +65,7 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     
     if (component) {
         component.sideImages = self.sideImages;
+        component.upside = self.upside;
     }
     
     return component;
@@ -71,6 +88,9 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
                 _sideImages = sideImages;
             }
         }
+    } else {
+        [NSException raise: @"No sides defined"
+                    format: @"Must specify %lu sides to use these side images", sideImages.count];
     }
 }
 

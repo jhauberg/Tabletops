@@ -13,9 +13,9 @@
 @interface TTDieRepresentation : TTRepresentationComponent <NSCoding, NSCopying>
 
 @property (readonly) NSArray *sides;
-@property (readonly) id<NSObject, NSCopying, NSCoding> upside;
-
 @property (strong) NSArray *sideImages;
+
+@property (strong) id<NSObject, NSCopying, NSCoding> upside;
 
 - (id) initWithSides: (NSArray *) sides;
 
