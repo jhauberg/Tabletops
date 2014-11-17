@@ -155,9 +155,15 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     NSMutableArray *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
+        TTEntity *card = [self draw:
+                          self.top];
+        
+        if (!card) {
+            break;
+        }
+        
         [cards addObject:
-         [self draw:
-          self.top]];
+         card];
     }
     
     return [NSArray arrayWithArray:
@@ -168,9 +174,15 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     NSMutableArray *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
+        TTEntity *card = [self draw:
+                          self.bottom];
+        
+        if (!card) {
+            break;
+        }
+        
         [cards addObject:
-         [self draw:
-          self.bottom]];
+         card];
     }
     
     return [NSArray arrayWithArray:
@@ -186,8 +198,14 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     NSMutableArray *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
+        TTEntity *card = [self drawAtRandom];
+        
+        if (!card) {
+            break;
+        }
+        
         [cards addObject:
-         [self drawAtRandom]];
+         card];
     }
     
     return [NSArray arrayWithArray:
@@ -195,12 +213,14 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 }
 
 - (void) shuffle {
-    for (NSUInteger i = 0; i < [_entities count]; ++i) {
-        NSUInteger remainingCount = [_entities count] - i;
-        NSUInteger exchangeIndex = i + arc4random_uniform((uint32_t)remainingCount);
-        
-        [_entities exchangeObjectAtIndex: i
-                       withObjectAtIndex: exchangeIndex];
+    if ([_entities count] > 0) {
+        for (NSUInteger i = 0; i < [_entities count]; ++i) {
+            NSUInteger remainingCount = [_entities count] - i;
+            NSUInteger exchangeIndex = i + arc4random_uniform((uint32_t)remainingCount);
+            
+            [_entities exchangeObjectAtIndex: i
+                           withObjectAtIndex: exchangeIndex];
+        }
     }
 }
 
