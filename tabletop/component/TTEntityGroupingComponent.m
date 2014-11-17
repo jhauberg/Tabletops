@@ -86,9 +86,24 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (BOOL) moveEntity: (TTEntity *) entity fromGrouping: (TTEntityGroupingComponent *) grouping {
-    if ([grouping removeEntity: entity] &&
-        [self addEntity: entity]) {
-        return YES;
+    return [self moveEntity: entity
+               fromGrouping: grouping
+                 atomically: YES];
+}
+
+- (BOOL) moveEntity: (TTEntity *) entity fromGrouping: (TTEntityGroupingComponent *) grouping atomically: (BOOL) atomically {
+    BOOL didAddEntity = [self addEntity: entity];
+    
+    if (didAddEntity) {
+        BOOL didRemoveEntity = [grouping removeEntity: entity];
+        
+        if (didRemoveEntity) {
+            return YES;
+        }
+        
+        if (atomically) {
+            [self removeEntity: entity];
+        }
     }
     
     return NO;
