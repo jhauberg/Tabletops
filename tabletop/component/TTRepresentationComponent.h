@@ -6,13 +6,12 @@
 //  Copyright (c) 2014 Jacob Hauberg Hansen. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "TTEntityComponent.h"
 
+/**
+ Base class for implementing physically representable components.
+ */
 @interface TTRepresentationComponent : TTEntityComponent <NSCoding, NSCopying>
-
-// probably needs to be tied to an SKSprite, and doesn't need to keep a position property (sprite does this)
 
 @property (assign) CGPoint position;
 

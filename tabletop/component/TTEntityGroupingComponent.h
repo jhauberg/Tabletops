@@ -47,6 +47,11 @@
  @returns YES if the entity was moved, otherwise NO.
  */
 - (BOOL) moveEntity: (TTEntity *) entity fromGrouping: (TTEntityGroupingComponent *) grouping;
+/**
+ Move an entity from a grouping to the receiver grouping, if specified, as an atomic operation.
+ 
+ @returns YES if the entity was moved, otherwise NO.
+ */
 - (BOOL) moveEntity: (TTEntity *) entity fromGrouping: (TTEntityGroupingComponent *) grouping atomically: (BOOL) atomically;
 
 /**

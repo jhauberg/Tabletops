@@ -8,10 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ Base class for implementing an entity component.
+ */
 @interface TTEntityComponent : NSObject <NSCoding, NSCopying>
 
 /**
  Determine whether a component is similar to the receiver.
+ 
+ @returns YES if the otherComponent is similar, otherwise NO.
  */
 - (BOOL) isLike: (TTEntityComponent *) otherComponent;
 

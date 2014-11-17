@@ -8,6 +8,9 @@
 
 #import "TTRepresentationComponent.h"
 
+/**
+ Represents a token with a single side.
+ */
 @interface TTTokenRepresentation : TTRepresentationComponent <NSCoding, NSCopying>
 
 @property (strong) NSString *image;

@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Jacob Hauberg Hansen. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "TTRepresentationComponent.h"
 
+/**
+ Represents a die with a certain amount of sides.
+ */
 @interface TTDieRepresentation : TTRepresentationComponent <NSCoding, NSCopying>
 
 @property (readonly) NSArray *sides;
@@ -17,8 +18,20 @@
 
 @property (strong) id<NSObject, NSCopying, NSCoding> upside;
 
+/**
+ Designated initializer.
+ 
+ Create a die representation with a given set of sides.
+ 
+ @returns A TTDieRepresentation object with the given sides.
+ */
 - (id) initWithSides: (NSArray *) sides;
 
+/**
+ Roll the die.
+ 
+ @returns The side facing up after landing the roll.
+ */
 - (id) roll;
 
 @end
