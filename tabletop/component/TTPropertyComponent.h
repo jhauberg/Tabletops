@@ -24,7 +24,7 @@
  
  @returns A TTPropertyComponent object with a named property/value.
  */
-- (id) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject>) value;
+- (id) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value;
 
 /**
  Compare the receiver to another property component.
