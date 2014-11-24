@@ -11,6 +11,8 @@
 
 @interface TTTableEntity : TTEntity
 
++ (TTTableEntity *) table;
+
 @property (readonly) TTEntityGroupingComponent *grouping;
 
 @end

@@ -15,6 +15,10 @@ NSString* const kTTDeckEntityGroupingKey = @"grouping";
     TTDeckGroupingComponent *_grouping;
 }
 
++ (TTDeckEntity *) deck {
+    return [[TTDeckEntity alloc] init];
+}
+
 - (id) init {
     if ((self = [super init])) {
         if (!_grouping) {
@@ -52,6 +56,14 @@ NSString* const kTTDeckEntityGroupingKey = @"grouping";
     }
     
     return entity;
+}
+
+- (BOOL) removeComponent: (TTEntityComponent *) component {
+    if (component == self.grouping) {
+        return NO;
+    }
+    
+    return [super removeComponent: component];
 }
 
 - (TTDeckGroupingComponent *) grouping {

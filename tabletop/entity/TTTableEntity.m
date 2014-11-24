@@ -13,6 +13,10 @@
     TTEntityGroupingComponent *_grouping;
 }
 
++ (TTTableEntity *) table {
+    return [[TTTableEntity alloc] init];
+}
+
 - (id) init {
     if ((self = [super init])) {
         if (!_grouping) {
@@ -50,6 +54,14 @@
     }
     
     return entity;
+}
+
+- (BOOL) removeComponent: (TTEntityComponent *) component {
+    if (component == self.grouping) {
+        return NO;
+    }
+    
+    return [super removeComponent: component];
 }
 
 - (TTEntityGroupingComponent *) grouping {

@@ -11,6 +11,8 @@
 
 @interface TTDeckEntity : TTEntity
 
++ (TTDeckEntity *) deck;
+
 @property (readonly) TTDeckGroupingComponent *grouping;
 
 @end

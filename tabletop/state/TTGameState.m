@@ -26,7 +26,7 @@ NSString* const kTTGameStateTableKey = @"table";
 
 - (id) init {
     if ((self = [super init])) {
-        _table = [[TTTableEntity alloc] init];
+        _table = [TTTableEntity table];
     }
     
     return self;
