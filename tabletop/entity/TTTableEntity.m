@@ -8,6 +8,8 @@
 
 #import "TTTableEntity.h"
 
+NSString* const kTTTableEntityGroupingKey = @"grouping";
+
 @implementation TTTableEntity {
  @private
     TTEntityGroupingComponent *_grouping;
@@ -31,7 +33,7 @@
 
 - (id) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
-        _grouping = [decoder decodeObjectForKey: @"grouping"];
+        _grouping = [decoder decodeObjectForKey: kTTTableEntityGroupingKey];
     }
     
     return self;
@@ -40,7 +42,7 @@
 - (void) encodeWithCoder: (NSCoder *) encoder {
     [super encodeWithCoder: encoder];
     
-    [encoder encodeObject: _grouping forKey: @"grouping"];
+    [encoder encodeObject: _grouping forKey: kTTTableEntityGroupingKey];
 }
 
 - (id) copyWithZone: (NSZone *) zone {

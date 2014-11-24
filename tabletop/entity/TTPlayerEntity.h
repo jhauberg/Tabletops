@@ -10,13 +10,29 @@
 #import "TTPropertyComponent.h"
 #import "TTHandGroupingComponent.h"
 
+/**
+ Provides a common implementation of a player entity.
+ */
 @interface TTPlayerEntity : TTEntity
 
 + (TTPlayerEntity *) playerWithName: (NSString *) name;
 
+/**
+ Get the name component. Can not be removed.
+ */
 @property (readonly) TTPropertyComponent *name;
+/**
+ Get the hand component. Can not be removed.
+ */
 @property (readonly) TTHandGroupingComponent *hand;
 
+/**
+ Designated initializer.
+ 
+ Create a new player entity with a hand, and a name property.
+ 
+ @returns A TTPlayerEntity object with a few components provided initially.
+ */
 - (id) initWithName: (NSString *) name;
 
 @end
