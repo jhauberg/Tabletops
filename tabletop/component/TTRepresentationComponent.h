@@ -11,7 +11,7 @@
 /**
  Base class for implementing physically representable components.
  */
-@interface TTRepresentationComponent : TTEntityComponent <NSCoding, NSCopying>
+@interface TTRepresentationComponent : TTEntityComponent
 
 @property (assign) CGPoint position;
 

@@ -11,7 +11,7 @@
 /**
  Groups entities as cards in a deck.
  */
-@interface TTDeckGroupingComponent : TTEntityGroupingComponent <NSCoding, NSCopying>
+@interface TTDeckGroupingComponent : TTEntityGroupingComponent
 
 /**
  The bottom card of the deck.

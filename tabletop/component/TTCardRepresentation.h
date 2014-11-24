@@ -11,7 +11,7 @@
 /**
  Represents a card with both a front and a back side.
  */
-@interface TTCardRepresentation : TTRepresentationComponent <NSCoding, NSCopying>
+@interface TTCardRepresentation : TTRepresentationComponent
 
 @property (strong) NSString *frontImage;
 @property (strong) NSString *backImage;

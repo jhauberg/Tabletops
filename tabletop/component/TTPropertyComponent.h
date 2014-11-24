@@ -11,11 +11,11 @@
 /**
  Represents a named property of any value.
  */
-@interface TTPropertyComponent : TTEntityComponent <NSCoding, NSCopying>
+@interface TTPropertyComponent : TTEntityComponent
 
 @property (readonly) NSString *name;
 
-@property (strong) id<NSCoding, NSObject> value;
+@property (strong) id<NSCoding, NSObject, NSCopying> value;
 
 /**
  Designated initializer.

@@ -13,7 +13,7 @@ NSString* const kTTPropertyComponentValueKey = @"value";
 
 @implementation TTPropertyComponent
 
-- (id) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject>) value {
+- (id) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value {
     if ((self = [super init])) {
         _name = name;
         _value = value;

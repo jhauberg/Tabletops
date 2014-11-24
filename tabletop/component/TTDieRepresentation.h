@@ -11,7 +11,7 @@
 /**
  Represents a die with a certain amount of sides.
  */
-@interface TTDieRepresentation : TTRepresentationComponent <NSCoding, NSCopying>
+@interface TTDieRepresentation : TTRepresentationComponent
 
 @property (readonly) NSArray *sides;
 @property (strong) NSArray *sideImages;

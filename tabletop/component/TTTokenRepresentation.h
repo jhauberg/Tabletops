@@ -11,7 +11,7 @@
 /**
  Represents a token with a single side.
  */
-@interface TTTokenRepresentation : TTRepresentationComponent <NSCoding, NSCopying>
+@interface TTTokenRepresentation : TTRepresentationComponent
 
 @property (strong) NSString *image;
 

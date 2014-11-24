@@ -9,7 +9,7 @@
 #import "TTEntity.h"
 #import "TTEntityGroupingComponent.h"
 
-@interface TTTableEntity : TTEntity <NSCoding, NSCopying>
+@interface TTTableEntity : TTEntity
 
 @property (readonly) TTEntityGroupingComponent *grouping;
 

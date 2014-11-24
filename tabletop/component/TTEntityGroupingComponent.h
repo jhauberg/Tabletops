@@ -14,7 +14,7 @@
 /**
  Base class for implementing entity groupings.
  */
-@interface TTEntityGroupingComponent : TTEntityComponent <NSCoding, NSCopying> {
+@interface TTEntityGroupingComponent : TTEntityComponent {
  @protected
     NSMutableArray *_entities;
 }
