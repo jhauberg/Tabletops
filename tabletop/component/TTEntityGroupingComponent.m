@@ -41,7 +41,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     TTEntityGroupingComponent *component = [[[self class] allocWithZone: zone] init];
     
     if (component) {
-        for (TTEntity *groupedEntity in self.entities) {
+        for (TTEntity *groupedEntity in _entities) {
             [component addEntity:
              [groupedEntity copyWithZone: zone]];
         }
@@ -168,7 +168,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     if ([super isEqual: object]) {
         TTEntityGroupingComponent *otherGroupingComponent = (TTEntityGroupingComponent *)object;
         
-        return [self.entities isEqualToArray:
+        return [_entities isEqualToArray:
                 otherGroupingComponent.entities];
     }
     
@@ -178,7 +178,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 - (NSString *) description {
     NSMutableArray *shortEntityDescriptions = [[NSMutableArray alloc] init];
     
-    for (TTEntity *entity in self.entities) {
+    for (TTEntity *entity in _entities) {
         NSMutableString *componentsDescription = [[NSMutableString alloc] init];
         
         for (TTEntityComponent *component in entity.components) {
