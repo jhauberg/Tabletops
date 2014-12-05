@@ -33,6 +33,12 @@
  @returns YES if the entities were added, otherwise NO.
  */
 - (BOOL) addEntities: (NSArray *) entities;
+/**
+ Add multiple entities to the grouping, if specified, as an atomic operation.
+ 
+ @returns YES if the entities were added, otherwise NO. If specified as an atomic operation, only returns YES if *all* the entities were added.
+ */
+- (BOOL) addEntities: (NSArray *) entities atomically: (BOOL) atomically;
 
 /**
  Remove an entity from the grouping.
@@ -40,6 +46,18 @@
  @returns YES if the entity was removed, otherwise NO.
  */
 - (BOOL) removeEntity: (TTEntity *) entity;
+/**
+ Remove multiple entities from the grouping.
+ 
+ @returns YES if the entities were removed, otherwise NO.
+ */
+- (BOOL) removeEntities: (NSArray *) entities;
+/**
+ Remove multiple entities from the grouping.
+ 
+ @returns YES if the entities were removed, otherwise NO. If specified as an atomic operation, only returns YES if *all* the entities were removed.
+ */
+- (BOOL) removeEntities: (NSArray *) entities atomically: (BOOL) atomically;
 
 /**
  Move an entity from a grouping to the receiver grouping.

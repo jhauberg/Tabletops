@@ -66,8 +66,22 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (BOOL) addEntities: (NSArray *) entities {
+    return [self addEntities: entities
+                  atomically: YES];
+}
+
+- (BOOL) addEntities: (NSArray *) entities atomically: (BOOL) atomically {
+    NSMutableArray *addedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
+    
     for (TTEntity *entity in entities) {
-        if (![self addEntity: entity]) {
+        if ([self addEntity: entity] && atomically) {
+            [addedEntities addObject: entity];
+        } else {
+            if (atomically) {
+                [self removeEntities:
+                 addedEntities];
+            }
+            
             return NO;
         }
     }
@@ -81,6 +95,30 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     }
 
     [_entities removeObject: entity];
+    
+    return YES;
+}
+
+- (BOOL) removeEntities: (NSArray *) entities {
+    return [self removeEntities: entities
+                     atomically: YES];
+}
+
+- (BOOL) removeEntities: (NSArray *) entities atomically: (BOOL) atomically {
+    NSMutableArray *removedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
+    
+    for (TTEntity *entity in entities) {
+        if ([self removeEntity: entity] && atomically) {
+            [removedEntities addObject: entity];
+        } else {
+            if (atomically) {
+                [self addEntities:
+                 removedEntities];
+            }
+            
+            return NO;
+        }
+    }
     
     return YES;
 }
