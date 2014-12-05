@@ -88,6 +88,30 @@ NSString* const kTTEntityComponentsKey = @"components";
     return YES;
 }
 
+- (BOOL) addComponents: (NSArray *) components {
+    return [self addComponents: components
+                    atomically: YES];
+}
+
+- (BOOL) addComponents: (NSArray *) components atomically: (BOOL) atomically {
+    NSMutableArray *addedComponents = atomically ? [[NSMutableArray alloc] init] : nil;
+    
+    for (TTEntityComponent *component in components) {
+        if ([self addComponent: component] && atomically) {
+            [addedComponents addObject: component];
+        } else {
+            if (atomically) {
+                [self removeComponents:
+                 addedComponents];
+            }
+            
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 - (BOOL) removeComponent: (TTEntityComponent *) component {
     if (![_components containsObject: component]) {
         return NO;
@@ -96,6 +120,35 @@ NSString* const kTTEntityComponentsKey = @"components";
     [_components removeObject: component];
     
     return YES;
+}
+
+- (BOOL) removeComponents: (NSArray *) components {
+    return [self removeComponents: components
+                       atomically: YES];
+}
+
+- (BOOL) removeComponents: (NSArray *) components atomically: (BOOL) atomically {
+    NSMutableArray *removedComponents = atomically ? [[NSMutableArray alloc] init] : nil;
+    
+    for (TTEntityComponent *component in components) {
+        if ([self removeComponent: component] && atomically) {
+            [removedComponents addObject: component];
+        } else {
+            if (atomically) {
+                [self addComponents:
+                 removedComponents];
+            }
+            
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL) removeAllComponents {
+    return [self removeComponents: _components
+                       atomically: NO];
 }
 
 - (id) getComponentOfType: (Class) type {

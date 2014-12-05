@@ -37,11 +37,42 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
  */
 - (BOOL) addComponent: (TTEntityComponent *) component;
 /**
+ Add multiple components to the entity.
+ 
+ @returns YES if the components were added, otherwise NO.
+ */
+- (BOOL) addComponents: (NSArray *) components;
+/**
+ Add multiple components to the entity.
+ 
+ @returns YES if the components were added, otherwise NO. If specified as an atomic operation, only returns YES if *all* components were added.
+ */
+- (BOOL) addComponents: (NSArray *) components atomically: (BOOL) atomically;
+
+/**
  Remove a component from the entity.
  
  @returns YES if the component was removed, otherwise NO.
  */
 - (BOOL) removeComponent: (TTEntityComponent *) component;
+/**
+ Remove multiple components from the entity.
+ 
+ @returns YES if the components were removed, otherwise NO.
+ */
+- (BOOL) removeComponents: (NSArray *) components;
+/**
+ Remove multiple components from the entity.
+ 
+ @returns YES if the components were removed, otherwise NO. If specified as an atomic operation, only returns YES if *all* components were removed.
+ */
+- (BOOL) removeComponents: (NSArray *) components atomically: (BOOL) atomically;
+/**
+ Remove all components from the entity.
+ 
+ @returns YES if the components were removed, otherwise NO.
+ */
+- (BOOL) removeAllComponents;
 
 /**
  Get a component of a given type.
