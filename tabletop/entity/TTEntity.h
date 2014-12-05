@@ -46,13 +46,13 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 /**
  Get a component of a given type.
  
- @returns A TTEntityComponent object that matches the specified type and is already added to the entity. Nil otherwise.
+ @returns The first TTEntityComponent object that matches the specified type and is already added to the entity. Nil otherwise.
  */
 - (id) getComponentOfType: (Class) type;
 /**
  Get a component of a given type, that also matches a condition.
  
- @returns A TTEntityComponent object that matches the specified type, is already added to the entity, and matches the specified condition. Nil otherwise.
+ @returns The first TTEntityComponent object that matches the specified type, is already added to the entity, and matches the specified condition. Nil otherwise.
  */
 - (id) getComponentOfType: (Class) type matching: (TTEntityComponentConditional) condition;
 
@@ -66,20 +66,20 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 /**
  Get a component of a given type (or a subclass of).
  
- @returns A TTEntityComponent object that matches the specified type (or a subclass of) and is already added to the entity. Nil otherwise.
+ @returns The first TTEntityComponent object that matches the specified type (or a subclass of) and is already added to the entity. Nil otherwise.
  */
 - (id) getComponentLikeType: (Class) type;
 
 /**
  Get a component that is similar to another component.
  
- @returns A TTEntityComponent object that is similar to otherComponent, if any. Nil otherwise.
+ @returns The first TTEntityComponent object that is similar to otherComponent, if any. Nil otherwise.
  */
 - (id) getComponentLike: (TTEntityComponent *) otherComponent;
 /**
  Get a component that is similar to another component and matches a condition.
  
- @returns A TTEntityComponent object that is similar to otherComponent and matches the specified condition, if any. Nil otherwise.
+ @returns The first TTEntityComponent object that is similar to otherComponent and matches the specified condition, if any. Nil otherwise.
  */
 - (id) getComponentLike: (TTEntityComponent *) otherComponent matching: (TTEntityComponentConditional) condition;
 
