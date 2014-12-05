@@ -73,6 +73,16 @@ NSString* const kTTEntityComponentsKey = @"components";
         return NO;
     }
     
+#ifdef DEBUG
+    for (TTEntityComponent *existingComponent in _components) {
+        if ([existingComponent isLike: component]) {
+            NSLog(@"*** Attempting to add '%@' to an entity which already seems to have a similar component. Are you sure this was intended? %@", component, self);
+            
+            break;
+        }
+    }
+#endif
+    
     [_components addObject: component];
     
     return YES;
