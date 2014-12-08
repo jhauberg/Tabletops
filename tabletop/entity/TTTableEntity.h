@@ -21,4 +21,11 @@
  */
 @property (readonly) TTEntityGroupingComponent *grouping;
 
+/**
+ Clear all entities from the table, restoring its default state.
+ 
+ @returns YES if the table was cleared, otherwise NO.
+ */
+- (BOOL) clear;
+
 @end

@@ -58,6 +58,14 @@ NSString* const kTTTableEntityGroupingKey = @"grouping";
     return entity;
 }
 
+- (BOOL) clear {
+    if ([_grouping removeAllEntities]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (BOOL) removeComponent: (TTEntityComponent *) component {
     if (component == self.grouping) {
         return NO;

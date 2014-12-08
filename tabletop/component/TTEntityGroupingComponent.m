@@ -123,6 +123,11 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return YES;
 }
 
+- (BOOL) removeAllEntities {
+    return [self removeEntities: _entities
+                     atomically: YES];
+}
+
 - (BOOL) moveEntity: (TTEntity *) entity fromGrouping: (TTEntityGroupingComponent *) grouping {
     return [self moveEntity: entity
                fromGrouping: grouping

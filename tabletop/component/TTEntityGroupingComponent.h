@@ -58,6 +58,12 @@
  @returns YES if the entities were removed, otherwise NO. If specified as an atomic operation, only returns YES if *all* the entities were removed.
  */
 - (BOOL) removeEntities: (NSArray *) entities atomically: (BOOL) atomically;
+/**
+ Remove all entities from the grouping.
+ 
+ @returns YES if all the entities were removed, otherwise NO.
+ */
+- (BOOL) removeAllEntities;
 
 /**
  Move an entity from a grouping to the receiver grouping.
