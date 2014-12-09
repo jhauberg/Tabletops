@@ -13,6 +13,14 @@
  */
 @interface TTRepresentationComponent : TTEntityComponent
 
-@property (assign) CGPoint position;
+/**
+ Get or set the location.
+ */
+@property (nonatomic, assign) CGPoint position;
+
+/**
+ Determine whether or not the position can be changed.
+ */
+@property (nonatomic, assign) BOOL isLocked;
 
 @end
