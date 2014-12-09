@@ -23,11 +23,11 @@
 @property (readonly) TTEntity *top;
 
 /**
- Flip cards to be face down when they are added to the deck.
+ Flip cards to be face-down when they are added to the deck.
  */
 @property (assign) BOOL addsFaceDown;
 /**
- Flip cards to be face up when they are drawn from the deck.
+ Flip cards to be face-up when they are drawn from the deck.
  */
 @property (assign) BOOL drawsFaceUp;
 
