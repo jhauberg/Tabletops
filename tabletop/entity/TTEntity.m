@@ -21,11 +21,8 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 + (TTEntity *) entityWithComponents: (NSArray *) components {
     TTEntity *entity = [TTEntity entity];
-    
-    for (TTEntityComponent *component in components) {
-        [entity addComponent:
-         component];
-    }
+
+    [entity addComponents: components];
     
     return entity;
 }
