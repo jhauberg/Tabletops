@@ -13,12 +13,27 @@
  */
 @interface TTCardRepresentation : TTRepresentationComponent
 
+/**
+ Get or set the face-up image of the card.
+ */
 @property (strong) NSString *frontImage;
+/**
+ Get or set the face-down image of the card.
+ */
 @property (strong) NSString *backImage;
 
+/**
+ Get the currently visible side image; either @c frontImage or @c backImage.
+ */
 @property (readonly) id visibleImage;
 
-@property (readonly) BOOL isFlipped;
+/**
+ Determine whether the card is currently showing face-up.
+ */
+@property (readonly) BOOL isFaceUp;
+/**
+ Determine whether the card is currently tapped.
+ */
 @property (readonly) BOOL isTapped;
 
 /**

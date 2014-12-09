@@ -10,7 +10,7 @@
 
 NSString* const kTTCardRepresentationFrontImageKey = @"front_image";
 NSString* const kTTCardRepresentationBackImageKey = @"back_image";
-NSString* const kTTCardRepresentationIsFlippedKey = @"is_flipped";
+NSString* const kTTCardRepresentationIsFaceUpKey = @"is_face_up";
 NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 
 @implementation TTCardRepresentation
@@ -19,7 +19,7 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
     if ((self = [super initWithCoder: decoder])) {
         _frontImage = [decoder decodeObjectForKey: kTTCardRepresentationFrontImageKey];
         _backImage = [decoder decodeObjectForKey: kTTCardRepresentationBackImageKey];
-        _isFlipped = [decoder decodeBoolForKey: kTTCardRepresentationIsFlippedKey];
+        _isFaceUp = [decoder decodeBoolForKey: kTTCardRepresentationIsFaceUpKey];
         _isTapped = [decoder decodeBoolForKey: kTTCardRepresentationIsTappedKey];
     }
     
@@ -31,7 +31,7 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
     
     [encoder encodeObject: _frontImage forKey: kTTCardRepresentationFrontImageKey];
     [encoder encodeObject: _backImage forKey: kTTCardRepresentationBackImageKey];
-    [encoder encodeBool: _isFlipped forKey: kTTCardRepresentationIsFlippedKey];
+    [encoder encodeBool: _isFaceUp forKey: kTTCardRepresentationIsFaceUpKey];
     [encoder encodeBool: _isTapped forKey: kTTCardRepresentationIsTappedKey];
 }
 
@@ -42,7 +42,7 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
         component.frontImage = self.frontImage;
         component.backImage = self.backImage;
         
-        if (self.isFlipped) {
+        if (!self.isFaceUp) {
             [component flip];
         }
         
@@ -55,12 +55,12 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 }
 
 - (id) visibleImage {
-    return self.isFlipped ?
-        self.backImage : self.frontImage;
+    return self.isFaceUp ?
+        self.frontImage : self.backImage;
 }
 
 - (void) flip {
-    _isFlipped = !_isFlipped;
+    _isFaceUp = !_isFaceUp;
 }
 
 - (void) tap {

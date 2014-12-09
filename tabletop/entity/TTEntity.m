@@ -148,7 +148,7 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 - (BOOL) removeAllComponents {
     return [self removeComponents: _components
-                       atomically: NO];
+                       atomically: YES];
 }
 
 - (id) getComponentOfType: (Class) type {
@@ -170,7 +170,7 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 - (NSArray *) getComponentsOfType: (Class) type {
     NSMutableArray *components = [[NSMutableArray alloc] init];
-    
+
     for (TTEntityComponent *component in _components) {
         if (component.class == type) {
             [components addObject:

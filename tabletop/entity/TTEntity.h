@@ -28,6 +28,9 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
  */
 + (TTEntity *) entityWithComponents: (NSArray *) components;
 
+/**
+ Get the components that are currently assigned to the entity.
+ */
 @property (readonly) NSArray *components;
 
 /**
@@ -70,7 +73,7 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 /**
  Remove all components from the entity.
  
- @returns YES if the components were removed, otherwise NO.
+ @returns YES if all the components were removed, otherwise NO.
  */
 - (BOOL) removeAllComponents;
 

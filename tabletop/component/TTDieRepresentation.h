@@ -13,9 +13,18 @@
  */
 @interface TTDieRepresentation : TTRepresentationComponent
 
+/**
+ Get all the sides of the die.
+ */
 @property (readonly) NSArray *sides;
+/**
+ Get the images for each side of the die.
+ */
 @property (strong) NSArray *sideImages;
 
+/**
+ Get or set the current upside of the die.
+ */
 @property (strong) id<NSObject, NSCopying, NSCoding> upside;
 
 /**
