@@ -91,13 +91,6 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 - (id) getComponentOfType: (Class) type matching: (TTEntityComponentConditional) condition;
 
 /**
- Get all components of a given type.
- 
- @returns An NSArray of TTEntityComponent objects that matches the specified type and is already added to the entity. An empty NSArray otherwise.
- */
-- (NSArray *) getComponentsOfType: (Class) type;
-
-/**
  Get a component of a given type (or a subclass of).
  
  @returns The first TTEntityComponent object that matches the specified type (or a subclass of) and is already added to the entity. Nil otherwise.
@@ -116,6 +109,20 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
  @returns The first TTEntityComponent object that is similar to otherComponent and matches the specified condition, if any. Nil otherwise.
  */
 - (id) getComponentLike: (TTEntityComponent *) otherComponent matching: (TTEntityComponentConditional) condition;
+
+/**
+ Get all components of a given type.
+
+ @returns An NSArray of TTEntityComponent objects that matches the specified type and is already added to the entity. An empty NSArray otherwise.
+ */
+- (NSArray *) getComponentsOfType: (Class) type;
+
+/**
+ Get all components of a given type (or subclass of).
+
+ @returns An NSArray of TTEntityComponent objects that matches the specified type (or a subclass of) and is already added to the entity. An empty NSArray otherwise.
+ */
+- (NSArray *) getComponentsLikeType: (Class) type;
 
 /**
  Determine whether an entity is similar to the receiver.

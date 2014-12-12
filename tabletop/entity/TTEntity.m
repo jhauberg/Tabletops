@@ -165,20 +165,6 @@ NSString* const kTTEntityComponentsKey = @"components";
     return nil;
 }
 
-- (NSArray *) getComponentsOfType: (Class) type {
-    NSMutableArray *components = [[NSMutableArray alloc] init];
-
-    for (TTEntityComponent *component in _components) {
-        if (component.class == type) {
-            [components addObject:
-             component];
-        }
-    }
-    
-    return [NSArray arrayWithArray:
-            components];
-}
-
 - (id) getComponentLikeType: (Class) type {
     for (TTEntityComponent *component in _components) {
         if ([component isKindOfClass: type]) {
@@ -204,6 +190,34 @@ NSString* const kTTEntityComponentsKey = @"components";
     }
     
     return nil;
+}
+
+- (NSArray *) getComponentsOfType: (Class) type {
+    NSMutableArray *components = [[NSMutableArray alloc] init];
+
+    for (TTEntityComponent *component in _components) {
+        if (component.class == type) {
+            [components addObject:
+             component];
+        }
+    }
+
+    return [NSArray arrayWithArray:
+            components];
+}
+
+- (NSArray *) getComponentsLikeType: (Class) type {
+    NSMutableArray *components = [[NSMutableArray alloc] init];
+
+    for (TTEntityComponent *component in _components) {
+        if ([component isKindOfClass: type]) {
+            [components addObject:
+             component];
+        }
+    }
+
+    return [NSArray arrayWithArray:
+            components];
 }
 
 /**
