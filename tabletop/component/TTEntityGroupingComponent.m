@@ -152,6 +152,28 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return NO;
 }
 
+- (NSArray *) getEntitiesMatching: (TTEntityConditional) condition {
+    NSMutableArray *entities = [[NSMutableArray alloc] init];
+
+    for (TTEntity *entity in _entities) {
+        if (condition && condition(entity)) {
+            [entities addObject: entity];
+        }
+
+        // go deeper
+        NSArray *groupings = [entity getComponentsLikeType:
+                              [TTEntityGroupingComponent class]];
+
+        for (TTEntityGroupingComponent *grouping in groupings) {
+            [entities addObjectsFromArray:
+             [grouping getEntitiesMatching: condition]];
+        }
+    }
+
+    return [NSArray arrayWithArray:
+            entities];
+}
+
 /**
  Sorts entities by 'like'-ness.
  
