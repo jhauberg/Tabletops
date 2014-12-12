@@ -29,7 +29,7 @@ NSString* const kTTPlayerEntityHandKey = @"hand";
     if ((self = [super init])) {
         if (!_name) {
             _name = [[TTPropertyComponent alloc] initWithName: @"Name"
-                                                     andValue: _name];
+                                                     andValue: name];
         }
         
         if (!_hand) {
