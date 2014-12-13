@@ -153,6 +153,11 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition {
+    return [self getEntitiesMatching: condition
+                    inChildGroupings: YES];
+}
+
+- (NSArray *) getEntitiesMatching: (TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper {
     NSMutableArray *entities = [[NSMutableArray alloc] init];
 
     for (TTEntity *entity in _entities) {
@@ -160,13 +165,14 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
             [entities addObject: entity];
         }
 
-        // go deeper
-        NSArray *groupings = [entity getComponentsLikeType:
-                              [TTEntityGroupingComponent class]];
+        if (searchDeeper) {
+            NSArray *groupings = [entity getComponentsLikeType:
+                                  [TTEntityGroupingComponent class]];
 
-        for (TTEntityGroupingComponent *grouping in groupings) {
-            [entities addObjectsFromArray:
-             [grouping getEntitiesMatching: condition]];
+            for (TTEntityGroupingComponent *grouping in groupings) {
+                [entities addObjectsFromArray:
+                 [grouping getEntitiesMatching: condition]];
+            }
         }
     }
 

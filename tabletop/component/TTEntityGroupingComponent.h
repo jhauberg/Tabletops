@@ -81,11 +81,17 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
 - (BOOL) moveEntity: (TTEntity *) entity fromGrouping: (TTEntityGroupingComponent *) grouping atomically: (BOOL) atomically;
 
 /**
- Get all entities that matches a condition.
- 
+ Get all entities that matches a condition. This will search through child groupings too.
+
  @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
  */
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition;
+/**
+ Get all entities that matches a condition. If specified, also search through child groupings.
+ 
+ @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
+ */
+- (NSArray *) getEntitiesMatching: (TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper;
 
 /**
  Sort entities by the default sorting behavior for the grouping.
