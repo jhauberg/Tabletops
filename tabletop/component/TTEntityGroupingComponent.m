@@ -170,8 +170,10 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
                                   [TTEntityGroupingComponent class]];
 
             for (TTEntityGroupingComponent *grouping in groupings) {
-                [entities addObjectsFromArray:
-                 [grouping getEntitiesMatching: condition]];
+                if (grouping != self) {
+                    [entities addObjectsFromArray:
+                     [grouping getEntitiesMatching: condition]];
+                }
             }
         }
     }
