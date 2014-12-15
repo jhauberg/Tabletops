@@ -13,8 +13,14 @@
  */
 @interface TTPropertyComponent : TTEntityComponent
 
-@property (readonly) NSString *name;
+/**
+ The name of the property.
+ */
+@property (strong) NSString *name;
 
+/**
+ The value of the property.
+ */
 @property (strong) id<NSCoding, NSObject, NSCopying> value;
 
 /**
