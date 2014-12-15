@@ -152,6 +152,20 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return NO;
 }
 
+- (BOOL) moveEntities: (NSArray *) entities fromGrouping: (TTEntityGroupingComponent *) grouping atomically: (BOOL) atomically {
+    for (TTEntity *entity in entities) {
+        if (![self moveEntity: entity
+                 fromGrouping: grouping
+                   atomically: atomically]) {
+            if (atomically) {
+                return NO;
+            }
+        }
+    }
+
+    return YES;
+}
+
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition {
     return [self getEntitiesMatching: condition
                     inChildGroupings: YES];
