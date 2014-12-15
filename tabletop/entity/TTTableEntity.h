@@ -19,7 +19,7 @@
 /**
  Get the grouping component for the contents of the table. Can not be removed.
  */
-@property (readonly) TTEntityGroupingComponent *grouping;
+@property (readonly) TTEntityGroupingComponent *group;
 
 /**
  Clear all entities from the table, restoring its default state.

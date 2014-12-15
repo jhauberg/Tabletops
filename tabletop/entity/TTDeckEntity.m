@@ -8,11 +8,11 @@
 
 #import "TTDeckEntity.h"
 
-NSString* const kTTDeckEntityGroupingKey = @"grouping";
+NSString* const kTTDeckEntityGroupKey = @"group";
 
 @implementation TTDeckEntity {
  @private
-    TTDeckGroupingComponent *_grouping;
+    TTDeckGroupingComponent *_group;
 }
 
 + (TTDeckEntity *) deck {
@@ -21,11 +21,11 @@ NSString* const kTTDeckEntityGroupingKey = @"grouping";
 
 - (id) init {
     if ((self = [super init])) {
-        if (!_grouping) {
-            _grouping = [[TTDeckGroupingComponent alloc] init];
+        if (!_group) {
+            _group = [[TTDeckGroupingComponent alloc] init];
         }
         
-        [self addComponent: _grouping];
+        [self addComponent: _group];
     }
     
     return self;
@@ -33,7 +33,7 @@ NSString* const kTTDeckEntityGroupingKey = @"grouping";
 
 - (id) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
-        _grouping = [decoder decodeObjectForKey: kTTDeckEntityGroupingKey];
+        _group = [decoder decodeObjectForKey: kTTDeckEntityGroupKey];
     }
     
     return self;
@@ -42,15 +42,15 @@ NSString* const kTTDeckEntityGroupingKey = @"grouping";
 - (void) encodeWithCoder: (NSCoder *) encoder {
     [super encodeWithCoder: encoder];
     
-    [encoder encodeObject: _grouping forKey: kTTDeckEntityGroupingKey];
+    [encoder encodeObject: _group forKey: kTTDeckEntityGroupKey];
 }
 
 - (id) copyWithZone: (NSZone *) zone {
     TTDeckEntity *entity = [[[self class] allocWithZone: zone] init];
     
     if (entity) {
-        for (TTEntity *groupedEntity in self.grouping.entities) {
-            [entity.grouping addEntity:
+        for (TTEntity *groupedEntity in self.group.entities) {
+            [entity.group addEntity:
              [groupedEntity copyWithZone: zone]];
         }
     }
@@ -59,15 +59,15 @@ NSString* const kTTDeckEntityGroupingKey = @"grouping";
 }
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
-    if (component == self.grouping) {
+    if (component == self.group) {
         return NO;
     }
     
     return [super removeComponent: component];
 }
 
-- (TTDeckGroupingComponent *) grouping {
-    return _grouping;
+- (TTDeckGroupingComponent *) group {
+    return _group;
 }
 
 @end

@@ -8,11 +8,11 @@
 
 #import "TTTableEntity.h"
 
-NSString* const kTTTableEntityGroupingKey = @"grouping";
+NSString* const kTTTableEntityGroupKey = @"group";
 
 @implementation TTTableEntity {
  @private
-    TTEntityGroupingComponent *_grouping;
+    TTEntityGroupingComponent *_group;
 }
 
 + (TTTableEntity *) table {
@@ -21,11 +21,11 @@ NSString* const kTTTableEntityGroupingKey = @"grouping";
 
 - (id) init {
     if ((self = [super init])) {
-        if (!_grouping) {
-            _grouping = [[TTEntityGroupingComponent alloc] init];
+        if (!_group) {
+            _group = [[TTEntityGroupingComponent alloc] init];
         }
         
-        [self addComponent: _grouping];
+        [self addComponent: _group];
     }
     
     return self;
@@ -33,7 +33,7 @@ NSString* const kTTTableEntityGroupingKey = @"grouping";
 
 - (id) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
-        _grouping = [decoder decodeObjectForKey: kTTTableEntityGroupingKey];
+        _group = [decoder decodeObjectForKey: kTTTableEntityGroupKey];
     }
     
     return self;
@@ -42,15 +42,15 @@ NSString* const kTTTableEntityGroupingKey = @"grouping";
 - (void) encodeWithCoder: (NSCoder *) encoder {
     [super encodeWithCoder: encoder];
     
-    [encoder encodeObject: _grouping forKey: kTTTableEntityGroupingKey];
+    [encoder encodeObject: _group forKey: kTTTableEntityGroupKey];
 }
 
 - (id) copyWithZone: (NSZone *) zone {
     TTTableEntity *entity = [[[self class] allocWithZone: zone] init];
     
     if (entity) {
-        for (TTEntity *groupedEntity in self.grouping.entities) {
-            [entity.grouping addEntity:
+        for (TTEntity *groupedEntity in self.group.entities) {
+            [entity.group addEntity:
              [groupedEntity copyWithZone: zone]];
         }
     }
@@ -59,7 +59,7 @@ NSString* const kTTTableEntityGroupingKey = @"grouping";
 }
 
 - (BOOL) clear {
-    if ([_grouping removeAllEntities]) {
+    if ([_group removeAllEntities]) {
         return YES;
     }
     
@@ -67,15 +67,15 @@ NSString* const kTTTableEntityGroupingKey = @"grouping";
 }
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
-    if (component == self.grouping) {
+    if (component == self.group) {
         return NO;
     }
     
     return [super removeComponent: component];
 }
 
-- (TTEntityGroupingComponent *) grouping {
-    return _grouping;
+- (TTEntityGroupingComponent *) group {
+    return _group;
 }
 
 @end
