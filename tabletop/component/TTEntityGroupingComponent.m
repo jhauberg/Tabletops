@@ -162,7 +162,9 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 
     for (TTEntity *entity in _entities) {
         if (condition && condition(entity)) {
-            [entities addObject: entity];
+            if (![entities containsObject: entity]) {
+                [entities addObject: entity];
+            }
         }
 
         if (searchDeeper) {
