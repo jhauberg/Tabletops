@@ -128,17 +128,17 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
                      atomically: YES];
 }
 
-- (BOOL) moveEntity: (TTEntity *) entity fromGrouping: (TTEntityGroupingComponent *) grouping {
+- (BOOL) moveEntity: (TTEntity *) entity fromGroup: (TTEntityGroupingComponent *) group {
     return [self moveEntity: entity
-               fromGrouping: grouping
+                  fromGroup: group
                  atomically: YES];
 }
 
-- (BOOL) moveEntity: (TTEntity *) entity fromGrouping: (TTEntityGroupingComponent *) grouping atomically: (BOOL) atomically {
+- (BOOL) moveEntity: (TTEntity *) entity fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically {
     BOOL didAddEntity = [self addEntity: entity];
     
     if (didAddEntity) {
-        BOOL didRemoveEntity = [grouping removeEntity: entity];
+        BOOL didRemoveEntity = [group removeEntity: entity];
         
         if (didRemoveEntity) {
             return YES;
@@ -152,10 +152,16 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return NO;
 }
 
-- (BOOL) moveEntities: (NSArray *) entities fromGrouping: (TTEntityGroupingComponent *) grouping atomically: (BOOL) atomically {
+- (BOOL) moveEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group {
+    return [self moveEntities: entities
+                    fromGroup: group
+                   atomically: YES];
+}
+
+- (BOOL) moveEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically {
     for (TTEntity *entity in entities) {
         if (![self moveEntity: entity
-                 fromGrouping: grouping
+                    fromGroup: group
                    atomically: atomically]) {
             if (atomically) {
                 return NO;
