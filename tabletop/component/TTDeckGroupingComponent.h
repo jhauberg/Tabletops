@@ -51,13 +51,13 @@
 - (TTEntity *) draw: (TTEntity *) card;
 
 /**
- Draw a card from the top of the deck and remove it.
+ Draw a card from the top and remove it from the deck.
  
  @returns The TTEntity object located at the last index.
  */
 - (TTEntity *) drawFromTop;
 /**
- Draw a card from the bottom of the deck and remove it.
+ Draw a card from the bottom and remove it from the deck.
  
  @returns The TTEntity object located at the first index.
  */
@@ -70,13 +70,13 @@
 - (TTEntity *) drawAtRandom;
 
 /**
- Draw an amount of cards (or as many possible) from the top of the deck and remove them.
+ Draw an amount of cards (or as many possible) from the top and remove them from the deck.
  
  @returns An NSArray of TTEntity objects located at the last indexes.
  */
 - (NSArray *) drawFromTop: (NSUInteger) amount;
 /**
- Draw an amount of cards (or as many possible) from the bottom of the deck and remove them.
+ Draw an amount of cards (or as many possible) from the bottom and remove them from the deck.
  
  @returns An NSArray of TTEntity objects located at the first indexes.
  */
