@@ -14,6 +14,11 @@
 @interface TTPropertyComponent : TTEntityComponent
 
 /**
+ Create a property component with a named property and an initial value.
+ */
++ (TTPropertyComponent *) propertyWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value;
+
+/**
  The name of the property.
  */
 @property (strong) NSString *name;
