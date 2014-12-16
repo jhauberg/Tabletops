@@ -22,6 +22,8 @@
  */
 + (TTGameState *) restoreFromFile: (NSString*) path;
 
+@property (readonly) NSNumber *version;
+
 @property (readonly) TTTableEntity *table;
 
 /**

@@ -8,9 +8,13 @@
 
 #import "TTGameState.h"
 
+NSUInteger const kTTGameStateVersion = 1;
 NSString* const kTTGameStateDefaultFilename = @"state";
 
+NSString* const kTTGameStateVersionKey = @"version";
 NSString* const kTTGameStateTableKey = @"table";
+
+// todo: save all files (images etc.) and state in a directory structure wrapped as a package (just a folder, but called "Game".box or whatever)
 
 @implementation TTGameState
 
@@ -26,6 +30,7 @@ NSString* const kTTGameStateTableKey = @"table";
 
 - (id) init {
     if ((self = [super init])) {
+        _version = @(kTTGameStateVersion);
         _table = [TTTableEntity table];
     }
     
@@ -34,6 +39,17 @@ NSString* const kTTGameStateTableKey = @"table";
 
 - (id) initWithCoder: (NSCoder *) decoder {
     if ((self = [super init])) {
+        _version = [decoder decodeObjectForKey: kTTGameStateVersionKey];
+        
+        if (_version) {
+            NSNumber *runningVersion = @(kTTGameStateVersion);
+            
+            if ([_version isNotEqualTo: runningVersion]) {
+                [NSException raise: @"The game state being restored was created in a different version of the application"
+                            format: @"Currently running version '%@', but the game state was saved in version '%@'", runningVersion, _version];
+            }
+        }
+        
         _table = [decoder decodeObjectForKey: kTTGameStateTableKey];
     }
     
@@ -41,6 +57,7 @@ NSString* const kTTGameStateTableKey = @"table";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [encoder encodeObject: _version forKey: kTTGameStateVersionKey];
     [encoder encodeObject: _table forKey: kTTGameStateTableKey];
 }
 
