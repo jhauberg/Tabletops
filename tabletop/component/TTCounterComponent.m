@@ -15,8 +15,7 @@ NSString* const kTTCounterComponentStepKey = @"step";
 - (id) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value {
     if (value) {
         if ([value isKindOfClass: [NSString class]]) {
-            value = [NSNumber numberWithDouble:
-                     [(NSString *)value doubleValue]];
+            value = @([(NSString *)value doubleValue]);
         }
         
         if (![value isKindOfClass: [NSNumber class]]) {
@@ -59,8 +58,7 @@ NSString* const kTTCounterComponentStepKey = @"step";
 
 - (BOOL) incrementBy: (double) amount {
     if (self.step) {
-        self.value = [NSNumber numberWithDouble:
-                      [(NSNumber *)self.value doubleValue] + amount];
+        self.value = @([(NSNumber *)self.value doubleValue] + amount);
         
         return YES;
     }
