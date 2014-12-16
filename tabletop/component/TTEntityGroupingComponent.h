@@ -119,7 +119,7 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
  */
 - (void) sortBy: (TTPropertyComponent *) propertyComponent;
 /**
- Sort entities by specific properties, in order.
+ Sort entities by specific properties, in order. Must be property components.
  */
 - (void) sortByComponents: (NSArray *) propertyComponents;
 

@@ -16,7 +16,7 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 @interface TTEntity : NSObject <NSCoding, NSCopying>
 
 /**
- Create a new entity.
+ Create a new entity with no components.
  
  @returns A TTEntity object.
  */

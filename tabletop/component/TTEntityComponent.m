@@ -12,14 +12,14 @@
 
 - (id) initWithCoder: (NSCoder *) decoder {
     if ((self = [super init])) {
-
+        
     }
     
     return self;
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
-    
+    // nothing to encode
 }
 
 - (id) copyWithZone: (NSZone *) zone {
@@ -27,11 +27,13 @@
 }
 
 - (BOOL) isEqual: (id) object {
+    // override to determine equality based on other/more factors
     return [object isKindOfClass:
             [self class]];
 }
 
 - (BOOL) isLike: (TTEntityComponent *) otherComponent {
+    // override to determine likeness based on other/more factors
     return [otherComponent isKindOfClass:
             [self class]];
 }
