@@ -29,4 +29,13 @@
  */
 @property (nonatomic, readonly) BOOL canUndo;
 
+/**
+ The displayed title for this action.
+ */
+@property (nonatomic, readonly) NSString *displayTitle;
+/**
+ The additionally displayed info for this action.
+ */
+@property (nonatomic, readonly) NSString *displayInfo;
+
 @end

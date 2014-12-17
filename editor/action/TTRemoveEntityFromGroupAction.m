@@ -19,6 +19,14 @@
     return self;
 }
 
+- (BOOL) canExecute {
+    if ([super canExecute]) {
+        return self.group && (self.entities && self.entities.count > 0);
+    }
+
+    return NO;
+}
+
 - (BOOL) execute {
     if ([super execute]) {
         if (self.entities && self.group) {
@@ -33,13 +41,26 @@
 - (BOOL) undo {
     if ([super undo]) {
         if (self.entities && self.group) {
-            // todo: insert at previous index
             return [self.group addEntities:
                     self.entities];
         }
     }
 
     return NO;
+}
+
+- (NSString *) displayTitle {
+    return self.entities.count > 1 ?
+        @"Remove entities" :
+        @"Remove entity";
+}
+
+- (NSString *) displayInfo {
+    return [NSString stringWithFormat:
+            @"Removed %lu %@ from '%@'",
+            self.entities.count,
+            self.entities.count > 1 ? @"entities" : @"1 entity",
+            self.group];
 }
 
 @end

@@ -19,6 +19,14 @@
     return self;
 }
 
+- (BOOL) canExecute {
+    if ([super canExecute]) {
+        return self.group && (self.entities && self.entities.count > 0);
+    }
+
+    return NO;
+}
+
 - (BOOL) execute {
     if ([super execute]) {
         if (self.entities && self.group) {
@@ -39,6 +47,20 @@
     }
     
     return NO;
+}
+
+- (NSString *) displayTitle {
+    return self.entities.count > 1 ?
+        @"Add entities" :
+        @"Add entity";
+}
+
+- (NSString *) displayInfo {
+    return [NSString stringWithFormat:
+            @"Added %lu %@ to '%@'",
+            self.entities.count,
+            self.entities.count > 1 ? @"entities" : @"1 entity",
+            self.group];
 }
 
 @end

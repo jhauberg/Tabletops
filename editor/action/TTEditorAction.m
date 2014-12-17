@@ -46,4 +46,12 @@
     return NO;
 }
 
+- (NSString *) displayTitle {
+    return @"Unknown";
+}
+
+- (NSString *) displayInfo {
+    return nil;
+}
+
 @end

@@ -19,6 +19,14 @@
     return self;
 }
 
+- (BOOL) canExecute {
+    if ([super canExecute]) {
+        return self.entity && (self.components && self.components.count > 0);
+    }
+
+    return NO;
+}
+
 - (BOOL) execute {
     if ([super execute]) {
         if (self.entity && self.components) {
@@ -39,6 +47,18 @@
     }
 
     return NO;
+}
+
+- (NSString *) displayTitle {
+    return @"Add component";
+}
+
+- (NSString *) displayInfo {
+    return [NSString stringWithFormat:
+            @"Added %lu %@ to '%@'",
+            self.components.count,
+            self.components.count > 1 ? @"components" : @"1 component",
+            self.entity];
 }
 
 @end

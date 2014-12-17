@@ -26,6 +26,14 @@
     return self;
 }
 
+- (BOOL) canExecute {
+    if ([super canExecute]) {
+        return self.propertyComponent != nil;
+    }
+
+    return NO;
+}
+
 - (BOOL) execute {
     if ([super execute]) {
         if (self.propertyComponent) {
@@ -70,6 +78,34 @@
     }
 
     return NO;
+}
+
+- (NSString *) displayTitle {
+    return @"Change property";
+}
+
+- (NSString *) displayInfo {
+    NSString *displayInfo = nil;
+
+    BOOL hasNameChange = self.fromName != self.toName;
+    BOOL hasValueChange = self.fromValue != self.toValue;
+
+    if (hasNameChange && hasValueChange) {
+        displayInfo = [NSString stringWithFormat:
+                       @"Changed from '%@' = '%@' to '%@' = '%@'",
+                       self.fromName, self.fromValue,
+                       self.toName, self.toValue];
+    } else if (hasNameChange) {
+        displayInfo = [NSString stringWithFormat:
+                       @"Changed name from '%@' to '%@'",
+                       self.fromName, self.toName];
+    } else if (hasValueChange) {
+        displayInfo = [NSString stringWithFormat:
+                       @"Changed value from '%@' to '%@'",
+                       self.fromValue, self.toValue];
+    }
+
+    return displayInfo;
 }
 
 @end

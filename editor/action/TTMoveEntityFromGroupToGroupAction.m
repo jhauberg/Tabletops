@@ -20,9 +20,18 @@
     return self;
 }
 
+- (BOOL) canExecute {
+    if ([super canExecute]) {
+        return self.fromGroup && self.toGroup &&
+            (self.entities && self.entities.count > 0);
+    }
+
+    return NO;
+}
+
 - (BOOL) execute {
     if ([super execute]) {
-        if (self.entities && self.toGroup) {
+        if (self.entities && self.toGroup && self.fromGroup) {
             return [self.toGroup moveEntities: self.entities
                                     fromGroup: self.fromGroup];
         }
@@ -33,13 +42,27 @@
 
 - (BOOL) undo {
     if ([super undo]) {
-        if (self.entities && self.fromGroup) {
+        if (self.entities && self.fromGroup && self.toGroup) {
             return [self.fromGroup moveEntities: self.entities
                                       fromGroup: self.toGroup];
         }
     }
 
     return NO;
+}
+
+- (NSString *) displayTitle {
+    return self.entities.count > 1 ?
+        @"Move entities" :
+        @"Move entity";
+}
+
+- (NSString *) displayInfo {
+    return [NSString stringWithFormat:
+            @"Moved %lu %@ from '%@' to '%@'",
+            self.entities.count,
+            self.entities.count > 1 ? @"entities" : @"1 entity",
+            self.fromGroup, self.toGroup];
 }
 
 @end
