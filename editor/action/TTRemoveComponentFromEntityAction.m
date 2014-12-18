@@ -57,7 +57,7 @@
     return [NSString stringWithFormat:
             @"Removed %lu %@ to '%@'",
             self.components.count,
-            self.components.count > 1 ? @"components" : @"1 component",
+            self.components.count > 1 ? @"components" : @"component",
             self.entity];
 }
 

@@ -54,4 +54,9 @@
     return nil;
 }
 
+- (NSString *) description {
+    return [NSString stringWithFormat:
+            @"%@: %@", self.displayTitle, self.displayInfo];
+}
+
 @end

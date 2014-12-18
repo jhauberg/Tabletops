@@ -55,10 +55,9 @@
 
 - (NSString *) displayInfo {
     return [NSString stringWithFormat:
-            @"Added %lu %@ to '%@'",
+            @"Added %lu %@",
             self.components.count,
-            self.components.count > 1 ? @"components" : @"1 component",
-            self.entity];
+            self.components.count > 1 ? @"components" : @"component"];
 }
 
 @end

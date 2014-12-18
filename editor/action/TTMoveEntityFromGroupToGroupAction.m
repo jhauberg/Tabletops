@@ -59,10 +59,9 @@
 
 - (NSString *) displayInfo {
     return [NSString stringWithFormat:
-            @"Moved %lu %@ from '%@' to '%@'",
+            @"Moved %lu %@",
             self.entities.count,
-            self.entities.count > 1 ? @"entities" : @"1 entity",
-            self.fromGroup, self.toGroup];
+            self.entities.count > 1 ? @"entities" : @"1 entity"];
 }
 
 @end

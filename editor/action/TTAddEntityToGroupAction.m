@@ -57,10 +57,9 @@
 
 - (NSString *) displayInfo {
     return [NSString stringWithFormat:
-            @"Added %lu %@ to '%@'",
+            @"Added %lu %@",
             self.entities.count,
-            self.entities.count > 1 ? @"entities" : @"1 entity",
-            self.group];
+            self.entities.count > 1 ? @"entities" : @"entity"];
 }
 
 @end
