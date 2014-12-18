@@ -36,8 +36,8 @@
 
 - (BOOL) execute {
     if ([super execute]) {
-        BOOL hasNameChange = self.propertyComponent.name != self.toName;
-        BOOL hasValueChange = self.propertyComponent.value != self.toValue;
+        BOOL hasNameChange = self.propertyComponent.name != self.toName && self.toName != nil;
+        BOOL hasValueChange = self.propertyComponent.value != self.toValue && self.toValue != nil;
 
         if (hasNameChange || hasValueChange) {
             if (hasNameChange) {
@@ -83,8 +83,8 @@
 - (NSString *) displayInfo {
     NSString *displayInfo = nil;
 
-    BOOL hasNameChange = self.fromName != self.toName;
-    BOOL hasValueChange = self.fromValue != self.toValue;
+    BOOL hasNameChange = self.fromName != self.toName && self.toName != nil;
+    BOOL hasValueChange = self.fromValue != self.toValue && self.toValue != nil;
 
     if (hasNameChange && hasValueChange) {
         displayInfo = [NSString stringWithFormat:
