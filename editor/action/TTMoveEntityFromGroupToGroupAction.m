@@ -31,10 +31,8 @@
 
 - (BOOL) execute {
     if ([super execute]) {
-        if (self.entities && self.toGroup && self.fromGroup) {
-            return [self.toGroup moveEntities: self.entities
-                                    fromGroup: self.fromGroup];
-        }
+        return [self.toGroup moveEntities: self.entities
+                                fromGroup: self.fromGroup];
     }
 
     return NO;
@@ -42,10 +40,8 @@
 
 - (BOOL) undo {
     if ([super undo]) {
-        if (self.entities && self.fromGroup && self.toGroup) {
-            return [self.fromGroup moveEntities: self.entities
-                                      fromGroup: self.toGroup];
-        }
+        return [self.fromGroup moveEntities: self.entities
+                                  fromGroup: self.toGroup];
     }
 
     return NO;

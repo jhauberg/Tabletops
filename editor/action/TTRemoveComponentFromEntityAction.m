@@ -29,10 +29,8 @@
 
 - (BOOL) execute {
     if ([super execute]) {
-        if (self.entity && self.components) {
-            return [self.entity removeComponents:
-                    self.components];
-        }
+        return [self.entity removeComponents:
+                self.components];
     }
 
     return NO;
@@ -40,10 +38,8 @@
 
 - (BOOL) undo {
     if ([super undo]) {
-        if (self.entity && self.components) {
-            return [self.entity addComponents:
-                    self.components];
-        }
+        return [self.entity addComponents:
+                self.components];
     }
 
     return NO;

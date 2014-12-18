@@ -29,10 +29,8 @@
 
 - (BOOL) execute {
     if ([super execute]) {
-        if (self.entities && self.group) {
-            return [self.group addEntities:
-                    self.entities];
-        }
+        return [self.group addEntities:
+                self.entities];
     }
     
     return NO;
@@ -40,10 +38,8 @@
 
 - (BOOL) undo {
     if ([super undo]) {
-        if (self.entities && self.group) {
-            return [self.group removeEntities:
-                    self.entities];
-        }
+        return [self.group removeEntities:
+                self.entities];
     }
     
     return NO;

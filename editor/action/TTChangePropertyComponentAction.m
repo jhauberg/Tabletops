@@ -36,21 +36,19 @@
 
 - (BOOL) execute {
     if ([super execute]) {
-        if (self.propertyComponent) {
-            BOOL hasNameChange = self.propertyComponent.name != self.toName;
-            BOOL hasValueChange = self.propertyComponent.value != self.toValue;
+        BOOL hasNameChange = self.propertyComponent.name != self.toName;
+        BOOL hasValueChange = self.propertyComponent.value != self.toValue;
 
-            if (hasNameChange || hasValueChange) {
-                if (hasNameChange) {
-                    self.propertyComponent.name = self.toName;
-                }
-
-                if (hasValueChange) {
-                    self.propertyComponent.value = self.toValue;
-                }
-
-                return YES;
+        if (hasNameChange || hasValueChange) {
+            if (hasNameChange) {
+                self.propertyComponent.name = self.toName;
             }
+
+            if (hasValueChange) {
+                self.propertyComponent.value = self.toValue;
+            }
+
+            return YES;
         }
     }
 
@@ -59,21 +57,19 @@
 
 - (BOOL) undo {
     if ([super undo]) {
-        if (self.propertyComponent) {
-            BOOL hasNameChange = self.propertyComponent.name != self.fromName;
-            BOOL hasValueChange = self.propertyComponent.value != self.fromValue;
+        BOOL hasNameChange = self.propertyComponent.name != self.fromName;
+        BOOL hasValueChange = self.propertyComponent.value != self.fromValue;
 
-            if (hasNameChange || hasValueChange) {
-                if (hasNameChange) {
-                    self.propertyComponent.name = self.fromName;
-                }
-
-                if (hasValueChange) {
-                    self.propertyComponent.value = self.fromValue;
-                }
-
-                return YES;
+        if (hasNameChange || hasValueChange) {
+            if (hasNameChange) {
+                self.propertyComponent.name = self.fromName;
             }
+
+            if (hasValueChange) {
+                self.propertyComponent.value = self.fromValue;
+            }
+
+            return YES;
         }
     }
 
