@@ -14,8 +14,6 @@ NSString* const kTTGameStateDefaultFilename = @"state";
 NSString* const kTTGameStateVersionKey = @"version";
 NSString* const kTTGameStateTableKey = @"table";
 
-// todo: save all files (images etc.) and state in a directory structure wrapped as a package (just a folder, but called "Game".box or whatever)
-
 @implementation TTGameState
 
 + (TTGameState *) restore {

@@ -47,7 +47,7 @@
 }
 
 - (NSString *) displayTitle {
-    return @"Unknown";
+    return @"No title";
 }
 
 - (NSString *) displayInfo {
@@ -55,8 +55,16 @@
 }
 
 - (NSString *) description {
-    return [NSString stringWithFormat:
-            @"%@: %@", self.displayTitle, self.displayInfo];
+    NSString *description = nil;
+    
+    if (self.displayInfo) {
+        description = [NSString stringWithFormat:
+                       @"%@: %@", self.displayTitle, self.displayInfo];
+    } else {
+        description = self.displayTitle;
+    }
+    
+    return description;
 }
 
 @end
