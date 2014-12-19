@@ -29,15 +29,17 @@
 
 - (BOOL) execute {
     if ([super execute]) {
-        NSMutableArray *clones = [[NSMutableArray alloc] init];
-        
-        for (TTEntity *entity in self.entities) {
-            [clones addObject:
-             [entity copy]];
+        if (!_clones) {
+            NSMutableArray *clones = [[NSMutableArray alloc] init];
+            
+            for (TTEntity *entity in self.entities) {
+                [clones addObject:
+                 [entity copy]];
+            }
+            
+            _clones = [NSArray arrayWithArray: clones];
         }
-        
-        _clones = [NSArray arrayWithArray: clones];
-        
+
         return [self.group addEntities:
                 self.clones];
     }
@@ -56,8 +58,8 @@
 
 - (NSString *) displayTitle {
     return self.entities.count > 1 ?
-    @"Clone entities" :
-    @"Clone entity";
+        @"Clone entities" :
+        @"Clone entity";
 }
 
 - (NSString *) displayInfo {
