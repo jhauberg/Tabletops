@@ -34,11 +34,6 @@
         }
     }
 
-    // todo: move to after undoing?
-    if (![action execute]) {
-        return NO;
-    }
-
     if (_mostRecentlyUndoneAction) {
         // clear all undone actions that were executed after the most recently undone action
         NSInteger indexOfAction = [_executedActions indexOfObject:
@@ -51,7 +46,11 @@
             _mostRecentlyUndoneAction = nil;
         }
     }
-    
+
+    if (![action execute]) {
+        return NO;
+    }
+
     [_executedActions addObject: action];
 
     return YES;
