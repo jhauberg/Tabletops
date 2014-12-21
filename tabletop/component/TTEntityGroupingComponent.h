@@ -14,7 +14,7 @@
 typedef BOOL (^TTEntityConditional)(TTEntity *entity);
 
 /**
- Base class for implementing entity groupings.
+ Base class for implementing entity groups.
  */
 @interface TTEntityGroupingComponent : TTEntityComponent {
  @protected
@@ -24,89 +24,89 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
 @property (readonly) NSArray *entities;
 
 /**
- Add an entity to the grouping.
+ Add an entity to the group.
  
  @returns YES if the entity was added, otherwise NO.
  */
 - (BOOL) addEntity: (TTEntity *) entity;
 /**
- Add multiple entities to the grouping.
+ Add multiple entities to the group.
  
  @returns YES if the entities were added, otherwise NO.
  */
 - (BOOL) addEntities: (NSArray *) entities;
 /**
- Add multiple entities to the grouping, if specified, as an atomic operation.
+ Add multiple entities to the group, if specified, as an atomic operation.
  
  @returns YES if the entities were added, otherwise NO. If specified as an atomic operation, only returns YES if *all* the entities were added.
  */
 - (BOOL) addEntities: (NSArray *) entities atomically: (BOOL) atomically;
 
 /**
- Remove an entity from the grouping.
+ Remove an entity from the group.
  
  @returns YES if the entity was removed, otherwise NO.
  */
 - (BOOL) removeEntity: (TTEntity *) entity;
 /**
- Remove multiple entities from the grouping.
+ Remove multiple entities from the group.
  
  @returns YES if the entities were removed, otherwise NO.
  */
 - (BOOL) removeEntities: (NSArray *) entities;
 /**
- Remove multiple entities from the grouping.
+ Remove multiple entities from the group.
  
  @returns YES if the entities were removed, otherwise NO. If specified as an atomic operation, only returns YES if *all* the entities were removed.
  */
 - (BOOL) removeEntities: (NSArray *) entities atomically: (BOOL) atomically;
 /**
- Remove all entities from the grouping.
+ Remove all entities from the group.
  
  @returns YES if all the entities were removed, otherwise NO.
  */
 - (BOOL) removeAllEntities;
 
 /**
- Move an entity from a grouping to the receiver grouping.
+ Move an entity from a group to the receiver group.
  
  @returns YES if the entity was moved, otherwise NO.
  */
 - (BOOL) moveEntity: (TTEntity *) entity fromGroup: (TTEntityGroupingComponent *) group;
 /**
- Move an entity from a grouping to the receiver grouping, if specified, as an atomic operation.
+ Move an entity from a group to the receiver group, if specified, as an atomic operation.
  
  @returns YES if the entity was moved, otherwise NO.
  */
 - (BOOL) moveEntity: (TTEntity *) entity fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically;
 /**
- Move multiple entities from a grouping to the receiver grouping.
+ Move multiple entities from a group to the receiver group.
 
  @returns YES if the entities were moved, otherwise NO.
  */
 - (BOOL) moveEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group;
 /**
- Move multiple entities from a grouping to the receiver grouping, if specified, as an atomic operation.
+ Move multiple entities from a group to the receiver group, if specified, as an atomic operation.
 
  @returns YES if the entities were moved, otherwise NO.
  */
 - (BOOL) moveEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically;
 
 /**
- Get all entities that matches a condition. This will search through child groupings too.
+ Get all entities that matches a condition. This will search through child groups too.
 
  @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
  */
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition;
 /**
- Get all entities that matches a condition. If specified, also search through child groupings.
+ Get all entities that matches a condition. If specified, also search through child groups.
  
  @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
  */
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper;
 
 /**
- Sort entities by the default sorting behavior for the grouping.
+ Sort entities by the default sorting behavior for the group.
  */
 - (void) sort;
 /**

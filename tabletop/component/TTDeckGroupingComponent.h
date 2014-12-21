@@ -88,4 +88,17 @@
  */
 - (NSArray *) drawAtRandom: (NSUInteger) amount;
 
+/**
+ Send a card to the bottom of the deck.
+ 
+ @return YES if the card was moved, or was already at the bottom, NO otherwise.
+ */
+- (BOOL) sendToBottom: (TTEntity *) card;
+/**
+ Bring a card to the top of the deck.
+ 
+ @return YES if the card was moved, or was already at the top, NO otherwise.
+ */
+- (BOOL) bringToTop: (TTEntity *) card;
+
 @end

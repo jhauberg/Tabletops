@@ -210,6 +210,27 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
             cards];
 }
 
+- (BOOL) sendToBottom: (TTEntity *) card {
+    if (![self removeEntity: card]) {
+        return NO;
+    }
+
+    [_entities insertObject: card
+                    atIndex: 0];
+
+    return YES;
+}
+
+- (BOOL) bringToTop: (TTEntity *) card {
+    if ([self removeEntity: card]) {
+        if ([self addEntity: card]) {
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
 - (void) shuffle {
     if ([_entities count] > 0) {
         for (NSUInteger i = 0; i < [_entities count]; ++i) {
