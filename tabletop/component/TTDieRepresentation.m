@@ -84,10 +84,10 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
             } else if ([sideImages count] > self.sides.count) {
                 [NSException raise: @"Too many side images specified"
                             format: @"Must specify %lu images", self.sides.count];
-            } else {
-                _sideImages = sideImages;
             }
         }
+
+        _sideImages = sideImages;
     } else {
         [NSException raise: @"No sides defined"
                     format: @"Must specify %lu sides to use these side images", sideImages.count];
