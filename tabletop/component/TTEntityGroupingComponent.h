@@ -21,6 +21,9 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
     NSMutableArray *_entities;
 }
 
+/**
+ The entities within this group.
+ */
 @property (readonly) NSArray *entities;
 
 /**

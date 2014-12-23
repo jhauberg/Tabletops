@@ -22,8 +22,14 @@
  */
 + (TTGameState *) restoreFromFile: (NSString*) path;
 
+/**
+ The version of the application that this state was built with.
+ */
 @property (readonly) NSNumber *version;
 
+/**
+ The root entity of the tabletop; the table itself.
+ */
 @property (readonly) TTTableEntity *table;
 
 /**

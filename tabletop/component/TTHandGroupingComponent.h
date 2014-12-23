@@ -14,7 +14,7 @@
 @interface TTHandGroupingComponent : TTEntityGroupingComponent
 
 /**
- Get or set the player who should have ownership of the entities.
+ The player who has ownership of the entities in this group.
  */
 @property (strong) TTEntity *owner;
 
