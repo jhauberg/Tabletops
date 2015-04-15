@@ -34,6 +34,15 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 @property (readonly) NSArray *components;
 
 /**
+ Designated initializer.
+ 
+ Create a new entity with a set of initially added components.
+ 
+ @returns A TTEntity object with components already added.
+ */
+- (instancetype) initWithComponents: (NSArray *) components;
+
+/**
  Add a component to the entity.
  
  @returns YES if the component was added, otherwise NO.

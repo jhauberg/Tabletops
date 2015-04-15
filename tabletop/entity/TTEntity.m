@@ -20,26 +20,31 @@ NSString* const kTTEntityComponentsKey = @"components";
 }
 
 + (instancetype) entityWithComponents: (NSArray *) components {
-    id entity = [self entity];
-
-    if (entity) {
-        [entity addComponents: components];
-    }
-    
-    return entity;
+    return [[[self class] alloc] initWithComponents: components];
 }
 
 - (instancetype) init {
     if ((self = [super init])) {
-        _components = [[NSMutableArray alloc] init];
+        if (!_components) {
+            _components = [[NSMutableArray alloc] init];
+        }
     }
     
     return self;
 }
 
 - (instancetype) initWithCoder: (NSCoder *) decoder {
-    if ((self = [super init])) {
-        _components = [decoder decodeObjectForKey: kTTEntityComponentsKey];
+    if ((self = [self initWithComponents:
+                 [decoder decodeObjectForKey: kTTEntityComponentsKey]])) {
+
+    }
+    
+    return self;
+}
+
+- (instancetype) initWithComponents: (NSArray *) components {
+    if ((self = [self init])) {
+        [self addComponents: components];
     }
     
     return self;

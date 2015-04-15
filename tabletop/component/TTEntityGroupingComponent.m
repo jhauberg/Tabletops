@@ -14,7 +14,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 @implementation TTEntityGroupingComponent
 
 - (instancetype) init {
-    if (((self = [super init]))) {
+    if ((self = [super init])) {
         if (!_entities) {
             _entities = [[NSMutableArray alloc] init];
         }
@@ -25,7 +25,8 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
-        _entities = [decoder decodeObjectForKey: kTTEntityGroupingComponentEntitiesKey];
+        _entities = [[NSMutableArray alloc] initWithArray:
+                     [decoder decodeObjectForKey: kTTEntityGroupingComponentEntitiesKey]];
     }
     
     return self;
