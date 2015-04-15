@@ -15,7 +15,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 
 @implementation TTDeckGroupingComponent
 
-- (id) init {
+- (instancetype) init {
     if (((self = [super init]))) {
         self.addsFaceDown = YES;
         self.drawsFaceUp = YES;
@@ -24,7 +24,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return self;
 }
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         self.addsFaceDown = [decoder decodeBoolForKey: kTTDeckGroupingComponentAddsFaceDownKey];
         self.drawsFaceUp = [decoder decodeBoolForKey: kTTDeckGroupingComponentDrawsFaceUpKey];

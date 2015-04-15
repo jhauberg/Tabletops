@@ -10,7 +10,7 @@
 
 @implementation TTCloneEntityAction
 
-- (id) initWithEntities: (NSArray *) entities toGroup: (TTEntityGroupingComponent *) group {
+- (instancetype) initWithEntities: (NSArray *) entities toGroup: (TTEntityGroupingComponent *) group {
     if ((self = [super init])) {
         _entities = entities;
         _group = group;

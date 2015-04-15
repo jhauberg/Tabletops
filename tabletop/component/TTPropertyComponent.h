@@ -16,7 +16,7 @@
 /**
  Create a property component with a named property and an initial value.
  */
-+ (TTPropertyComponent *) propertyWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value;
++ (instancetype) propertyWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value;
 
 /**
  The name of the property.
@@ -35,7 +35,7 @@
  
  @returns A TTPropertyComponent object with a named property/value.
  */
-- (id) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value;
+- (instancetype) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value;
 
 /**
  Compare the receiver to another property component.

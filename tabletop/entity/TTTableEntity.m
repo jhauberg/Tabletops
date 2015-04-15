@@ -15,11 +15,11 @@ NSString* const kTTTableEntityGroupKey = @"group";
     TTEntityGroupingComponent *_group;
 }
 
-+ (TTTableEntity *) table {
-    return [[TTTableEntity alloc] init];
++ (instancetype) table {
+    return [[[self class] alloc] init];
 }
 
-- (id) init {
+- (instancetype) init {
     if ((self = [super init])) {
         if (!_group) {
             _group = [[TTEntityGroupingComponent alloc] init];
@@ -31,7 +31,7 @@ NSString* const kTTTableEntityGroupKey = @"group";
     return self;
 }
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _group = [decoder decodeObjectForKey: kTTTableEntityGroupKey];
     }

@@ -10,7 +10,7 @@
 
 @implementation TTRemoveEntityFromGroupAction
 
-- (id) initWithEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group {
+- (instancetype) initWithEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group {
     if ((self = [super init])) {
         _entities = entities;
         _group = group;

@@ -13,7 +13,7 @@ NSString* const kTTAreaGroupingComponentAreaKey = @"area";
 
 @implementation TTAreaGroupingComponent
 
-- (id) init {
+- (instancetype) init {
     if (((self = [super init]))) {
         self.area = CGRectZero;
     }
@@ -21,7 +21,7 @@ NSString* const kTTAreaGroupingComponentAreaKey = @"area";
     return self;
 }
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         self.area = [decoder decodeRectForKey: kTTAreaGroupingComponentAreaKey];
     }

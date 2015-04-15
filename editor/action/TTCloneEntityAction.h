@@ -16,16 +16,16 @@
  */
 @interface TTCloneEntityAction : TTEditorAction
 
-@property (nonatomic, readonly) NSArray *entities;
-@property (nonatomic, readonly) NSArray *clones;
+@property (readonly) NSArray *entities;
+@property (readonly) NSArray *clones;
 
-@property (nonatomic, readonly) TTEntityGroupingComponent *group;
+@property (readonly) TTEntityGroupingComponent *group;
 
 /**
  Designated initializer.
  
  Create an action that clones entities and adds them to a group.
  */
-- (id) initWithEntities: (NSArray *) entities toGroup: (TTEntityGroupingComponent *) group;
+- (instancetype) initWithEntities: (NSArray *) entities toGroup: (TTEntityGroupingComponent *) group;
 
 @end

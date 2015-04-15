@@ -16,11 +16,11 @@
 /**
  Get or set the location.
  */
-@property (nonatomic, assign) CGPoint position;
+@property (assign, nonatomic) CGPoint position;
 
 /**
  Determine whether or not the position can be changed.
  */
-@property (nonatomic, assign) BOOL isLocked;
+@property (assign) BOOL isLocked;
 
 @end

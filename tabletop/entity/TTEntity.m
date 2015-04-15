@@ -15,19 +15,21 @@ NSString* const kTTEntityComponentsKey = @"components";
     NSMutableArray *_components;
 }
 
-+ (TTEntity *) entity {
-    return [[TTEntity alloc] init];
++ (instancetype) entity {
+    return [[[self class] alloc] init];
 }
 
-+ (TTEntity *) entityWithComponents: (NSArray *) components {
-    TTEntity *entity = [TTEntity entity];
++ (instancetype) entityWithComponents: (NSArray *) components {
+    id entity = [self entity];
 
-    [entity addComponents: components];
+    if (entity) {
+        [entity addComponents: components];
+    }
     
     return entity;
 }
 
-- (id) init {
+- (instancetype) init {
     if ((self = [super init])) {
         _components = [[NSMutableArray alloc] init];
     }
@@ -35,7 +37,7 @@ NSString* const kTTEntityComponentsKey = @"components";
     return self;
 }
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super init])) {
         _components = [decoder decodeObjectForKey: kTTEntityComponentsKey];
     }

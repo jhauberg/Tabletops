@@ -15,11 +15,11 @@ NSString* const kTTDeckEntityGroupKey = @"group";
     TTDeckGroupingComponent *_group;
 }
 
-+ (TTDeckEntity *) deck {
-    return [[TTDeckEntity alloc] init];
++ (instancetype) deck {
+    return [[[self class] alloc] init];
 }
 
-- (id) init {
+- (instancetype) init {
     if ((self = [super init])) {
         if (!_group) {
             _group = [[TTDeckGroupingComponent alloc] init];
@@ -31,7 +31,7 @@ NSString* const kTTDeckEntityGroupKey = @"group";
     return self;
 }
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _group = [decoder decodeObjectForKey: kTTDeckEntityGroupKey];
     }

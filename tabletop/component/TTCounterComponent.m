@@ -12,7 +12,7 @@ NSString* const kTTCounterComponentStepKey = @"step";
 
 @implementation TTCounterComponent
 
-- (id) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value {
+- (instancetype) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value {
     if (value) {
         if ([value isKindOfClass: [NSString class]]) {
             value = @([(NSString *)value doubleValue]);
@@ -32,7 +32,7 @@ NSString* const kTTCounterComponentStepKey = @"step";
     return self;
 }
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _step = [decoder decodeObjectForKey: kTTCounterComponentStepKey];
     }

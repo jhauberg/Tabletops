@@ -22,17 +22,17 @@ typedef BOOL (^TTActionBlock)();
 /**
  The block that is executed when doing/redoing the action.
  */
-@property (nonatomic, readonly) TTActionBlock action;
+@property (readonly) TTActionBlock action;
 /**
  The block that is performed when undoing the executed action.
  */
-@property (nonatomic, readonly) TTActionBlock undoAction;
+@property (readonly) TTActionBlock undoAction;
 
 /**
  Designated initializer.
  
  Create an action with an optional title and info, along with executable do/undo block actions.
  */
-- (id) initWithTitle: (NSString *) title andInfo: (NSString *) info action: (TTActionBlock) action undo: (TTActionBlock) undoAction;
+- (instancetype) initWithTitle: (NSString *) title andInfo: (NSString *) info action: (TTActionBlock) action undo: (TTActionBlock) undoAction;
 
 @end

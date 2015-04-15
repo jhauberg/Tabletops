@@ -15,19 +15,19 @@
  */
 @interface TTChangePropertyComponentAction : TTEditorAction
 
-@property (nonatomic, readonly) TTPropertyComponent *propertyComponent;
+@property (readonly) TTPropertyComponent *propertyComponent;
 
-@property (nonatomic, readonly) NSString *fromName;
-@property (nonatomic, readonly) NSString *toName;
+@property (readonly) NSString *fromName;
+@property (readonly) NSString *toName;
 
-@property (nonatomic, readonly) id fromValue;
-@property (nonatomic, readonly) id toValue;
+@property (readonly) id fromValue;
+@property (readonly) id toValue;
 
 /**
  Designated initializer.
 
  Create an action that changes the name and value of a property component.
  */
-- (id) initWithNewName: (NSString *) newName andNewValue: (id) newValue forPropertyComponent: (TTPropertyComponent *) propertyComponent;
+- (instancetype) initWithNewName: (NSString *) newName andNewValue: (id) newValue forPropertyComponent: (TTPropertyComponent *) propertyComponent;
 
 @end

@@ -12,7 +12,7 @@ NSString* const kTTTokenRepresentationImageKey = @"image";
 
 @implementation TTTokenRepresentation
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _image = [decoder decodeObjectForKey: kTTTokenRepresentationImageKey];
     }

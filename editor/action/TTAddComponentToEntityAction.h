@@ -15,15 +15,15 @@
  */
 @interface TTAddComponentToEntityAction : TTEditorAction
 
-@property (nonatomic, readonly) TTEntity *entity;
+@property (readonly) TTEntity *entity;
 
-@property (nonatomic, readonly) NSArray *components;
+@property (readonly) NSArray *components;
 
 /**
  Designated initializer.
 
  Create an action that adds components to an entity.
  */
-- (id) initWithComponents: (NSArray *) components toEntity: (TTEntity *) entity;
+- (instancetype) initWithComponents: (NSArray *) components toEntity: (TTEntity *) entity;
 
 @end

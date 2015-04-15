@@ -16,16 +16,16 @@
  */
 @interface TTMoveEntityFromGroupToGroupAction : TTEditorAction
 
-@property (nonatomic, readonly) NSArray *entities;
+@property (readonly) NSArray *entities;
 
-@property (nonatomic, readonly) TTEntityGroupingComponent *fromGroup;
-@property (nonatomic, readonly) TTEntityGroupingComponent *toGroup;
+@property (readonly) TTEntityGroupingComponent *fromGroup;
+@property (readonly) TTEntityGroupingComponent *toGroup;
 
 /**
  Designated initializer.
 
  Create an action that moves entities from a group to another group.
  */
-- (id) initWithEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) fromGroup toGroup: (TTEntityGroupingComponent *) toGroup;
+- (instancetype) initWithEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) fromGroup toGroup: (TTEntityGroupingComponent *) toGroup;
 
 @end

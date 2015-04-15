@@ -16,11 +16,11 @@
 /**
  Restore the state from default.
  */
-+ (TTGameState *) restore;
++ (instancetype) restore;
 /**
  Restore the state from a file.
  */
-+ (TTGameState *) restoreFromFile: (NSString*) path;
++ (instancetype) restoreFromFile: (NSString*) path;
 
 /**
  The version of the application that this state was built with.

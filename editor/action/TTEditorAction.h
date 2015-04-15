@@ -18,24 +18,24 @@
 /**
  Determine whether the action has been executed succesfully.
  */
-@property (nonatomic, readonly) BOOL isExecuted;
+@property (readonly) BOOL isExecuted;
 
 /**
  Determine whether the action can be executed.
  */
-@property (nonatomic, readonly) BOOL canExecute;
+@property (readonly) BOOL canExecute;
 /**
  Determine whether the executed action can be undone.
  */
-@property (nonatomic, readonly) BOOL canUndo;
+@property (readonly) BOOL canUndo;
 
 /**
  The displayed title for this action.
  */
-@property (nonatomic, readonly) NSString *displayTitle;
+@property (readonly) NSString *displayTitle;
 /**
  The additionally displayed info for this action.
  */
-@property (nonatomic, readonly) NSString *displayInfo;
+@property (readonly) NSString *displayInfo;
 
 @end

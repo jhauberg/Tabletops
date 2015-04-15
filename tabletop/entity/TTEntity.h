@@ -20,13 +20,13 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
  
  @returns A TTEntity object.
  */
-+ (TTEntity *) entity;
++ (instancetype) entity;
 /**
  Create a new entity with a set of initially added components.
  
  @returns A TTEntity object with components already added.
  */
-+ (TTEntity *) entityWithComponents: (NSArray *) components;
++ (instancetype) entityWithComponents: (NSArray *) components;
 
 /**
  Get the components that are currently assigned to the entity.

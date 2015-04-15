@@ -15,15 +15,15 @@
  */
 @interface TTRemoveComponentFromEntityAction : TTEditorAction
 
-@property (nonatomic, readonly) TTEntity *entity;
+@property (readonly) TTEntity *entity;
 
-@property (nonatomic, readonly) NSArray *components;
+@property (readonly) NSArray *components;
 
 /**
  Designated initializer.
 
  Create an action that removes components from an entity.
  */
-- (id) initWithComponents: (NSArray *) components fromEntity: (TTEntity *) entity;
+- (instancetype) initWithComponents: (NSArray *) components fromEntity: (TTEntity *) entity;
 
 @end

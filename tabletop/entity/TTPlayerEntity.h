@@ -33,6 +33,6 @@
  
  @returns A TTPlayerEntity object with a few components provided initially.
  */
-- (id) initWithName: (NSString *) name;
+- (instancetype) initWithName: (NSString *) name;
 
 @end

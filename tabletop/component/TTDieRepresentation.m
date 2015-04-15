@@ -17,7 +17,7 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
 @synthesize sideImages = _sideImages;
 @synthesize upside = _upside;
 
-- (id) initWithSides: (NSArray *) sides {
+- (instancetype) initWithSides: (NSArray *) sides {
     if ((self = [super init])) {
         _sides = sides;
         _upside = [sides firstObject];
@@ -26,22 +26,7 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     return self;
 }
 
-- (id<NSObject, NSCoding, NSCopying>) upside {
-    return _upside;
-}
-
-- (void) setUpside: (id<NSObject, NSCopying, NSCoding>) upside {
-    if (![self.sides containsObject: upside]) {
-        [NSException raise: @"Invalid side"
-                    format: @"Must be a side on the die"];
-        
-        return;
-    }
-    
-    _upside = upside;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _sides = [decoder decodeObjectForKey: kTTDieRepresentationSidesKey];
         _sideImages = [decoder decodeObjectForKey: kTTDieRepresentationSideImagesKey];
@@ -69,6 +54,21 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     }
     
     return component;
+}
+
+- (id<NSObject, NSCoding, NSCopying>) upside {
+    return _upside;
+}
+
+- (void) setUpside: (id<NSObject, NSCopying, NSCoding>) upside {
+    if (![self.sides containsObject: upside]) {
+        [NSException raise: @"Invalid side"
+                    format: @"Must be a side on the die"];
+        
+        return;
+    }
+    
+    _upside = upside;
 }
 
 - (NSArray *) sideImages {

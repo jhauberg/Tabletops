@@ -16,15 +16,15 @@
  */
 @interface TTAddEntityToGroupAction : TTEditorAction
 
-@property (nonatomic, readonly) NSArray *entities;
+@property (readonly) NSArray *entities;
 
-@property (nonatomic, readonly) TTEntityGroupingComponent *group;
+@property (readonly) TTEntityGroupingComponent *group;
 
 /**
  Designated initializer.
  
  Create an action that adds entities to a group.
  */
-- (id) initWithEntities: (NSArray *) entities toGroup: (TTEntityGroupingComponent *) group;
+- (instancetype) initWithEntities: (NSArray *) entities toGroup: (TTEntityGroupingComponent *) group;
 
 @end

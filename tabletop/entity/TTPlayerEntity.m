@@ -17,15 +17,15 @@ NSString* const kTTPlayerEntityHandKey = @"hand";
     TTHandGroupingComponent *_hand;
 }
 
-+ (TTPlayerEntity *) playerWithName: (NSString *) name {
-    return [[TTPlayerEntity alloc] initWithName: name];
++ (instancetype) playerWithName: (NSString *) name {
+    return [[[self class] alloc] initWithName: name];
 }
 
-- (id) init {
+- (instancetype) init {
     return [self initWithName: @"John Doe"];
 }
 
-- (id) initWithName: (NSString *) name {
+- (instancetype) initWithName: (NSString *) name {
     if ((self = [super init])) {
         if (!_name) {
             _name = [[TTPropertyComponent alloc] initWithName: @"Name"
@@ -43,7 +43,7 @@ NSString* const kTTPlayerEntityHandKey = @"hand";
     return self;
 }
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _name = [decoder decodeObjectForKey: kTTPlayerEntityNameKey];
         _hand = [decoder decodeObjectForKey: kTTPlayerEntityHandKey];

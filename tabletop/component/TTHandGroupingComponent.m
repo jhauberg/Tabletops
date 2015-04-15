@@ -12,7 +12,7 @@ NSString* const kTTHandGroupingComponentOwnerKey = @"owner";
 
 @implementation TTHandGroupingComponent
 
-- (id) initWithOwner: (TTEntity *) owner {
+- (instancetype) initWithOwner: (TTEntity *) owner {
     if ((self = [super init])) {
         self.owner = owner;
     }
@@ -20,7 +20,7 @@ NSString* const kTTHandGroupingComponentOwnerKey = @"owner";
     return self;
 }
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         self.owner = [decoder decodeObjectForKey: kTTHandGroupingComponentOwnerKey];
     }

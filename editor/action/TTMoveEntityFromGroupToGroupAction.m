@@ -10,7 +10,7 @@
 
 @implementation TTMoveEntityFromGroupToGroupAction
 
-- (id) initWithEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) fromGroup toGroup: (TTEntityGroupingComponent *) toGroup {
+- (instancetype) initWithEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) fromGroup toGroup: (TTEntityGroupingComponent *) toGroup {
     if ((self = [super init])) {
         _entities = entities;
         _fromGroup = fromGroup;

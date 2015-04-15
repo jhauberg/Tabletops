@@ -10,7 +10,7 @@
 
 @implementation TTAddComponentToEntityAction
 
-- (id) initWithComponents: (NSArray *) components toEntity: (TTEntity *) entity {
+- (instancetype) initWithComponents: (NSArray *) components toEntity: (TTEntity *) entity {
     if ((self = [super init])) {
         _entity = entity;
         _components = components;

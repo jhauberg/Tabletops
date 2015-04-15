@@ -16,15 +16,15 @@
  */
 @interface TTRemoveEntityFromGroupAction : TTEditorAction
 
-@property (nonatomic, readonly) NSArray *entities;
+@property (readonly) NSArray *entities;
 
-@property (nonatomic, readonly) TTEntityGroupingComponent *group;
+@property (readonly) TTEntityGroupingComponent *group;
 
 /**
  Designated initializer.
 
  Create an action that removes entities from a group.
  */
-- (id) initWithEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group;
+- (instancetype) initWithEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group;
 
 @end

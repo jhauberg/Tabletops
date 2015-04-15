@@ -26,6 +26,6 @@
  
  @returns A TTHandGroupingComponent object with a given owner.
  */
-- (id) initWithOwner: (TTEntity *) owner;
+- (instancetype) initWithOwner: (TTEntity *) owner;
 
 @end

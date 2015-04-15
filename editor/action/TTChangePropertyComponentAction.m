@@ -10,7 +10,7 @@
 
 @implementation TTChangePropertyComponentAction
 
-- (id) initWithNewName: (NSString *) newName andNewValue: (id) newValue forPropertyComponent: (TTPropertyComponent *) propertyComponent {
+- (instancetype) initWithNewName: (NSString *) newName andNewValue: (id) newValue forPropertyComponent: (TTPropertyComponent *) propertyComponent {
     if ((self = [super init])) {
         _propertyComponent = propertyComponent;
 

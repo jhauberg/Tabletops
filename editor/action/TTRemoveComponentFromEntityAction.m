@@ -10,7 +10,7 @@
 
 @implementation TTRemoveComponentFromEntityAction
 
-- (id) initWithComponents: (NSArray *) components fromEntity: (TTEntity *) entity {
+- (instancetype) initWithComponents: (NSArray *) components fromEntity: (TTEntity *) entity {
     if ((self = [super init])) {
         _entity = entity;
         _components = components;

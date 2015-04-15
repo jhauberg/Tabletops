@@ -10,7 +10,7 @@
 
 @implementation TTEditorAction
 
-- (id) init {
+- (instancetype) init {
     if ((self = [super init])) {
         _isExecuted = NO;
     }
@@ -59,9 +59,10 @@
     
     if (self.displayInfo) {
         description = [NSString stringWithFormat:
-                       @"%@: %@", self.displayTitle, self.displayInfo];
+                       @"%@%@: %@", !self.isExecuted ? @" *** " : @"", self.displayTitle, self.displayInfo];
     } else {
-        description = self.displayTitle;
+        description = [NSString stringWithFormat:
+                       @"%@%@", !self.isExecuted ? @" *** " : @"", self.displayTitle];
     }
     
     return description;

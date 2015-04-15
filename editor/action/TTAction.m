@@ -35,7 +35,7 @@
                                       undo: undoAction];
 }
 
-- (id) initWithTitle: (NSString *) title andInfo: (NSString *) info action: (TTActionBlock) action undo: (TTActionBlock) undoAction {
+- (instancetype) initWithTitle: (NSString *) title andInfo: (NSString *) info action: (TTActionBlock) action undo: (TTActionBlock) undoAction {
     if ((self = [super init])) {
         _title = title;
         _info = info;

@@ -16,17 +16,17 @@ NSString* const kTTGameStateTableKey = @"table";
 
 @implementation TTGameState
 
-+ (TTGameState *) restore {
++ (instancetype) restore {
     return [TTGameState restoreFromFile:
             kTTGameStateDefaultFilename];
 }
 
-+ (TTGameState *) restoreFromFile: (NSString*) path {
-    return (TTGameState *)[NSKeyedUnarchiver unarchiveObjectWithFile:
-                           path];
++ (instancetype) restoreFromFile: (NSString*) path {
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:
+            path];
 }
 
-- (id) init {
+- (instancetype) init {
     if ((self = [super init])) {
         _version = @(kTTGameStateVersion);
         _table = [TTTableEntity table];
@@ -35,7 +35,7 @@ NSString* const kTTGameStateTableKey = @"table";
     return self;
 }
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super init])) {
         _version = [decoder decodeObjectForKey: kTTGameStateVersionKey];
         

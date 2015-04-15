@@ -16,7 +16,7 @@
 /**
  Get or set the amount to increment or decrement by.
  */
-@property (nonatomic, strong) NSNumber *step;
+@property (strong) NSNumber *step;
 
 /**
  Increment the value.

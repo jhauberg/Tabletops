@@ -12,7 +12,7 @@ NSString* const kTTRepresentationComponentPositionKey = @"position";
 
 @implementation TTRepresentationComponent
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _position = [decoder decodePointForKey: kTTRepresentationComponentPositionKey];
     }

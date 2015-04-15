@@ -21,11 +21,11 @@
  
  Note that all undone actions will be removed once a new action is executed.
  */
-@property (nonatomic, readonly) NSArray *actions;
+@property (readonly) NSArray *actions;
 /**
  All executed actions except those that have been undone.
  */
-@property (nonatomic, readonly) NSArray *executedActions;
+@property (readonly) NSArray *executedActions;
 
 /**
  Execute an undoable action.

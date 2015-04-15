@@ -14,7 +14,7 @@
     TTEditorAction *_mostRecentlyUndoneAction;
 }
 
-- (id) init {
+- (instancetype) init {
     if ((self = [super init])) {
         _executedActions = [[NSMutableArray alloc] init];
     }

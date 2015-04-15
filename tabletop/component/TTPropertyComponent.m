@@ -13,12 +13,12 @@ NSString* const kTTPropertyComponentValueKey = @"value";
 
 @implementation TTPropertyComponent
 
-+ (TTPropertyComponent *) propertyWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value {
-    return [[TTPropertyComponent alloc] initWithName: name
-                                            andValue: value];
++ (instancetype) propertyWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value {
+    return [[[self class] alloc] initWithName: name
+                                     andValue: value];
 }
 
-- (id) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value {
+- (instancetype) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value {
     if ((self = [super init])) {
         _name = name;
         _value = value;
@@ -27,7 +27,7 @@ NSString* const kTTPropertyComponentValueKey = @"value";
     return self;
 }
 
-- (id) initWithCoder: (NSCoder *) decoder {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _name = [decoder decodeObjectForKey: kTTPropertyComponentNameKey];
         _value = [decoder decodeObjectForKey: kTTPropertyComponentValueKey];

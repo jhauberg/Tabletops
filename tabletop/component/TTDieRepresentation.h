@@ -34,7 +34,7 @@
  
  @returns A TTDieRepresentation object with the given sides.
  */
-- (id) initWithSides: (NSArray *) sides;
+- (instancetype) initWithSides: (NSArray *) sides;
 
 /**
  Roll the die.
