@@ -15,6 +15,8 @@ NSString* const kTTEntityComponentsKey = @"components";
     NSMutableArray *_components;
 }
 
+#pragma mark Convenience
+
 + (instancetype) entity {
     return [[[self class] alloc] init];
 }
@@ -22,6 +24,8 @@ NSString* const kTTEntityComponentsKey = @"components";
 + (instancetype) entityWithComponents: (NSArray *) components {
     return [[[self class] alloc] initWithComponents: components];
 }
+
+#pragma mark Initialization
 
 - (instancetype) init {
     if ((self = [super init])) {
@@ -33,18 +37,20 @@ NSString* const kTTEntityComponentsKey = @"components";
     return self;
 }
 
-- (instancetype) initWithCoder: (NSCoder *) decoder {
-    if ((self = [super init])) {
-        _components = [[NSMutableArray alloc] initWithArray:
-                       [decoder decodeObjectForKey: kTTEntityComponentsKey]];
+- (instancetype) initWithComponents: (NSArray *) components {
+    if ((self = [self init])) {
+        [self addComponents: components];
     }
     
     return self;
 }
 
-- (instancetype) initWithComponents: (NSArray *) components {
+- (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [self init])) {
-        [self addComponents: components];
+        if (_components) {
+            [_components addObjectsFromArray:
+             [decoder decodeObjectForKey: kTTEntityComponentsKey]];
+        }
     }
     
     return self;
@@ -66,6 +72,8 @@ NSString* const kTTEntityComponentsKey = @"components";
     
     return entity;
 }
+
+#pragma mark Component
 
 - (NSArray *) components {
     return [NSArray arrayWithArray:
@@ -155,6 +163,8 @@ NSString* const kTTEntityComponentsKey = @"components";
                        atomically: YES];
 }
 
+#pragma mark Component Query
+
 - (id) getComponentOfType: (Class) type {
     return [self getComponentOfType: type
                            matching: nil];
@@ -226,6 +236,8 @@ NSString* const kTTEntityComponentsKey = @"components";
     return [NSArray arrayWithArray:
             components];
 }
+
+#pragma mark Other
 
 /**
  Determines similarity, or 'like'-ness, by whether the entity has the same types of components with the same values.
