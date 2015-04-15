@@ -66,7 +66,7 @@
     TTEditorAction *previouslyDoneAction = nil;
 
     // undo every action that happened after the specified action to undo
-    while (![(previouslyDoneAction = [_executedActions objectAtIndex: i--]) isEqual: action]) {
+    while (![(previouslyDoneAction = _executedActions[i--]) isEqual: action]) {
         if (![self undoAction: previouslyDoneAction]) {
             break;
         }
@@ -88,7 +88,7 @@
     TTEditorAction *previouslyUndoneAction = nil;
 
     // execute every action that were undone prior to the specified action to redo
-    while (![(previouslyUndoneAction = [_executedActions objectAtIndex: i++]) isEqual: action]) {
+    while (![(previouslyUndoneAction = _executedActions[i++]) isEqual: action]) {
         if (![previouslyUndoneAction execute]) {
             break;
         }
@@ -101,7 +101,7 @@
     }
 
     if ([_executedActions count] > i) {
-        _mostRecentlyUndoneAction = [_executedActions objectAtIndex: i];
+        _mostRecentlyUndoneAction = _executedActions[i];
     } else {
         _mostRecentlyUndoneAction = nil;
     }

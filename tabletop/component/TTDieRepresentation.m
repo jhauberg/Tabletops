@@ -98,8 +98,7 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     id result = nil;
     
     if (self.sides) {
-        result = [self.sides objectAtIndex:
-                  rand() % self.sides.count];
+        result = self.sides[rand() % self.sides.count];
     }
     
     _upside = result;
@@ -128,9 +127,9 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     NSMutableArray *sidesAndImages = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < [self.sides count]; i++) {
-        NSString *sideImage = [self.sideImages objectAtIndex: i];
+        NSString *sideImage = self.sideImages[i];
 
-        id side = [self.sides objectAtIndex: i];
+        id side = self.sides[i];
         
         [sidesAndImages addObject:
          [NSString stringWithFormat:

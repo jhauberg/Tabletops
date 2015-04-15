@@ -108,7 +108,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     TTEntity *card = nil;
     
     if (index < _entities.count) {
-        card = [_entities objectAtIndex: index];
+        card = _entities[index];
         
         if (card) {
             [_entities removeObjectAtIndex: index];
