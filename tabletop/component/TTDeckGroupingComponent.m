@@ -210,14 +210,23 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
             cards];
 }
 
-- (BOOL) sendToBottom: (TTEntity *) card {
-    if (![self removeEntity: card]) {
-        return NO;
+- (BOOL) addEntityToBottom: (TTEntity *) entity {
+    if ([self addEntity: entity]) {
+        return [self sendToBottom: entity];
     }
+    
+    return NO;
+}
 
+- (BOOL) sendToBottom: (TTEntity *) card {
+    if (![_entities containsObject: card]) {
+        return [self addEntityToBottom: card];
+    }
+    
+    [_entities removeObject: card];
     [_entities insertObject: card
                     atIndex: 0];
-
+    
     return YES;
 }
 

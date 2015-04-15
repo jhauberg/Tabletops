@@ -42,7 +42,6 @@
  @returns The TTEntity object located at index.
  */
 - (TTEntity *) drawAtIndex: (NSUInteger) index;
-
 /**
  Draw the card and remove it from the deck.
  
