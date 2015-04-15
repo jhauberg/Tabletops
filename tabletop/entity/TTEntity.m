@@ -34,9 +34,9 @@ NSString* const kTTEntityComponentsKey = @"components";
 }
 
 - (instancetype) initWithCoder: (NSCoder *) decoder {
-    if ((self = [self initWithComponents:
-                 [decoder decodeObjectForKey: kTTEntityComponentsKey]])) {
-
+    if ((self = [super init])) {
+        _components = [[NSMutableArray alloc] initWithArray:
+                       [decoder decodeObjectForKey: kTTEntityComponentsKey]];
     }
     
     return self;
@@ -80,7 +80,7 @@ NSString* const kTTEntityComponentsKey = @"components";
 #ifdef DEBUG
     for (TTEntityComponent *existingComponent in _components) {
         if ([existingComponent isLike: component]) {
-            NSLog(@"*** Attempting to add '%@' to an entity which already seems to have a similar component. Are you sure this was intended? %@", component, self);
+            NSLog(@"*** Adding '%@' to an entity which already seems to have a similar component. Are you sure this is intended? %@", component, self);
             
             break;
         }

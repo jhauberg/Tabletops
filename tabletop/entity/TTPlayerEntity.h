@@ -15,7 +15,7 @@
  */
 @interface TTPlayerEntity : TTEntity
 
-+ (TTPlayerEntity *) playerWithName: (NSString *) name;
++ (instancetype) playerWithName: (NSString *) name;
 
 /**
  Get the name component. Can not be removed.

@@ -14,7 +14,7 @@
  */
 @interface TTDeckEntity : TTEntity
 
-+ (TTDeckEntity *) deck;
++ (instancetype) deck;
 
 /**
  Get the grouping component for the contents of the deck. Can not be removed.

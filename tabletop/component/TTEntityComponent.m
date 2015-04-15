@@ -11,11 +11,7 @@
 @implementation TTEntityComponent
 
 - (instancetype) initWithCoder: (NSCoder *) decoder {
-    if ((self = [super init])) {
-        
-    }
-    
-    return self;
+    return [self init];
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
