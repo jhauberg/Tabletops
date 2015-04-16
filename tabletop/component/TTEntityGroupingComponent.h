@@ -96,7 +96,7 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
 - (BOOL) moveEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically;
 
 /**
- Get all entities that matches a condition. This will search through child groups too.
+ Get all entities that matches a condition. This will search through child groups too (in case this group contains another group of entities).
 
  @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
  */
@@ -116,7 +116,6 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
  Sort entities by the provided comparison.
  */
 - (void) sort: (NSComparator) comparison;
-
 /**
  Sort entities by a specific property.
  */
