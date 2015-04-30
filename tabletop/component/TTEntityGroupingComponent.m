@@ -214,20 +214,21 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
  otherwise it bases the comparison on the amount of components they have.
  */
 - (void) sort {
-    [_entities sortUsingComparator: ^NSComparisonResult(id left, id right) {
-        TTEntity *entity = (TTEntity *)left;
-        TTEntity *otherEntity = (TTEntity *)right;
+    [_entities sortUsingComparator:
+     ^NSComparisonResult(id left, id right) {
+         TTEntity *entity = (TTEntity *)left;
+         TTEntity *otherEntity = (TTEntity *)right;
         
-        if (entity && otherEntity) {
-            if ([entity isLike: otherEntity]) {
-                return NSOrderedSame;
-            } else if (entity.components.count > otherEntity.components.count) {
-                return NSOrderedDescending;
-            }
-        }
+         if (entity && otherEntity) {
+             if ([entity isLike: otherEntity]) {
+                 return NSOrderedSame;
+             } else if (entity.components.count > otherEntity.components.count) {
+                 return NSOrderedDescending;
+             }
+         }
         
-        return NSOrderedAscending;
-    }];
+         return NSOrderedAscending;
+     }];
 }
 
 - (void) sort: (NSComparator) comparison {
@@ -240,26 +241,27 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (void) sortByComponents: (NSArray *) propertyComponents {
-    [_entities sortUsingComparator: ^NSComparisonResult(id left, id right) {
-        for (TTPropertyComponent *propertyComponent in propertyComponents) {
-            TTEntity *entity = (TTEntity *)left;
-            TTEntity *otherEntity = (TTEntity *)right;
+    [_entities sortUsingComparator:
+     ^NSComparisonResult(id left, id right) {
+         for (TTPropertyComponent *propertyComponent in propertyComponents) {
+             TTEntity *entity = (TTEntity *)left;
+             TTEntity *otherEntity = (TTEntity *)right;
             
-            TTPropertyComponent *property = [entity getComponentLike: propertyComponent];
-            TTPropertyComponent *otherProperty = [otherEntity getComponentLike: propertyComponent];
+             TTPropertyComponent *property = [entity getComponentLike: propertyComponent];
+             TTPropertyComponent *otherProperty = [otherEntity getComponentLike: propertyComponent];
             
-            if (property && otherProperty) {
-                NSInteger comparison = [property compare:
-                                        otherProperty];
+             if (property && otherProperty) {
+                 NSInteger comparison = [property compare:
+                                         otherProperty];
                 
-                if (comparison != NSOrderedSame) {
-                    return comparison;
-                }
-            }
-        }
+                 if (comparison != NSOrderedSame) {
+                     return comparison;
+                 }
+             }
+         }
         
-        return NSOrderedSame;
-    }];
+         return NSOrderedSame;
+     }];
 }
 
 - (BOOL) isEqual: (id) object {
