@@ -44,7 +44,7 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTCardRepresentation *component = [[[self class] allocWithZone: zone] init];
+    TTCardRepresentation *component = [super copyWithZone: zone];
     
     if (component) {
         component.frontImage = self.frontImage;

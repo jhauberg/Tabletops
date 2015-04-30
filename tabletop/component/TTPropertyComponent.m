@@ -44,8 +44,14 @@ NSString* const kTTPropertyComponentValueKey = @"value";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    return [[[self class] allocWithZone: zone] initWithName: self.name
-                                                   andValue: self.value];
+    TTPropertyComponent *propertyComponent = [super copyWithZone: zone];
+
+    if (propertyComponent) {
+        propertyComponent.name = self.name;
+        propertyComponent.value = self.value;
+    }
+
+    return propertyComponent;
 }
 
 - (NSComparisonResult) compare: (TTPropertyComponent *) otherProperty {

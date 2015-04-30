@@ -27,7 +27,7 @@ NSString* const kTTTokenRepresentationImageKey = @"image";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTTokenRepresentation *component = [[[self class] allocWithZone: zone] init];
+    TTTokenRepresentation *component = [super copyWithZone: zone];
     
     if (component) {
         component.image = self.image;

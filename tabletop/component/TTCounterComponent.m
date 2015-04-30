@@ -47,7 +47,7 @@ NSString* const kTTCounterComponentStepKey = @"step";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTCounterComponent *component = [[[self class] allocWithZone: zone] init];
+    TTCounterComponent *component = [super copyWithZone: zone];
     
     if (component) {
         component.step = self.step;

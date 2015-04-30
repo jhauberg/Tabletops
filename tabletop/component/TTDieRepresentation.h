@@ -16,7 +16,7 @@
 /**
  Get all the sides of the die.
  */
-@property (readonly) NSArray *sides;
+@property (strong) NSArray *sides;
 /**
  Get the images for each side of the die.
  */

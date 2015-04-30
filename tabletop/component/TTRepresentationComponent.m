@@ -27,7 +27,7 @@ NSString* const kTTRepresentationComponentPositionKey = @"position";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTRepresentationComponent *component = [[[self class] allocWithZone: zone] init];
+    TTRepresentationComponent *component = [super copyWithZone: zone];
     
     if (component) {
         component.position = self.position;

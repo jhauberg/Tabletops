@@ -39,7 +39,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTEntityGroupingComponent *component = [[[self class] allocWithZone: zone] init];
+    TTEntityGroupingComponent *component = [super copyWithZone: zone];
     
     if (component) {
         for (TTEntity *groupedEntity in _entities) {

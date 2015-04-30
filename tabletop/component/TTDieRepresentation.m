@@ -45,10 +45,10 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTDieRepresentation *component = [[[self class] allocWithZone: zone] initWithSides:
-                                      self.sides];
+    TTDieRepresentation *component = [super copyWithZone: zone];
     
     if (component) {
+        component.sides = self.sides;
         component.sideImages = self.sideImages;
         component.upside = self.upside;
     }
