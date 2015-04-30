@@ -1,6 +1,6 @@
 ![icon](icon.png)
 
-I wanted a tool for conveniently making, and playing, board-game prototypes, without going through all the hassles of printing and paper cutting.
+I wanted to make a tool for conveniently making, and playing, board-game prototypes, without going through all the hassles of printing and paper cutting.
 
 This might be it- someday.
 
@@ -11,12 +11,66 @@ These are a few of the ones inspiration will be drawn from:
   * [Tabletop Simulator](http://store.steampowered.com/app/286160)
   * [VASSAL](http://www.vassalengine.org)
   * [ZunTzu](http://www.zuntzu.com)
+  * [Roll20](http://roll20.net)
+
+# Implementation
+
+The [tabletop](https://github.com/jhauberg/Tabletops/tree/master/tabletop) is implemented as a component-entity model.
+
+This is how you would make a 6-sided die:
+
+```objective-c
+TTEntity *d6 = [TTEntity entity];
+
+TTDieRepresentation *representation =
+  [[TTDieRepresentation alloc] initWithSides:
+   // note that a 'side' can be any kind of object
+   @[ @1, @2, @3, @4, @5, @6 ]];
+
+representation.sideImages = @[ @"d6-1.png",
+                               @"d6-2.png",
+                               @"d6-3.png",
+                               @"d6-4.png",
+                               @"d6-5.png",
+                               @"d6-6.png" ];
+
+[d6 addComponent: representation];
+```
+
+And a card with a few properties:
+
+```objective-c
+TTEntity *trickCard = [TTEntity entity];
+
+TTPropertyComponent *difficultyProperty =
+  [[TTPropertyComponent alloc] initWithName: @"Difficulty"
+                                   andValue: @3];
+
+TTPropertyComponent *nameProperty =
+  [[TTPropertyComponent alloc] initWithName: @"Name"
+  // again note that the value can be any kind of object
+                                   andValue: @"Heelflip"];
+
+TTPropertyComponent *flavorProperty =
+  [[TTPropertyComponent alloc] initWithName: @"Flavor"
+                                   andValue: @"Flip the board with a flick of the heel"];
+
+TTCardRepresentation *representation = [[TTCardRepresentation alloc] init];
+
+representation.frontImage = @"card-trick-front-4-heelflip.png";
+representation.backImage = @"card-trick-back.png";
+
+[trickCard addComponents: @[ nameProperty,
+                             difficultyProperty,
+                             flavorProperty,
+                             representation ]];
+```
 
 # License
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Jacob Hauberg Hansen
+Copyright (c) 2015 Jacob Hauberg Hansen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
