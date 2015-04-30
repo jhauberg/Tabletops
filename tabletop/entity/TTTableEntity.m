@@ -59,7 +59,7 @@ NSString* const kTTTableEntityGroupKey = @"group";
 }
 
 - (BOOL) clear {
-    if ([_group removeAllEntities]) {
+    if (_group && [_group removeAllEntities]) {
         return YES;
     }
     
