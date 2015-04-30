@@ -66,6 +66,12 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return result;
 }
 
+/**
+ Sorts entities by their card representation.
+
+ The comparison is based on the front and back images of any card representation components present on the compared entities.
+ No sorting occurs if either of the compared entities do not have a card representation component.
+ */
 - (void) sort {
     [_entities sortUsingComparator:
      ^NSComparisonResult(id left, id right) {

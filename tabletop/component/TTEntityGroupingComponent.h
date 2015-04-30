@@ -102,8 +102,8 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
  */
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition;
 /**
- Get all entities that matches a condition. If specified, also search through child groups.
- 
+ Get all entities that matches a condition. If specified, also searches through child groups.
+
  @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
  */
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper;
