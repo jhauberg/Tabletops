@@ -10,6 +10,8 @@
 
 /**
  Groups entities as cards in a deck.
+ 
+ A deck can be sorted, shuffled and drawn from (either randomly or specifically).
  */
 @interface TTDeckGroupingComponent : TTEntityGroupingComponent
 
@@ -24,10 +26,14 @@
 
 /**
  Flip cards to be face-down when they are added to the deck.
+ 
+ This property only affects entities which have a TTCardRepresentation component assigned.
  */
 @property (assign) BOOL addsFaceDown;
 /**
  Flip cards to be face-up when they are drawn from the deck.
+ 
+ This property only affects entities which have a TTCardRepresentation component assigned.
  */
 @property (assign) BOOL drawsFaceUp;
 
@@ -43,7 +49,7 @@
  */
 - (TTEntity *) drawAtIndex: (NSUInteger) index;
 /**
- Draw the card and remove it from the deck.
+ Draw a card and remove it from the deck.
  
  @returns The card specified if it is in the deck, nil otherwise.
  */

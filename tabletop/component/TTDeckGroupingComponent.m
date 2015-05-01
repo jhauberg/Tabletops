@@ -122,6 +122,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 
             TTCardRepresentation *cardRepresentation = [card getComponentOfType:
                                                         [TTCardRepresentation class]];
+
             if (cardRepresentation) {
                 if (self.drawsFaceUp && !cardRepresentation.isFaceUp) {
                     [cardRepresentation flip];
