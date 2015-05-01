@@ -98,7 +98,7 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     id result = nil;
     
     if (self.sides) {
-        result = self.sides[rand() % self.sides.count];
+        result = self.sides[arc4random_uniform((uint32_t)self.sides.count)];
     }
     
     _upside = result;
