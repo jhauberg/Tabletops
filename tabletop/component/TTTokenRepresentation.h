@@ -13,6 +13,9 @@
  */
 @interface TTTokenRepresentation : TTRepresentationComponent
 
-@property (strong) NSString *image;
+/**
+ Get or set the frontside image of the card.
+ */
+@property (strong) NSString *frontImage;
 
 @end

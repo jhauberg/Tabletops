@@ -25,7 +25,7 @@
 /**
  Get the currently visible side image; either @c frontImage or @c backImage.
  */
-@property (readonly) id visibleImage;
+@property (readonly) NSString *visibleImage;
 
 /**
  Determine whether the card is currently showing face-up.
@@ -37,7 +37,7 @@
 @property (readonly) BOOL isTapped;
 
 /**
- Flip the card, making it face up if it was facing down before, and vice versa.
+ Flip the card, making it face up if it was facing down before, or face down if it was facing up before.
  */
 - (void) flip;
 /**

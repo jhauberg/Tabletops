@@ -8,13 +8,13 @@
 
 #import "TTTokenRepresentation.h"
 
-NSString* const kTTTokenRepresentationImageKey = @"image";
+NSString* const kTTTokenRepresentationFrontImageKey = @"front_image";
 
 @implementation TTTokenRepresentation
 
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
-        _image = [decoder decodeObjectForKey: kTTTokenRepresentationImageKey];
+        _frontImage = [decoder decodeObjectForKey: kTTTokenRepresentationFrontImageKey];
     }
     
     return self;
@@ -23,14 +23,14 @@ NSString* const kTTTokenRepresentationImageKey = @"image";
 - (void) encodeWithCoder: (NSCoder *) encoder {
     [super encodeWithCoder: encoder];
     
-    [encoder encodeObject: _image forKey: kTTTokenRepresentationImageKey];
+    [encoder encodeObject: _frontImage forKey: kTTTokenRepresentationFrontImageKey];
 }
 
 - (id) copyWithZone: (NSZone *) zone {
     TTTokenRepresentation *component = [super copyWithZone: zone];
     
     if (component) {
-        component.image = self.image;
+        component.frontImage = self.frontImage;
     }
     
     return component;
@@ -40,8 +40,8 @@ NSString* const kTTTokenRepresentationImageKey = @"image";
     if ([super isEqual: object]) {
         TTTokenRepresentation *otherTokenRepresentation = (TTTokenRepresentation *)object;
         
-        return [self.image isEqualToString:
-                otherTokenRepresentation.image];
+        return [self.frontImage isEqualToString:
+                otherTokenRepresentation.frontImage];
     }
     
     return NO;

@@ -62,7 +62,7 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
     return component;
 }
 
-- (id) visibleImage {
+- (NSString *) visibleImage {
     return self.isFaceUp ?
         self.frontImage : self.backImage;
 }
