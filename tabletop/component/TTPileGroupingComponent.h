@@ -16,10 +16,17 @@
 @interface TTPileGroupingComponent : TTEntityGroupingComponent
 
 /**
- Draw an entity from the pile.
+ Draw an entity and remove it from the pile.
 
  @returns A randomly picked entity, if any, nil otherwise.
  */
 - (TTEntity *) draw;
+
+/**
+ Draw several entities and remove them from the pile.
+
+ @returns An NSArray of up to @c amount of randomly picked entities, if any, nil otherwise.
+ */
+- (NSArray *) draw: (NSUInteger) amount;
 
 @end

@@ -24,4 +24,22 @@
     return entity;
 }
 
+- (NSArray *) draw: (NSUInteger) amount {
+    NSMutableArray *entities = [[NSMutableArray alloc] init];
+
+    for (NSUInteger i = 0; i < amount; i++) {
+        TTEntity *entity = [self draw];
+
+        if (!entity) {
+            break;
+        }
+
+        [entities addObject:
+         entity];
+    }
+
+    return [NSArray arrayWithArray:
+            entities];
+}
+
 @end
