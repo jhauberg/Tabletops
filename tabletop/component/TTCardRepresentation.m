@@ -8,26 +8,12 @@
 
 #import "TTCardRepresentation.h"
 
-NSString* const kTTCardRepresentationFrontImageKey = @"front_image";
-NSString* const kTTCardRepresentationBackImageKey = @"back_image";
-NSString* const kTTCardRepresentationIsFaceUpKey = @"is_face_up";
 NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 
 @implementation TTCardRepresentation
 
-- (instancetype) init {
-    if ((self = [super init])) {
-        _isFaceUp = YES;
-    }
-
-    return self;
-}
-
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
-        _frontImage = [decoder decodeObjectForKey: kTTCardRepresentationFrontImageKey];
-        _backImage = [decoder decodeObjectForKey: kTTCardRepresentationBackImageKey];
-        _isFaceUp = [decoder decodeBoolForKey: kTTCardRepresentationIsFaceUpKey];
         _isTapped = [decoder decodeBoolForKey: kTTCardRepresentationIsTappedKey];
     }
     
@@ -36,10 +22,7 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
     [super encodeWithCoder: encoder];
-    
-    [encoder encodeObject: _frontImage forKey: kTTCardRepresentationFrontImageKey];
-    [encoder encodeObject: _backImage forKey: kTTCardRepresentationBackImageKey];
-    [encoder encodeBool: _isFaceUp forKey: kTTCardRepresentationIsFaceUpKey];
+
     [encoder encodeBool: _isTapped forKey: kTTCardRepresentationIsTappedKey];
 }
 
@@ -47,13 +30,6 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
     TTCardRepresentation *component = [super copyWithZone: zone];
     
     if (component) {
-        component.frontImage = self.frontImage;
-        component.backImage = self.backImage;
-        
-        if (component.isFaceUp != self.isFaceUp) {
-            [component flip];
-        }
-        
         if (component.isTapped != self.isTapped) {
             [component tap];
         }
@@ -62,13 +38,21 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
     return component;
 }
 
-- (NSString *) visibleImage {
+- (BOOL) isFaceUp {
+    return !self.isFlipped;
+}
+
+- (id<NSCoding, NSObject, NSCopying>) visibleSide {
     return self.isFaceUp ?
-        self.frontImage : self.backImage;
+        self.frontside : self.backside;
 }
 
 - (void) flip {
-    _isFaceUp = !_isFaceUp;
+    [super flip];
+}
+
+- (void) flip: (BOOL) randomly {
+    [super flip: randomly];
 }
 
 - (void) tap {
@@ -83,8 +67,8 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
         TTCardRepresentation *otherCardRepresentation = (TTCardRepresentation *)object;
         
         return
-            [self.frontImage isEqualToString: otherCardRepresentation.frontImage] &&
-            [self.backImage isEqualToString: otherCardRepresentation.backImage];
+            [self.frontside isEqual: otherCardRepresentation.frontside] &&
+            [self.backside isEqual: otherCardRepresentation.backside];
     }
     
     return NO;
@@ -92,7 +76,7 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 
 - (NSString *) description {
     return [NSString stringWithFormat:
-            @"%@ %@%@", [super description], self.visibleImage, self.isTapped ? @" (tapped)" : @""];
+            @"%@ %@%@", [super description], self.visibleSide, self.isTapped ? @" (tapped)" : @""];
 }
 
 @end

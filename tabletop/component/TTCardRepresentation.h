@@ -6,29 +6,15 @@
 //  Copyright (c) 2014 Jacob Hauberg Hansen. All rights reserved.
 //
 
-#import "TTRepresentationComponent.h"
+#import "TTCoinRepresentation.h"
 
 /**
- Represents a card with both a front and a back side.
+ Represents a card with both a frontside and a backside.
  */
-@interface TTCardRepresentation : TTRepresentationComponent
+@interface TTCardRepresentation : TTCoinRepresentation
 
 /**
- Get or set the face-up image of the card.
- */
-@property (strong) NSString *frontImage;
-/**
- Get or set the face-down image of the card.
- */
-@property (strong) NSString *backImage;
-
-/**
- Get the currently visible side image; either @c frontImage or @c backImage.
- */
-@property (readonly) NSString *visibleImage;
-
-/**
- Determine whether the card is currently showing face-up.
+ Determine whether the card is currently showing face up.
  */
 @property (readonly) BOOL isFaceUp;
 /**
@@ -40,6 +26,11 @@
  Flip the card, making it face up if it was facing down before, or face down if it was facing up before.
  */
 - (void) flip;
+/**
+ Flip the card, making it randomly show either its @c backside or @c frontside.
+ */
+- (void) flip: (BOOL) randomly;
+
 /**
  Tap the card, flagging it as being tapped unless it was already tapped, in which case it becomes un-tapped.
  */

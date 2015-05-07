@@ -84,16 +84,16 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
                                                           [TTCardRepresentation class]];
 
          if (cardRepresentation && otherCardRepresentation) {
-             NSInteger comparison = [cardRepresentation.backImage compare:
-                                     otherCardRepresentation.backImage];
-    
+             NSComparisonResult comparison = [self compare: cardRepresentation.backside
+                                                        to: otherCardRepresentation.backside];
+
              if (comparison != NSOrderedSame) {
                  return comparison;
              }
-    
-             comparison = [cardRepresentation.frontImage compare:
-                           otherCardRepresentation.frontImage];
-    
+
+             comparison = [self compare: cardRepresentation.frontside
+                                     to: otherCardRepresentation.frontside];
+
              if (comparison != NSOrderedSame) {
                  return comparison;
              }
@@ -101,6 +101,27 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 
          return NSOrderedSame;
      }];
+}
+
+- (NSComparisonResult) compare: (id<NSCoding, NSObject, NSCopying>) leftObject to: (id<NSCoding, NSObject, NSCopying>) rightObject {
+    NSComparisonResult comparisonResult = NSOrderedSame;
+
+    SEL comparisonSelector = @selector(compare:);
+
+    if ([leftObject respondsToSelector: comparisonSelector] &&
+        [rightObject respondsToSelector: comparisonSelector]) {
+        NSMethodSignature *signature = [NSString instanceMethodSignatureForSelector: comparisonSelector];
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature: signature];
+
+        [invocation setTarget: leftObject];
+        [invocation setSelector: comparisonSelector];
+        [invocation setArgument: &rightObject atIndex: 2];
+        [invocation invoke];
+
+        [invocation getReturnValue: &comparisonResult];
+    }
+
+    return comparisonResult;
 }
 
 - (TTEntity *) top {
