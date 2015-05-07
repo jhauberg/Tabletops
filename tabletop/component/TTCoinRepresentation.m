@@ -8,13 +8,23 @@
 
 #import "TTCoinRepresentation.h"
 
-NSString* const kTTCoinRepresentationBackImageKey = @"back_image";
+NSString* const kTTCoinRepresentationIsFlippedKey = @"is_flipped";
+NSString* const kTTCoinRepresentationBacksideKey = @"backside";
 
 @implementation TTCoinRepresentation
 
+- (instancetype) init {
+    if ((self = [super init])) {
+        _isFlipped = NO;
+    }
+
+    return self;
+}
+
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
-        _backImage = [decoder decodeObjectForKey: kTTCoinRepresentationBackImageKey];
+        _isFlipped = [decoder decodeBoolForKey: kTTCoinRepresentationIsFlippedKey];
+        _backside = [decoder decodeObjectForKey: kTTCoinRepresentationBacksideKey];
     }
 
     return self;
@@ -23,14 +33,19 @@ NSString* const kTTCoinRepresentationBackImageKey = @"back_image";
 - (void) encodeWithCoder: (NSCoder *) encoder {
     [super encodeWithCoder: encoder];
 
-    [encoder encodeObject: _backImage forKey: kTTCoinRepresentationBackImageKey];
+    [encoder encodeBool: _isFlipped forKey: kTTCoinRepresentationIsFlippedKey];
+    [encoder encodeObject: _backside forKey: kTTCoinRepresentationBacksideKey];
 }
 
 - (id) copyWithZone: (NSZone *) zone {
     TTCoinRepresentation *component = [super copyWithZone: zone];
 
     if (component) {
-        component.backImage = self.backImage;
+        component.backside = self.backside;
+
+        if (component.isFlipped != self.isFlipped) {
+            [component flip];
+        }
     }
 
     return component;
@@ -40,16 +55,16 @@ NSString* const kTTCoinRepresentationBackImageKey = @"back_image";
     if ([super isEqual: object]) {
         TTCoinRepresentation *otherCoinRepresentation = (TTCoinRepresentation *)object;
 
-        return [self.backImage isEqualToString:
-                otherCoinRepresentation.backImage];
+        return [otherCoinRepresentation.backside isEqual:
+                self.backside];
     }
 
     return NO;
 }
 
-- (NSString *) visibleImage {
+- (id<NSCoding, NSObject, NSCopying>) visibleImage {
     return self.isFlipped ?
-        self.backImage : self.frontImage;
+        self.backside : self.frontside;
 }
 
 - (void) flip {

@@ -9,7 +9,7 @@
 #import "TTEntityComponent.h"
 
 /**
- Base class for implementing physically representable components.
+ Base class for implementing visually representable components.
  */
 @interface TTRepresentationComponent : TTEntityComponent
 

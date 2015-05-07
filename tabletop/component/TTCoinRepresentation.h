@@ -14,26 +14,26 @@
 @interface TTCoinRepresentation : TTTokenRepresentation
 
 /**
- Get or set the backside image of the card.
+ Get or set the backside.
  */
-@property (strong) NSString *backImage;
+@property (strong) id<NSCoding, NSObject, NSCopying> backside;
 
 /**
- Get the currently visible side image; either @c frontImage or @c backImage.
+ Get the currently visible side; either @c frontside or @c backside.
  */
-@property (readonly) NSString *visibleImage;
+@property (readonly) id<NSCoding, NSObject, NSCopying> visibleSide;
 
 /**
- Determine whether the coin is currently showing its backside.
+ Determine whether the @c backside is currently showing.
  */
 @property (readonly) BOOL isFlipped;
 
 /**
- Flip the coin, making it show its backside if it was showing its frontside before, or show its frontside if it was showing its backside before.
+ Flip the coin, making it show its @c backside if it was showing its @c frontside before, or show its @c frontside if it was showing its @c backside before.
  */
 - (void) flip;
 /**
- Flip the coin, making it randomly show either its back- or frontside.
+ Flip the coin, making it randomly show either its @c backside or @c frontside.
  */
 - (void) flip: (BOOL) randomly;
 
