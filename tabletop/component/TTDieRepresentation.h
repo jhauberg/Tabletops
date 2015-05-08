@@ -9,7 +9,7 @@
 #import "TTRepresentationComponent.h"
 
 /**
- Represents a die with a certain amount of sides.
+ Represents a die with a set amount of sides.
  */
 @interface TTDieRepresentation : TTRepresentationComponent
 
@@ -17,10 +17,6 @@
  Get all the sides of the die.
  */
 @property (strong) NSArray *sides;
-/**
- Get the images for each side of the die.
- */
-@property (strong) NSArray *sideImages;
 
 /**
  Get or set the current upside of the die.
@@ -39,7 +35,7 @@
 /**
  Roll the die.
  
- @returns The side facing up after landing the roll.
+ @returns The side facing up after rolling the die.
  */
 - (id) roll;
 

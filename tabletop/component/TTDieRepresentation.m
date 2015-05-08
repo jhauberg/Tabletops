@@ -9,12 +9,10 @@
 #import "TTDieRepresentation.h"
 
 NSString* const kTTDieRepresentationSidesKey = @"sides";
-NSString* const kTTDieRepresentationSideImagesKey = @"side_images";
 NSString* const kTTDieRepresentationUpsideKey = @"upside";
 
 @implementation TTDieRepresentation
 
-@synthesize sideImages = _sideImages;
 @synthesize upside = _upside;
 
 - (instancetype) initWithSides: (NSArray *) sides {
@@ -29,7 +27,6 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _sides = [decoder decodeObjectForKey: kTTDieRepresentationSidesKey];
-        _sideImages = [decoder decodeObjectForKey: kTTDieRepresentationSideImagesKey];
         _upside = [decoder decodeObjectForKey: kTTDieRepresentationUpsideKey];
     }
     
@@ -40,7 +37,6 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     [super encodeWithCoder: encoder];
     
     [encoder encodeObject: _sides forKey: kTTDieRepresentationSidesKey];
-    [encoder encodeObject: _sideImages forKey: kTTDieRepresentationSideImagesKey];
     [encoder encodeObject: _upside forKey: kTTDieRepresentationUpsideKey];
 }
 
@@ -49,7 +45,6 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     
     if (component) {
         component.sides = self.sides;
-        component.sideImages = self.sideImages;
         component.upside = self.upside;
     }
     
@@ -69,29 +64,6 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     }
     
     _upside = upside;
-}
-
-- (NSArray *) sideImages {
-    return _sideImages;
-}
-
-- (void) setSideImages: (NSArray *) sideImages {
-    if (self.sides) {
-        if (sideImages) {
-            if ([sideImages count] < self.sides.count) {
-                [NSException raise: @"Too few side images specified"
-                            format: @"Must specify %lu images", self.sides.count];
-            } else if ([sideImages count] > self.sides.count) {
-                [NSException raise: @"Too many side images specified"
-                            format: @"Must specify %lu images", self.sides.count];
-            }
-        }
-
-        _sideImages = sideImages;
-    } else {
-        [NSException raise: @"No sides defined"
-                    format: @"Must specify %lu sides to use these side images", sideImages.count];
-    }
 }
 
 - (id) roll {
@@ -116,7 +88,6 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
         
         return
             [self.sides isEqualToArray: otherDieRepresentation.sides] &&
-            [self.sideImages isEqualToArray: otherDieRepresentation.sideImages] &&
             [self.upside isEqual: otherDieRepresentation.upside];
     }
     
@@ -124,20 +95,8 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
 }
 
 - (NSString *) description {
-    NSMutableArray *sidesAndImages = [[NSMutableArray alloc] init];
-    
-    for (NSUInteger i = 0; i < [self.sides count]; i++) {
-        NSString *sideImage = self.sideImages[i];
-
-        id side = self.sides[i];
-        
-        [sidesAndImages addObject:
-         [NSString stringWithFormat:
-          @"%@ (%@)", side, sideImage]];
-    }
-    
     return [NSString stringWithFormat:
-            @"%@ %@", [super description], sidesAndImages];
+            @"%@ %@", [super description], self.sides];
 }
 
 @end
