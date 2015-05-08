@@ -19,12 +19,12 @@
 + (instancetype) propertyWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value;
 
 /**
- The name of the property.
+ Get or set the name of the property.
  */
 @property (strong) NSString *name;
 
 /**
- The value of the property.
+ Get or set the value of the property.
  */
 @property (strong) id<NSCoding, NSObject, NSCopying> value;
 

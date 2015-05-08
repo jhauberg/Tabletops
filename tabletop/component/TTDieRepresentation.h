@@ -14,7 +14,7 @@
 @interface TTDieRepresentation : TTRepresentationComponent
 
 /**
- Get all the sides of the die.
+ Get or set all the sides of the die.
  */
 @property (strong) NSArray *sides;
 
