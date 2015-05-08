@@ -12,26 +12,6 @@ NSString* const kTTCounterComponentStepKey = @"step";
 
 @implementation TTCounterComponent
 
-- (instancetype) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value {
-    if (value) {
-        if ([value isKindOfClass: [NSString class]]) {
-            value = @([(NSString *)value doubleValue]);
-        }
-        
-        if (![value isKindOfClass: [NSNumber class]]) {
-            [NSException raise: @"Invalid value"
-                        format: @"'%@' must be a number value", value];
-        }
-    }
-    
-    if ((self = [super initWithName: name
-                           andValue: value])) {
-        
-    }
-    
-    return self;
-}
-
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _step = [decoder decodeObjectForKey: kTTCounterComponentStepKey];
@@ -58,9 +38,32 @@ NSString* const kTTCounterComponentStepKey = @"step";
 
 - (BOOL) incrementBy: (double) amount {
     if (self.step) {
-        self.value = @([(NSNumber *)self.value doubleValue] + amount);
+        SEL valueSelector = @selector(doubleValue);
         
-        return YES;
+        if ([self.value respondsToSelector: valueSelector]) {
+            NSMethodSignature *signature = [NSString instanceMethodSignatureForSelector: valueSelector];
+            
+            if (signature) {
+                NSInvocation *invocation = [NSInvocation invocationWithMethodSignature: signature];
+                
+                if (invocation) {
+                    [invocation setTarget: self.value];
+                    [invocation setSelector: valueSelector];
+                    [invocation invoke];
+                    
+                    double currentValue = 0;
+                    
+                    [invocation getReturnValue: &currentValue];
+                    
+                    self.value = @(currentValue + amount);
+                    
+                    return YES;
+                }
+            }
+        } else {
+            [NSException raise: @"Invalid value"
+                        format: @"'%@' must be a number value", self.value];
+        }
     }
     
     return NO;

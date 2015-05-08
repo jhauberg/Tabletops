@@ -21,13 +21,17 @@
 /**
  Increment the value.
  
- @returns YES if the value was incremented, otherwise NO.
+ Note that if the @c value is currently anything other than a NSNumber, it will be converted.
+ 
+ @returns YES if the @c value was incremented, otherwise NO.
  */
 - (BOOL) increment;
 /**
- Decrement the value.
+ Decrement the value. 
  
- @returns YES if the value was decremented, otherwise NO.
+ Note that if the @c value is currently anything other than a NSNumber, it will be converted.
+ 
+ @returns YES if the @c value was decremented, otherwise NO.
  */
 - (BOOL) decrement;
 
