@@ -29,6 +29,19 @@
 @property (strong) id<NSCoding, NSObject, NSCopying> value;
 
 /**
+ Get the current @c value as an NSNumber object.
+ 
+ @returns The current @c value as an NSNumber object if possible, nil otherwise.
+ */
+@property (readonly) NSNumber *numberValue;
+/**
+ Get the current @c value as an NSString object.
+
+ @returns The current @c value as a NSString object if possible, nil otherwise.
+ */
+@property (readonly) NSString *stringValue;
+
+/**
  Designated initializer.
  
  Create a property component with a named property and an initial value.

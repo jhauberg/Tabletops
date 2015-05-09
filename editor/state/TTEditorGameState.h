@@ -12,7 +12,7 @@
 #import "TTEditorAction.h"
 
 /**
- Provides do/undo/redo functionality for state altering actions.
+ Provides do/undo/redo functionality for state-altering actions.
  */
 @interface TTEditorGameState : TTGameState
 
@@ -28,7 +28,7 @@
 @property (readonly) NSArray *executedActions;
 
 /**
- Execute an undoable action.
+ Execute an action that can be undone afterwards.
 
  If the action has been previously undone, then this will redo the action and all undone actions prior to this one, starting with the oldest action first.
 

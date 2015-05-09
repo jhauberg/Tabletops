@@ -49,7 +49,7 @@ NSString* const kTTRepresentationComponentPositionKey = @"position";
 
 - (void) setPosition: (CGPoint) position {
     if (self.isLocked) {
-        NSLog(@"*** Attempting to change position of locked component '%@'", self);
+        NSLog(@" *** Attempting to change position of locked component '%@'", self);
         
         return;
     }

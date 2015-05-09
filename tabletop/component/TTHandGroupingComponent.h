@@ -21,8 +21,9 @@
 /**
  Designated initializer.
  
- Create a hand for a player. A "hand" is a grouping of the entities that the player currently has ownership of, 
- but is still part of the game as a whole; i.e. dice, tokens and cards (potentially a deck of cards that are only visible to the player).
+ Create a hand for a player. A "hand" is a grouping of the entities that a player currently has ownership of,
+ but is still part of the game as a whole; i.e. dice, tokens and cards (potentially a deck of cards that are 
+ only visible to the player).
  
  @returns A TTHandGroupingComponent object with a given owner.
  */
