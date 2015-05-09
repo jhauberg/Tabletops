@@ -6,12 +6,13 @@
 //  Copyright (c) 2014 Jacob Hauberg Hansen. All rights reserved.
 //
 
-#import "TTTableEntity.h"
+#import "TTEntity.h"
+#import "TTEntityGroupingComponent.h"
 
 /**
  Represents the current state of the tabletop.
  */
-@interface TTGameState : NSObject <NSCoding>
+@interface TTGameState : NSObject <NSCoding, NSCopying>
 
 /**
  Restore the state from default.
@@ -23,14 +24,18 @@
 + (instancetype) restoreFromFile: (NSString*) path;
 
 /**
- The version of the application that this state was built with.
+ Get the version of the application that this state was built with.
  */
 @property (readonly) NSNumber *version;
 
 /**
- The root entity of the tabletop; the table itself.
+ Get the root entity of the tabletop; the table itself.
  */
-@property (readonly) TTTableEntity *table;
+@property (readonly) TTEntity *table;
+/**
+ Get the grouping component for the @c table.
+ */
+@property (readonly) TTEntityGroupingComponent *entities;
 
 /**
  Save the current state as default.

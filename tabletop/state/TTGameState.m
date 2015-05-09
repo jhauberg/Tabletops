@@ -9,15 +9,17 @@
 #import "TTGameState.h"
 
 NSUInteger const kTTGameStateVersion = 1;
+
 NSString* const kTTGameStateDefaultFilename = @"state";
 
 NSString* const kTTGameStateVersionKey = @"version";
 NSString* const kTTGameStateTableKey = @"table";
+NSString* const kTTGameStateTableEntitiesKey = @"table_entities";
 
 @implementation TTGameState
 
 + (instancetype) restore {
-    return [TTGameState restoreFromFile:
+    return [self restoreFromFile:
             kTTGameStateDefaultFilename];
 }
 
@@ -29,7 +31,10 @@ NSString* const kTTGameStateTableKey = @"table";
 - (instancetype) init {
     if ((self = [super init])) {
         _version = @(kTTGameStateVersion);
-        _table = [TTTableEntity table];
+        _table = [TTEntity entity];
+        _entities = [[TTEntityGroupingComponent alloc] init];
+
+        [_table addComponent: _entities];
     }
     
     return self;
@@ -38,25 +43,40 @@ NSString* const kTTGameStateTableKey = @"table";
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super init])) {
         _version = [decoder decodeObjectForKey: kTTGameStateVersionKey];
-        
+
         if (_version) {
             NSNumber *runningVersion = @(kTTGameStateVersion);
-            
+
             if ([_version isNotEqualTo: runningVersion]) {
                 [NSException raise: @"The game state being restored was created in a different version of the application"
                             format: @"Currently running version '%@', but the game state was saved in version '%@'", runningVersion, _version];
             }
         }
-        
+
         _table = [decoder decodeObjectForKey: kTTGameStateTableKey];
+        _entities = [decoder decodeObjectForKey: kTTGameStateTableEntitiesKey];
     }
-    
+
     return self;
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
     [encoder encodeObject: _version forKey: kTTGameStateVersionKey];
     [encoder encodeObject: _table forKey: kTTGameStateTableKey];
+    [encoder encodeObject: _entities forKey: kTTGameStateTableEntitiesKey];
+}
+
+- (id) copyWithZone: (NSZone *) zone {
+    TTGameState *state = [[[self class] allocWithZone: zone] init];
+
+    if (state) {
+        for (TTEntity *entity in self.entities.entities) {
+            [state.entities addEntity:
+             [entity copyWithZone: zone]];
+        }
+    }
+
+    return state;
 }
 
 - (BOOL) save {
