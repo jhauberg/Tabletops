@@ -23,4 +23,6 @@
  */
 @property (assign) BOOL isLocked;
 
+// todo: this should be represented by a rule instead; i.e. TTMayNotBeMovedRule...
+
 @end

@@ -38,31 +38,11 @@ NSString* const kTTCounterComponentStepKey = @"step";
 
 - (BOOL) incrementBy: (double) amount {
     if (self.step) {
-        SEL valueSelector = @selector(doubleValue);
-        
-        if ([self.value respondsToSelector: valueSelector]) {
-            NSMethodSignature *signature = [NSString instanceMethodSignatureForSelector: valueSelector];
-            
-            if (signature) {
-                NSInvocation *invocation = [NSInvocation invocationWithMethodSignature: signature];
-                
-                if (invocation) {
-                    [invocation setTarget: self.value];
-                    [invocation setSelector: valueSelector];
-                    [invocation invoke];
-                    
-                    double currentValue = 0;
-                    
-                    [invocation getReturnValue: &currentValue];
-                    
-                    self.value = @(currentValue + amount);
-                    
-                    return YES;
-                }
-            }
-        } else {
+        if (!self.numberValue) {
             [NSException raise: @"Invalid value"
                         format: @"'%@' must be a number value", self.value];
+        } else {
+            self.value = @([self.numberValue doubleValue] + amount);
         }
     }
     

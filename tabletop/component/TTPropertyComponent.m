@@ -54,16 +54,57 @@ NSString* const kTTPropertyComponentValueKey = @"value";
     return propertyComponent;
 }
 
+- (NSNumber *) numberValue {
+    NSNumber *numberValue = nil;
+
+    SEL doubleSelector = @selector(doubleValue);
+
+    if ([self.value respondsToSelector: doubleSelector]) {
+        NSMethodSignature *signature = [NSString instanceMethodSignatureForSelector: doubleSelector];
+
+        if (signature) {
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature: signature];
+
+            if (invocation) {
+                [invocation setTarget: self.value];
+                [invocation setSelector: doubleSelector];
+                [invocation invoke];
+
+                double currentValue = 0;
+
+                [invocation getReturnValue: &currentValue];
+
+                numberValue = @(currentValue);
+            }
+        }
+    }
+
+    return numberValue;
+}
+
+- (NSString *) stringValue {
+    NSString *stringValue = nil;
+
+    if ([self.value isKindOfClass: [NSString class]]) {
+        stringValue = (NSString *)self.value;
+    } else {
+        if ([self.value respondsToSelector: @selector(stringValue)]) {
+            stringValue = (NSString *)[self.value performSelector: @selector(stringValue)
+                                                       withObject: nil];
+        }
+    }
+
+    return stringValue;
+}
+
 - (NSComparisonResult) compare: (TTPropertyComponent *) otherProperty {
     if ([self isLike: otherProperty]) {
-        if ([self.value isKindOfClass: [NSNumber class]] &&
-            [otherProperty.value isKindOfClass: [NSNumber class]]) {
-            return [((NSNumber *)self.value) compare:
-                    (NSNumber *)otherProperty.value];
-        } else if ([self.value isKindOfClass: [NSString class]] &&
-                   [otherProperty.value isKindOfClass: [NSString class]]) {
-            return [((NSString *)self.value) compare:
-                    (NSString *)otherProperty.value];
+        if (self.numberValue && otherProperty.numberValue) {
+            return [self.numberValue compare:
+                    otherProperty.numberValue];
+        } else if (self.stringValue && otherProperty.stringValue) {
+            return [self.stringValue compare:
+                    otherProperty.stringValue];
         } else if ([self.value isKindOfClass: [NSArray class]] &&
                    [otherProperty.value isKindOfClass: [NSArray class]]) {
             NSArray *valueArray = (NSArray *)self.value;
