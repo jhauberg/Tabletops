@@ -36,27 +36,54 @@ NSString* const kTTCounterComponentStepKey = @"step";
     return component;
 }
 
-- (BOOL) incrementBy: (double) amount {
-    if (self.step) {
+- (BOOL) incrementBy: (NSNumber *) amount {
+    if (amount) {
+#ifdef DEBUG
+        if ([amount doubleValue] < 0) {
+            NSLog(@" *** Attempting to increment '%@' by a negative value ('%@') will cause a decrement instead. Are you sure this is intended?", self, amount);
+        }
+#endif
         if (!self.numberValue) {
             [NSException raise: @"Invalid value"
                         format: @"'%@' must be a number value", self.value];
         } else {
-            self.value = @([self.numberValue doubleValue] + amount);
+            self.value = @([self.numberValue doubleValue] + [amount doubleValue]);
+
+            return YES;
         }
     }
     
     return NO;
 }
 
+- (BOOL) decrementBy: (NSNumber *) amount {
+    if (amount) {
+#ifdef DEBUG
+        if ([amount doubleValue] < 0) {
+            NSLog(@" *** Attempting to decrement '%@' by a negative value ('%@') causes an increment instead. Are you sure this is intended?", self, amount);
+        }
+#endif
+        if (!self.numberValue) {
+            [NSException raise: @"Invalid value"
+                        format: @"'%@' must be a number value", self.value];
+        } else {
+            self.value = @([self.numberValue doubleValue] - [amount doubleValue]);
+
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
 - (BOOL) increment {
     return [self incrementBy:
-            [self.step doubleValue]];
+            self.step];
 }
 
 - (BOOL) decrement {
     return [self incrementBy:
-            -[self.step doubleValue]];
+            @(-[self.step doubleValue])];
 }
 
 @end
