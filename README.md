@@ -4,7 +4,9 @@ Tabletops is a framework for simulating and playtesting card and boardgames. It 
 
 In its current state, the framework can be used to model a representation of most games that uses a variety of cards, dice, tokens, decks, piles, and so on.
 
-Future features might include:
+This representation can then be used to create scenarios and perform simulations; i.e. moving tokens, rolling dice, flipping cards, shuffling decks and other similarly common tabletop actions.
+
+**Future features might include**:
 
   * Interface for visually modeling game representations
   * Rule enforcement
@@ -26,10 +28,17 @@ TTDieRepresentation *representation =
 [d6 addComponent: representation];
 ```
 
-And a card with a few properties:
+As expected, the die can be rolled randomly, or turned to show a specific side.
+
+Here's how you would make a card with a few properties:
 
 ```objective-c
 TTEntity *trickCard = [TTEntity entity];
+
+TTCardRepresentation *representation = [[TTCardRepresentation alloc] init];
+
+representation.frontside = @"card-trick-front-4-heelflip.png";
+representation.backside = @"card-trick-back.png";
 
 TTPropertyComponent *difficultyProperty =
   [[TTPropertyComponent alloc] initWithName: @"Difficulty"
@@ -40,20 +49,12 @@ TTPropertyComponent *nameProperty =
   // again note that the value can be any kind of object
                                    andValue: @"Heelflip"];
 
-TTPropertyComponent *flavorProperty =
-  [[TTPropertyComponent alloc] initWithName: @"Flavor"
-                                   andValue: @"Flip the board with a flick of the heel"];
-
-TTCardRepresentation *representation = [[TTCardRepresentation alloc] init];
-
-representation.frontside = @"card-trick-front-4-heelflip.png";
-representation.backside = @"card-trick-back.png";
-
 [trickCard addComponents: @[ nameProperty,
                              difficultyProperty,
-                             flavorProperty,
                              representation ]];
 ```
+
+The card can be flipped, tapped and be part of a larger deck of cards.
 
 # License
 
