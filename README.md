@@ -1,17 +1,13 @@
 ![icon](icon.png)
 
-I wanted to make a tool for conveniently making, and playing, board-game prototypes, without going through all the hassles of printing and paper cutting.
+Tabletops is a framework for simulating and playtesting card and boardgames. It is not a game engine.
 
-This might be it- someday.
+In its current state, the framework can be used to model a representation of most games that uses a variety of cards, dice, tokens, decks, piles, and so on.
 
-## Alternatives
+Future features might include:
 
-These are a few of the ones inspiration will be drawn from:
-
-  * [Tabletop Simulator](http://store.steampowered.com/app/286160)
-  * [VASSAL](http://www.vassalengine.org)
-  * [ZunTzu](http://www.zuntzu.com)
-  * [Roll20](http://roll20.net)
+  * Interface for visually modeling game representations
+  * Rule enforcement
 
 # Implementation
 
@@ -26,13 +22,6 @@ TTDieRepresentation *representation =
   [[TTDieRepresentation alloc] initWithSides:
    // note that a 'side' can be any kind of object
    @[ @1, @2, @3, @4, @5, @6 ]];
-
-representation.sideImages = @[ @"d6-1.png",
-                               @"d6-2.png",
-                               @"d6-3.png",
-                               @"d6-4.png",
-                               @"d6-5.png",
-                               @"d6-6.png" ];
 
 [d6 addComponent: representation];
 ```
@@ -57,8 +46,8 @@ TTPropertyComponent *flavorProperty =
 
 TTCardRepresentation *representation = [[TTCardRepresentation alloc] init];
 
-representation.frontImage = @"card-trick-front-4-heelflip.png";
-representation.backImage = @"card-trick-back.png";
+representation.frontside = @"card-trick-front-4-heelflip.png";
+representation.backside = @"card-trick-back.png";
 
 [trickCard addComponents: @[ nameProperty,
                              difficultyProperty,
