@@ -9,20 +9,8 @@
 #import "TTEntityComponent.h"
 
 /**
- Base class for implementing visually representable components.
+ Base class for implementing a tangible tabletop component.
  */
 @interface TTRepresentationComponent : TTEntityComponent
-
-/**
- Get or set the location.
- */
-@property (assign, nonatomic) CGPoint position;
-
-/**
- Determine whether or not the position can be changed.
- */
-@property (assign) BOOL isLocked;
-
-// todo: this should be represented by a rule instead; i.e. TTMayNotBeMovedRule...
 
 @end

@@ -8,45 +8,6 @@
 
 #import "TTRepresentationComponent.h"
 
-NSString* const kTTRepresentationComponentPositionKey = @"position";
-
 @implementation TTRepresentationComponent
-
-- (instancetype) initWithCoder: (NSCoder *) decoder {
-    if ((self = [super initWithCoder: decoder])) {
-        _position = [decoder decodePointForKey: kTTRepresentationComponentPositionKey];
-    }
-    
-    return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder {
-    [super encodeWithCoder: encoder];
-    
-    [encoder encodePoint: _position forKey: kTTRepresentationComponentPositionKey];
-}
-
-- (BOOL) isEqual: (id) object {
-    if ([super isEqual: object]) {
-        TTRepresentationComponent *otherRepresentationComponent = (TTRepresentationComponent *)object;
-        
-        return CGPointEqualToPoint(self.position,
-                                   otherRepresentationComponent.position);
-    }
-    
-    return NO;
-}
-
-- (void) setPosition: (CGPoint) position {
-    if (self.isLocked) {
-        NSLog(@" *** Attempting to change position of locked component '%@'", self);
-        
-        return;
-    }
-    
-    if (!CGPointEqualToPoint(_position, position)) {
-        _position = position;
-    }
-}
 
 @end
