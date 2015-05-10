@@ -18,6 +18,8 @@
 
 /**
  Get the grouping component for the contents of the table. Can not be removed.
+ 
+ Note that this component is only created and assigned when first used.
  */
 @property (readonly) TTEntityGroupingComponent *group;
 

@@ -62,7 +62,7 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 - (id) copyWithZone: (NSZone *) zone {
     TTEntity *entity = [[[self class] allocWithZone: zone] init];
-    
+
     if (entity) {
         for (TTEntityComponent *component in _components) {
             [entity addComponent:
@@ -88,7 +88,7 @@ NSString* const kTTEntityComponentsKey = @"components";
 #ifdef DEBUG
     for (TTEntityComponent *existingComponent in _components) {
         if ([existingComponent isLike: component]) {
-            NSLog(@" *** Adding '%@' to an entity which already seems to have a similar component. Are you sure this is intended? %@", component, self);
+            NSLog(@" *** Adding '%@' to an entity which already has a similar component. Are you sure this is intended? ↲%@", component, self);
             
             break;
         }

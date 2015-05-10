@@ -21,11 +21,7 @@ NSString* const kTTTableEntityGroupKey = @"group";
 
 - (instancetype) init {
     if ((self = [super init])) {
-        if (!_group) {
-            _group = [[TTEntityGroupingComponent alloc] init];
-        }
-        
-        [self addComponent: _group];
+
     }
     
     return self;
@@ -46,16 +42,9 @@ NSString* const kTTTableEntityGroupKey = @"group";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTTableEntity *entity = [[[self class] allocWithZone: zone] init];
-    
-    if (entity) {
-        for (TTEntity *groupedEntity in self.group.entities) {
-            [entity.group addEntity:
-             [groupedEntity copyWithZone: zone]];
-        }
-    }
-    
-    return entity;
+    return [NSKeyedUnarchiver unarchiveObjectWithData:
+            [NSKeyedArchiver archivedDataWithRootObject:
+             self]];
 }
 
 - (BOOL) clear {
@@ -75,6 +64,12 @@ NSString* const kTTTableEntityGroupKey = @"group";
 }
 
 - (TTEntityGroupingComponent *) group {
+    if (!_group) {
+        _group = [[TTEntityGroupingComponent alloc] init];
+
+        [self addComponent: _group];
+    }
+
     return _group;
 }
 

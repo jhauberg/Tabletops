@@ -21,11 +21,7 @@ NSString* const kTTDeckEntityGroupKey = @"group";
 
 - (instancetype) init {
     if ((self = [super init])) {
-        if (!_group) {
-            _group = [[TTDeckGroupingComponent alloc] init];
-        }
-        
-        [self addComponent: _group];
+
     }
     
     return self;
@@ -46,16 +42,9 @@ NSString* const kTTDeckEntityGroupKey = @"group";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTDeckEntity *entity = [[[self class] allocWithZone: zone] init];
-    
-    if (entity) {
-        for (TTEntity *groupedEntity in self.group.entities) {
-            [entity.group addEntity:
-             [groupedEntity copyWithZone: zone]];
-        }
-    }
-    
-    return entity;
+    return [NSKeyedUnarchiver unarchiveObjectWithData:
+            [NSKeyedArchiver archivedDataWithRootObject:
+             self]];
 }
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
@@ -67,6 +56,12 @@ NSString* const kTTDeckEntityGroupKey = @"group";
 }
 
 - (TTDeckGroupingComponent *) group {
+    if (!_group) {
+        _group = [[TTDeckGroupingComponent alloc] init];
+
+        [self addComponent: _group];
+    }
+    
     return _group;
 }
 

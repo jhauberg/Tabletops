@@ -18,6 +18,8 @@
 
 /**
  Get the representation component. Can not be removed.
+ 
+ Note that this component is only created and assigned when first used.
  */
 @property (readonly) TTCardRepresentation *representation;
 

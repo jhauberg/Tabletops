@@ -21,16 +21,11 @@ NSString* const kTTCardEntityRepresentationKey = @"representation";
 
 - (instancetype) init {
     if ((self = [super init])) {
-        if (!_representation) {
-            _representation = [[TTCardRepresentation alloc] init];
-        }
 
-        [self addComponent: _representation];
     }
 
     return self;
 }
-
 
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
@@ -47,7 +42,19 @@ NSString* const kTTCardEntityRepresentationKey = @"representation";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    return [[[self class] allocWithZone: zone] init];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:
+            [NSKeyedArchiver archivedDataWithRootObject:
+             self]];
+}
+
+- (TTCardRepresentation *) representation {
+    if (!_representation) {
+        _representation = [[TTCardRepresentation alloc] init];
+
+        [self addComponent: _representation];
+    }
+
+    return _representation;
 }
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
@@ -56,10 +63,6 @@ NSString* const kTTCardEntityRepresentationKey = @"representation";
     }
 
     return [super removeComponent: component];
-}
-
-- (TTCardRepresentation *) representation {
-    return _representation;
 }
 
 @end

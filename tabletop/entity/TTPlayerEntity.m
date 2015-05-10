@@ -9,12 +9,15 @@
 #import "TTPlayerEntity.h"
 
 NSString* const kTTPlayerEntityNameKey = @"name";
+NSString* const kTTPlayerEntityNameValueKey = @"name_value";
 NSString* const kTTPlayerEntityHandKey = @"hand";
 
 @implementation TTPlayerEntity {
  @private
     TTPropertyComponent *_name;
     TTHandGroupingComponent *_hand;
+
+    NSString *_nameValue;
 }
 
 + (instancetype) playerWithName: (NSString *) name {
@@ -27,17 +30,7 @@ NSString* const kTTPlayerEntityHandKey = @"hand";
 
 - (instancetype) initWithName: (NSString *) name {
     if ((self = [super init])) {
-        if (!_name) {
-            _name = [[TTPropertyComponent alloc] initWithName: @"Name"
-                                                     andValue: name];
-        }
-        
-        if (!_hand) {
-            _hand = [[TTHandGroupingComponent alloc] initWithOwner: self];
-        }
-        
-        [self addComponent: _name];
-        [self addComponent: _hand];
+        _nameValue = name;
     }
     
     return self;
@@ -47,6 +40,7 @@ NSString* const kTTPlayerEntityHandKey = @"hand";
     if ((self = [super initWithCoder: decoder])) {
         _name = [decoder decodeObjectForKey: kTTPlayerEntityNameKey];
         _hand = [decoder decodeObjectForKey: kTTPlayerEntityHandKey];
+        _nameValue = [decoder decodeObjectForKey: kTTPlayerEntityNameValueKey];
     }
     
     return self;
@@ -57,19 +51,13 @@ NSString* const kTTPlayerEntityHandKey = @"hand";
     
     [encoder encodeObject: _name forKey: kTTPlayerEntityNameKey];
     [encoder encodeObject: _hand forKey: kTTPlayerEntityHandKey];
+    [encoder encodeObject: _nameValue forKey: kTTPlayerEntityNameValueKey];
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTPlayerEntity *player = [[[self class] allocWithZone: zone] initWithName: (NSString *)self.name.value];
-    
-    if (player) {
-        for (TTEntity *entityInHand in self.hand.entities) {
-            [player.hand addEntity:
-             [entityInHand copyWithZone: zone]];
-        }
-    }
-    
-    return player;
+    return [NSKeyedUnarchiver unarchiveObjectWithData:
+            [NSKeyedArchiver archivedDataWithRootObject:
+             self]];
 }
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
@@ -82,10 +70,23 @@ NSString* const kTTPlayerEntityHandKey = @"hand";
 }
 
 - (TTPropertyComponent *) name {
+    if (!_name) {
+        _name = [[TTPropertyComponent alloc] initWithName: @"Name"
+                                                 andValue: _nameValue];
+
+        [self addComponent: _name];
+    }
+
     return _name;
 }
 
 - (TTHandGroupingComponent *) hand {
+    if (!_hand) {
+        _hand = [[TTHandGroupingComponent alloc] initWithOwner: self];
+
+        [self addComponent: _hand];
+    }
+
     return _hand;
 }
 
