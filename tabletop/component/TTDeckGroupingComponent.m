@@ -40,17 +40,6 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     [encoder encodeBool: _drawsFaceUp forKey: kTTDeckGroupingComponentDrawsFaceUpKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTDeckGroupingComponent *component = [super copyWithZone: zone];
-    
-    if (component) {
-        component.addsFaceDown = self.addsFaceDown;
-        component.drawsFaceUp = self.drawsFaceUp;
-    }
-    
-    return component;
-}
-
 - (BOOL) addEntity: (TTEntity *) entity {
     BOOL result = [super addEntity: entity];
     

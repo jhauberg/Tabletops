@@ -43,17 +43,6 @@ NSString* const kTTPropertyComponentValueKey = @"value";
     [encoder encodeObject: _value forKey: kTTPropertyComponentValueKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTPropertyComponent *propertyComponent = [super copyWithZone: zone];
-
-    if (propertyComponent) {
-        propertyComponent.name = self.name;
-        propertyComponent.value = self.value;
-    }
-
-    return propertyComponent;
-}
-
 - (NSNumber *) numberValue {
     NSNumber *numberValue = nil;
 

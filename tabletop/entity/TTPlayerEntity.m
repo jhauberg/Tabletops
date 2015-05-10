@@ -54,12 +54,6 @@ NSString* const kTTPlayerEntityHandKey = @"hand";
     [encoder encodeObject: _nameValue forKey: kTTPlayerEntityNameValueKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    return [NSKeyedUnarchiver unarchiveObjectWithData:
-            [NSKeyedArchiver archivedDataWithRootObject:
-             self]];
-}
-
 - (BOOL) removeComponent: (TTEntityComponent *) component {
     if (component == self.name ||
         component == self.hand) {

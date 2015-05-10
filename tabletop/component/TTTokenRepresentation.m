@@ -26,16 +26,6 @@ NSString* const kTTTokenRepresentationFrontsideKey = @"frontside";
     [encoder encodeObject: _frontside forKey: kTTTokenRepresentationFrontsideKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTTokenRepresentation *component = [super copyWithZone: zone];
-    
-    if (component) {
-        component.frontside = self.frontside;
-    }
-    
-    return component;
-}
-
 - (BOOL) isEqual: (id) object {
     if ([super isEqual: object]) {
         TTTokenRepresentation *otherTokenRepresentation = (TTTokenRepresentation *)object;

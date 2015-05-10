@@ -34,14 +34,4 @@ NSString* const kTTHandGroupingComponentOwnerKey = @"owner";
     [encoder encodeObject: _owner forKey: kTTHandGroupingComponentOwnerKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTHandGroupingComponent *component = [super copyWithZone: zone];
-    
-    if (component) {
-        component.owner = self.owner;
-    }
-    
-    return component;
-}
-
 @end

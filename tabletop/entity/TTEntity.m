@@ -61,16 +61,9 @@ NSString* const kTTEntityComponentsKey = @"components";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTEntity *entity = [[[self class] allocWithZone: zone] init];
-
-    if (entity) {
-        for (TTEntityComponent *component in _components) {
-            [entity addComponent:
-             [component copyWithZone: zone]];
-        }
-    }
-    
-    return entity;
+    return [NSKeyedUnarchiver unarchiveObjectWithData:
+            [NSKeyedArchiver archivedDataWithRootObject:
+             self]];
 }
 
 #pragma mark Component

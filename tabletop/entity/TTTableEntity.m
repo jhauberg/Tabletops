@@ -41,12 +41,6 @@ NSString* const kTTTableEntityGroupKey = @"group";
     [encoder encodeObject: _group forKey: kTTTableEntityGroupKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    return [NSKeyedUnarchiver unarchiveObjectWithData:
-            [NSKeyedArchiver archivedDataWithRootObject:
-             self]];
-}
-
 - (BOOL) clear {
     if (_group && [_group removeAllEntities]) {
         return YES;

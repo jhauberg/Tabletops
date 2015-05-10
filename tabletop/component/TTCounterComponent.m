@@ -26,16 +26,6 @@ NSString* const kTTCounterComponentStepKey = @"step";
     [encoder encodeObject: _step forKey: kTTCounterComponentStepKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTCounterComponent *component = [super copyWithZone: zone];
-    
-    if (component) {
-        component.step = self.step;
-    }
-    
-    return component;
-}
-
 - (BOOL) incrementBy: (NSNumber *) amount {
     if (amount) {
 #ifdef DEBUG

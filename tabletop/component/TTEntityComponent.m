@@ -19,7 +19,9 @@
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    return [[[self class] allocWithZone: zone] init];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:
+            [NSKeyedArchiver archivedDataWithRootObject:
+             self]];
 }
 
 - (BOOL) isEqual: (id) object {

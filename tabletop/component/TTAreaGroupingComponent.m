@@ -35,16 +35,6 @@ NSString* const kTTAreaGroupingComponentAreaKey = @"area";
     [encoder encodeRect: _area forKey: kTTAreaGroupingComponentAreaKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTAreaGroupingComponent *component = [super copyWithZone: zone];
-    
-    if (component) {
-        component.area = self.area;
-    }
-    
-    return component;
-}
-
 - (BOOL) addEntity: (TTEntity *) entity {
     if ([self canAddEntity: entity]) {
         return [super addEntity: entity];

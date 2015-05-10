@@ -26,16 +26,6 @@ NSString* const kTTRepresentationComponentPositionKey = @"position";
     [encoder encodePoint: _position forKey: kTTRepresentationComponentPositionKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTRepresentationComponent *component = [super copyWithZone: zone];
-    
-    if (component) {
-        component.position = self.position;
-    }
-    
-    return component;
-}
-
 - (BOOL) isEqual: (id) object {
     if ([super isEqual: object]) {
         TTRepresentationComponent *otherRepresentationComponent = (TTRepresentationComponent *)object;

@@ -26,18 +26,6 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
     [encoder encodeBool: _isTapped forKey: kTTCardRepresentationIsTappedKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTCardRepresentation *component = [super copyWithZone: zone];
-    
-    if (component) {
-        if (component.isTapped != self.isTapped) {
-            [component tap];
-        }
-    }
-    
-    return component;
-}
-
 - (BOOL) isFaceUp {
     return !self.isFlipped;
 }

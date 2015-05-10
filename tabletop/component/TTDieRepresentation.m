@@ -40,17 +40,6 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     [encoder encodeObject: _upside forKey: kTTDieRepresentationUpsideKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTDieRepresentation *component = [super copyWithZone: zone];
-    
-    if (component) {
-        component.sides = self.sides;
-        component.upside = self.upside;
-    }
-    
-    return component;
-}
-
 - (id<NSObject, NSCoding, NSCopying>) upside {
     return _upside;
 }

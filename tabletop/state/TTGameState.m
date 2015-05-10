@@ -67,25 +67,9 @@ NSString* const kTTGameStateTableEntitiesKey = @"table_entities";
 }
 
 - (id) copyWithZone: (NSZone *) zone {
-    TTGameState *state = [[[self class] allocWithZone: zone] init];
-
-    if (state) {
-        for (TTEntityComponent *component in self.table.components) {
-            if (component == self.entities) {
-                continue;
-            }
-
-            [state.table addComponent:
-             [component copyWithZone: zone]];
-        }
-
-        for (TTEntity *entity in self.entities.entities) {
-            [state.entities addEntity:
-             [entity copyWithZone: zone]];
-        }
-    }
-
-    return state;
+    return [NSKeyedUnarchiver unarchiveObjectWithData:
+            [NSKeyedArchiver archivedDataWithRootObject:
+             self]];
 }
 
 - (BOOL) save {

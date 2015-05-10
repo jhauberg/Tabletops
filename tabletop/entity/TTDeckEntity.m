@@ -41,12 +41,6 @@ NSString* const kTTDeckEntityGroupKey = @"group";
     [encoder encodeObject: _group forKey: kTTDeckEntityGroupKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    return [NSKeyedUnarchiver unarchiveObjectWithData:
-            [NSKeyedArchiver archivedDataWithRootObject:
-             self]];
-}
-
 - (BOOL) removeComponent: (TTEntityComponent *) component {
     if (component == self.group) {
         return NO;

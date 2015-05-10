@@ -41,12 +41,6 @@ NSString* const kTTCardEntityRepresentationKey = @"representation";
     [encoder encodeObject: _representation forKey: kTTCardEntityRepresentationKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    return [NSKeyedUnarchiver unarchiveObjectWithData:
-            [NSKeyedArchiver archivedDataWithRootObject:
-             self]];
-}
-
 - (TTCardRepresentation *) representation {
     if (!_representation) {
         _representation = [[TTCardRepresentation alloc] init];

@@ -38,19 +38,6 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     [encoder encodeObject: _entities forKey: kTTEntityGroupingComponentEntitiesKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTEntityGroupingComponent *component = [super copyWithZone: zone];
-    
-    if (component) {
-        for (TTEntity *groupedEntity in _entities) {
-            [component addEntity:
-             [groupedEntity copyWithZone: zone]];
-        }
-    }
-    
-    return component;
-}
-
 - (NSArray *) entities {
     return [NSArray arrayWithArray:
             _entities];

@@ -37,20 +37,6 @@ NSString* const kTTCoinRepresentationBacksideKey = @"backside";
     [encoder encodeObject: _backside forKey: kTTCoinRepresentationBacksideKey];
 }
 
-- (id) copyWithZone: (NSZone *) zone {
-    TTCoinRepresentation *component = [super copyWithZone: zone];
-
-    if (component) {
-        component.backside = self.backside;
-
-        if (component.isFlipped != self.isFlipped) {
-            [component flip];
-        }
-    }
-
-    return component;
-}
-
 - (BOOL) isEqual: (id) object {
     if ([super isEqual: object]) {
         TTCoinRepresentation *otherCoinRepresentation = (TTCoinRepresentation *)object;
