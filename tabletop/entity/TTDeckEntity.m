@@ -15,10 +15,6 @@ NSString* const kTTDeckEntityGroupKey = @"group";
     TTDeckGroupingComponent *_group;
 }
 
-+ (instancetype) deck {
-    return [[[self class] alloc] init];
-}
-
 - (instancetype) init {
     if ((self = [super init])) {
 

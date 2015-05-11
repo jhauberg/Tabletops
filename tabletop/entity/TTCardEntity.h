@@ -14,8 +14,6 @@
  */
 @interface TTCardEntity : TTEntity
 
-+ (instancetype) card;
-
 /**
  Get the representation component. Can not be removed.
  

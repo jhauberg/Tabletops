@@ -15,10 +15,6 @@ NSString* const kTTCardEntityRepresentationKey = @"representation";
     TTCardRepresentation *_representation;
 }
 
-+ (instancetype) card {
-    return [[[self class] alloc] init];
-}
-
 - (instancetype) init {
     if ((self = [super init])) {
 

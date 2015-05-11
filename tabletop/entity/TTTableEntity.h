@@ -14,8 +14,6 @@
  */
 @interface TTTableEntity : TTEntity
 
-+ (instancetype) table;
-
 /**
  Get the grouping component for the contents of the table. Can not be removed.
  

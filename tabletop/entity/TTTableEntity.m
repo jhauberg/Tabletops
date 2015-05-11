@@ -15,10 +15,6 @@ NSString* const kTTTableEntityGroupKey = @"group";
     TTEntityGroupingComponent *_group;
 }
 
-+ (instancetype) table {
-    return [[[self class] alloc] init];
-}
-
 - (instancetype) init {
     if ((self = [super init])) {
 
