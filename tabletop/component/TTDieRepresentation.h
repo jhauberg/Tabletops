@@ -13,6 +13,8 @@
  */
 @interface TTDieRepresentation : TTRepresentationComponent
 
++ (instancetype) representationWithSides: (NSArray *) sides;
+
 /**
  Get or set all the sides of the die.
  */

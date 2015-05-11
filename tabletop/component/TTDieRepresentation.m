@@ -13,6 +13,10 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
 
 @implementation TTDieRepresentation
 
++ (instancetype) representationWithSides: (NSArray *) sides {
+    return [[[self class] alloc] initWithSides: sides];
+}
+
 @synthesize upside = _upside;
 
 - (instancetype) initWithSides: (NSArray *) sides {

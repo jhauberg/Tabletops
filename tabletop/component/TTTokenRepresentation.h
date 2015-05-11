@@ -13,6 +13,8 @@
  */
 @interface TTTokenRepresentation : TTRepresentationComponent
 
++ (instancetype) representationWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside;
+
 /**
  Get or set the frontside.
  */

@@ -12,6 +12,21 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 
 @implementation TTCardRepresentation
 
++ (instancetype) representationWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp {
+    TTCardRepresentation *representation = [self representation];
+
+    if (representation) {
+        representation.frontside = frontside;
+        representation.backside = backside;
+
+        if (![representation isFaceUp]) {
+            [representation flip];
+        }
+    }
+
+    return representation;
+}
+
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _isTapped = [decoder decodeBoolForKey: kTTCardRepresentationIsTappedKey];

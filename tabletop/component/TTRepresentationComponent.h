@@ -13,4 +13,6 @@
  */
 @interface TTRepresentationComponent : TTEntityComponent
 
++ (instancetype) representation;
+
 @end

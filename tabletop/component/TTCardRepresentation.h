@@ -13,6 +13,8 @@
  */
 @interface TTCardRepresentation : TTCoinRepresentation
 
++ (instancetype) representationWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp;
+
 /**
  Determine whether the card is currently showing face up.
  */

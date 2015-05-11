@@ -10,4 +10,8 @@
 
 @implementation TTRepresentationComponent
 
++ (instancetype) representation {
+    return [[[self class] alloc] init];
+}
+
 @end
