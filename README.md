@@ -4,11 +4,12 @@ Tabletops is a framework for simulating and playtesting card and boardgames. It 
 
 In its current state, the framework can be used to model a representation of most games that uses a variety of cards, dice, tokens, decks, piles, and so on.
 
-This representation can then be used to create scenarios and perform simulations; i.e. moving tokens, rolling dice, flipping cards, shuffling decks and other similarly common tabletop actions.
+This representation can then be used to create scenarios and perform simulations; i.e. moving tokens, rolling dice, flipping cards, shuffling decks and other common tabletop actions.
 
 **Future features might include**:
 
   * Interface for visually modeling game representations
+  * AI layer for automating playtests
   * Rule enforcement
 
 # Implementation
@@ -21,7 +22,7 @@ This is how you would make a 6-sided die:
 TTEntity *d6 = [TTEntity entity];
 
 TTDieRepresentation *representation =
-  [[TTDieRepresentation alloc] initWithSides:
+  [TTDieRepresentation representationWithSides:
    // note that a 'side' can be any kind of object
    @[ @1, @2, @3, @4, @5, @6 ]];
 
@@ -35,19 +36,18 @@ Here's how you would make a card with a few properties:
 ```objective-c
 TTEntity *trickCard = [TTEntity entity];
 
-TTCardRepresentation *representation = [[TTCardRepresentation alloc] init];
-
-representation.frontside = @"card-trick-front-4-heelflip.png";
-representation.backside = @"card-trick-back.png";
+TTCardRepresentation *representation =
+    [TTCardRepresentation representationWithFrontside: @"card-trick-front-heelflip.png"
+                                          andBackside: @"card-trick-back.png"];
 
 TTPropertyComponent *difficultyProperty =
-  [[TTPropertyComponent alloc] initWithName: @"Difficulty"
-                                   andValue: @3];
+    [TTPropertyComponent propertyWithName: @"Difficulty"
+                                 andValue: @3];
 
 TTPropertyComponent *nameProperty =
-  [[TTPropertyComponent alloc] initWithName: @"Name"
-  // again note that the value can be any kind of object
-                                   andValue: @"Heelflip"];
+    [TTPropertyComponent propertyWithName: @"Name"
+    // again note that the value can be any kind of object
+                                 andValue: @"Heelflip"];
 
 [trickCard addComponents: @[ nameProperty,
                              difficultyProperty,
