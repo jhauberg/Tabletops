@@ -25,12 +25,13 @@
 
 <p>In its current state, the framework can be used to model a representation of most games that uses a variety of cards, dice, tokens, decks, piles, and so on.</p>
 
-<p>This representation can then be used to create scenarios and perform simulations; i.e. moving tokens, rolling dice, flipping cards, shuffling decks and other similarly common tabletop actions.</p>
+<p>This representation can then be used to create scenarios and perform simulations; i.e. moving tokens, rolling dice, flipping cards, shuffling decks and other common tabletop actions.</p>
 
 <p><strong>Future features might include</strong>:</p>
 
 <ul>
 <li>Interface for visually modeling game representations</li>
+<li>AI layer for automating playtests</li>
 <li>Rule enforcement</li>
 </ul>
 
@@ -44,7 +45,7 @@
 <div class="highlight highlight-objective-c"><pre>TTEntity *d6 = [TTEntity <span class="pl-c1">entity</span>];
 
 TTDieRepresentation *representation =
-  [[TTDieRepresentation <span class="pl-c1">alloc</span>] <span class="pl-c1">initWithSides:</span>
+  [TTDieRepresentation <span class="pl-c1">representationWithSides:</span>
    <span class="pl-c">// note that a 'side' can be any kind of object</span>
    @[ @<span class="pl-c1">1</span>, @<span class="pl-c1">2</span>, @<span class="pl-c1">3</span>, @<span class="pl-c1">4</span>, @<span class="pl-c1">5</span>, @<span class="pl-c1">6</span> ]];
 
@@ -56,19 +57,18 @@ TTDieRepresentation *representation =
 
 <div class="highlight highlight-objective-c"><pre>TTEntity *trickCard = [TTEntity <span class="pl-c1">entity</span>];
 
-TTCardRepresentation *representation = [[TTCardRepresentation <span class="pl-c1">alloc</span>] <span class="pl-c1">init</span>];
-
-representation.frontside = <span class="pl-s"><span class="pl-pds">@"</span>card-trick-front-4-heelflip.png<span class="pl-pds">"</span></span>;
-representation.backside = <span class="pl-s"><span class="pl-pds">@"</span>card-trick-back.png<span class="pl-pds">"</span></span>;
+TTCardRepresentation *representation =
+    [TTCardRepresentation <span class="pl-c1">representationWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>card-trick-front-heelflip.png<span class="pl-pds">"</span></span>
+                                          <span class="pl-c1">andBackside:</span> <span class="pl-s"><span class="pl-pds">@"</span>card-trick-back.png<span class="pl-pds">"</span></span>];
 
 TTPropertyComponent *difficultyProperty =
-  [[TTPropertyComponent <span class="pl-c1">alloc</span>] <span class="pl-c1">initWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Difficulty<span class="pl-pds">"</span></span>
-                                   <span class="pl-c1">andValue:</span> @<span class="pl-c1">3</span>];
+    [TTPropertyComponent <span class="pl-c1">propertyWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Difficulty<span class="pl-pds">"</span></span>
+                                 <span class="pl-c1">andValue:</span> @<span class="pl-c1">3</span>];
 
 TTPropertyComponent *nameProperty =
-  [[TTPropertyComponent <span class="pl-c1">alloc</span>] <span class="pl-c1">initWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Name<span class="pl-pds">"</span></span>
-  <span class="pl-c">// again note that the value can be any kind of object</span>
-                                   <span class="pl-c1">andValue:</span> <span class="pl-s"><span class="pl-pds">@"</span>Heelflip<span class="pl-pds">"</span></span>];
+    [TTPropertyComponent <span class="pl-c1">propertyWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Name<span class="pl-pds">"</span></span>
+    <span class="pl-c">// again note that the value can be any kind of object</span>
+                                 <span class="pl-c1">andValue:</span> <span class="pl-s"><span class="pl-pds">@"</span>Heelflip<span class="pl-pds">"</span></span>];
 
 [trickCard <span class="pl-c1">addComponents:</span> @[ nameProperty,
                              difficultyProperty,
