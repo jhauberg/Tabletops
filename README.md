@@ -1,4 +1,4 @@
-<img width="200" src="https://rawgit.com/jhauberg/Tabletops/master/logo.svg" alt="got">
+<img width="200" src="https://rawgit.com/jhauberg/Tabletops/master/logo.svg" alt="Tabletops">
 
 Tabletops is a framework for simulating and playtesting card and boardgames. It is not a game engine.
 
