@@ -20,4 +20,6 @@
  */
 - (BOOL) isLike: (TTEntityComponent *) otherComponent;
 
+- (NSString *) shortDescription;
+
 @end

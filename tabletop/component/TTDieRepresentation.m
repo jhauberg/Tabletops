@@ -87,9 +87,29 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     return NO;
 }
 
+- (NSString *) sidesDescription {
+    NSMutableString *sidesDescription = [[NSMutableString alloc] init];
+    
+    for (id side in self.sides) {
+        if ([sidesDescription length] > 0) {
+            [sidesDescription appendString: @", "];
+        }
+        
+        [sidesDescription appendFormat: @"%@", side];
+    }
+    
+    return [NSString stringWithString:
+            sidesDescription];
+}
+
 - (NSString *) description {
     return [NSString stringWithFormat:
-            @"%@ %@", [super description], self.sides];
+            @"%@ Shows '%@' from [%@]", [super description], self.upside, [self sidesDescription]];
+}
+
+- (NSString *) shortDescription {
+    return [NSString stringWithFormat:
+            @"%@ (Shows '%@', [%@])", [super shortDescription], self.upside, [self sidesDescription]];
 }
 
 @end

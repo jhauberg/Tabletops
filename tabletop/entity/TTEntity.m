@@ -253,11 +253,28 @@ NSString* const kTTEntityComponentsKey = @"components";
     
     for (TTEntityComponent *component in _components) {
         [description appendFormat:
-         @"\n  - %@", component];
+         @"\n  ↳ %@", component];
     }
     
     return [NSString stringWithString:
             description];
+}
+
+- (NSString *) shortDescription {
+    NSMutableString *componentsDescription = [[NSMutableString alloc] init];
+
+    for (TTEntityComponent *component in _components) {
+        if ([componentsDescription length] > 0) {
+            [componentsDescription appendString: @", "];
+        } else {
+            [componentsDescription appendString: @" "];
+        }
+
+        [componentsDescription appendFormat: @"%@", [component shortDescription]];
+    }
+
+    return [NSString stringWithFormat:
+            @"<%@: %p>%@", [self className], self, componentsDescription];
 }
 
 @end

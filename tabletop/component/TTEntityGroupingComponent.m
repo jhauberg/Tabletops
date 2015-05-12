@@ -262,26 +262,30 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return NO;
 }
 
-- (NSString *) description {
-    NSMutableArray *shortEntityDescriptions = [[NSMutableArray alloc] init];
+- (NSString *) entitiesDescription {
+    NSMutableString *entitiesDescription = [[NSMutableString alloc] init];
     
     for (TTEntity *entity in _entities) {
-        NSMutableString *componentsDescription = [[NSMutableString alloc] init];
-        
-        for (TTEntityComponent *component in entity.components) {
-            if ([componentsDescription length] > 0) {
-                [componentsDescription appendString: @", "];
-            }
-            
-            [componentsDescription appendFormat: @"%@", component.class];
+        if ([entitiesDescription length] > 0) {
+            [entitiesDescription appendString: @", \n"];
         }
         
-        [shortEntityDescriptions addObject:
-         [NSString stringWithFormat: @"<%@: %p> %@", [entity className], entity, componentsDescription]];
+        [entitiesDescription appendString:
+         [NSString stringWithFormat: @"     ↳ [%@]", [entity shortDescription]]];
     }
     
+    return [NSString stringWithString:
+            entitiesDescription];
+}
+
+- (NSString *) shortDescription {
     return [NSString stringWithFormat:
-            @"%@ %@", [super description], shortEntityDescriptions];
+            @"%@ (%lu %@)", [super shortDescription], [_entities count], [_entities count] == 1 ? @"entity" : @"entities"];
+}
+
+- (NSString *) description {
+    return [NSString stringWithFormat:
+            @"%@ \n%@", [super description], [self entitiesDescription]];
 }
 
 @end

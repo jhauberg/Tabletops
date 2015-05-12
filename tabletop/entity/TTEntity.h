@@ -144,4 +144,6 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
  */
 - (BOOL) isLike: (TTEntity *) otherEntity;
 
+- (NSString *) shortDescription;
+
 @end

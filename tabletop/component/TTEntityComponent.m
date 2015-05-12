@@ -36,4 +36,9 @@
             [self class]];
 }
 
+- (NSString *) shortDescription {
+    return [NSString stringWithFormat:
+            @"%@", self.class];
+}
+
 @end
