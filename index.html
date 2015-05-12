@@ -19,7 +19,7 @@
     </section>
 
     <section class="main-content">
-      <p><img width="250" src="https://rawgit.com/jhauberg/Tabletops/master/logo.svg" alt="Tabletops"></p>
+      <p><img width="200" src="https://rawgit.com/jhauberg/Tabletops/master/logo.svg" alt="Tabletops"></p>
 
 <p>Tabletops is a framework for simulating and playtesting card and boardgames. It is not a game engine.</p>
 
@@ -46,12 +46,17 @@
 
 TTDieRepresentation *representation =
   [TTDieRepresentation <span class="pl-c1">representationWithSides:</span>
-   <span class="pl-c">// note that a 'side' can be any kind of object</span>
+   <span class="pl-c">// note that a 'side' can be most kinds of objects</span>
    @[ @<span class="pl-c1">1</span>, @<span class="pl-c1">2</span>, @<span class="pl-c1">3</span>, @<span class="pl-c1">4</span>, @<span class="pl-c1">5</span>, @<span class="pl-c1">6</span> ]];
 
 [d6 <span class="pl-c1">addComponent:</span> representation];</pre></div>
 
 <p>As expected, the die can be rolled randomly, or turned to show a specific side.</p>
+
+<div class="highlight highlight-objective-c"><pre>[representation <span class="pl-c1">roll</span>];</pre></div>
+
+<div class="highlight highlight-shell"><pre><span class="pl-k">&lt;</span>TTEntity: 0x<span class="pl-k">100108530&gt;</span>
+  ↳ <span class="pl-k">&lt;</span>TTDieRepresentation: 0x100108ed<span class="pl-k">0&gt;</span> Shows <span class="pl-s"><span class="pl-pds">'</span>5<span class="pl-pds">'</span></span> from [1, 2, 3, 4, 5, 6]</pre></div>
 
 <p>Here's how you would make a card with a few properties:</p>
 
@@ -67,14 +72,27 @@ TTPropertyComponent *difficultyProperty =
 
 TTPropertyComponent *nameProperty =
     [TTPropertyComponent <span class="pl-c1">propertyWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Name<span class="pl-pds">"</span></span>
-    <span class="pl-c">// again note that the value can be any kind of object</span>
+    <span class="pl-c">// again note that the value can be most kinds of objects</span>
                                  <span class="pl-c1">andValue:</span> <span class="pl-s"><span class="pl-pds">@"</span>Heelflip<span class="pl-pds">"</span></span>];
+
+TTPropertyComponent *typeProperty =
+    [TTPropertyComponent <span class="pl-c1">propertyWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Type<span class="pl-pds">"</span></span>
+                                 <span class="pl-c1">andValue:</span> <span class="pl-s"><span class="pl-pds">@"</span>Trick<span class="pl-pds">"</span></span>];
 
 [trickCard <span class="pl-c1">addComponents:</span> @[ nameProperty,
                              difficultyProperty,
+                             typeProperty,
                              representation ]];</pre></div>
 
 <p>The card can be flipped, tapped and be part of a larger deck of cards.</p>
+
+<div class="highlight highlight-objective-c"><pre>[representation <span class="pl-c1">flipToFrontside</span>];</pre></div>
+
+<div class="highlight highlight-shell"><pre> <span class="pl-k">&lt;</span>TTCardEntity: 0x1001132d<span class="pl-k">0&gt;</span>
+  ↳ <span class="pl-k">&lt;</span>TTCardRepresentation: 0x<span class="pl-k">100113570&gt;</span> Shows <span class="pl-s"><span class="pl-pds">'</span>card-trick-front-3-heelflip.png<span class="pl-pds">'</span></span>
+  ↳ <span class="pl-k">&lt;</span>TTPropertyComponent: 0x<span class="pl-k">100113350&gt;</span> Name = Heelflip
+  ↳ <span class="pl-k">&lt;</span>TTPropertyComponent: 0x1001134f<span class="pl-k">0&gt;</span> Type = Trick
+  ↳ <span class="pl-k">&lt;</span>TTPropertyComponent: 0x<span class="pl-k">100113330&gt;</span> Difficulty = 3</pre></div>
 
 <h1>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
