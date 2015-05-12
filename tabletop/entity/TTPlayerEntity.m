@@ -55,8 +55,8 @@ NSString* const kTTPlayerEntityHandKey = @"hand";
 }
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
-    if (component == self.name ||
-        component == self.hand) {
+    if (component == _name ||
+        component == _hand) {
         return NO;
     }
     
@@ -65,8 +65,8 @@ NSString* const kTTPlayerEntityHandKey = @"hand";
 
 - (TTPropertyComponent *) name {
     if (!_name) {
-        _name = [[TTPropertyComponent alloc] initWithName: @"Name"
-                                                 andValue: _nameValue];
+        _name = [TTPropertyComponent propertyWithName: @"Name"
+                                             andValue: _nameValue];
 
         [self addComponent: _name];
     }

@@ -31,7 +31,7 @@ NSString* const kTTCardEntityRepresentationKey = @"representation";
 
 - (TTCardRepresentation *) representation {
     if (!_representation) {
-        _representation = [[TTCardRepresentation alloc] init];
+        _representation = [TTCardRepresentation representation];
 
         [self addComponent: _representation];
     }
@@ -40,7 +40,7 @@ NSString* const kTTCardEntityRepresentationKey = @"representation";
 }
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
-    if (component == self.representation) {
+    if (component == _representation) {
         return NO;
     }
 

@@ -30,7 +30,7 @@ NSString* const kTTDeckEntityGroupKey = @"group";
 }
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
-    if (component == self.group) {
+    if (component == _group) {
         return NO;
     }
     
@@ -39,7 +39,7 @@ NSString* const kTTDeckEntityGroupKey = @"group";
 
 - (TTDeckGroupingComponent *) group {
     if (!_group) {
-        _group = [[TTDeckGroupingComponent alloc] init];
+        _group = [TTDeckGroupingComponent group];
 
         [self addComponent: _group];
     }

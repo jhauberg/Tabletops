@@ -38,7 +38,7 @@ NSString* const kTTTableEntityGroupKey = @"group";
 }
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
-    if (component == self.group) {
+    if (component == _group) {
         return NO;
     }
     
@@ -47,7 +47,7 @@ NSString* const kTTTableEntityGroupKey = @"group";
 
 - (TTEntityGroupingComponent *) group {
     if (!_group) {
-        _group = [[TTEntityGroupingComponent alloc] init];
+        _group = [TTEntityGroupingComponent group];
 
         [self addComponent: _group];
     }
