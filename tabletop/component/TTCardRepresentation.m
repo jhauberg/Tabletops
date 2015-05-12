@@ -45,11 +45,6 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
     return !self.isFlipped;
 }
 
-- (id<NSCoding, NSObject, NSCopying>) visibleSide {
-    return self.isFaceUp ?
-        self.frontside : self.backside;
-}
-
 - (void) flip {
     [super flip];
 }

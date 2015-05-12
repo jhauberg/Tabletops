@@ -59,7 +59,7 @@ NSString* const kTTCoinRepresentationBacksideKey = @"backside";
     return NO;
 }
 
-- (id<NSCoding, NSObject, NSCopying>) visibleImage {
+- (id<NSCoding, NSObject, NSCopying>) visibleSide {
     return self.isFlipped ?
         self.backside : self.frontside;
 }
