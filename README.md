@@ -23,13 +23,22 @@ TTEntity *d6 = [TTEntity entity];
 
 TTDieRepresentation *representation =
   [TTDieRepresentation representationWithSides:
-   // note that a 'side' can be any kind of object
+   // note that a 'side' can be most kinds of objects
    @[ @1, @2, @3, @4, @5, @6 ]];
 
 [d6 addComponent: representation];
 ```
 
 As expected, the die can be rolled randomly, or turned to show a specific side.
+
+```objective-c
+[representation roll];
+```
+
+```shell
+<TTEntity: 0x100108530>
+  ↳ <TTDieRepresentation: 0x100108ed0> Shows '5' from [1, 2, 3, 4, 5, 6]
+```
 
 Here's how you would make a card with a few properties:
 
@@ -46,15 +55,32 @@ TTPropertyComponent *difficultyProperty =
 
 TTPropertyComponent *nameProperty =
     [TTPropertyComponent propertyWithName: @"Name"
-    // again note that the value can be any kind of object
+    // again note that the value can be most kinds of objects
                                  andValue: @"Heelflip"];
+
+TTPropertyComponent *typeProperty =
+    [TTPropertyComponent propertyWithName: @"Type"
+                                 andValue: @"Trick"];
 
 [trickCard addComponents: @[ nameProperty,
                              difficultyProperty,
+                             typeProperty,
                              representation ]];
 ```
 
 The card can be flipped, tapped and be part of a larger deck of cards.
+
+```objective-c
+[representation flipToFrontside];
+```
+
+```shell
+ <TTCardEntity: 0x1001132d0>
+  ↳ <TTCardRepresentation: 0x100113570> Shows 'card-trick-front-3-heelflip.png'
+  ↳ <TTPropertyComponent: 0x100113350> Name = Heelflip
+  ↳ <TTPropertyComponent: 0x1001134f0> Type = Trick
+  ↳ <TTPropertyComponent: 0x100113330> Difficulty = 3
+```
 
 # License
 
