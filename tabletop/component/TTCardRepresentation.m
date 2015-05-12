@@ -74,12 +74,12 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 
 - (NSString *) description {
     return [NSString stringWithFormat:
-            @"%@ Shows '%@'%@", [super description], self.visibleSide, self.isTapped ? @" (tapped)" : @""];
+            @"<%@: %p> Shows '%@'%@", self.class, self, self.visibleSide, self.isTapped ? @" (tapped)" : @""];
 }
 
 - (NSString *) shortDescription {
     return [NSString stringWithFormat:
-            @"%@ (Shows '%@'%@)", [super shortDescription], self.visibleSide, self.isTapped ? @", tapped" : @""];
+            @"%@ (Shows '%@'%@)", self.class, self.visibleSide, self.isTapped ? @", tapped" : @""];
 }
 
 @end

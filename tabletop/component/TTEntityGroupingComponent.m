@@ -284,12 +284,12 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 
 - (NSString *) shortDescription {
     return [NSString stringWithFormat:
-            @"%@ (%lu %@)", [super shortDescription], [_entities count], [_entities count] == 1 ? @"entity" : @"entities"];
+            @"%@ (%lu %@)", self.class, [_entities count], [_entities count] == 1 ? @"entity" : @"entities"];
 }
 
 - (NSString *) description {
     return [NSString stringWithFormat:
-            @"%@ \n%@", [super description], [self entitiesDescription]];
+            @"<%@: %p> \n%@", self.class, self, [self entitiesDescription]];
 }
 
 @end

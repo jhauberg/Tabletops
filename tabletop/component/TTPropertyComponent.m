@@ -143,12 +143,12 @@ NSString* const kTTPropertyComponentValueKey = @"value";
 
 - (NSString *) description {
     return [NSString stringWithFormat:
-            @"%@ %@ = %@", [super description], self.name, self.value];
+            @"<%@: %p> %@ = %@", self.class, self, self.name, self.value];
 }
 
 - (NSString *) shortDescription {
     return [NSString stringWithFormat:
-            @"%@ (%@ = %@)", [super shortDescription], self.name, self.value];
+            @"%@ (%@ = %@)", self.class, self.name, self.value];
 }
 
 @end

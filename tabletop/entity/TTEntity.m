@@ -249,7 +249,7 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 - (NSString *) description {
     NSMutableString *description = [[NSMutableString alloc] initWithString:
-                                    [NSString stringWithFormat: @"\n %@", [super description]]];
+                                    [NSString stringWithFormat: @"\n <%@: %p>", self.class, self]];
     
     for (TTEntityComponent *component in _components) {
         [description appendFormat:

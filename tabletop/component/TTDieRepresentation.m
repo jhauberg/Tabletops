@@ -104,12 +104,12 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
 
 - (NSString *) description {
     return [NSString stringWithFormat:
-            @"%@ Shows '%@' from [%@]", [super description], self.upside, [self sidesDescription]];
+            @"<%@: %p> Shows '%@' from [%@]", self.class, self, self.upside, [self sidesDescription]];
 }
 
 - (NSString *) shortDescription {
     return [NSString stringWithFormat:
-            @"%@ (Shows '%@', [%@])", [super shortDescription], self.upside, [self sidesDescription]];
+            @"%@ (Shows '%@', [%@])", self.class, self.upside, [self sidesDescription]];
 }
 
 @end
