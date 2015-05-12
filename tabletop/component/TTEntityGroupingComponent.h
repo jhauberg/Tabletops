@@ -21,6 +21,8 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
     NSMutableArray *_entities;
 }
 
++ (instancetype) group;
+
 /**
  The entities within this group.
  */

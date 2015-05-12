@@ -13,6 +13,10 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 
 @implementation TTEntityGroupingComponent
 
++ (instancetype) group {
+    return [[[self class] alloc] init];
+}
+
 - (instancetype) init {
     if ((self = [super init])) {
         if (!_entities) {
