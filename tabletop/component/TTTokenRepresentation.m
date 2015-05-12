@@ -47,4 +47,14 @@ NSString* const kTTTokenRepresentationFrontsideKey = @"frontside";
     return NO;
 }
 
+- (NSString *) description {
+    return [NSString stringWithFormat:
+            @"<%@: %p> Shows '%@'", self.class, self, self.frontside];
+}
+
+- (NSString *) shortDescription {
+    return [NSString stringWithFormat:
+            @"%@ (Shows '%@')", self.class, self.frontside];
+}
+
 @end
