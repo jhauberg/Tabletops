@@ -20,7 +20,9 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 
 - (instancetype) initWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp {
     if ((self = [super initWithFrontside: frontside andBackside: backside])) {
-        [self flipToFrontside];
+        if (faceUp) {
+            [self flipToFrontside];
+        }
     }
 
     return self;
@@ -48,8 +50,8 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
     [super flip];
 }
 
-- (void) flip: (BOOL) randomly {
-    [super flip: randomly];
+- (void) flipRandomly {
+    [super flipRandomly];
 }
 
 - (BOOL) flipToFrontside {

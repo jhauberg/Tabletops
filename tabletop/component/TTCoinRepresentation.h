@@ -39,7 +39,7 @@
 /**
  Flip the coin, making it randomly show either its @c backside or @c frontside.
  */
-- (void) flip: (BOOL) randomly;
+- (void) flipRandomly;
 
 /**
  Flip the coin to show its frontside.

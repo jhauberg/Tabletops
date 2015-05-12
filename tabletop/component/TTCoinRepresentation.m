@@ -70,7 +70,7 @@ NSString* const kTTCoinRepresentationBacksideKey = @"backside";
     _isFlipped = !_isFlipped;
 }
 
-- (void) flip: (BOOL) randomly {
+- (void) flipRandomly {
     _isFlipped = arc4random_uniform((u_int32_t)2) == 1;
 }
 

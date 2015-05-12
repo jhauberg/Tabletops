@@ -33,7 +33,7 @@
 /**
  Flip the card, making it randomly show either its @c backside or @c frontside.
  */
-- (void) flip: (BOOL) randomly;
+- (void) flipRandomly;
 
 /**
  Flip the card to show its frontside.
