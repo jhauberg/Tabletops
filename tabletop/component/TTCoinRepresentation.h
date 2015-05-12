@@ -39,4 +39,17 @@
  */
 - (void) flip: (BOOL) randomly;
 
+/**
+ Flip the coin to show its frontside.
+ 
+ @returns YES if the coin was flipped, NO otherwise.
+ */
+- (BOOL) flipToFrontside;
+/**
+ Flip the coin to show its backside.
+ 
+ @returns YES if the coin was flipped, NO otherwise.
+ */
+- (BOOL) flipToBackside;
+
 @end

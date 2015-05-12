@@ -34,6 +34,19 @@
 - (void) flip: (BOOL) randomly;
 
 /**
+ Flip the card to show its frontside.
+ 
+ @returns YES if the card was flipped, NO otherwise.
+ */
+- (BOOL) flipToFrontside;
+/**
+ Flip the card to show its backside.
+ 
+ @returns YES if the card was flipped, NO otherwise.
+ */
+- (BOOL) flipToBackside;
+
+/**
  Tap the card, flagging it as being tapped unless it was already tapped, in which case it becomes un-tapped.
  */
 - (void) tap;

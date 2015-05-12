@@ -53,6 +53,14 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
     [super flip: randomly];
 }
 
+- (BOOL) flipToFrontside {
+    return [super flipToFrontside];
+}
+
+- (BOOL) flipToBackside {
+    return [super flipToBackside];
+}
+
 - (void) tap {
     _isTapped = !_isTapped;
 }

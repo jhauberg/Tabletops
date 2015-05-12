@@ -72,6 +72,26 @@ NSString* const kTTCoinRepresentationBacksideKey = @"backside";
     _isFlipped = arc4random_uniform((u_int32_t)2) == 1;
 }
 
+- (BOOL) flipToFrontside {
+    if (_isFlipped) {
+        [self flip];
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL) flipToBackside {
+    if (!_isFlipped) {
+        [self flip];
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (NSString *) description {
     return [NSString stringWithFormat:
             @"<%@: %p> Shows '%@'", self.class, self, self.visibleSide];
