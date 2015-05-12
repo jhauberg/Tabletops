@@ -47,8 +47,8 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
                                                 [TTCardRepresentation class]];
     
     if (cardRepresentation) {
-        if (self.addsFaceDown && cardRepresentation.isFaceUp) {
-            [cardRepresentation flip];
+        if (self.addsFaceDown) {
+            [cardRepresentation flipToBackside];
         }
     }
     
@@ -134,8 +134,8 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
                                                         [TTCardRepresentation class]];
 
             if (cardRepresentation) {
-                if (self.drawsFaceUp && !cardRepresentation.isFaceUp) {
-                    [cardRepresentation flip];
+                if (self.drawsFaceUp) {
+                    [cardRepresentation flipToFrontside];
                 }
             }
         }
