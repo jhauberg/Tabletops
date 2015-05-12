@@ -17,12 +17,12 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     return [[[self class] alloc] initWithSides: sides];
 }
 
+@synthesize sides = _sides;
 @synthesize upside = _upside;
 
 - (instancetype) initWithSides: (NSArray *) sides {
     if ((self = [self init])) {
-        _sides = sides;
-        _upside = [sides firstObject];
+        self.sides = sides;
     }
 
     return self;
@@ -57,6 +57,18 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     }
     
     _upside = upside;
+}
+
+- (NSArray *) sides {
+    return _sides;
+}
+
+- (void) setSides: (NSArray *) sides {
+    if (_sides != sides) {
+        _sides = sides;
+
+        _upside = [_sides firstObject];
+    }
 }
 
 - (id) roll {
