@@ -14,7 +14,6 @@ NSString* const kTTGameStateDefaultFilename = @"state";
 
 NSString* const kTTGameStateVersionKey = @"version";
 NSString* const kTTGameStateTableKey = @"table";
-NSString* const kTTGameStateTableEntitiesKey = @"table_entities";
 
 @implementation TTGameState
 
@@ -31,10 +30,7 @@ NSString* const kTTGameStateTableEntitiesKey = @"table_entities";
 - (instancetype) init {
     if ((self = [super init])) {
         _version = @(kTTGameStateVersion);
-        _table = [TTEntity entity];
-        _entities = [[TTEntityGroupingComponent alloc] init];
-
-        [_table addComponent: _entities];
+        _table = [TTTableEntity entity];
     }
     
     return self;
@@ -54,7 +50,6 @@ NSString* const kTTGameStateTableEntitiesKey = @"table_entities";
         }
 
         _table = [decoder decodeObjectForKey: kTTGameStateTableKey];
-        _entities = [decoder decodeObjectForKey: kTTGameStateTableEntitiesKey];
     }
 
     return self;
@@ -63,7 +58,6 @@ NSString* const kTTGameStateTableEntitiesKey = @"table_entities";
 - (void) encodeWithCoder: (NSCoder *) encoder {
     [encoder encodeObject: _version forKey: kTTGameStateVersionKey];
     [encoder encodeObject: _table forKey: kTTGameStateTableKey];
-    [encoder encodeObject: _entities forKey: kTTGameStateTableEntitiesKey];
 }
 
 - (id) copyWithZone: (NSZone *) zone {
@@ -132,7 +126,7 @@ NSString* const kTTGameStateTableEntitiesKey = @"table_entities";
 
 - (NSString *) description {
     return [NSString stringWithFormat:
-            @"\nTable: %@", [_table description]];
+            @"\nTable: %@", _table];
 }
 
 @end

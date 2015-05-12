@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 Jacob Hauberg Hansen. All rights reserved.
 //
 
-#import "TTEntity.h"
-#import "TTEntityGroupingComponent.h"
+#import "TTTableEntity.h"
 
 /**
  Represents the current state of the tabletop.
@@ -31,11 +30,7 @@
 /**
  Get the root entity of the tabletop; the table itself.
  */
-@property (readonly) TTEntity *table;
-/**
- Get the grouping component for the @c table.
- */
-@property (readonly) TTEntityGroupingComponent *entities;
+@property (readonly) TTTableEntity *table;
 
 /**
  Save the current state as default.
