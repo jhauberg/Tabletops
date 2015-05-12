@@ -15,6 +15,27 @@ NSString* const kTTCardEntityRepresentationKey = @"representation";
     TTCardRepresentation *_representation;
 }
 
++ (instancetype) cardWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside {
+    return [self cardWithFrontside: frontside
+                       andBackside: backside
+             withFrontsideFacingUp: YES];
+}
+
++ (instancetype) cardWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp {
+    TTCardEntity *card = [self entity];
+
+    if (card) {
+        card.representation.frontside = frontside;
+        card.representation.backside = backside;
+
+        if (faceUp) {
+            [card.representation flipToFrontside];
+        }
+    }
+
+    return card;
+}
+
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _representation = [decoder decodeObjectForKey: kTTCardEntityRepresentationKey];
