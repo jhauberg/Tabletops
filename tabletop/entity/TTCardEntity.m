@@ -15,14 +15,6 @@ NSString* const kTTCardEntityRepresentationKey = @"representation";
     TTCardRepresentation *_representation;
 }
 
-- (instancetype) init {
-    if ((self = [super init])) {
-
-    }
-
-    return self;
-}
-
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _representation = [decoder decodeObjectForKey: kTTCardEntityRepresentationKey];

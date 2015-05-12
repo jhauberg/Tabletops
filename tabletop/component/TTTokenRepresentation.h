@@ -20,4 +20,6 @@
  */
 @property (strong) id<NSCoding, NSObject, NSCopying> frontside;
 
+- (instancetype) initWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside;
+
 @end

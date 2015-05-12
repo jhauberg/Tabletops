@@ -22,11 +22,14 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
 }
 
 + (instancetype) group;
++ (instancetype) groupWithEntities: (NSArray *) entities;
 
 /**
  The entities within this group.
  */
 @property (readonly) NSArray *entities;
+
+- (instancetype) initWithEntities: (NSArray *) entities;
 
 /**
  Add an entity to the group.

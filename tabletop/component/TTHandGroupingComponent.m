@@ -13,7 +13,7 @@ NSString* const kTTHandGroupingComponentOwnerKey = @"owner";
 @implementation TTHandGroupingComponent
 
 - (instancetype) initWithOwner: (TTEntity *) owner {
-    if ((self = [super init])) {
+    if ((self = [self init])) {
         self.owner = owner;
     }
     

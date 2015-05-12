@@ -30,6 +30,8 @@
  */
 @property (readonly) BOOL isFlipped;
 
+- (instancetype) initWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside;
+
 /**
  Flip the coin, making it show its @c backside if it was showing its @c frontside before, or show its @c frontside if it was showing its @c backside before.
  */

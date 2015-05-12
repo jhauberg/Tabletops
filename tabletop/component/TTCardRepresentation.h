@@ -24,6 +24,8 @@
  */
 @property (readonly) BOOL isTapped;
 
+- (instancetype) initWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp;
+
 /**
  Flip the card, making it face up if it was facing down before, or face down if it was facing up before.
  */

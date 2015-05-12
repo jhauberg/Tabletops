@@ -20,7 +20,7 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
 @synthesize upside = _upside;
 
 - (instancetype) initWithSides: (NSArray *) sides {
-    if ((self = [super init])) {
+    if ((self = [self init])) {
         _sides = sides;
         _upside = [sides firstObject];
     }

@@ -14,19 +14,21 @@ NSString* const kTTCoinRepresentationBacksideKey = @"backside";
 @implementation TTCoinRepresentation
 
 + (instancetype) representationWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside {
-    TTCoinRepresentation *representation = [[[self class] alloc] init];
-
-    if (representation) {
-        representation.frontside = frontside;
-        representation.backside = backside;
-    }
-
-    return representation;
+    return [[[self class] alloc] initWithFrontside: frontside
+                                       andBackside: backside];
 }
 
 - (instancetype) init {
     if ((self = [super init])) {
         _isFlipped = NO;
+    }
+
+    return self;
+}
+
+- (instancetype) initWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside {
+    if ((self = [super initWithFrontside: frontside])) {
+        _backside = backside;
     }
 
     return self;

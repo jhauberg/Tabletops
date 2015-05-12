@@ -17,6 +17,10 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return [[[self class] alloc] init];
 }
 
++ (instancetype) groupWithEntities: (NSArray *) entities {
+    return [[[self class] alloc] initWithEntities: entities];
+}
+
 - (instancetype) init {
     if ((self = [super init])) {
         if (!_entities) {
@@ -24,6 +28,14 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
         }
     }
     
+    return self;
+}
+
+- (instancetype) initWithEntities: (NSArray *) entities {
+    if ((self = [self init])) {
+        [self addEntities: entities];
+    }
+
     return self;
 }
 

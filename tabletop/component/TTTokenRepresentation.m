@@ -22,6 +22,14 @@ NSString* const kTTTokenRepresentationFrontsideKey = @"frontside";
     return representation;
 }
 
+- (instancetype) initWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside {
+    if ((self = [self init])) {
+        _frontside = frontside;
+    }
+
+    return self;
+}
+
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [super initWithCoder: decoder])) {
         _frontside = [decoder decodeObjectForKey: kTTTokenRepresentationFrontsideKey];
