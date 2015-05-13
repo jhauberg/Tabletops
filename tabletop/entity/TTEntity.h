@@ -34,6 +34,13 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 @property (readonly) NSArray *components;
 
 /**
+ Get or set the tag for this entity. 
+ 
+ A tag can be used to group similar entities together, or to easily find an entity later.
+ */
+@property (strong) NSString *tag;
+
+/**
  Create a new entity with no components.
  
  @returns A TTEntity object.
@@ -144,6 +151,11 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
  */
 - (BOOL) isLike: (TTEntity *) otherEntity;
 
+/**
+ Get a short description of this entity instance.
+ 
+ This is similar to calling @c description, but will result in a one-line description.
+ */
 - (NSString *) shortDescription;
 
 @end

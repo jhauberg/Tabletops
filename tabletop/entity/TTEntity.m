@@ -247,9 +247,14 @@ NSString* const kTTEntityComponentsKey = @"components";
     return NO;
 }
 
+- (NSString *) tagOrNothing {
+    return self.tag ? [NSString stringWithFormat: @" \"%@\"", self.tag] : @"";
+}
+
 - (NSString *) description {
     NSMutableString *description = [[NSMutableString alloc] initWithString:
-                                    [NSString stringWithFormat: @"\n <%@: %p>", self.class, self]];
+                                    [NSString stringWithFormat: @"\n <%@%@: %p>",
+                                     self.class, [self tagOrNothing], self]];
     
     for (TTEntityComponent *component in _components) {
         [description appendFormat:
@@ -274,7 +279,7 @@ NSString* const kTTEntityComponentsKey = @"components";
     }
 
     return [NSString stringWithFormat:
-            @"<%@: %p>%@", [self className], self, componentsDescription];
+            @"<%@%@: %p>%@", [self className], [self tagOrNothing], self, componentsDescription];
 }
 
 @end

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Jacob Hauberg Hansen. All rights reserved.
 //
 
-#import "TTEntity.h"
 #import "TTEntityGroupingComponent.h"
+#import "TTEntity.h"
 
 NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 
