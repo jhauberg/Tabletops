@@ -287,7 +287,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
         }
         
         [entitiesDescription appendString:
-         [NSString stringWithFormat: @"     ↳ [%@]", [entity shortDescription]]];
+         [NSString stringWithFormat: @"     ↳ %@", [entity shortDescription]]];
     }
     
     return [NSString stringWithString:

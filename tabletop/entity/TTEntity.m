@@ -176,9 +176,16 @@ NSString* const kTTEntityComponentsKey = @"components";
 }
 
 - (id) getComponentLikeType: (Class) type {
+    return [self getComponentLikeType: type
+                             matching: nil];
+}
+
+- (id) getComponentLikeType: (Class) type matching: (TTEntityComponentConditional) condition {
     for (TTEntityComponent *component in _components) {
         if ([component isKindOfClass: type]) {
-            return component;
+            if (!condition || (condition && condition(component))) {
+                return component;
+            }
         }
     }
     

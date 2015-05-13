@@ -11,10 +11,10 @@
 @implementation TTEntity (Additions)
 
 - (TTPropertyComponent *) getPropertyComponentWithName: (NSString *) name {
-    return [self getComponentOfType: [TTPropertyComponent class]
-                           matching: ^BOOL(TTEntityComponent *component) {
-                               return [((TTPropertyComponent *)component).name isEqualToString: name];
-                           }];
+    return [self getComponentLikeType: [TTPropertyComponent class]
+                             matching: ^BOOL(TTEntityComponent *component) {
+                                 return [((TTPropertyComponent *)component).name isEqualToString: name];
+                             }];
 }
 
 @end

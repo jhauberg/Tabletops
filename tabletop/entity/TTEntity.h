@@ -116,6 +116,12 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
  @returns The first TTEntityComponent object that matches the specified type (or a subclass of) and is already added to the entity. Nil otherwise.
  */
 - (id) getComponentLikeType: (Class) type;
+/**
+ Get a component of a given type (or a subclass of), that also matches a condition.
+ 
+ @returns The first TTEntityComponent object that matches the specified type (or a subclass of), is already added to the entity, and matches the specified condition. Nil otherwise.
+ */
+- (id) getComponentLikeType: (Class) type matching: (TTEntityComponentConditional) condition;
 
 /**
  Get a component that is similar to another component.
