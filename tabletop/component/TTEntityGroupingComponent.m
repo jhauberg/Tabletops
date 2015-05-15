@@ -178,6 +178,11 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return YES;
 }
 
+- (BOOL) moveAllEntitiesFromGroup: (TTEntityGroupingComponent *) group {
+    return [self moveEntities: group.entities
+                    fromGroup: group];
+}
+
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition {
     return [self getEntitiesMatching: condition
                     inChildGroupings: YES];

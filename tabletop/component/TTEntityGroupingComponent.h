@@ -99,6 +99,12 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
  @returns YES if the entities were moved, otherwise NO.
  */
 - (BOOL) moveEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically;
+/**
+ Move all entities from a group to the receiver group.
+
+ @returns YES if the entities were moved, otherwise NO.
+ */
+- (BOOL) moveAllEntitiesFromGroup: (TTEntityGroupingComponent *) group;
 
 /**
  Get all entities that matches a condition. This will search through child groups too (in case this group contains another group of entities).
