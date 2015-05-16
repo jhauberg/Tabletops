@@ -14,8 +14,9 @@
 
 @interface TTEntity (Additions)
 
+- (NSArray *) getAllTags;
+
+- (TTTagComponent *) getTagWithName: (NSString *) tag;
 - (TTPropertyComponent *) getPropertyWithName: (NSString *) name;
-- (TTTagComponent *) getTagNamed: (NSString *) tag;
-- (NSArray *) getTags;
 
 @end
