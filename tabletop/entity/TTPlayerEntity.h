@@ -7,7 +7,6 @@
 //
 
 #import "TTEntity.h"
-#import "TTPropertyComponent.h"
 #import "TTHandGroupingComponent.h"
 
 /**
@@ -15,28 +14,11 @@
  */
 @interface TTPlayerEntity : TTEntity
 
-+ (instancetype) playerWithName: (NSString *) name;
-
-/**
- Get the name component. Can not be removed.
- 
- Note that this component is only created and assigned when first used.
- */
-@property (readonly) TTPropertyComponent *name;
 /**
  Get the hand component. Can not be removed.
  
  Note that this component is only created and assigned when first used.
  */
 @property (readonly) TTHandGroupingComponent *hand;
-
-/**
- Designated initializer.
- 
- Create a new player entity with a hand, and a name property.
- 
- @returns A TTPlayerEntity object with a few components provided initially.
- */
-- (instancetype) initWithName: (NSString *) name;
 
 @end

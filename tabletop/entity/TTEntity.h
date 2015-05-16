@@ -16,17 +16,29 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 @interface TTEntity : NSObject <NSCoding, NSCopying>
 
 /**
- Create a new entity with no components.
+ Create a new entity.
  
  @returns A TTEntity object.
  */
 + (instancetype) entity;
 /**
  Create a new entity with a set of initially added components.
- 
+
  @returns A TTEntity object with components already added.
  */
 + (instancetype) entityWithComponents: (NSArray *) components;
+/**
+ Create a new entity with a name.
+
+ @returns A TTEntity object.
+ */
++ (instancetype) entityWithName: (NSString *) name;
+/**
+ Create a new entity with a name and a set of initially added components.
+
+ @returns A TTEntity object with components already added.
+ */
++ (instancetype) entityWithName: (NSString *) name andComponents: (NSArray *) components;
 
 /**
  Get the components that are currently assigned to the entity.
@@ -34,11 +46,11 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent *component);
 @property (readonly) NSArray *components;
 
 /**
- Get or set the tag for this entity. 
+ Get or set the name for this entity.
  
- A tag can be used to group similar entities together, or to easily find an entity later.
+ A name can be used to easily identify an entity.
  */
-@property (strong) NSString *tag;
+@property (strong) NSString *name;
 
 /**
  Create a new entity with no components.

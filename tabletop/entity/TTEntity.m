@@ -25,6 +25,21 @@ NSString* const kTTEntityComponentsKey = @"components";
     return [[[self class] alloc] initWithComponents: components];
 }
 
++ (instancetype) entityWithName: (NSString *) name {
+    return [self entityWithName: name
+                 andComponents: nil];
+}
+
++ (instancetype) entityWithName: (NSString *) name andComponents: (NSArray *) components {
+    TTEntity *entity = [self entityWithComponents: components];
+
+    if (entity) {
+        entity.name = name;
+    }
+
+    return entity;
+}
+
 #pragma mark Initialization
 
 - (instancetype) init {
@@ -75,13 +90,16 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 - (BOOL) addComponent: (TTEntityComponent *) component {
     if ([_components containsObject: component]) {
+#ifdef DEBUG
+        NSLog(@" *** Attempted to add '%@' to '<%@: %p>%@' which already had this component assigned. The component was not added.", component, self.class, self, [self nameOrNothing]);
+#endif
         return NO;
     }
     
 #ifdef DEBUG
     for (TTEntityComponent *existingComponent in _components) {
         if ([existingComponent isLike: component]) {
-            NSLog(@" *** Adding '%@' to an entity which already has a similar component. Are you sure this is intended? ↲%@", component, self);
+            NSLog(@" *** Adding '%@' to '<%@: %p>%@' which already has a similar component assigned. The component was added. Are you sure this was intended?", component, self.class, self, [self nameOrNothing]);
             
             break;
         }
@@ -119,6 +137,9 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
     if (![_components containsObject: component]) {
+#ifdef DEBUG
+        NSLog(@" *** Attempted to remove '%@' from '<%@: %p>%@' which did not have this component assigned. The component was not removed.", component, self.class, self, [self nameOrNothing]);
+#endif
         return NO;
     }
     
@@ -239,6 +260,14 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 #pragma mark Other
 
+- (BOOL) isEqual: (id) object {
+    if ([object isKindOfClass: [self class]]) {
+        return ((TTEntity *)object).name && self.name && [((TTEntity *)object).name compare: self.name] == NSOrderedSame;
+    }
+
+    return NO;
+}
+
 /**
  Determines similarity, or 'like'-ness, by whether the entity has the same types of components with the same values.
  */
@@ -254,14 +283,14 @@ NSString* const kTTEntityComponentsKey = @"components";
     return NO;
 }
 
-- (NSString *) tagOrNothing {
-    return self.tag ? [NSString stringWithFormat: @" \"%@\"", self.tag] : @"";
+- (NSString *) nameOrNothing {
+    return self.name ? [NSString stringWithFormat: @" \"%@\"", self.name] : @"";
 }
 
 - (NSString *) description {
     NSMutableString *description = [[NSMutableString alloc] initWithString:
                                     [NSString stringWithFormat: @"\n <%@%@: %p>",
-                                     self.class, [self tagOrNothing], self]];
+                                     self.class, [self nameOrNothing], self]];
     
     for (TTEntityComponent *component in _components) {
         [description appendFormat:
@@ -286,7 +315,7 @@ NSString* const kTTEntityComponentsKey = @"components";
     }
 
     return [NSString stringWithFormat:
-            @"<%@%@: %p>%@", [self className], [self tagOrNothing], self, componentsDescription];
+            @"<%@%@: %p>%@", [self className], [self nameOrNothing], self, componentsDescription];
 }
 
 @end
