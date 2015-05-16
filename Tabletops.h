@@ -12,6 +12,7 @@
 #ifdef DEBUG
   #ifndef SHOW_RUNTIME_WARNINGS
     #define SHOW_RUNTIME_WARNINGS 1
+    #define SHOW_ALL_RUNTIME_WARNINGS 0
   #endif
 #endif
 

@@ -99,13 +99,15 @@ NSString* const kTTEntityComponentsKey = @"components";
     }
     
 #ifdef SHOW_RUNTIME_WARNINGS
+  #if SHOW_ALL_RUNTIME_WARNINGS
     for (TTEntityComponent *existingComponent in _components) {
         if ([existingComponent isLike: component]) {
-            NSLog(@" *** Adding '%@' to '<%@: %p>%@' which already has a similar component assigned. The component was added. Are you sure this was intended?", component, self.class, self, [self nameOrNothing]);
+            NSLog(@" *** Adding '%@' to '<%@: %p>%@' which already has a similar component ('%@') assigned. The component was added. Are you sure this was intended?", component, self.class, self, [self nameOrNothing], existingComponent);
             
             break;
         }
     }
+  #endif
 #endif
     
     [_components addObject: component];
