@@ -10,6 +10,10 @@
 
 @implementation TTEntityComponent
 
++ (instancetype) component {
+    return [[[self class] alloc] init];
+}
+
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     return [self init];
 }
@@ -26,8 +30,7 @@
 
 - (BOOL) isEqual: (id) object {
     // override to determine equality based on other/more factors
-    return [object isKindOfClass:
-            [self class]];
+    return [object class] == self.class;
 }
 
 - (BOOL) isLike: (TTEntityComponent *) otherComponent {

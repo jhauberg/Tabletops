@@ -14,12 +14,22 @@
 @interface TTEntityComponent : NSObject <NSCoding, NSCopying>
 
 /**
+ Create a component.
+ */
++ (instancetype) component;
+
+/**
  Determine whether a component is similar to the receiver.
  
  @returns YES if the otherComponent is similar, otherwise NO.
  */
 - (BOOL) isLike: (TTEntityComponent *) otherComponent;
 
+/**
+ Get a short description of this component instance.
+
+ This is similar to calling @c description, but will result in a one-line description.
+ */
 - (NSString *) shortDescription;
 
 @end
