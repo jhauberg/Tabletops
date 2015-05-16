@@ -289,6 +289,8 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     for (TTEntity *entity in _entities) {
         if ([entitiesDescription length] > 0) {
             [entitiesDescription appendString: @", \n"];
+        } else {
+            [entitiesDescription appendString: @"\n"];
         }
         
         [entitiesDescription appendString:
@@ -306,7 +308,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 
 - (NSString *) description {
     return [NSString stringWithFormat:
-            @"<%@: %p> \n%@", self.class, self, [self entitiesDescription]];
+            @"<%@: %p> %@", self.class, self, [self entitiesDescription]];
 }
 
 @end

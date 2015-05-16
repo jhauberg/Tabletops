@@ -10,11 +10,23 @@
 
 @implementation TTEntity (Additions)
 
-- (TTPropertyComponent *) getPropertyComponentWithName: (NSString *) name {
+- (TTPropertyComponent *) getPropertyWithName: (NSString *) name {
     return [self getComponentLikeType: [TTPropertyComponent class]
                              matching: ^BOOL(TTEntityComponent *component) {
                                  return [((TTPropertyComponent *)component).name isEqualToString: name];
                              }];
+}
+
+- (TTTagComponent *) getTagNamed: (NSString *) tag {
+    return [self getComponentLikeType: [TTTagComponent class]
+                             matching: ^BOOL(TTEntityComponent *component) {
+                                 return [((TTTagComponent *)component).tag isEqualToString: tag];
+                             }];
+}
+
+- (NSArray *) getTags {
+    return [self getComponentsLikeType:
+            [TTTagComponent class]];
 }
 
 @end

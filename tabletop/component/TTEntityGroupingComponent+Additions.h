@@ -10,6 +10,10 @@
 
 @interface TTEntityGroupingComponent (Additions)
 
+- (id) getEntityWithTag: (NSString *) tag;
+- (id) getEntityWithName: (NSString *) name;
+
 - (NSArray *) getEntitiesWithTag: (NSString *) tag;
+- (NSArray *) getEntitiesWithName: (NSString *) name;
 
 @end

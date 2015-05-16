@@ -10,9 +10,12 @@
 
 #import "TTEntity.h"
 #import "TTPropertyComponent.h"
+#import "TTTagComponent.h"
 
 @interface TTEntity (Additions)
 
-- (TTPropertyComponent *) getPropertyComponentWithName: (NSString *) name;
+- (TTPropertyComponent *) getPropertyWithName: (NSString *) name;
+- (TTTagComponent *) getTagNamed: (NSString *) tag;
+- (NSArray *) getTags;
 
 @end
