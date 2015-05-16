@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Jacob Hauberg Hansen. All rights reserved.
 //
 
+#import "Tabletops.h"
+
 #import "TTEntity.h"
 
 NSString* const kTTEntityComponentsKey = @"components";
@@ -90,13 +92,13 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 - (BOOL) addComponent: (TTEntityComponent *) component {
     if ([_components containsObject: component]) {
-#ifdef DEBUG
+#if SHOW_RUNTIME_WARNINGS
         NSLog(@" *** Attempted to add '%@' to '<%@: %p>%@' which already had this component assigned. The component was not added.", component, self.class, self, [self nameOrNothing]);
 #endif
         return NO;
     }
     
-#ifdef DEBUG
+#ifdef SHOW_RUNTIME_WARNINGS
     for (TTEntityComponent *existingComponent in _components) {
         if ([existingComponent isLike: component]) {
             NSLog(@" *** Adding '%@' to '<%@: %p>%@' which already has a similar component assigned. The component was added. Are you sure this was intended?", component, self.class, self, [self nameOrNothing]);
@@ -137,7 +139,7 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
     if (![_components containsObject: component]) {
-#ifdef DEBUG
+#ifdef SHOW_RUNTIME_WARNINGS
         NSLog(@" *** Attempted to remove '%@' from '<%@: %p>%@' which did not have this component assigned. The component was not removed.", component, self.class, self, [self nameOrNothing]);
 #endif
         return NO;
