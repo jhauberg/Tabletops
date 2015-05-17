@@ -19,7 +19,7 @@
     </section>
 
     <section class="main-content">
-      <p><img width="200" src="https://rawgit.com/jhauberg/Tabletops/master/logo.svg" alt="Tabletops"></p>
+      <p><img width="240" src="https://rawgit.com/jhauberg/Tabletops/master/logo.svg" alt="Tabletops"></p>
 
 <p>Tabletops is a framework for simulating and playtesting card and boardgames. It is not a game engine.</p>
 
@@ -56,43 +56,60 @@ TTDieRepresentation *representation =
 <div class="highlight highlight-objective-c"><pre>[representation <span class="pl-c1">roll</span>];</pre></div>
 
 <div class="highlight highlight-shell"><pre><span class="pl-k">&lt;</span>TTEntity: 0x<span class="pl-k">100108530&gt;</span>
-  ↳ <span class="pl-k">&lt;</span>TTDieRepresentation: 0x100108ed<span class="pl-k">0&gt;</span> Shows <span class="pl-s"><span class="pl-pds">'</span>5<span class="pl-pds">'</span></span> from [1, 2, 3, 4, 5, 6]</pre></div>
+ ↳ <span class="pl-k">&lt;</span>TTDieRepresentation: 0x100108ed<span class="pl-k">0&gt;</span> Shows <span class="pl-s"><span class="pl-pds">'</span>5<span class="pl-pds">'</span></span> from [1, 2, 3, 4, 5, 6]</pre></div>
 
-<p>Here's how you would make a card with a few properties:</p>
+<p>Here's how you could make a card with a few properties:</p>
 
-<div class="highlight highlight-objective-c"><pre>TTEntity *trickCard = [TTEntity <span class="pl-c1">entity</span>];
+<div class="highlight highlight-objective-c"><pre>TTCardEntity *trickCard = [TTCardEntity <span class="pl-c1">cardWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>card-trick-front-heelflip.png<span class="pl-pds">"</span></span>
+                                              <span class="pl-c1">andBackside:</span> <span class="pl-s"><span class="pl-pds">@"</span>card-trick-back.png<span class="pl-pds">"</span></span>];
 
-TTCardRepresentation *representation =
-    [TTCardRepresentation <span class="pl-c1">representationWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>card-trick-front-heelflip.png<span class="pl-pds">"</span></span>
-                                          <span class="pl-c1">andBackside:</span> <span class="pl-s"><span class="pl-pds">@"</span>card-trick-back.png<span class="pl-pds">"</span></span>];
+TTTagComponent *tag =
+  [TTTagComponent <span class="pl-c1">componentWithTag:</span> <span class="pl-s"><span class="pl-pds">@"</span>Trick<span class="pl-pds">"</span></span>];
 
 TTPropertyComponent *difficultyProperty =
-    [TTPropertyComponent <span class="pl-c1">propertyWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Difficulty<span class="pl-pds">"</span></span>
-                                 <span class="pl-c1">andValue:</span> @<span class="pl-c1">3</span>];
+  [TTPropertyComponent <span class="pl-c1">propertyWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Difficulty<span class="pl-pds">"</span></span>
+                               <span class="pl-c1">andValue:</span> @<span class="pl-c1">3</span>];
 
 TTPropertyComponent *nameProperty =
-    [TTPropertyComponent <span class="pl-c1">propertyWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Name<span class="pl-pds">"</span></span>
-    <span class="pl-c">// again note that the value can be most kinds of objects</span>
-                                 <span class="pl-c1">andValue:</span> <span class="pl-s"><span class="pl-pds">@"</span>Heelflip<span class="pl-pds">"</span></span>];
+  [TTPropertyComponent <span class="pl-c1">propertyWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Name<span class="pl-pds">"</span></span>
+   <span class="pl-c">// again note that the value can be most kinds of objects</span>
+                               <span class="pl-c1">andValue:</span> <span class="pl-s"><span class="pl-pds">@"</span>Heelflip<span class="pl-pds">"</span></span>];
 
-TTPropertyComponent *typeProperty =
-    [TTPropertyComponent <span class="pl-c1">propertyWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Type<span class="pl-pds">"</span></span>
-                                 <span class="pl-c1">andValue:</span> <span class="pl-s"><span class="pl-pds">@"</span>Trick<span class="pl-pds">"</span></span>];
-
-[trickCard <span class="pl-c1">addComponents:</span> @[ nameProperty,
-                             difficultyProperty,
-                             typeProperty,
-                             representation ]];</pre></div>
+[trick <span class="pl-c1">addComponents:</span>
+ @[ tag,
+    nameProperty,
+    difficultyProperty ]];</pre></div>
 
 <p>The card can be flipped, tapped and be part of a larger deck of cards.</p>
 
-<div class="highlight highlight-objective-c"><pre>[representation <span class="pl-c1">flipToFrontside</span>];</pre></div>
+<div class="highlight highlight-objective-c"><pre>[trickCard.representation <span class="pl-c1">flipToFrontside</span>];</pre></div>
 
-<div class="highlight highlight-shell"><pre> <span class="pl-k">&lt;</span>TTCardEntity: 0x1001132d<span class="pl-k">0&gt;</span>
-  ↳ <span class="pl-k">&lt;</span>TTCardRepresentation: 0x<span class="pl-k">100113570&gt;</span> Shows <span class="pl-s"><span class="pl-pds">'</span>card-trick-front-3-heelflip.png<span class="pl-pds">'</span></span>
-  ↳ <span class="pl-k">&lt;</span>TTPropertyComponent: 0x<span class="pl-k">100113350&gt;</span> Name = Heelflip
-  ↳ <span class="pl-k">&lt;</span>TTPropertyComponent: 0x1001134f<span class="pl-k">0&gt;</span> Type = Trick
-  ↳ <span class="pl-k">&lt;</span>TTPropertyComponent: 0x<span class="pl-k">100113330&gt;</span> Difficulty = 3</pre></div>
+<div class="highlight highlight-shell"><pre><span class="pl-k">&lt;</span>TTCardEntity: 0x10011d<span class="pl-k">620&gt;</span>
+ ↳ <span class="pl-k">&lt;</span>TTCardRepresentation: 0x10011d<span class="pl-k">670&gt;</span> Shows <span class="pl-s"><span class="pl-pds">'</span>card-trick-front-3-heelflip.png<span class="pl-pds">'</span></span>
+ ↳ <span class="pl-k">&lt;</span>TTTagComponent: 0x<span class="pl-k">100116850&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>Trick<span class="pl-pds">"</span></span>
+ ↳ <span class="pl-k">&lt;</span>TTPropertyComponent: 0x10011d7c<span class="pl-k">0&gt;</span> Name = Heelflip
+ ↳ <span class="pl-k">&lt;</span>TTPropertyComponent: 0x10011d7a<span class="pl-k">0&gt;</span> Difficulty = 3</pre></div>
+
+<p>A pile of tokens:</p>
+
+<div class="highlight highlight-objective-c"><pre>TTEntity *pile =
+  [TTEntity <span class="pl-c1">entityWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Tokens<span class="pl-pds">"</span></span>];
+
+  [pile <span class="pl-c1">addComponent:</span>
+    [TTPileGroupingComponent <span class="pl-c1">groupWithEntities:</span>
+      @[ [TTTokenEntity <span class="pl-c1">tokenWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>▪<span class="pl-pds">"</span></span>],
+         [TTTokenEntity <span class="pl-c1">tokenWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>▪<span class="pl-pds">"</span></span>],
+         [TTTokenEntity <span class="pl-c1">tokenWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>▪<span class="pl-pds">"</span></span>],
+         [TTTokenEntity <span class="pl-c1">tokenWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>▪<span class="pl-pds">"</span></span>],
+         [TTTokenEntity <span class="pl-c1">tokenWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>▪<span class="pl-pds">"</span></span>] ]]];</pre></div>
+
+<div class="highlight highlight-shell"><pre><span class="pl-k">&lt;</span>TTEntity <span class="pl-s"><span class="pl-pds">"</span>Tokens<span class="pl-pds">"</span></span>: 0x10030cfd<span class="pl-k">0&gt;</span>
+ ↳ <span class="pl-k">&lt;</span>TTPileGroupingComponent: 0x100318bf<span class="pl-k">0&gt;</span>
+    ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x1003188c<span class="pl-k">0&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>),
+    ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x1003188e<span class="pl-k">0&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>),
+    ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x<span class="pl-k">100318940&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>),
+    ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x1003189b<span class="pl-k">0&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>),
+    ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x100318a<span class="pl-k">20&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>)</pre></div>
 
 <h1>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
