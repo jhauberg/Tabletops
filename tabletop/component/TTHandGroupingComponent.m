@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Jacob Hauberg Hansen. All rights reserved.
 //
 
+#import "TTEntity.h"
 #import "TTHandGroupingComponent.h"
 
 NSString* const kTTHandGroupingComponentOwnerKey = @"owner";

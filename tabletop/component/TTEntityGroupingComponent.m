@@ -297,9 +297,30 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 - (BOOL) isEqual: (id) object {
     if ([super isEqual: object]) {
         TTEntityGroupingComponent *otherGroupingComponent = (TTEntityGroupingComponent *)object;
-        
+
         return [_entities isEqualToArray:
                 otherGroupingComponent.entities];
+    }
+    
+    return NO;
+}
+
+- (BOOL) isLike: (TTEntityComponent *) otherComponent {
+    if ([super isLike: otherComponent]) {
+        NSArray *otherEntities = ((TTEntityGroupingComponent *)otherComponent).entities;
+
+        if (_entities.count == otherEntities.count) {
+            for (NSUInteger i = 0; i < otherEntities.count; i++) {
+                TTEntity *entity = _entities[i];
+                TTEntity *otherEntity = otherEntities[i];
+
+                if (![entity isLike: otherEntity]) {
+                    return NO;
+                }
+            }
+
+            return YES;
+        }
     }
     
     return NO;

@@ -66,21 +66,6 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
     _isTapped = !_isTapped;
 }
 
-/**
- A different card component is considered to be equal to the receiver only if both front- and back images are the same.
- */
-- (BOOL) isEqual: (id) object {
-    if ([super isEqual: object]) {
-        TTCardRepresentation *otherCardRepresentation = (TTCardRepresentation *)object;
-        
-        return
-            [self.frontside isEqual: otherCardRepresentation.frontside] &&
-            [self.backside isEqual: otherCardRepresentation.backside];
-    }
-    
-    return NO;
-}
-
 - (NSString *) description {
     return [NSString stringWithFormat:
             @"<%@: %p> Shows '%@'%@", self.class, self, self.visibleSide, self.isTapped ? @" (tapped)" : @""];

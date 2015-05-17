@@ -76,4 +76,13 @@ NSString* const kTTCounterComponentStepKey = @"step";
             @(-[self.step doubleValue])];
 }
 
+- (BOOL) isEqual: (id) object {
+    if ([super isEqual: object]) {
+        return [self.step isEqualToNumber:
+                ((TTCounterComponent *)object).step];
+    }
+
+    return NO;
+}
+
 @end

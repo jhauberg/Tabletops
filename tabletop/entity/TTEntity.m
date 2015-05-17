@@ -11,6 +11,7 @@
 #import "TTEntity.h"
 
 NSString* const kTTEntityComponentsKey = @"components";
+NSString* const kTTEntityNameKey = @"name";
 
 @implementation TTEntity {
  @private
@@ -64,6 +65,8 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 - (instancetype) initWithCoder: (NSCoder *) decoder {
     if ((self = [self init])) {
+        _name = [decoder decodeObjectForKey: kTTEntityNameKey];
+
         if (_components) {
             [_components addObjectsFromArray:
              [decoder decodeObjectForKey: kTTEntityComponentsKey]];
@@ -74,6 +77,7 @@ NSString* const kTTEntityComponentsKey = @"components";
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder {
+    [encoder encodeObject: _name forKey: kTTEntityNameKey];
     [encoder encodeObject: _components forKey: kTTEntityComponentsKey];
 }
 
@@ -264,24 +268,42 @@ NSString* const kTTEntityComponentsKey = @"components";
 
 #pragma mark Other
 
+/**
+ Determines equality by comparing likeness and @c name.
+ 
+ Two entities are considered equal if they have the same name, and if they both have the same amount of components assigned and all of those components are alike.
+ */
 - (BOOL) isEqual: (id) object {
-    if ([object isKindOfClass: [self class]]) {
-        return ((TTEntity *)object).name && self.name && [((TTEntity *)object).name compare: self.name] == NSOrderedSame;
+    if ([self isLike: object]) {
+        TTEntity *otherEntity = (TTEntity *)object;
+
+        if (self.name && otherEntity.name) {
+            return [otherEntity.name compare: self.name] == NSOrderedSame;
+        }
     }
 
     return NO;
 }
 
 /**
- Determines similarity, or 'like'-ness, by whether the entity has the same types of components with the same values.
+ Determines similarity, or likeness, by whether the entity has the same types of components with the same values.
  */
 - (BOOL) isLike: (TTEntity *) otherEntity {
     if ([otherEntity isKindOfClass: [self class]]) {
-        // Note the checking of equality against each component, and NOT whether they're 'like' each other.
-        // An entity is ONLY like another entity if all components are equal; an entity is NEVER equal to another entity.
-        // Imagine two cards of the same type; they are treated the same, but they are still two cards.
-        return [self.components isEqualToArray:
-                otherEntity.components];
+        NSArray *otherComponents = otherEntity.components;
+
+        if (_components.count == otherComponents.count) {
+            for (NSUInteger i = 0; i < otherComponents.count; i++) {
+                TTEntityComponent *component = _components[i];
+                TTEntityComponent *otherComponent = otherComponents[i];
+
+                if (![component isLike: otherComponent]) {
+                    return NO;
+                }
+            }
+            
+            return YES;
+        }
     }
     
     return NO;
