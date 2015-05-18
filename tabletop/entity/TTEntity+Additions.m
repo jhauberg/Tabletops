@@ -29,4 +29,19 @@
                              }];
 }
 
+- (BOOL) moveComponent: (TTEntityComponent *) component fromEntity: (TTEntity *) entity {
+    return [entity moveComponent: component
+                        toEntity: self];
+}
+
+- (BOOL) moveComponent: (TTEntityComponent *) component toEntity: (TTEntity *) entity {
+    if ([self removeComponent: component]) {
+        if ([entity addComponent: component]) {
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
 @end

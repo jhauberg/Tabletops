@@ -19,4 +19,7 @@
 - (TTTagComponent *) getTagWithName: (NSString *) tag;
 - (TTPropertyComponent *) getPropertyWithName: (NSString *) name;
 
+- (BOOL) moveComponent: (TTEntityComponent *) component fromEntity: (TTEntity *) entity;
+- (BOOL) moveComponent: (TTEntityComponent *) component toEntity: (TTEntity *) entity;
+
 @end
