@@ -14,7 +14,7 @@
 @interface TTTagComponent : TTEntityComponent
 
 /**
- Create a tagged component.
+ Create a tag component.
  */
 + (instancetype) componentWithTag: (NSString *) tag;
 
@@ -26,7 +26,7 @@
 /**
  Designated initializer.
 
- Create a tagged component.
+ Create a tag component.
 
  @returns A TTTagComponent object with a tag.
  */

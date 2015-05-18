@@ -13,6 +13,9 @@
  */
 @interface TTDieRepresentation : TTRepresentationComponent
 
+/**
+ Create a representation with a set of sides.
+ */
 + (instancetype) representationWithSides: (NSArray *) sides;
 
 /**

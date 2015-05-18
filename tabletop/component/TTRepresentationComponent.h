@@ -13,6 +13,9 @@
  */
 @interface TTRepresentationComponent : TTEntityComponent
 
+/**
+ Create a representation.
+ */
 + (instancetype) representation;
 
 @end

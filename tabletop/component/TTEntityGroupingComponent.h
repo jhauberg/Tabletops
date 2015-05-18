@@ -21,14 +21,30 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
     NSMutableArray *_entities;
 }
 
+/**
+ Create a new group.
+ */
 + (instancetype) group;
+/**
+ Create a new group with a set of entities.
+ */
 + (instancetype) groupWithEntities: (NSArray *) entities;
+
+/**
+ Determine whether there's any entities in this group.
+ */
+@property (readonly) BOOL isEmpty;
 
 /**
  The entities within this group.
  */
 @property (readonly) NSArray *entities;
 
+/**
+ Create a new group with a set of entities initially added.
+ 
+ @returns a TTEntityGroupingComponent object with a set of entities already grouped.
+ */
 - (instancetype) initWithEntities: (NSArray *) entities;
 
 /**

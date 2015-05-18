@@ -56,6 +56,10 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     [encoder encodeObject: _entities forKey: kTTEntityGroupingComponentEntitiesKey];
 }
 
+- (BOOL) isEmpty {
+    return _entities == nil || [_entities count] == 0;
+}
+
 - (NSArray *) entities {
     return [NSArray arrayWithArray:
             _entities];

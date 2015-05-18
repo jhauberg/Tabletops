@@ -13,6 +13,9 @@
  */
 @interface TTCardRepresentation : TTCoinRepresentation
 
+/**
+ Create a representation with a frontside and a backside, with its frontside facing up or down initially.
+ */
 + (instancetype) representationWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp;
 
 /**

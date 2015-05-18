@@ -13,6 +13,9 @@
  */
 @interface TTCoinRepresentation : TTTokenRepresentation
 
+/**
+ Create a representation with a frontside and a backside.
+ */
 + (instancetype) representationWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside;
 
 /**
