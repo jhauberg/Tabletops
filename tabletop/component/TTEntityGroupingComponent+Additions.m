@@ -45,7 +45,7 @@
                 }
 
                 return NO;
-            }];
+            } inChildGroupings: YES];
 }
 
 - (NSArray *) getEntitiesWithTag: (NSString *) tag {
@@ -60,7 +60,7 @@
                 }
 
                 return NO;
-            }];
+            } inChildGroupings: YES];
 }
 
 @end

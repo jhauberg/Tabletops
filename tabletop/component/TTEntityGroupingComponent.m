@@ -207,7 +207,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition {
     return [self getEntitiesMatching: condition
-                    inChildGroupings: YES];
+                    inChildGroupings: NO];
 }
 
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper {
@@ -227,7 +227,8 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
             for (TTEntityGroupingComponent *grouping in groupings) {
                 if (grouping != self) {
                     [entities addObjectsFromArray:
-                     [grouping getEntitiesMatching: condition]];
+                     [grouping getEntitiesMatching: condition
+                                  inChildGroupings: YES]];
                 }
             }
         }
@@ -238,7 +239,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 /**
- Sorts entities by 'like'-ness.
+ Sorts entities by likeness.
  
  The comparison considers two different entities to be the same only if they are 'like' each other,
  otherwise it bases the comparison on the amount of components they have.
