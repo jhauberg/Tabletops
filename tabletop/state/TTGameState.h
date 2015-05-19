@@ -58,4 +58,22 @@
  */
 - (BOOL) saveToFile: (NSString *) path asHumanlyReadable: (BOOL) humanlyReadable;
 
+/**
+ Find an entity on the table with a given tag. This searches through the entire table and all its groups.
+ */
+- (id) findEntityTagged: (NSString *) tag;
+/**
+ Find an entity on the table with a given name. This searches through the entire table and all its groups.
+ */
+- (id) findEntityNamed: (NSString *) name;
+
+/**
+ Find all entities on the table with a given tag. This searches through the entire table and all its groups.
+ */
+- (NSArray *) findEntitiesTagged: (NSString *) tag;
+/**
+ Find all entities on the table with a given name. This searches through the entire table and all its groups.
+ */
+- (NSArray *) findEntitiesNamed: (NSString *) name;
+
 @end

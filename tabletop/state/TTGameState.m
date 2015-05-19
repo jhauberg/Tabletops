@@ -8,6 +8,8 @@
 
 #import "TTGameState.h"
 
+#import "TTEntityGroupingComponent+Additions.h"
+
 NSUInteger const kTTGameStateVersion = 1;
 
 NSString* const kTTGameStateDefaultFilename = @"state";
@@ -122,6 +124,46 @@ NSString* const kTTGameStateTableKey = @"table";
     }
     
     return NO;
+}
+
+- (id) findEntityTagged: (NSString *) tag {
+    id entity = [self.table.group getEntityWithTag: tag];
+    
+    if (!entity) {
+        NSLog(@" *** Could not find any entity tagged with '%@'", tag);
+    }
+    
+    return entity;
+}
+
+- (id) findEntityNamed: (NSString *) name {
+    id entity = [self.table.group getEntityWithName: name];
+    
+    if (!entity) {
+        NSLog(@" *** Could not find any entity named '%@'", name);
+    }
+    
+    return entity;
+}
+
+- (NSArray *) findEntitiesTagged: (NSString *) tag {
+    NSArray *entities = [self.table.group getEntitiesWithTag: tag];
+    
+    if (!entities || [entities count] == 0) {
+        NSLog(@" *** Could not find any entities tagged with '%@'", tag);
+    }
+    
+    return entities;
+}
+
+- (NSArray *) findEntitiesNamed: (NSString *) name {
+    NSArray *entities = [self.table.group getEntitiesWithName: name];
+    
+    if (!entities || [entities count] == 0) {
+        NSLog(@" *** Could not find any entities named '%@'", name);
+    }
+    
+    return entities;
 }
 
 - (NSString *) description {
