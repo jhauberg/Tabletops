@@ -36,6 +36,11 @@ typedef BOOL (^TTEntityConditional)(TTEntity *entity);
 @property (readonly) BOOL isEmpty;
 
 /**
+ Get the number of entities in this group.
+ */
+@property (readonly) NSUInteger count;
+
+/**
  The entities within this group.
  */
 @property (readonly) NSArray *entities;

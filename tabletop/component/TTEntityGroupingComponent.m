@@ -60,6 +60,10 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return _entities == nil || [_entities count] == 0;
 }
 
+- (NSUInteger) count {
+    return _entities != nil ? [_entities count] : 0;
+}
+
 - (NSArray *) entities {
     return [NSArray arrayWithArray:
             _entities];
