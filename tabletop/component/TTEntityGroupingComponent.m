@@ -141,7 +141,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 - (BOOL) removeEntities: (NSArray *) entities atomically: (BOOL) atomically {
     NSMutableArray *removedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
     
-    for (TTEntity *entity in entities) {
+    for (TTEntity *entity in [entities reverseObjectEnumerator]) {
         if ([self removeEntity: entity] && atomically) {
             [removedEntities addObject: entity];
         } else {
