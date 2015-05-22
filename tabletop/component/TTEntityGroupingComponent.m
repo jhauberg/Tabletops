@@ -260,6 +260,11 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
         
          if (entity && otherEntity) {
              if ([entity isLike: otherEntity]) {
+                 if (entity.name && otherEntity.name) {
+                     return [entity.name compare:
+                             otherEntity.name];
+                 }
+
                  return NSOrderedSame;
              } else if (entity.components.count > otherEntity.components.count) {
                  return NSOrderedDescending;
