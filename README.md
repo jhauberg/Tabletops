@@ -10,13 +10,15 @@ This representation can then be used to create scenarios and perform simulations
 
   * Interface for visually modeling game representations
   * AI layer for automating playtests
-  * Rule enforcement
+  * ~~Rule enforcement~~ (**Added!**)
 
 # Implementation
 
-The [tabletop](https://github.com/jhauberg/Tabletops/tree/master/tabletop) is implemented as a component-entity model.
+The [tabletop](https://github.com/jhauberg/Tabletops/tree/master/tabletop) is implemented as a component/entity model. Every object (either tangible or abstract) on the tabletop, is represented as an [entity](https://github.com/jhauberg/Tabletops/blob/master/tabletop/entity/TTEntity.h).
 
-This is how you would make a 6-sided die:
+[Components](https://github.com/jhauberg/Tabletops/blob/master/tabletop/component/TTEntityComponent.h) add behavior to entities, and each entity can have any number of components assigned to it.
+
+This is how you could make a 6-sided die:
 
 ```objective-c
 TTEntity *d6 = [TTEntity entity];
@@ -101,6 +103,72 @@ TTEntity *pile =
      ↳ <TTTokenEntity: 0x100318940> TTTokenRepresentation (Shows '▪'),
      ↳ <TTTokenEntity: 0x1003189b0> TTTokenRepresentation (Shows '▪'),
      ↳ <TTTokenEntity: 0x100318a20> TTTokenRepresentation (Shows '▪')
+```
+
+## Rule enforcement
+
+The tabletop can be manipulated and controlled by creating [rules](https://github.com/jhauberg/Tabletops/blob/master/tabletop/rule/TTRule.h). Rules are resolved recursively, such that a rule can create new rules, or break/alter existing ones.
+
+Here's an example where, on a turn, the current player draws a card from a deck, and if the deck is emptied, it is reshuffled from a discard pile.
+
+```objective-c
+TTRuleDrivenGameState *state = [[TTRuleDrivenGameState alloc] init];
+
+TTOrderGroupingComponent *order = [TTOrderGroupingComponent groupWithEntities:
+  @[ [TTPlayerEntity entityWithName: @"Player 1"],
+     [TTPlayerEntity entityWithName: @"Player 2"],
+     [TTPlayerEntity entityWithName: @"Player 3"] ]];
+
+[state.table addComponent: order];
+
+TTRule* onStartOfTurn =
+  [TTRule ruleWithName: @"On Start of Turn"
+        thatResolvesTo: ^BOOL(TTRuleDrivenGameState *state) {
+          [state.rules push: drawATrick
+                      after: onStartOfTurn];
+
+          return YES;
+        }];
+
+TTRule* drawATrick =
+  [TTRule ruleWithName: @"Draw A Trick"
+        thatResolvesTo: ^BOOL(TTRuleDrivenGameState *state) {
+          TTPlayerEntity *currentPlayer = (TTPlayerEntity *)order.current;
+          TTDeckEntity *tricks = [state findEntityNamed: @"Tricks"];
+
+          if ([tricks.group isEmpty]) {
+              return NO;
+          }
+
+          [currentPlayer.hand addEntity:
+           [tricks.group drawFromTop]];
+
+          [state.rules push: reshuffleIfNecessary
+                      after: drawATrick];
+
+          return YES;
+        }];
+
+TTRule *reshuffleIfNecessary =
+  [TTRule ruleWithName: @"Reshuffle"
+        thatResolvesTo: ^BOOL(TTRuleDrivenGameState *state) {
+          TTDeckEntity *tricks = [state findEntityNamed: @"Tricks"];
+
+          if ([tricks.group isEmpty]) {
+            TTDeckEntity *tricksDiscard = [state findEntityNamed: @"Discarded tricks"];
+
+            [tricks.group moveAllEntitiesFromGroup: tricksDiscard.group];
+            [tricks.group shuffle];
+
+            return YES;
+          }
+
+          return NO;
+        }];
+
+[state.rules push: onStartOfTurn];
+
+[state resolveIfNecessary];
 ```
 
 # License
