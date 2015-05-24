@@ -1,0 +1,161 @@
+//
+//  TTRule.m
+//  Tabletops
+//
+//  Created by Jacob Hauberg Hansen on 07/05/15.
+//  Copyright (c) 2015 Jacob Hauberg Hansen. All rights reserved.
+//
+
+#import "TTRule.h"
+
+@implementation TTRule
+
++ (TTRule *) rule {
+    return [[[self class] alloc] init];
+}
+
++ (TTRule *) ruleWithName: (NSString *) name {
+    return [[[self class] alloc] initWithName: name];
+}
+
++ (TTRule *) ruleWithName: (NSString *) name
+             thatResolves: (TTRuleResolutionConditionBlock) condition {
+    return [self ruleWithName: name
+                 thatResolves: condition
+                           to: ^BOOL(id state) {
+                               // always resolves successfully if condition is met
+                               return YES;
+                           }];
+}
+
++ (TTRule *) ruleWithName: (NSString *) name
+           thatResolvesTo: (TTRuleResolutionBlock) resolution {
+    return [self ruleWithName: name
+                 thatResolves: nil // default behavior for a rule is to always be resolvable unless a subclass/block says otherwise
+                           to: resolution];
+}
+
++ (TTRule *) ruleWithName: (NSString *) name
+             thatResolves: (TTRuleResolutionConditionBlock) condition
+                       to: (TTRuleResolutionBlock) resolution {
+    TTRule *rule = [self ruleWithName: name];
+    
+    if (rule) {
+        rule.resolutionBlock = resolution;
+        rule.resolutionConditionBlock = condition;
+    }
+    
+    return rule;
+}
+
++ (TTRule *) ruleWithName: (NSString *) name
+       thatResolvesBefore: (TTRuleResolutionConditionResponseBlock) responseCondition
+                       to: (TTRuleResolutionResponseBlock) resolution {
+    return [self ruleWithName: name
+           thatResolvesBefore: responseCondition
+                           to: resolution
+                      orAfter: nil
+                           to: nil];
+}
+
++ (TTRule *) ruleWithName: (NSString *) name
+        thatResolvesAfter: (TTRuleResolutionConditionResponseBlock) responseCondition
+                       to: (TTRuleResolutionResponseBlock) resolution {
+    return [self ruleWithName: name
+           thatResolvesBefore: nil
+                           to: nil
+                      orAfter: responseCondition
+                           to: resolution];
+}
+
++ (TTRule *) ruleWithName: (NSString *) name
+       thatResolvesBefore: (TTRuleResolutionConditionResponseBlock) responseConditionBefore
+                       to: (TTRuleResolutionResponseBlock) resolutionBefore
+                  orAfter: (TTRuleResolutionConditionResponseBlock) responseConditionAfter
+                       to: (TTRuleResolutionResponseBlock) resolutionAfter {
+    TTRule *rule = [self ruleWithName: name];
+    
+    if (rule) {
+        rule.resolutionConditionBeforeBlock = responseConditionBefore;
+        rule.resolutionBeforeBlock = resolutionBefore;
+        rule.resolutionConditionAfterBlock = responseConditionAfter;
+        rule.resolutionAfterBlock = resolutionAfter;
+    }
+    
+    return rule;
+}
+
+- (instancetype) initWithName: (NSString *) name {
+    if ((self = [super init])) {
+        _name = name;
+    }
+
+    return self;
+}
+
+- (BOOL) canResolve: (id) state before: (TTRule *) rule {
+    // override to implement behavior in subclass
+
+    if (self.resolutionConditionBeforeBlock) {
+        return self.resolutionConditionBeforeBlock(state, rule);
+    }
+
+    return NO;
+}
+
+- (BOOL) canResolve: (id) state {
+    // override to implement behavior in subclass
+
+    if (self.resolutionConditionBlock) {
+        return self.resolutionConditionBlock(state);
+    }
+
+    return YES;
+}
+
+- (BOOL) canResolve: (id) state after: (TTRule *) rule {
+    // override to implement behavior in subclass
+    
+    if (self.resolutionConditionAfterBlock) {
+        return self.resolutionConditionAfterBlock(state, rule);
+    }
+    
+    return NO;
+}
+
+- (BOOL) resolve: (id) state before: (TTRule *) rule {
+    // override to implement behavior in subclass
+    
+    if (self.resolutionBeforeBlock) {
+        return self.resolutionBeforeBlock(state, rule);
+    }
+    
+    return NO;
+}
+
+- (BOOL) resolve: (id) state {
+    // override to implement behavior in subclass
+
+    if (self.resolutionBlock) {
+        return self.resolutionBlock(state);
+    }
+
+    return NO;
+}
+
+- (BOOL) resolve: (id) state after: (TTRule *) rule {
+    // override to implement behavior in subclass
+
+    if (self.resolutionAfterBlock) {
+        return self.resolutionAfterBlock(state, rule);
+    }
+
+    return NO;
+}
+
+- (NSString *) description {
+    return [NSString stringWithFormat:
+            @"%@", self.name ? self.name : [self className]];
+}
+
+@end
