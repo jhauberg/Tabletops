@@ -22,16 +22,15 @@
              thatResolves: (TTRuleResolutionConditionBlock) condition {
     return [self ruleWithName: name
                  thatResolves: condition
-                           to: ^BOOL(id state) {
-                               // always resolves successfully if condition is met
-                               return YES;
-                           }];
+            // default behavior for a rule is to always resolve successfully if condition is met
+                           to: nil];
 }
 
 + (TTRule *) ruleWithName: (NSString *) name
            thatResolvesTo: (TTRuleResolutionBlock) resolution {
     return [self ruleWithName: name
-                 thatResolves: nil // default behavior for a rule is to always be resolvable unless a subclass/block says otherwise
+            // default behavior for a rule is to always be resolvable if no condition is specified
+                 thatResolves: nil
                            to: resolution];
 }
 
@@ -100,6 +99,7 @@
         return self.resolutionConditionBeforeBlock(state, rule);
     }
 
+    // by default, a rule can only be resolved before another rule if specified to
     return NO;
 }
 
@@ -110,6 +110,7 @@
         return self.resolutionConditionBlock(state);
     }
 
+    // by default, a rule can always be resolved unless otherwise specified by a condition block subclassed behavior
     return YES;
 }
 
@@ -119,7 +120,8 @@
     if (self.resolutionConditionAfterBlock) {
         return self.resolutionConditionAfterBlock(state, rule);
     }
-    
+
+    // by default, a rule can only be resolved after another rule if specified to
     return NO;
 }
 
@@ -129,8 +131,9 @@
     if (self.resolutionBeforeBlock) {
         return self.resolutionBeforeBlock(state, rule);
     }
-    
-    return NO;
+
+    // by default, a rule always resolves successfully before another rule unless otherwise specified
+    return YES;
 }
 
 - (BOOL) resolve: (id) state {
@@ -140,7 +143,8 @@
         return self.resolutionBlock(state);
     }
 
-    return NO;
+    // by default, a rule always resolves successfully unless otherwise specified
+    return YES;
 }
 
 - (BOOL) resolve: (id) state after: (TTRule *) rule {
@@ -150,7 +154,8 @@
         return self.resolutionAfterBlock(state, rule);
     }
 
-    return NO;
+    // by default, a rule always resolves successfully after another rule unless otherwise specified
+    return YES;
 }
 
 - (NSString *) description {
