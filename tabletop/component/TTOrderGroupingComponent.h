@@ -1,5 +1,5 @@
 //
-//  TTOrderedGroupingComponent.h
+//  TTOrderGroupingComponent.h
 //  Tabletops
 //
 //  Created by Jacob Hauberg Hansen on 21/05/15.

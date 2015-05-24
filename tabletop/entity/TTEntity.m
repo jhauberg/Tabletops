@@ -297,7 +297,7 @@ NSString* const kTTEntityNameKey = @"name";
                 TTEntityComponent *component = _components[i];
                 TTEntityComponent *otherComponent = otherComponents[i];
 
-                if (![component isLike: otherComponent]) {
+                if (![component isEqual: otherComponent]) {
                     return NO;
                 }
             }
