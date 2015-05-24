@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Jacob Hauberg Hansen. All rights reserved.
 //
 
+#import "Tabletops.h"
+
 #import "TTRuleStack.h"
 
 @implementation TTRuleStack {
@@ -229,8 +231,10 @@
     if (self.isEmpty) {
         return;
     }
-    
-    for (TTRule *otherRule in [_rules reverseObjectEnumerator]) {
+
+    NSArray *rules = [NSArray arrayWithArray: _rules];
+
+    for (TTRule *otherRule in [rules reverseObjectEnumerator]) {
         if (otherRule == rule) {
             continue;
         }
@@ -283,9 +287,11 @@
     }
     
     NSLog(@"processing rules...");
-    
+
+    NSArray *rules = [NSArray arrayWithArray: _rules];
+
     // go through all processable rules, from top to bottom; first in, last out.
-    for (TTRule *rule in [_rules reverseObjectEnumerator]) {
+    for (TTRule *rule in [rules reverseObjectEnumerator]) {
         NSLog(@"processing: %@", rule);
         
         // determine if the rule can resolve with the current game state
@@ -343,8 +349,10 @@
     if (self.isEmpty) {
         return;
     }
-    
-    for (TTRule *otherRule in [_rules reverseObjectEnumerator]) {
+
+    NSArray *rules = [NSArray arrayWithArray: _rules];
+
+    for (TTRule *otherRule in [rules reverseObjectEnumerator]) {
         if (otherRule == rule) {
             continue;
         }
