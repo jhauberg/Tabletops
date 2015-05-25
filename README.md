@@ -1,10 +1,14 @@
 <img width="200" src="https://rawgit.com/jhauberg/Tabletops/master/logo.svg" alt="Tabletops">
 
-Tabletops is a framework for simulating and playtesting card and boardgames. It is not a game engine.
+Tabletops is a framework for simulating and playtesting card and boardgames.
+
+It is not a game engine.
 
 In its current state, the framework can be used to model a representation of most games that uses a variety of cards, dice, tokens, decks, piles, and so on.
 
 This representation can then be used to create scenarios and perform simulations; i.e. moving tokens, rolling dice, flipping cards, shuffling decks and other common tabletop actions.
+
+Additionally, rules can be created to control and advance the simulation through conditional responses, triggers and resolutions.
 
 **Future features might include**:
 
@@ -12,7 +16,7 @@ This representation can then be used to create scenarios and perform simulations
   * AI layer for automating playtests
   * ~~Rule enforcement~~ (**Added!**)
 
-# Implementation
+## Implementation
 
 The [tabletop](https://github.com/jhauberg/Tabletops/tree/master/tabletop) is implemented as a component/entity model. Every object (either tangible or abstract) on the tabletop, is represented as an [entity](https://github.com/jhauberg/Tabletops/blob/master/tabletop/entity/TTEntity.h).
 
@@ -90,8 +94,6 @@ TTEntity *pile =
     [TTPileGroupingComponent groupWithEntities:
       @[ [TTTokenEntity tokenWithFrontside: @"▪"],
          [TTTokenEntity tokenWithFrontside: @"▪"],
-         [TTTokenEntity tokenWithFrontside: @"▪"],
-         [TTTokenEntity tokenWithFrontside: @"▪"],
          [TTTokenEntity tokenWithFrontside: @"▪"] ]]];
 ```
 
@@ -99,8 +101,6 @@ TTEntity *pile =
 <TTEntity "Tokens": 0x10030cfd0>
  ↳ <TTPileGroupingComponent: 0x100318bf0>
      ↳ <TTTokenEntity: 0x1003188c0> TTTokenRepresentation (Shows '▪'),
-     ↳ <TTTokenEntity: 0x1003188e0> TTTokenRepresentation (Shows '▪'),
-     ↳ <TTTokenEntity: 0x100318940> TTTokenRepresentation (Shows '▪'),
      ↳ <TTTokenEntity: 0x1003189b0> TTTokenRepresentation (Shows '▪'),
      ↳ <TTTokenEntity: 0x100318a20> TTTokenRepresentation (Shows '▪')
 ```
