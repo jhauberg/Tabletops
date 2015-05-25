@@ -1,46 +1,65 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
+
   <head>
-    <meta charset="UTF-8">
-    <title>Tabletops by jhauberg</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Tabletops : A framework for simulating and playtesting card and boardgames">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Tabletops</title>
   </head>
+
   <body>
-    <section class="page-header">
-      <h1 class="project-name">Tabletops</h1>
-      <h2 class="project-tagline">A framework for simulating and playtesting card and boardgames</h2>
-      <a href="https://github.com/jhauberg/Tabletops" class="btn">View on GitHub</a>
-      <a href="https://github.com/jhauberg/Tabletops/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/jhauberg/Tabletops/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
 
-    <section class="main-content">
-      <p><img width="240" src="https://rawgit.com/jhauberg/Tabletops/master/logo.svg" alt="Tabletops"></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jhauberg/Tabletops">View on GitHub</a>
 
-<p>Tabletops is a framework for simulating and playtesting card and boardgames. It is not a game engine.</p>
+          <h1 id="project_title">Tabletops</h1>
+          <h2 id="project_tagline">A framework for simulating and playtesting card and boardgames</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jhauberg/Tabletops/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jhauberg/Tabletops/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><img width="220" src="https://rawgit.com/jhauberg/Tabletops/master/logo.svg" alt="Tabletops"></p>
+
+<p>Tabletops is a framework for simulating and playtesting card and boardgames.</p>
+
+<p>It is not a game engine.</p>
 
 <p>In its current state, the framework can be used to model a representation of most games that uses a variety of cards, dice, tokens, decks, piles, and so on.</p>
 
 <p>This representation can then be used to create scenarios and perform simulations; i.e. moving tokens, rolling dice, flipping cards, shuffling decks and other common tabletop actions.</p>
+
+<p>Additionally, rules can be created to control and advance the simulation through conditional responses, triggers and resolutions.</p>
 
 <p><strong>Future features might include</strong>:</p>
 
 <ul>
 <li>Interface for visually modeling game representations</li>
 <li>AI layer for automating playtests</li>
-<li>Rule enforcement</li>
+<li>
+<del>Rule enforcement</del> (<strong>Added!</strong>)</li>
 </ul>
 
-<h1>
-<a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation</h1>
+<h2>
+<a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation</h2>
 
-<p>The <a href="https://github.com/jhauberg/Tabletops/tree/master/tabletop">tabletop</a> is implemented as a component-entity model.</p>
+<p>The <a href="https://github.com/jhauberg/Tabletops/tree/master/tabletop">tabletop</a> is implemented as a component/entity model. Every object (either tangible or abstract) on the tabletop, is represented as an <a href="https://github.com/jhauberg/Tabletops/blob/master/tabletop/entity/TTEntity.h">entity</a>.</p>
 
-<p>This is how you would make a 6-sided die:</p>
+<p><a href="https://github.com/jhauberg/Tabletops/blob/master/tabletop/component/TTEntityComponent.h">Components</a> add behavior to entities, and each entity can have any number of components assigned to it.</p>
+
+<p>This is how you could make a 6-sided die:</p>
 
 <div class="highlight highlight-objective-c"><pre>TTEntity *d6 = [TTEntity <span class="pl-c1">entity</span>];
 
@@ -99,17 +118,78 @@ TTPropertyComponent *nameProperty =
     [TTPileGroupingComponent <span class="pl-c1">groupWithEntities:</span>
       @[ [TTTokenEntity <span class="pl-c1">tokenWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>▪<span class="pl-pds">"</span></span>],
          [TTTokenEntity <span class="pl-c1">tokenWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>▪<span class="pl-pds">"</span></span>],
-         [TTTokenEntity <span class="pl-c1">tokenWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>▪<span class="pl-pds">"</span></span>],
-         [TTTokenEntity <span class="pl-c1">tokenWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>▪<span class="pl-pds">"</span></span>],
          [TTTokenEntity <span class="pl-c1">tokenWithFrontside:</span> <span class="pl-s"><span class="pl-pds">@"</span>▪<span class="pl-pds">"</span></span>] ]]];</pre></div>
 
 <div class="highlight highlight-shell"><pre><span class="pl-k">&lt;</span>TTEntity <span class="pl-s"><span class="pl-pds">"</span>Tokens<span class="pl-pds">"</span></span>: 0x10030cfd<span class="pl-k">0&gt;</span>
  ↳ <span class="pl-k">&lt;</span>TTPileGroupingComponent: 0x100318bf<span class="pl-k">0&gt;</span>
-    ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x1003188c<span class="pl-k">0&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>),
-    ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x1003188e<span class="pl-k">0&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>),
-    ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x<span class="pl-k">100318940&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>),
-    ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x1003189b<span class="pl-k">0&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>),
-    ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x100318a<span class="pl-k">20&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>)</pre></div>
+     ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x1003188c<span class="pl-k">0&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>),
+     ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x1003189b<span class="pl-k">0&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>),
+     ↳ <span class="pl-k">&lt;</span>TTTokenEntity: 0x100318a<span class="pl-k">20&gt;</span> TTTokenRepresentation (Shows <span class="pl-s"><span class="pl-pds">'</span>▪<span class="pl-pds">'</span></span>)</pre></div>
+
+<h2>
+<a id="rule-enforcement" class="anchor" href="#rule-enforcement" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rule enforcement</h2>
+
+<p>The tabletop can be manipulated and controlled by creating <a href="https://github.com/jhauberg/Tabletops/blob/master/tabletop/rule/TTRule.h">rules</a>. Rules are resolved recursively, such that a rule can create new rules, or break/alter existing ones.</p>
+
+<p>Here's an example where, on a turn, the current player draws a card from a deck, and if the deck is emptied, it is reshuffled from a discard pile.</p>
+
+<div class="highlight highlight-objective-c"><pre>TTRuleDrivenGameState *state = [[TTRuleDrivenGameState <span class="pl-c1">alloc</span>] <span class="pl-c1">init</span>];
+
+TTOrderGroupingComponent *order = [TTOrderGroupingComponent <span class="pl-c1">groupWithEntities:</span>
+  @[ [TTPlayerEntity <span class="pl-c1">entityWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Player 1<span class="pl-pds">"</span></span>],
+     [TTPlayerEntity <span class="pl-c1">entityWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Player 2<span class="pl-pds">"</span></span>],
+     [TTPlayerEntity <span class="pl-c1">entityWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Player 3<span class="pl-pds">"</span></span>] ]];
+
+[state.table <span class="pl-c1">addComponent:</span> order];
+
+TTRule* onStartOfTurn =
+  [TTRule <span class="pl-c1">ruleWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>On Start of Turn<span class="pl-pds">"</span></span>
+        <span class="pl-c1">thatResolvesTo:</span> ^<span class="pl-c1">BOOL</span>(TTRuleDrivenGameState *state) {
+          [state.rules <span class="pl-c1">push:</span> drawATrick
+                      <span class="pl-c1">after:</span> onStartOfTurn];
+
+          <span class="pl-k">return</span> <span class="pl-c1">YES</span>;
+        }];
+
+TTRule* drawATrick =
+  [TTRule <span class="pl-c1">ruleWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Draw A Trick<span class="pl-pds">"</span></span>
+        <span class="pl-c1">thatResolvesTo:</span> ^<span class="pl-c1">BOOL</span>(TTRuleDrivenGameState *state) {
+          TTPlayerEntity *currentPlayer = (TTPlayerEntity *)order.<span class="pl-smi">current</span>;
+          TTDeckEntity *tricks = [state <span class="pl-c1">findEntityNamed:</span> <span class="pl-s"><span class="pl-pds">@"</span>Tricks<span class="pl-pds">"</span></span>];
+
+          <span class="pl-k">if</span> ([tricks.group <span class="pl-c1">isEmpty</span>]) {
+              <span class="pl-k">return</span> <span class="pl-c1">NO</span>;
+          }
+
+          [currentPlayer.hand <span class="pl-c1">addEntity:</span>
+           [tricks.group <span class="pl-c1">drawFromTop</span>]];
+
+          [state.rules <span class="pl-c1">push:</span> reshuffleIfNecessary
+                      <span class="pl-c1">after:</span> drawATrick];
+
+          <span class="pl-k">return</span> <span class="pl-c1">YES</span>;
+        }];
+
+TTRule *reshuffleIfNecessary =
+  [TTRule <span class="pl-c1">ruleWithName:</span> <span class="pl-s"><span class="pl-pds">@"</span>Reshuffle<span class="pl-pds">"</span></span>
+        <span class="pl-c1">thatResolvesTo:</span> ^<span class="pl-c1">BOOL</span>(TTRuleDrivenGameState *state) {
+          TTDeckEntity *tricks = [state <span class="pl-c1">findEntityNamed:</span> <span class="pl-s"><span class="pl-pds">@"</span>Tricks<span class="pl-pds">"</span></span>];
+
+          <span class="pl-k">if</span> ([tricks.group <span class="pl-c1">isEmpty</span>]) {
+            TTDeckEntity *tricksDiscard = [state <span class="pl-c1">findEntityNamed:</span> <span class="pl-s"><span class="pl-pds">@"</span>Discarded tricks<span class="pl-pds">"</span></span>];
+
+            [tricks.group <span class="pl-c1">moveAllEntitiesFromGroup:</span> tricksDiscard.group];
+            [tricks.group <span class="pl-c1">shuffle</span>];
+
+            <span class="pl-k">return</span> <span class="pl-c1">YES</span>;
+          }
+
+          <span class="pl-k">return</span> <span class="pl-c1">NO</span>;
+        }];
+
+[state.rules <span class="pl-c1">push:</span> onStartOfTurn];
+
+[state <span class="pl-c1">resolveIfNecessary</span>];</pre></div>
 
 <h1>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
@@ -135,16 +215,18 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.</p>
+      </section>
+    </div>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/jhauberg/Tabletops">Tabletops</a> is maintained by <a href="https://github.com/jhauberg">jhauberg</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Tabletops maintained by <a href="https://github.com/jhauberg">jhauberg</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
+    </div>
 
-    </section>
-
-            <script type="text/javascript">
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -155,6 +237,6 @@ SOFTWARE.</p>
             } catch(err) {}
           </script>
 
+
   </body>
 </html>
-
