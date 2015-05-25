@@ -19,6 +19,14 @@
  Determine whether there's any rules to be processed.
  */
 @property (readonly) BOOL isEmpty;
+/**
+ Get the number of rules currently in the stack.
+ */
+@property (readonly) NSUInteger count;
+/**
+ Get the rules in order of resolution; i.e. from top to bottom, so that the first element is the top (and most recently pushed) rule.
+ */
+@property (readonly) NSArray *rules;
 
 /**
  Push a rule to the top of the stack.

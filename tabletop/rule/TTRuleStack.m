@@ -31,6 +31,29 @@
     return _rules == nil || [_rules count] == 0;
 }
 
+- (NSUInteger) count {
+    return _rules != nil ? [_rules count] : 0;
+}
+
+- (NSArray *) rules {
+    NSArray *rules = nil;
+
+    if (_rules) {
+        NSMutableArray *reversedRules = [NSMutableArray arrayWithCapacity:
+                                         [_rules count]];
+
+        NSEnumerator *reverseEnumerator = [_rules reverseObjectEnumerator];
+
+        for (id rule in reverseEnumerator) {
+            [reversedRules addObject: rule];
+        }
+
+        rules = [NSArray arrayWithArray: reversedRules];
+    }
+
+    return rules;
+}
+
 - (void) removeAllRules {
     [_rules removeAllObjects];
 }
