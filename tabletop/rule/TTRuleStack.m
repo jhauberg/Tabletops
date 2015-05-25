@@ -79,7 +79,7 @@
 
 - (TTRuleResolutionConditionResponseBlock) conditionForRule: (TTRule *) rule thatRespondsToRule: (TTRule *) triggerRule {
     return ^BOOL(id state, TTRule *anotherRule) {
-        BOOL shouldTriggerInResponseToRule = [anotherRule.name isEqualToString: triggerRule.name] || [anotherRule isEqual: triggerRule];
+        BOOL shouldTriggerInResponseToRule = anotherRule == triggerRule || [anotherRule isEqual: triggerRule] || [anotherRule.name isEqualToString: triggerRule.name];
 
         if (shouldTriggerInResponseToRule) {
             if (rule.resolutionConditionBlock) {
