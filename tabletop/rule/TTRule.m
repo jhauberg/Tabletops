@@ -160,7 +160,7 @@
 
 - (NSString *) description {
     return [NSString stringWithFormat:
-            @"%@", self.name ? self.name : [self className]];
+            @"%@", self.name ? self.name : NSStringFromClass([self class])];
 }
 
 @end

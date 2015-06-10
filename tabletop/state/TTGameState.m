@@ -45,7 +45,7 @@ NSString* const kTTGameStateTableKey = @"table";
         if (_version) {
             NSNumber *runningVersion = @(kTTGameStateVersion);
 
-            if ([_version isNotEqualTo: runningVersion]) {
+            if (![_version isEqualToNumber: runningVersion]) {
                 [NSException raise: @"The game state being restored was created in a different version of the application"
                             format: @"Currently running version '%@', but the game state was saved in version '%@'", runningVersion, _version];
             }

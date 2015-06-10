@@ -341,7 +341,7 @@ NSString* const kTTEntityNameKey = @"name";
     }
 
     return [NSString stringWithFormat:
-            @"<%@%@: %p>%@", [self className], [self nameOrNothing], self, componentsDescription];
+            @"<%@%@: %p>%@", NSStringFromClass([self class]), [self nameOrNothing], self, componentsDescription];
 }
 
 @end
