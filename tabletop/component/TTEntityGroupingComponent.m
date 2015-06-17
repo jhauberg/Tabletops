@@ -70,6 +70,10 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (BOOL) addEntity: (TTEntity *) entity {
+    if (!entity) {
+        return NO;
+    }
+    
     if ([_entities containsObject: entity]) {
 #if SHOW_RUNTIME_WARNINGS
 #pragma clang diagnostic push
@@ -86,7 +90,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
         if ([existingEntity isLike: entity]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-            NSLog(@" *** Adding '<%@: %p>%@' to '<%@: %p>' which already has a similar entity ('<%@: %p>%@') grouped. The entity was added. Are you sure this was intended?", entity.class, entity, [entity performSelector: @selector(nameOrNothing)], self.class, self, existingEntity.class, existingEntity, [existingEntity performSelector: @selector(nameOrNothing)]);
+            NSLog(@" *** Adding '<%@: %p>%@' to '<%@: %p>' which already has a similar entity ('<%@: %p>%@') grouped. The entity was added anyway. Are you sure this was intended?", entity.class, entity, [entity performSelector: @selector(nameOrNothing)], self.class, self, existingEntity.class, existingEntity, [existingEntity performSelector: @selector(nameOrNothing)]);
 #pragma clang diagnostic pop
             break;
         }
@@ -124,6 +128,10 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (BOOL) removeEntity: (TTEntity *) entity {
+    if (!entity) {
+        return NO;
+    }
+    
     if (![_entities containsObject: entity]) {
         return NO;
     }
@@ -169,6 +177,10 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (BOOL) moveEntity: (TTEntity *) entity fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically {
+    if (!entity) {
+        return NO;
+    }
+    
     if (group != self) {
         BOOL didAddEntity = [self addEntity: entity];
         

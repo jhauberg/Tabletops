@@ -67,7 +67,9 @@ NSString* const kTTDieRepresentationUpsideKey = @"upside";
     if (_sides != sides) {
         _sides = sides;
 
-        _upside = [_sides firstObject];
+        if (_sides) {
+            _upside = [_sides firstObject];
+        }
     }
 }
 
