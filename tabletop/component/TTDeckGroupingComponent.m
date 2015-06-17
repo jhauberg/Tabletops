@@ -207,7 +207,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 
 - (TTEntity *) drawAtRandom {
     return [self drawAtIndex:
-            rand() % [_entities count]];
+            arc4random_uniform((uint32_t)[_entities count])];
 }
 
 - (NSArray *) drawAtRandom: (NSUInteger) amount {
