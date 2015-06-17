@@ -14,11 +14,21 @@
     #define SHOW_RUNTIME_WARNINGS 1
     #define SHOW_ALL_RUNTIME_WARNINGS 0
   #endif
+  #ifndef SHOW_RULE_RESOLUTION
+    #define SHOW_RULE_RESOLUTION 1
+  #endif
 #endif
 
 #import <Foundation/Foundation.h>
 
 #import "TTEntity.h"
 #import "TTEntity+Additions.h"
+
+#import "TTEntityComponent.h"
+
+#import "TTEntityGroupingComponent.h"
+#import "TTEntityGroupingComponent+Additions.h"
+
+#import "TTGameState.h"
 
 #endif
