@@ -16,17 +16,17 @@
 /**
  Create a representation with a set of sides.
  */
-+ (instancetype) representationWithSides: (NSArray *) sides;
++ (nonnull instancetype) representationWithSides: (nullable NSArray *) sides;
 
 /**
  Get or set all the sides of the die.
  */
-@property (strong) NSArray *sides;
+@property (nullable, strong) NSArray *sides;
 
 /**
  Get or set the current upside of the die.
  */
-@property (strong) id<NSObject, NSCopying, NSCoding> upside;
+@property (nullable, strong) id<NSObject, NSCopying, NSCoding> upside;
 
 /**
  Designated initializer.
@@ -35,13 +35,13 @@
  
  @returns A TTDieRepresentation object with the given sides.
  */
-- (instancetype) initWithSides: (NSArray *) sides;
+- (nonnull instancetype) initWithSides: (nullable NSArray *) sides;
 
 /**
  Roll the die.
  
  @returns The side facing up after rolling the die.
  */
-- (id) roll;
+- (nullable id) roll;
 
 @end

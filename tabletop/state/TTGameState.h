@@ -16,21 +16,21 @@
 /**
  Restore the state from default.
  */
-+ (instancetype) restore;
++ (nullable instancetype) restore;
 /**
  Restore the state from a file.
  */
-+ (instancetype) restoreFromFile: (NSString*) path;
++ (nullable instancetype) restoreFromFile: (nonnull NSString *) path;
 
 /**
  Get the version of the application that this state was built with.
  */
-@property (readonly) NSNumber *version;
+@property (nonnull, readonly) NSNumber *version;
 
 /**
  Get the root entity of the tabletop; the table itself.
  */
-@property (readonly) TTTableEntity *table;
+@property (nonnull, readonly) TTTableEntity *table;
 
 /**
  Save the current state as default.
@@ -50,30 +50,30 @@
  
  @returns YES if the state was saved, NO otherwise.
  */
-- (BOOL) saveToFile: (NSString *) path;
+- (BOOL) saveToFile: (nonnull NSString *) path;
 /**
  Save the current state to a file, in a humanly readable format if specified.
  
  @returns YES if the state was saved, NO otherwise.
  */
-- (BOOL) saveToFile: (NSString *) path asHumanlyReadable: (BOOL) humanlyReadable;
+- (BOOL) saveToFile: (nonnull NSString *) path asHumanlyReadable: (BOOL) humanlyReadable;
 
 /**
  Find an entity on the table with a given tag. This searches through the entire table and all its groups.
  */
-- (id) findEntityTagged: (NSString *) tag;
+- (nullable id) findEntityTagged: (nonnull NSString *) tag;
 /**
  Find an entity on the table with a given name. This searches through the entire table and all its groups.
  */
-- (id) findEntityNamed: (NSString *) name;
+- (nullable id) findEntityNamed: (nonnull NSString *) name;
 
 /**
  Find all entities on the table with a given tag. This searches through the entire table and all its groups.
  */
-- (NSArray *) findEntitiesTagged: (NSString *) tag;
+- (nonnull NSArray *) findEntitiesTagged: (nonnull NSString *) tag;
 /**
  Find all entities on the table with a given name. This searches through the entire table and all its groups.
  */
-- (NSArray *) findEntitiesNamed: (NSString *) name;
+- (nonnull NSArray *) findEntitiesNamed: (nonnull NSString *) name;
 
 @end

@@ -14,12 +14,12 @@
 
 @interface TTEntity (Additions)
 
-- (NSArray *) getAllTags;
+- (nonnull NSArray *) getAllTags;
 
-- (TTTagComponent *) getTagWithName: (NSString *) tag;
-- (TTPropertyComponent *) getPropertyWithName: (NSString *) name;
+- (nullable TTTagComponent *) getTagWithName: (nonnull NSString *) tag;
+- (nullable TTPropertyComponent *) getPropertyWithName: (nonnull NSString *) name;
 
-- (BOOL) moveComponent: (TTEntityComponent *) component fromEntity: (TTEntity *) entity;
-- (BOOL) moveComponent: (TTEntityComponent *) component toEntity: (TTEntity *) entity;
+- (BOOL) moveComponent: (nonnull TTEntityComponent *) component fromEntity: (nonnull TTEntity *) entity;
+- (BOOL) moveComponent: (nonnull TTEntityComponent *) component toEntity: (nonnull TTEntity *) entity;
 
 @end

@@ -16,13 +16,13 @@
 /**
  Create a representation with a frontside.
  */
-+ (instancetype) representationWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside;
++ (nonnull instancetype) representationWithFrontside: (nullable id<NSCoding, NSObject, NSCopying>) frontside;
 
 /**
  Get or set the frontside.
  */
-@property (strong) id<NSCoding, NSObject, NSCopying> frontside;
+@property (nullable, strong) id<NSCoding, NSObject, NSCopying> frontside;
 
-- (instancetype) initWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside;
+- (nonnull instancetype) initWithFrontside: (nullable id<NSCoding, NSObject, NSCopying>) frontside;
 
 @end

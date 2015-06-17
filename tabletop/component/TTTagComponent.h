@@ -16,12 +16,12 @@
 /**
  Create a tag component.
  */
-+ (instancetype) componentWithTag: (NSString *) tag;
++ (nonnull instancetype) componentWithTag: (nullable NSString *) tag;
 
 /**
  Get or set the tag.
  */
-@property (strong) NSString *tag;
+@property (nullable, strong) NSString *tag;
 
 /**
  Designated initializer.
@@ -30,13 +30,13 @@
 
  @returns A TTTagComponent object with a tag.
  */
-- (instancetype) initWithTag: (NSString *) tag;
+- (nonnull instancetype) initWithTag: (nullable NSString *) tag;
 
 /**
  Compare this tag to another tag.
  
  @returns The case-sensitive string comparison of this tag to the other tag.
  */
-- (NSComparisonResult) compare: (TTTagComponent *) otherTag;
+- (NSComparisonResult) compare: (nonnull TTTagComponent *) otherTag;
 
 @end

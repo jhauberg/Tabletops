@@ -16,23 +16,23 @@
 /**
  Get the current entity in the order.
  */
-@property (readonly) TTEntity *current;
+@property (nullable, readonly) TTEntity *current;
 /**
  Get the previous entity in the order.
  */
-@property (readonly) TTEntity *previous;
+@property (nullable, readonly) TTEntity *previous;
 /**
  Get the next entity in the order.
  */
-@property (readonly) TTEntity *next;
+@property (nullable, readonly) TTEntity *next;
 /**
  Get the last entity in the order. The @c last entity is always the entity just before the @c first entity.
  */
-@property (readonly) TTEntity *last;
+@property (nullable, readonly) TTEntity *last;
 /**
  Get the first and starting entity in the order.
  */
-@property (readonly) TTEntity *first;
+@property (nullable, readonly) TTEntity *first;
 
 /**
  Advance the order to the @c next entity.
@@ -51,6 +51,6 @@
 /**
  Make the specified entity be the first in the order of entities. This also resets the order.
  */
-- (void) makeEntityFirstInOrder: (TTEntity *) entity;
+- (void) makeEntityFirstInOrder: (nonnull TTEntity *) entity;
 
 @end

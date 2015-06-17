@@ -95,6 +95,10 @@ NSString* const kTTEntityNameKey = @"name";
 }
 
 - (BOOL) addComponent: (TTEntityComponent *) component {
+    if (!component) {
+        return NO;
+    }
+    
     if ([_components containsObject: component]) {
 #if SHOW_RUNTIME_WARNINGS
         NSLog(@" *** Attempted to add '%@' to '<%@: %p>%@' which already had this component assigned. The component was not added.", component, self.class, self, [self nameOrNothing]);
@@ -106,7 +110,7 @@ NSString* const kTTEntityNameKey = @"name";
   #if SHOW_ALL_RUNTIME_WARNINGS
     for (TTEntityComponent *existingComponent in _components) {
         if ([existingComponent isLike: component]) {
-            NSLog(@" *** Adding '%@' to '<%@: %p>%@' which already has a similar component ('%@') assigned. The component was added. Are you sure this was intended?", component, self.class, self, [self nameOrNothing], existingComponent);
+            NSLog(@" *** Adding '%@' to '<%@: %p>%@' which already has a similar component ('%@') assigned. The component was added anyway. Are you sure this was intended?", component, self.class, self, [self nameOrNothing], existingComponent);
             
             break;
         }
@@ -115,7 +119,7 @@ NSString* const kTTEntityNameKey = @"name";
 #endif
     
     [_components addObject: component];
-    
+        
     return YES;
 }
 
@@ -144,6 +148,10 @@ NSString* const kTTEntityNameKey = @"name";
 }
 
 - (BOOL) removeComponent: (TTEntityComponent *) component {
+    if (!component) {
+        return NO;
+    }
+    
     if (![_components containsObject: component]) {
 #ifdef SHOW_RUNTIME_WARNINGS
         NSLog(@" *** Attempted to remove '%@' from '<%@: %p>%@' which did not have this component assigned. The component was not removed.", component, self.class, self, [self nameOrNothing]);

@@ -16,30 +16,30 @@
 /**
  Create a property component with a named property and an initial value.
  */
-+ (instancetype) propertyWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value;
++ (nonnull instancetype) propertyWithName: (nullable NSString *) name andValue: (nullable id<NSCoding, NSObject, NSCopying>) value;
 
 /**
  Get or set the name of the property.
  */
-@property (strong) NSString *name;
+@property (nullable, strong) NSString *name;
 
 /**
  Get or set the value of the property.
  */
-@property (strong) id<NSCoding, NSObject, NSCopying> value;
+@property (nullable, strong) id<NSCoding, NSObject, NSCopying> value;
 
 /**
  Get the current @c value as an NSNumber object.
  
  @returns The current @c value as an NSNumber object if possible, nil otherwise.
  */
-@property (readonly) NSNumber *numberValue;
+@property (nullable, readonly) NSNumber *numberValue;
 /**
  Get the current @c value as an NSString object.
 
  @returns The current @c value as a NSString object if possible, nil otherwise.
  */
-@property (readonly) NSString *stringValue;
+@property (nullable, readonly) NSString *stringValue;
 
 /**
  Designated initializer.
@@ -48,13 +48,13 @@
  
  @returns A TTPropertyComponent object with a named property/value.
  */
-- (instancetype) initWithName: (NSString *) name andValue: (id<NSCoding, NSObject, NSCopying>) value;
+- (nonnull instancetype) initWithName: (nullable NSString *) name andValue: (nullable id<NSCoding, NSObject, NSCopying>) value;
 
 /**
  Compare the receiver to another property component.
  
  @returns NSOrderedSame if the other property is considered equal to the receiver, NSOrderedAscending if the other property is considered greater than the receiver and NSOrderedDescending if the other property is considered less.
  */
-- (NSComparisonResult) compare: (TTPropertyComponent *) otherProperty;
+- (NSComparisonResult) compare: (nonnull TTPropertyComponent *) otherProperty;
 
 @end

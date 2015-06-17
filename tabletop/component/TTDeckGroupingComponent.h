@@ -18,11 +18,11 @@
 /**
  The bottom card of the deck.
  */
-@property (readonly) TTEntity *bottom;
+@property (nullable, readonly) TTEntity *bottom;
 /**
  The top card of the deck.
  */
-@property (readonly) TTEntity *top;
+@property (nullable, readonly) TTEntity *top;
 
 /**
  Flip cards to be face-down when they are added to the deck.
@@ -45,65 +45,65 @@
 /**
  Draw a card at a given position and remove it from the deck.
 
- @returns The TTEntity object located at index.
+ @returns The TTEntity object located at index, or nil if out of bounds.
  */
-- (TTEntity *) drawAtIndex: (NSUInteger) index;
+- (nullable TTEntity *) drawAtIndex: (NSUInteger) index;
 /**
  Draw a card and remove it from the deck.
  
  @returns The card specified if it is in the deck, nil otherwise.
  */
-- (TTEntity *) draw: (TTEntity *) card;
+- (nullable TTEntity *) draw: (nonnull TTEntity *) card;
 
 /**
  Draw a card from the top and remove it from the deck.
  
- @returns The TTEntity object located at the last index.
+ @returns The TTEntity object located at the last index, or nil if the deck is empty.
  */
-- (TTEntity *) drawFromTop;
+- (nullable TTEntity *) drawFromTop;
 /**
  Draw a card from the bottom and remove it from the deck.
  
- @returns The TTEntity object located at the first index.
+ @returns The TTEntity object located at the first index, or nil if the deck is empty.
  */
-- (TTEntity *) drawFromBottom;
+- (nullable TTEntity *) drawFromBottom;
 /**
  Draw a card at a random position and remove it from the deck.
  
- @returns The TTEntity object located at a random index.
+ @returns The TTEntity object located at a random index, or nil if the deck is empty.
  */
-- (TTEntity *) drawAtRandom;
+- (nullable TTEntity *) drawAtRandom;
 
 /**
  Draw an amount of cards (or as many possible) from the top and remove them from the deck.
  
  @returns An NSArray of TTEntity objects located at the last indexes.
  */
-- (NSArray *) drawFromTop: (NSUInteger) amount;
+- (nonnull NSArray *) drawFromTop: (NSUInteger) amount;
 /**
  Draw an amount of cards (or as many possible) from the bottom and remove them from the deck.
  
  @returns An NSArray of TTEntity objects located at the first indexes.
  */
-- (NSArray *) drawFromBottom: (NSUInteger) amount;
+- (nonnull NSArray *) drawFromBottom: (NSUInteger) amount;
 /**
  Draw an amount of cards (or as many possible) from random positions and remove them from the deck.
  
  @returns An NSArray of TTEntity objects located at random indexes.
  */
-- (NSArray *) drawAtRandom: (NSUInteger) amount;
+- (nonnull NSArray *) drawAtRandom: (NSUInteger) amount;
 
 /**
  Send a card to the bottom of the deck.
  
  @return YES if the card was moved, or was already at the bottom, NO otherwise.
  */
-- (BOOL) sendToBottom: (TTEntity *) card;
+- (BOOL) sendToBottom: (nonnull TTEntity *) card;
 /**
  Bring a card to the top of the deck.
  
  @return YES if the card was moved, or was already at the top, NO otherwise.
  */
-- (BOOL) bringToTop: (TTEntity *) card;
+- (BOOL) bringToTop: (nonnull TTEntity *) card;
 
 @end

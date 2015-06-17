@@ -16,6 +16,6 @@
 /**
  Create a representation.
  */
-+ (instancetype) representation;
++ (nonnull instancetype) representation;
 
 @end

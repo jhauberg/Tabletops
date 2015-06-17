@@ -16,7 +16,7 @@
 /**
  Get or set the amount to increment or decrement by.
  */
-@property (copy) NSNumber *step;
+@property (nullable, copy) NSNumber *step;
 
 /**
  Increment the value by @c step.
@@ -33,7 +33,7 @@
 
  @returns YES if the @c value was incremented, otherwise NO.
  */
-- (BOOL) incrementBy: (NSNumber *) amount;
+- (BOOL) incrementBy: (nonnull NSNumber *) amount;
 /**
  Decrement the value. 
  
@@ -49,6 +49,6 @@
 
  @returns YES if the @c value was decremented, otherwise NO.
  */
-- (BOOL) decrementBy: (NSNumber *) amount;
+- (BOOL) decrementBy: (nonnull NSNumber *) amount;
 
 @end
