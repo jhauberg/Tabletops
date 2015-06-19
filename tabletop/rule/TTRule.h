@@ -134,6 +134,31 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__non
               after: (nonnull TTRule *) rule;
 
 /**
+ Called before the rule attempts to resolve as a response to another rule being resolved.
+ 
+ Override this method in a subclass to implement behavior before a resolution attempt.
+ 
+ The default implementation of this method does nothing.
+ */
+- (void) willResolveBefore: (nonnull TTRule *) rule;
+/**
+ Called before the rule attempts to resolve.
+ 
+ Override this method in a subclass to implement behavior before a resolution attempt.
+ 
+ The default implementation of this method does nothing.
+ */
+- (void) willResolve;
+/**
+ Called before the rule attempts to resolve as a response to another rule having been resolved.
+ 
+ Override this method in a subclass to implement behavior before a resolution attempt.
+ 
+ The default implementation of this method does nothing.
+ */
+- (void) willResolveAfter: (nonnull TTRule *) rule;
+
+/**
  Resolve the rule.
  
  @returns YES if the rule was resolved, NO otherwise.
@@ -153,5 +178,32 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__non
  */
 - (BOOL) resolve: (nullable id) state
            after: (nonnull TTRule *) rule;
+
+/**
+ Called after the rule has been resolved (either successfully or not) as a response to another rule being resolved.
+ 
+ Override this method in a subclass to implement behavior after a resolution attempt.
+ 
+ The default implementation of this method does nothing.
+ */
+- (void) didResolve: (BOOL) successfully
+             before: (nonnull TTRule *) rule;
+/**
+ Called after the rule has been resolved (either successfully or not).
+ 
+ Override this method in a subclass to implement behavior after a resolution attempt.
+ 
+ The default implementation of this method does nothing.
+ */
+- (void) didResolve: (BOOL) successfully;
+/**
+ Called after the rule has been resolved (either successfully or not) as a response to another rule having been resolved.
+ 
+ Override this method in a subclass to implement behavior after a resolution attempt.
+ 
+ The default implementation of this method does nothing.
+ */
+- (void) didResolve: (BOOL) successfully
+              after: (nonnull TTRule *) rule;
 
 @end

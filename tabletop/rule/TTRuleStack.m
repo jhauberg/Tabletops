@@ -281,10 +281,14 @@
 #ifdef SHOW_RULE_RESOLUTION
             NSLog(@"  trying to resolve: %@ ← %@...", otherRule, rule);
 #endif
+            [otherRule willResolveBefore: rule];
+            
             if ([otherRule resolve: state before: rule]) {
 #ifdef SHOW_RULE_RESOLUTION
                 NSLog(@"    resolved ✓");
 #endif
+                [otherRule didResolve: YES
+                               before: rule];
                 
                 if (!otherRule.persistsWhenResolved) {
                     [self removeRule: otherRule];
@@ -302,6 +306,9 @@
 #ifdef SHOW_RULE_RESOLUTION
                 NSLog(@"    not resolved ✗");
 #endif
+                [otherRule didResolve: NO
+                               before: rule];
+                
                 if (otherRule.removedIfNotResolved) {
                     [self removeRule: otherRule];
 #ifdef SHOW_RULE_RESOLUTION
@@ -334,7 +341,6 @@
 #ifdef SHOW_RULE_RESOLUTION
         NSLog(@"processing: %@", rule);
 #endif
-        
         // determine if the rule can resolve with the current game state
         if ([rule canResolve: state]) {
             if (!self.isEmpty) {
@@ -345,11 +351,15 @@
 #ifdef SHOW_RULE_RESOLUTION
             NSLog(@"  trying to resolve: %@...", rule);
 #endif
+            [rule willResolve];
+            
             // then finally resolve the rule
             if ([rule resolve: state]) {
 #ifdef SHOW_RULE_RESOLUTION
                 NSLog(@"    resolved ✓");
 #endif
+                [rule didResolve: YES];
+                
                 if (!rule.persistsWhenResolved) {
                     [self removeRule: rule];
 #ifdef SHOW_RULE_RESOLUTION
@@ -366,6 +376,8 @@
 #ifdef SHOW_RULE_RESOLUTION
                 NSLog(@"    not resolved ✗");
 #endif
+                [rule didResolve: NO];
+                
                 if (rule.removedIfNotResolved) {
                     [self removeRule: rule];
 #ifdef SHOW_RULE_RESOLUTION
@@ -411,10 +423,15 @@
 #ifdef SHOW_RULE_RESOLUTION
             NSLog(@"  trying to resolve: %@ → %@...", rule, otherRule);
 #endif
+            [otherRule willResolveAfter: rule];
+            
             if ([otherRule resolve: state after: rule]) {
 #ifdef SHOW_RULE_RESOLUTION
                 NSLog(@"    resolved ✓");
 #endif
+                [otherRule didResolve: YES
+                                after: rule];
+                
                 if (!otherRule.persistsWhenResolved) {
                     [self removeRule: otherRule];
 #ifdef SHOW_RULE_RESOLUTION
@@ -431,6 +448,9 @@
 #ifdef SHOW_RULE_RESOLUTION
                 NSLog(@"    not resolved ✗");
 #endif
+                [otherRule didResolve: NO
+                                after: rule];
+                
                 if (otherRule.removedIfNotResolved) {
                     [self removeRule: otherRule];
 #ifdef SHOW_RULE_RESOLUTION

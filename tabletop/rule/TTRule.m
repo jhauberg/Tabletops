@@ -125,6 +125,18 @@
     return NO;
 }
 
+- (void) willResolveBefore: (TTRule *) rule {
+    // override in subclass to implement behavior before a resolution attempt
+}
+
+- (void) willResolve {
+    // override in subclass to implement behavior before a resolution attempt
+}
+
+- (void) willResolveAfter: (TTRule *) rule {
+    // override in subclass to implement behavior before a resolution attempt
+}
+
 - (BOOL) resolve: (id) state before: (TTRule *) rule {
     // override to implement behavior in subclass
     
@@ -156,6 +168,18 @@
 
     // by default, a rule always resolves successfully after another rule unless otherwise specified
     return YES;
+}
+
+- (void) didResolve: (BOOL) successfully before: (TTRule *) rule {
+    // override in subclass to implement behavior after a resolution attempt
+}
+
+- (void) didResolve: (BOOL) successfully {
+    // override in subclass to implement behavior after a resolution attempt
+}
+
+- (void) didResolve: (BOOL) successfully after: (TTRule *) rule {
+    // override in subclass to implement behavior after a resolution attempt
 }
 
 - (NSString *) description {
