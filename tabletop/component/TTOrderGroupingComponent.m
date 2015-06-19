@@ -8,10 +8,29 @@
 
 #import "TTOrderGroupingComponent.h"
 
+NSString* const kTTOrderGroupingComponentCurrentEntityKey = @"current_entity";
+NSString* const kTTOrderGroupingComponentStartingEntityKey = @"starting_entity";
+
 @implementation TTOrderGroupingComponent {
  @private
     TTEntity *_currentEntity;
     TTEntity *_startingEntity;
+}
+
+- (instancetype) initWithCoder: (NSCoder *) decoder {
+    if ((self = [super initWithCoder: decoder])) {
+        _currentEntity = [decoder decodeObjectForKey: kTTOrderGroupingComponentCurrentEntityKey];
+        _startingEntity = [decoder decodeObjectForKey: kTTOrderGroupingComponentStartingEntityKey];
+    }
+    
+    return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder {
+    [super encodeWithCoder: encoder];
+    
+    [encoder encodeObject: _currentEntity forKey: kTTOrderGroupingComponentCurrentEntityKey];
+    [encoder encodeObject: _startingEntity forKey: kTTOrderGroupingComponentStartingEntityKey];
 }
 
 - (TTEntity *) current {
