@@ -37,17 +37,23 @@
 /**
  Push a rule to the top of the stack. The rule will be resolved in response to another rule being resolved.
  
+ Note that if the rule already has a condition under which it should resolve, that condition will also be evaluated when determining whether or not the rule can resolve before another rule.
+ 
  @returns YES if the rule was added to the top of the stack, NO otherwise.
  */
 - (BOOL) push: (nonnull TTRule *) rule before: (nonnull TTRule *) otherRule;
 /**
  Push a rule to the top of the stack. The rule will be resolved in response to another rule with the given name being resolved.
  
+ Note that if the rule already has a condition under which it should resolve, that condition will also be evaluated when determining whether or not the rule can resolve before another rule.
+
  @returns YES if the rule was added to the top of the stack, NO otherwise.
  */
 - (BOOL) push: (nonnull TTRule *) rule beforeRuleNamed: (nonnull NSString *) otherRuleName;
 /**
  Push a rule to the top of the stack. The rule will be resolved in response to another rule having been resolved.
+ 
+ Note that if the rule already has a condition under which it should resolve, that condition will also be evaluated when determining whether or not the rule can resolve after another rule.
  
  @returns YES if the rule was added to the top of the stack, NO otherwise.
  */
@@ -55,6 +61,8 @@
 /**
  Push a rule to the top of the stack. The rule will be resolved in response to another rule with the given name having been resolved.
  
+ Note that if the rule already has a condition under which it should resolve, that condition will also be evaluated when determining whether or not the rule can resolve after another rule.
+
  @returns YES if the rule was added to the top of the stack, NO otherwise.
  */
 - (BOOL) push: (nonnull TTRule *) rule afterRuleNamed: (nonnull NSString *) otherRuleName;
