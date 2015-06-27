@@ -167,8 +167,16 @@ NSString* const kTTGameStateTableKey = @"table";
 }
 
 - (NSString *) description {
+    NSUInteger totalEntityCount = self.table.group.countIncludingChildGroupings + 1; // include table entity
+
     return [NSString stringWithFormat:
-            @"\nTable: %@", _table];
+            @"\nTable %@ (%@): %@",
+            self.version,
+            [NSString stringWithFormat:
+             @"%lu %@",
+             totalEntityCount,
+             totalEntityCount == 1 ? @"entity" : @"entities"],
+            self.table];
 }
 
 @end
