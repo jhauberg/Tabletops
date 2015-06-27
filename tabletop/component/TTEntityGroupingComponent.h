@@ -39,6 +39,10 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
  Get the number of entities in this group.
  */
 @property (readonly) NSUInteger count;
+/**
+ Get the number of entities in this group and in any child groupings.
+ */
+@property (readonly) NSUInteger countIncludingChildGroupings;
 
 /**
  The entities within this group.

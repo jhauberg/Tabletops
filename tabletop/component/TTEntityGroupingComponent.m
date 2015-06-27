@@ -64,6 +64,23 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return _entities != nil ? [_entities count] : 0;
 }
 
+- (NSUInteger) countIncludingChildGroupings {
+    NSUInteger count = [self count];
+
+    for (TTEntity *entity in _entities) {
+        NSArray *groupings = [entity getComponentsLikeType:
+                              [TTEntityGroupingComponent class]];
+
+        for (TTEntityGroupingComponent *grouping in groupings) {
+            if (grouping != self) {
+                count += grouping.countIncludingChildGroupings;
+            }
+        }
+    }
+
+    return count;
+}
+
 - (NSArray *) entities {
     return [NSArray arrayWithArray:
             _entities];
