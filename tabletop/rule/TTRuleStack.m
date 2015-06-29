@@ -331,6 +331,9 @@
 #endif
         return;
     }
+    
+    _requiresResolution = NO;
+    
 #ifdef SHOW_RULE_RESOLUTION
     NSLog(@"processing rules...");
 #endif
