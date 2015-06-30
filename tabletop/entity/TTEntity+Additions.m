@@ -29,6 +29,14 @@
                              }];
 }
 
+- (BOOL) isTaggedWithName: (NSString *) name {
+    return [self getTagWithName: name] != nil;
+}
+
+- (BOOL) hasPropertyWithName: (nonnull NSString *) name {
+    return [self getPropertyWithName: name] != nil;
+}
+
 - (BOOL) moveComponent: (TTEntityComponent *) component fromEntity: (TTEntity *) entity {
     return [entity moveComponent: component
                         toEntity: self];

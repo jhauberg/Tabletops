@@ -19,6 +19,9 @@
 - (nullable TTTagComponent *) getTagWithName: (nonnull NSString *) tag;
 - (nullable TTPropertyComponent *) getPropertyWithName: (nonnull NSString *) name;
 
+- (BOOL) isTaggedWithName: (nonnull NSString *) name;
+- (BOOL) hasPropertyWithName: (nonnull NSString *) name;
+
 - (BOOL) moveComponent: (nonnull TTEntityComponent *) component fromEntity: (nonnull TTEntity *) entity;
 - (BOOL) moveComponent: (nonnull TTEntityComponent *) component toEntity: (nonnull TTEntity *) entity;
 
