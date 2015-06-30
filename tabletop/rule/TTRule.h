@@ -23,47 +23,47 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__non
 /**
  Create an empty rule.
  */
-+ (nonnull TTRule *) rule;
++ (nonnull instancetype) rule;
 /**
  Create an empty rule with a name.
  */
-+ (nonnull TTRule *) ruleWithName: (nullable NSString *) name;
++ (nonnull instancetype) ruleWithName: (nullable NSString *) name;
 /**
  Create a rule that will be resolved in the appropriate state.
  */
-+ (nonnull TTRule *) ruleWithName: (nullable NSString *) name
-                     thatResolves: (nullable TTRuleResolutionConditionBlock) condition;
++ (nonnull instancetype) ruleWithName: (nullable NSString *) name
+                         thatResolves: (nullable TTRuleResolutionConditionBlock) condition;
 /**
  Create a rule that will be resolved on the next pass.
  */
-+ (nonnull TTRule *) ruleWithName: (nullable NSString *) name
-                   thatResolvesTo: (nullable TTRuleResolutionBlock) resolution;
++ (nonnull instancetype) ruleWithName: (nullable NSString *) name
+                       thatResolvesTo: (nullable TTRuleResolutionBlock) resolution;
 /**
  Create a rule that will be resolved in the appropriate state.
  */
-+ (nonnull TTRule *) ruleWithName: (nullable NSString *) name
-                     thatResolves: (nullable TTRuleResolutionConditionBlock) condition
-                               to: (nullable TTRuleResolutionBlock) resolution;
++ (nonnull instancetype) ruleWithName: (nullable NSString *) name
+                         thatResolves: (nullable TTRuleResolutionConditionBlock) condition
+                                   to: (nullable TTRuleResolutionBlock) resolution;
 /**
  Create a rule that will be resolved before another rule.
  */
-+ (nonnull TTRule *) ruleWithName: (nullable NSString *) name
-               thatResolvesBefore: (nullable TTRuleResolutionConditionResponseBlock) responseCondition
-                               to: (nullable TTRuleResolutionResponseBlock) resolution;
++ (nonnull instancetype) ruleWithName: (nullable NSString *) name
+                   thatResolvesBefore: (nullable TTRuleResolutionConditionResponseBlock) responseCondition
+                                   to: (nullable TTRuleResolutionResponseBlock) resolution;
 /**
  Create a rule that will be resolved before or after another rule.
  */
-+ (nonnull TTRule *) ruleWithName: (nullable NSString *) name
-               thatResolvesBefore: (nullable TTRuleResolutionConditionResponseBlock) responseConditionBefore
-                               to: (nullable TTRuleResolutionResponseBlock) resolutionBefore
-                          orAfter: (nullable TTRuleResolutionConditionResponseBlock) responseConditionAfter
-                               to: (nullable TTRuleResolutionResponseBlock) resolutionAfter;
++ (nonnull instancetype) ruleWithName: (nullable NSString *) name
+                   thatResolvesBefore: (nullable TTRuleResolutionConditionResponseBlock) responseConditionBefore
+                                   to: (nullable TTRuleResolutionResponseBlock) resolutionBefore
+                              orAfter: (nullable TTRuleResolutionConditionResponseBlock) responseConditionAfter
+                                   to: (nullable TTRuleResolutionResponseBlock) resolutionAfter;
 /**
  Create a rule that will be resolved after another rule.
  */
-+ (nonnull TTRule *) ruleWithName: (nullable NSString *) name
-                thatResolvesAfter: (nullable TTRuleResolutionConditionResponseBlock) responseCondition
-                               to: (nullable TTRuleResolutionResponseBlock) resolution;
++ (nonnull instancetype) ruleWithName: (nullable NSString *) name
+                    thatResolvesAfter: (nullable TTRuleResolutionConditionResponseBlock) responseCondition
+                                   to: (nullable TTRuleResolutionResponseBlock) resolution;
 
 /**
  Get or set the action that should occur when the rule is being resolved. The action should return YES if the rule was resolved, NO otherwise.
