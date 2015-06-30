@@ -10,46 +10,46 @@
 
 @implementation TTRule
 
-+ (TTRule *) rule {
++ (instancetype) rule {
     return [[[self class] alloc] init];
 }
 
-+ (TTRule *) ruleWithName: (NSString *) name {
++ (instancetype) ruleWithName: (NSString *) name {
     return [[[self class] alloc] initWithName: name];
 }
 
-+ (TTRule *) ruleWithName: (NSString *) name
-             thatResolves: (TTRuleResolutionConditionBlock) condition {
++ (instancetype) ruleWithName: (NSString *) name
+                 thatResolves: (TTRuleResolutionConditionBlock) condition {
     return [self ruleWithName: name
                  thatResolves: condition
             // default behavior for a rule is to always resolve successfully if condition is met
                            to: nil];
 }
 
-+ (TTRule *) ruleWithName: (NSString *) name
-           thatResolvesTo: (TTRuleResolutionBlock) resolution {
++ (instancetype) ruleWithName: (NSString *) name
+               thatResolvesTo: (TTRuleResolutionBlock) resolution {
     return [self ruleWithName: name
             // default behavior for a rule is to always be resolvable if no condition is specified
                  thatResolves: nil
                            to: resolution];
 }
 
-+ (TTRule *) ruleWithName: (NSString *) name
-             thatResolves: (TTRuleResolutionConditionBlock) condition
-                       to: (TTRuleResolutionBlock) resolution {
++ (instancetype) ruleWithName: (NSString *) name
+                 thatResolves: (TTRuleResolutionConditionBlock) condition
+                           to: (TTRuleResolutionBlock) resolution {
     TTRule *rule = [self ruleWithName: name];
-    
+
     if (rule) {
         rule.resolutionBlock = resolution;
         rule.resolutionConditionBlock = condition;
     }
-    
+
     return rule;
 }
 
-+ (TTRule *) ruleWithName: (NSString *) name
-       thatResolvesBefore: (TTRuleResolutionConditionResponseBlock) responseCondition
-                       to: (TTRuleResolutionResponseBlock) resolution {
++ (instancetype) ruleWithName: (NSString *) name
+           thatResolvesBefore: (TTRuleResolutionConditionResponseBlock) responseCondition
+                           to: (TTRuleResolutionResponseBlock) resolution {
     return [self ruleWithName: name
            thatResolvesBefore: responseCondition
                            to: resolution
@@ -57,9 +57,9 @@
                            to: nil];
 }
 
-+ (TTRule *) ruleWithName: (NSString *) name
-        thatResolvesAfter: (TTRuleResolutionConditionResponseBlock) responseCondition
-                       to: (TTRuleResolutionResponseBlock) resolution {
++ (instancetype) ruleWithName: (NSString *) name
+            thatResolvesAfter: (TTRuleResolutionConditionResponseBlock) responseCondition
+                           to: (TTRuleResolutionResponseBlock) resolution {
     return [self ruleWithName: name
            thatResolvesBefore: nil
                            to: nil
@@ -67,13 +67,13 @@
                            to: resolution];
 }
 
-+ (TTRule *) ruleWithName: (NSString *) name
-       thatResolvesBefore: (TTRuleResolutionConditionResponseBlock) responseConditionBefore
-                       to: (TTRuleResolutionResponseBlock) resolutionBefore
-                  orAfter: (TTRuleResolutionConditionResponseBlock) responseConditionAfter
-                       to: (TTRuleResolutionResponseBlock) resolutionAfter {
++ (instancetype) ruleWithName: (NSString *) name
+           thatResolvesBefore: (TTRuleResolutionConditionResponseBlock) responseConditionBefore
+                           to: (TTRuleResolutionResponseBlock) resolutionBefore
+                      orAfter: (TTRuleResolutionConditionResponseBlock) responseConditionAfter
+                           to: (TTRuleResolutionResponseBlock) resolutionAfter {
     TTRule *rule = [self ruleWithName: name];
-    
+
     if (rule) {
         rule.resolutionConditionBeforeBlock = responseConditionBefore;
         rule.resolutionBeforeBlock = resolutionBefore;
@@ -139,7 +139,11 @@
 
 - (BOOL) resolve: (id) state before: (TTRule *) rule {
     // override to implement behavior in subclass
-    
+
+    if (![self resolve: state]) {
+        return NO;
+    }
+
     if (self.resolutionBeforeBlock) {
         return self.resolutionBeforeBlock(state, rule);
     }
@@ -161,6 +165,10 @@
 
 - (BOOL) resolve: (id) state after: (TTRule *) rule {
     // override to implement behavior in subclass
+
+    if (![self resolve: state]) {
+        return NO;
+    }
 
     if (self.resolutionAfterBlock) {
         return self.resolutionAfterBlock(state, rule);
