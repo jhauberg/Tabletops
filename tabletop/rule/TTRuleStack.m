@@ -108,13 +108,12 @@
 
 - (TTRuleResolutionConditionResponseBlock) conditionForRule: (TTRule *) rule thatRespondsToRule: (TTRule *) triggerRule {
     return ^BOOL(id state, TTRule *anotherRule) {
-        BOOL shouldTriggerInResponseToRule = anotherRule == triggerRule || [anotherRule isEqual: triggerRule] || [anotherRule.name isEqualToString: triggerRule.name];
+        BOOL shouldTriggerInResponseToRule =
+            anotherRule == triggerRule ||
+            [anotherRule isEqual: triggerRule] ||
+            [anotherRule.name isEqualToString: triggerRule.name];
 
         if (shouldTriggerInResponseToRule) {
-            if (rule.resolutionConditionBlock) {
-                return rule.resolutionConditionBlock(state);
-            }
-
             return YES;
         }
 
@@ -124,35 +123,16 @@
 
 - (BOOL) push: (TTRule *) rule before: (TTRule *) otherRule {
     if ([self push: rule]) {
-        __weak typeof(rule) weakRule = rule;
-
-#ifdef SHOW_RUNTIME_WARNINGS
-        if (rule.resolutionConditionBlock) {
-            // what might happen is that a call to resolveWithState: will cause the rule to try to resolve if its condition is met even if it is *not* before the other rule
-            // the rule will still be triggered for resolution before the other rule, if its condition is met at that time
-            NSLog(@" *** Rule '%@' that should trigger before '%@' already has a resolution condition. It might resolve unexpectedly.", rule.name, otherRule.name);
+        if (!rule.resolutionConditionBlock) {
+            // rules default to be resolvable, so add a block that says otherwise
+            rule.resolutionConditionBlock = ^BOOL(id state) {
+                return NO;
+            };
         }
-#endif
 
         rule.resolutionConditionBeforeBlock = [self conditionForRule: rule
                                                   thatRespondsToRule: otherRule];
-        
-        if (!rule.resolutionBeforeBlock) {
-            if (rule.resolutionBlock) {
-                rule.resolutionBeforeBlock = ^BOOL(id state, TTRule *anotherRule) {
-                    if (weakRule.resolutionBlock) {
-                        return weakRule.resolutionBlock(state);
-                    }
-                    
-                    return NO;
-                };
-            } else {
-                rule.resolutionBeforeBlock = ^BOOL(id state, TTRule *anotherRule) {
-                    return YES;
-                };
-            }
-        }
-        
+
         return YES;
     }
     
@@ -167,34 +147,15 @@
 
 - (BOOL) push: (TTRule *) rule after: (TTRule *) otherRule {
     if ([self push: rule]) {
-        __weak typeof(rule) weakRule = rule;
-
-#ifdef SHOW_RUNTIME_WARNINGS
-        if (rule.resolutionConditionBlock) {
-            // what might happen is that a call to resolveWithState: will cause the rule to try to resolve if its condition is met even if it is *not* after the other rule
-            // the rule will still be triggered for resolution before the other rule, if its condition is met at that time
-            NSLog(@" *** Rule '%@' that should trigger after '%@' already has a resolution condition. It might resolve unexpectedly.", rule.name, otherRule.name);
+        if (!rule.resolutionConditionBlock) {
+            // rules default to be resolvable, so add a block that says otherwise
+            rule.resolutionConditionBlock = ^BOOL(id state) {
+                return NO;
+            };
         }
-#endif
 
         rule.resolutionConditionAfterBlock = [self conditionForRule: rule
                                                  thatRespondsToRule: otherRule];
-        
-        if (!rule.resolutionAfterBlock) {
-            if (rule.resolutionBlock) {
-                rule.resolutionAfterBlock = ^BOOL(id state, TTRule *anotherRule) {
-                    if (weakRule.resolutionBlock) {
-                        return weakRule.resolutionBlock(state);
-                    }
-                    
-                    return NO;
-                };
-            } else {
-                rule.resolutionAfterBlock = ^BOOL(id state, TTRule *anotherRule) {
-                    return YES;
-                };
-            }
-        }
         
         return YES;
     }
@@ -396,7 +357,6 @@
     }
     
     if (_requiresResolution) {
-        _requiresResolution = NO;
 #ifdef SHOW_RULE_RESOLUTION
         NSLog(@"process from top ⟲");
 #endif
