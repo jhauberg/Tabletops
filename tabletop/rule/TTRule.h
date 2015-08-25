@@ -12,8 +12,8 @@
 
 typedef BOOL (^TTRuleResolutionBlock)(id __nullable state);
 typedef BOOL (^TTRuleResolutionConditionBlock)(id __nullable state);
-typedef BOOL (^TTRuleResolutionConditionResponseBlock)(id __nullable state, TTRule *__nonnull otherRule);
-typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nonnull otherRule);
+typedef BOOL (^TTRuleResolutionConditionResponseBlock)(id __nullable state, TTRule *__nullable otherRule);
+typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nullable otherRule);
 
 /**
  Represents a rule that can be resolved given the appropriate state or context.
@@ -95,7 +95,7 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__non
 /**
  Get or set whether or not the rule should persist after being resolved.
  
- A rule that persists will stay in the rules stack after it has been resolved successfully.
+ A rule that persists will stay in the rule stack after it has been resolved successfully.
  */
 @property (assign) BOOL persistsWhenResolved;
 

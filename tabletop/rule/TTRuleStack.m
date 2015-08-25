@@ -107,6 +107,15 @@
 }
 
 - (TTRuleResolutionConditionResponseBlock) conditionForRule: (TTRule *) rule thatRespondsToRule: (TTRule *) triggerRule {
+    TTRuleResolutionConditionBlock existingCondition = rule.resolutionConditionBlock;
+
+    // rules default to be resolvable, so to prevent the rule from resolving out of order when meant to trigger
+    // in response to another rule being resolved/having been resolved, add a block that says it cannot be resolved
+    // if it doesn't happen as a before/after response
+    rule.resolutionConditionBlock = ^BOOL(id state) {
+        return NO;
+    };
+
     return ^BOOL(id state, TTRule *anotherRule) {
         BOOL shouldTriggerInResponseToRule =
             anotherRule == triggerRule ||
@@ -114,6 +123,10 @@
             [anotherRule.name isEqualToString: triggerRule.name];
 
         if (shouldTriggerInResponseToRule) {
+            if (existingCondition) {
+                return existingCondition(state);
+            }
+
             return YES;
         }
 
@@ -123,13 +136,6 @@
 
 - (BOOL) push: (TTRule *) rule before: (TTRule *) otherRule {
     if ([self push: rule]) {
-        if (!rule.resolutionConditionBlock) {
-            // rules default to be resolvable, so add a block that says otherwise
-            rule.resolutionConditionBlock = ^BOOL(id state) {
-                return NO;
-            };
-        }
-
         rule.resolutionConditionBeforeBlock = [self conditionForRule: rule
                                                   thatRespondsToRule: otherRule];
 
@@ -147,16 +153,9 @@
 
 - (BOOL) push: (TTRule *) rule after: (TTRule *) otherRule {
     if ([self push: rule]) {
-        if (!rule.resolutionConditionBlock) {
-            // rules default to be resolvable, so add a block that says otherwise
-            rule.resolutionConditionBlock = ^BOOL(id state) {
-                return NO;
-            };
-        }
-
         rule.resolutionConditionAfterBlock = [self conditionForRule: rule
                                                  thatRespondsToRule: otherRule];
-        
+
         return YES;
     }
     
