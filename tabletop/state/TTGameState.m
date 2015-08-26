@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Jacob Hauberg Hansen. All rights reserved.
 //
 
+#import "Tabletops.h"
+
 #import "TTGameState.h"
 
 #import "TTEntityGroupingComponent+Additions.h"
@@ -115,7 +117,7 @@ NSString* const kTTGameStateTableKey = @"table";
                     error: &error];
         
         if (error) {
-            NSLog(@"error: %@", error);
+            TTDebugWarning(@"error: %@", error);
             
             return NO;
         }
@@ -130,7 +132,7 @@ NSString* const kTTGameStateTableKey = @"table";
     id entity = [self.table.group getEntityWithTag: tag];
     
     if (!entity) {
-        NSLog(@" *** Could not find any entity tagged with '%@'", tag);
+        TTDebugWarning(@"Could not find any entity tagged with '%@'", tag);
     }
     
     return entity;
@@ -140,7 +142,7 @@ NSString* const kTTGameStateTableKey = @"table";
     id entity = [self.table.group getEntityWithName: name];
     
     if (!entity) {
-        NSLog(@" *** Could not find any entity named '%@'", name);
+        TTDebugWarning(@"Could not find any entity named '%@'", name);
     }
     
     return entity;
@@ -150,7 +152,7 @@ NSString* const kTTGameStateTableKey = @"table";
     NSArray *entities = [self.table.group getEntitiesWithTag: tag];
     
     if (!entities || [entities count] == 0) {
-        NSLog(@" *** Could not find any entities tagged with '%@'", tag);
+        TTDebugWarning(@"Could not find any entities tagged with '%@'", tag);
     }
     
     return entities;
@@ -160,7 +162,7 @@ NSString* const kTTGameStateTableKey = @"table";
     NSArray *entities = [self.table.group getEntitiesWithName: name];
     
     if (!entities || [entities count] == 0) {
-        NSLog(@" *** Could not find any entities named '%@'", name);
+        TTDebugWarning(@"Could not find any entities named '%@'", name);
     }
     
     return entities;

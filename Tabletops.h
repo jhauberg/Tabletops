@@ -12,11 +12,19 @@
 #ifdef DEBUG
   #ifndef SHOW_RUNTIME_WARNINGS
     #define SHOW_RUNTIME_WARNINGS 1
-    #define SHOW_ALL_RUNTIME_WARNINGS 0
+    #define SHOW_ALL_RUNTIME_WARNINGS 1
   #endif
-  #ifndef SHOW_RULE_RESOLUTION
-    #define SHOW_RULE_RESOLUTION 1
+
+  #define TTDebug(format, ...) NSLog((@"" format), ##__VA_ARGS__)
+
+  #if SHOW_RUNTIME_WARNINGS
+    #define TTDebugWarning(format, ...) NSLog((@" *** " format), ##__VA_ARGS__)
+  #else
+    #define TTDebugWarning(...)
   #endif
+#else
+  #define TTDebug(...)
+  #define TTDebugWarning(...)
 #endif
 
 #import <Foundation/Foundation.h>
