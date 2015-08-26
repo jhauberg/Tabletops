@@ -16,7 +16,7 @@ typedef BOOL (^TTRuleResolutionConditionResponseBlock)(id __nullable state, TTRu
 typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nullable otherRule);
 
 /**
- Represents a rule that can be resolved given the appropriate state or context.
+ Represents a rule that resolves given a state or context that satisfies a condition.
  */
 @interface TTRule : NSObject
 
@@ -25,33 +25,33 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nul
  */
 + (nonnull instancetype) rule;
 /**
- Create an empty rule with a name.
+ Create a rule that will always resolve.
  */
 + (nonnull instancetype) ruleWithName: (nullable NSString *) name;
 /**
- Create a rule that will be resolved in the appropriate state.
- */
-+ (nonnull instancetype) ruleWithName: (nullable NSString *) name
-                         thatResolves: (nullable TTRuleResolutionConditionBlock) condition;
-/**
- Create a rule that will be resolved on the next pass.
+ Create a rule that will always resolve.
  */
 + (nonnull instancetype) ruleWithName: (nullable NSString *) name
                        thatResolvesTo: (nullable TTRuleResolutionBlock) resolution;
 /**
- Create a rule that will be resolved in the appropriate state.
+ Create a rule that will resolve when a condition is satisfied.
+ */
++ (nonnull instancetype) ruleWithName: (nullable NSString *) name
+                         thatResolves: (nullable TTRuleResolutionConditionBlock) condition;
+/**
+ Create a rule that will resolve when a condition is satisfied.
  */
 + (nonnull instancetype) ruleWithName: (nullable NSString *) name
                          thatResolves: (nullable TTRuleResolutionConditionBlock) condition
                                    to: (nullable TTRuleResolutionBlock) resolution;
 /**
- Create a rule that will be resolved before another rule.
+ Create a rule that will resolve before another rule if a condition is satisfied.
  */
 + (nonnull instancetype) ruleWithName: (nullable NSString *) name
                    thatResolvesBefore: (nullable TTRuleResolutionConditionResponseBlock) responseCondition
                                    to: (nullable TTRuleResolutionResponseBlock) resolution;
 /**
- Create a rule that will be resolved before or after another rule.
+ Create a rule that will resolve before or after another rule if a condition is satisfied.
  */
 + (nonnull instancetype) ruleWithName: (nullable NSString *) name
                    thatResolvesBefore: (nullable TTRuleResolutionConditionResponseBlock) responseConditionBefore
@@ -59,14 +59,14 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nul
                               orAfter: (nullable TTRuleResolutionConditionResponseBlock) responseConditionAfter
                                    to: (nullable TTRuleResolutionResponseBlock) resolutionAfter;
 /**
- Create a rule that will be resolved after another rule.
+ Create a rule that will resolve after another rule if a condition is satisfied.
  */
 + (nonnull instancetype) ruleWithName: (nullable NSString *) name
                     thatResolvesAfter: (nullable TTRuleResolutionConditionResponseBlock) responseCondition
                                    to: (nullable TTRuleResolutionResponseBlock) resolution;
 
 /**
- Get or set the action that should occur when the rule is being resolved. The action should return YES if the rule was resolved, NO otherwise.
+ Get or set the action that should occur when the rule resolves. The action should return YES if the rule was resolved successfully, NO otherwise.
  */
 @property (nullable, strong) TTRuleResolutionBlock resolutionBlock;
 /**
@@ -84,7 +84,7 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nul
 @property (nullable, strong) TTRuleResolutionConditionResponseBlock resolutionConditionAfterBlock;
 
 /**
- Get or set the action that should occur when the rule is being resolved as a response to another rule being resolved. The action should return YES if the rule was resolved, NO otherwise.
+ Get or set the action that should occur when the rule resolves as a response to another rule being resolved. The action should return YES if the rule was resolved, NO otherwise.
  */
 @property (nullable, strong) TTRuleResolutionResponseBlock resolutionBeforeBlock;
 /**
@@ -93,14 +93,14 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nul
 @property (nullable, strong) TTRuleResolutionResponseBlock resolutionAfterBlock;
 
 /**
- Get or set whether or not the rule should persist after being resolved.
+ Get or set whether or not the rule should persist @a after having been resolved.
  
  A rule that persists will stay in the rule stack after it has been resolved successfully.
  */
 @property (assign) BOOL persistsWhenResolved;
 
 /**
- Get or set whether or not the rule should be removed after not resolving successfully.
+ Get or set whether or not the rule should be removed after @a not resolving successfully.
  */
 @property (assign) BOOL removedIfNotResolved;
 
