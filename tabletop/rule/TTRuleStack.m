@@ -74,9 +74,8 @@
     }
     
     if (![_rules containsObject: rule]) {
-#ifdef SHOW_RUNTIME_WARNINGS
-        NSLog(@" *** Rule '%@' is not in the rule stack. It was not removed.", rule);
-#endif
+        TTDebugWarning(@"Rule '%@' is not in the rule stack. It was not removed.", rule);
+
         return NO;
     }
 
@@ -91,9 +90,8 @@
     }
     
     if ([_rules containsObject: rule]) {
-#ifdef SHOW_RUNTIME_WARNINGS
-        NSLog(@" *** Rule '%@' is already in the rule stack. It was not added.", rule);
-#endif
+        TTDebugWarning(@"Rule '%@' is already in the rule stack. It was not added.", rule);
+        
         return NO;
     }
 
@@ -238,23 +236,21 @@
                 [self resolveWithState: state
                                 before: otherRule];
             }
-#ifdef SHOW_RULE_RESOLUTION
-            NSLog(@"  trying to resolve: %@ ← %@...", otherRule, rule);
-#endif
+
+            TTDebug(@"  trying to resolve: %@ ← %@...", otherRule, rule);
+
             [otherRule willResolveBefore: rule];
             
             if ([otherRule resolve: state before: rule]) {
-#ifdef SHOW_RULE_RESOLUTION
-                NSLog(@"    resolved ✓");
-#endif
+                TTDebug(@"    resolved ✓");
+
                 [otherRule didResolve: YES
                                before: rule];
                 
                 if (!otherRule.persistsWhenResolved) {
                     [self removeRule: otherRule];
-#ifdef SHOW_RULE_RESOLUTION
-                    NSLog(@"      and removed");
-#endif
+
+                    TTDebug(@"      and removed");
                 }
                 
                 if (!self.isEmpty) {
@@ -263,17 +259,15 @@
                                      after: otherRule];
                 }
             } else {
-#ifdef SHOW_RULE_RESOLUTION
-                NSLog(@"    not resolved ✗");
-#endif
+                TTDebug(@"    not resolved ✗");
+
                 [otherRule didResolve: NO
                                before: rule];
                 
                 if (otherRule.removedIfNotResolved) {
                     [self removeRule: otherRule];
-#ifdef SHOW_RULE_RESOLUTION
-                     NSLog(@"      but removed");
-#endif
+
+                     TTDebug(@"      but removed");
                 }
             }
         }
@@ -286,24 +280,21 @@
 
 - (void) resolveWithState: (id) state {
     if (self.isEmpty) {
-#ifdef SHOW_RULE_RESOLUTION
-        NSLog(@"no rules to process");
-#endif
+        TTDebug(@"no rules to process");
+
         return;
     }
     
     _requiresResolution = NO;
-    
-#ifdef SHOW_RULE_RESOLUTION
-    NSLog(@"processing rules...");
-#endif
+
+    TTDebug(@"processing rules...");
+
     NSArray *rules = [NSArray arrayWithArray: _rules];
 
     // go through all processable rules, from top to bottom; first in, last out.
     for (TTRule *rule in [rules reverseObjectEnumerator]) {
-#ifdef SHOW_RULE_RESOLUTION
-        NSLog(@"processing: %@", rule);
-#endif
+        TTDebug(@"processing: %@", rule);
+
         // determine if the rule can resolve with the current game state
         if ([rule canResolve: state]) {
             if (!self.isEmpty) {
@@ -311,23 +302,21 @@
                 [self resolveWithState: state
                                 before: rule];
             }
-#ifdef SHOW_RULE_RESOLUTION
-            NSLog(@"  trying to resolve: %@...", rule);
-#endif
+
+            TTDebug(@"  trying to resolve: %@...", rule);
+
             [rule willResolve];
             
             // then finally resolve the rule
             if ([rule resolve: state]) {
-#ifdef SHOW_RULE_RESOLUTION
-                NSLog(@"    resolved ✓");
-#endif
+                TTDebug(@"    resolved ✓");
+
                 [rule didResolve: YES];
                 
                 if (!rule.persistsWhenResolved) {
                     [self removeRule: rule];
-#ifdef SHOW_RULE_RESOLUTION
-                    NSLog(@"      and removed");
-#endif
+
+                    TTDebug(@"      and removed");
                 }
                 
                 if (!self.isEmpty) {
@@ -336,16 +325,14 @@
                                      after: rule];
                 }
             } else {
-#ifdef SHOW_RULE_RESOLUTION
-                NSLog(@"    not resolved ✗");
-#endif
+                TTDebug(@"    not resolved ✗");
+
                 [rule didResolve: NO];
                 
                 if (rule.removedIfNotResolved) {
                     [self removeRule: rule];
-#ifdef SHOW_RULE_RESOLUTION
-                    NSLog(@"      but removed");
-#endif
+
+                    TTDebug(@"      but removed");
                 }
             }
         }
@@ -356,9 +343,8 @@
     }
     
     if (_requiresResolution) {
-#ifdef SHOW_RULE_RESOLUTION
-        NSLog(@"process from top ⟲");
-#endif
+        TTDebug(@"process from top ⟲");
+
         // rules should be processed again from top to bottom, processing newest ones first
         [self resolveWithState: state];
     }
@@ -382,23 +368,21 @@
                 [self resolveWithState: state
                                 before: otherRule];
             }
-#ifdef SHOW_RULE_RESOLUTION
-            NSLog(@"  trying to resolve: %@ → %@...", rule, otherRule);
-#endif
+
+            TTDebug(@"  trying to resolve: %@ → %@...", rule, otherRule);
+
             [otherRule willResolveAfter: rule];
             
             if ([otherRule resolve: state after: rule]) {
-#ifdef SHOW_RULE_RESOLUTION
-                NSLog(@"    resolved ✓");
-#endif
+                TTDebug(@"    resolved ✓");
+
                 [otherRule didResolve: YES
                                 after: rule];
                 
                 if (!otherRule.persistsWhenResolved) {
                     [self removeRule: otherRule];
-#ifdef SHOW_RULE_RESOLUTION
-                    NSLog(@"      and removed");
-#endif
+
+                    TTDebug(@"      and removed");
                 }
                 
                 if (!self.isEmpty) {
@@ -407,17 +391,15 @@
                                      after: otherRule];
                 }
             } else {
-#ifdef SHOW_RULE_RESOLUTION
-                NSLog(@"    not resolved ✗");
-#endif
+                TTDebug(@"    not resolved ✗");
+
                 [otherRule didResolve: NO
                                 after: rule];
                 
                 if (otherRule.removedIfNotResolved) {
                     [self removeRule: otherRule];
-#ifdef SHOW_RULE_RESOLUTION
-                    NSLog(@"      but removed");
-#endif
+
+                    TTDebug(@"      but removed");
                 }
             }
         }

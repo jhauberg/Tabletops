@@ -92,27 +92,23 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     }
     
     if ([_entities containsObject: entity]) {
-#if SHOW_RUNTIME_WARNINGS
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-        NSLog(@" *** Attempted to add '<%@: %p>%@' to '<%@: %p>' which already had this entity grouped. The entity was not added.", entity.class, entity, [entity performSelector: @selector(nameOrNothing)], self.class, self);
+        TTDebugWarning(@"Attempted to add '<%@: %p>%@' to '<%@: %p>' which already had this entity grouped. The entity was not added.", entity.class, entity, [entity performSelector: @selector(nameOrNothing)], self.class, self);
 #pragma clang diagnostic pop
-#endif
         return NO;
     }
 
-#ifdef SHOW_RUNTIME_WARNINGS
-  #if SHOW_ALL_RUNTIME_WARNINGS
+#ifdef DEBUG
     for (TTEntity *existingEntity in _entities) {
         if ([existingEntity isLike: entity]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-            NSLog(@" *** Adding '<%@: %p>%@' to '<%@: %p>' which already has a similar entity ('<%@: %p>%@') grouped. The entity was added anyway. Are you sure this was intended?", entity.class, entity, [entity performSelector: @selector(nameOrNothing)], self.class, self, existingEntity.class, existingEntity, [existingEntity performSelector: @selector(nameOrNothing)]);
+            TTDebugWarning(@"Adding '<%@: %p>%@' to '<%@: %p>' which already has a similar entity ('<%@: %p>%@') grouped. The entity was added anyway. Are you sure this was intended?", entity.class, entity, [entity performSelector: @selector(nameOrNothing)], self.class, self, existingEntity.class, existingEntity, [existingEntity performSelector: @selector(nameOrNothing)]);
 #pragma clang diagnostic pop
             break;
         }
     }
-  #endif
 #endif
 
     [_entities addObject: entity];

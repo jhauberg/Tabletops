@@ -8,6 +8,8 @@
 
 #import "TTCounterComponent.h"
 
+#import "Tabletops.h"
+
 NSString* const kTTCounterComponentStepKey = @"step";
 
 @implementation TTCounterComponent
@@ -30,7 +32,7 @@ NSString* const kTTCounterComponentStepKey = @"step";
     if (amount) {
 #ifdef DEBUG
         if ([amount doubleValue] < 0) {
-            NSLog(@" *** Attempting to increment '%@' by a negative value ('%@') will cause a decrement instead. Are you sure this is intended?", self, amount);
+            TTDebugWarning(@"Attempting to increment '%@' by a negative value ('%@') will cause a decrement instead. Are you sure this is intended?", self, amount);
         }
 #endif
         if (!self.numberValue) {
@@ -50,7 +52,7 @@ NSString* const kTTCounterComponentStepKey = @"step";
     if (amount) {
 #ifdef DEBUG
         if ([amount doubleValue] < 0) {
-            NSLog(@" *** Attempting to decrement '%@' by a negative value ('%@') causes an increment instead. Are you sure this is intended?", self, amount);
+            TTDebugWarning(@" *** Attempting to decrement '%@' by a negative value ('%@') causes an increment instead. Are you sure this is intended?", self, amount);
         }
 #endif
         if (!self.numberValue) {
