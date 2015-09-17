@@ -18,7 +18,7 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
  */
 @interface TTEntityGroupingComponent : TTEntityComponent {
  @protected
-    NSMutableArray *_entities;
+    NSMutableArray<__kindof TTEntity *> *_entities;
 }
 
 /**
@@ -28,7 +28,7 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 /**
  Create a new group with a set of entities.
  */
-+ (nonnull instancetype) groupWithEntities: (nonnull NSArray *) entities;
++ (nonnull instancetype) groupWithEntities: (nonnull NSArray<__kindof TTEntity *> *) entities;
 
 /**
  Determine whether there's any entities in this group.
@@ -47,14 +47,14 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 /**
  The entities within this group.
  */
-@property (nonnull, readonly) NSArray *entities;
+@property (nonnull, readonly) NSArray<__kindof TTEntity *> *entities;
 
 /**
  Create a new group with a set of entities initially added.
  
  @returns a TTEntityGroupingComponent object with a set of entities already grouped.
  */
-- (nonnull instancetype) initWithEntities: (nonnull NSArray *) entities;
+- (nonnull instancetype) initWithEntities: (nonnull NSArray<__kindof TTEntity *> *) entities;
 
 /**
  Add an entity to the group.
@@ -67,13 +67,13 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
  
  @returns YES if the entities were added, otherwise NO.
  */
-- (BOOL) addEntities: (nonnull NSArray *) entities;
+- (BOOL) addEntities: (nonnull NSArray<__kindof TTEntity *> *) entities;
 /**
  Add multiple entities to the group, if specified, as an atomic operation.
  
  @returns YES if the entities were added, otherwise NO. If specified as an atomic operation, only returns YES if *all* the entities were added.
  */
-- (BOOL) addEntities: (nonnull NSArray *) entities atomically: (BOOL) atomically;
+- (BOOL) addEntities: (nonnull NSArray<__kindof TTEntity *> *) entities atomically: (BOOL) atomically;
 
 /**
  Remove an entity from the group.
@@ -86,13 +86,13 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
  
  @returns YES if the entities were removed, otherwise NO.
  */
-- (BOOL) removeEntities: (nonnull NSArray *) entities;
+- (BOOL) removeEntities: (nonnull NSArray<__kindof TTEntity *> *) entities;
 /**
  Remove multiple entities from the group.
  
  @returns YES if the entities were removed, otherwise NO. If specified as an atomic operation, only returns YES if *all* the entities were removed.
  */
-- (BOOL) removeEntities: (nonnull NSArray *) entities atomically: (BOOL) atomically;
+- (BOOL) removeEntities: (nonnull NSArray<__kindof TTEntity *> *) entities atomically: (BOOL) atomically;
 /**
  Remove all entities from the group.
  
@@ -117,13 +117,13 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 
  @returns YES if the entities were moved, otherwise NO.
  */
-- (BOOL) moveEntities: (nonnull NSArray *) entities fromGroup: (nonnull TTEntityGroupingComponent *) group;
+- (BOOL) moveEntities: (nonnull NSArray<__kindof TTEntity *> *) entities fromGroup: (nonnull TTEntityGroupingComponent *) group;
 /**
  Move multiple entities from a group to the receiver group, if specified, as an atomic operation.
 
  @returns YES if the entities were moved, otherwise NO.
  */
-- (BOOL) moveEntities: (nonnull NSArray *) entities fromGroup: (nonnull TTEntityGroupingComponent *) group atomically: (BOOL) atomically;
+- (BOOL) moveEntities: (nonnull NSArray<__kindof TTEntity *> *) entities fromGroup: (nonnull TTEntityGroupingComponent *) group atomically: (BOOL) atomically;
 /**
  Move all entities from a group to the receiver group.
 
@@ -136,13 +136,13 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 
  @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
  */
-- (nonnull NSArray *) getEntitiesMatching: (nonnull TTEntityConditional) condition;
+- (nonnull NSArray<__kindof TTEntity *> *) getEntitiesMatching: (nonnull TTEntityConditional) condition;
 /**
  Get all entities that matches a condition. If specified, also searches through child groups.
 
  @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
  */
-- (nonnull NSArray *) getEntitiesMatching: (nonnull TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper;
+- (nonnull NSArray<__kindof TTEntity *> *) getEntitiesMatching: (nonnull TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper;
 
 /**
  Sort entities by the default sorting behavior for the group.
@@ -159,6 +159,6 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 /**
  Sort entities by specific properties, in order. Must be property components.
  */
-- (void) sortByComponents: (nonnull NSArray *) propertyComponents;
+- (void) sortByComponents: (nonnull NSArray<__kindof TTPropertyComponent *> *) propertyComponents;
 
 @end

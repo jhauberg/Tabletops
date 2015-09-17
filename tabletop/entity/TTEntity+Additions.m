@@ -10,7 +10,7 @@
 
 @implementation TTEntity (Additions)
 
-- (NSArray *) getAllTags {
+- (NSArray<__kindof TTTagComponent *> *) getAllTags {
     return [self getComponentsLikeType:
             [TTTagComponent class]];
 }

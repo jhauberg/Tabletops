@@ -10,8 +10,8 @@
 
 @implementation TTDeckGroupingComponent (Additions)
 
-- (NSArray *) drawUsingSelector: (SEL) selector until: (TTEntityConditional) condition inclusive: (BOOL) inclusive {
-    NSMutableArray *cards = [[NSMutableArray alloc] init];
+- (NSArray<__kindof TTEntity *> *) drawUsingSelector: (SEL) selector until: (TTEntityConditional) condition inclusive: (BOOL) inclusive {
+    NSMutableArray<__kindof TTEntity *> *cards = [[NSMutableArray alloc] init];
     
     if ([self respondsToSelector: selector]) {
         TTEntity *card = nil;
@@ -38,23 +38,23 @@
             cards];
 }
 
-- (NSArray *) drawFromBottomUntil: (TTEntityConditional) condition {
+- (NSArray<__kindof TTEntity *> *) drawFromBottomUntil: (TTEntityConditional) condition {
     return [self drawFromBottomUntil: condition
                            inclusive: YES];
 }
 
-- (NSArray *) drawFromBottomUntil: (TTEntityConditional) condition inclusive: (BOOL) inclusive {
+- (NSArray<__kindof TTEntity *> *) drawFromBottomUntil: (TTEntityConditional) condition inclusive: (BOOL) inclusive {
     return [self drawUsingSelector: @selector(drawFromBottom)
                              until: condition
                          inclusive: inclusive];
 }
 
-- (NSArray *) drawFromTopUntil: (TTEntityConditional) condition {
+- (NSArray<__kindof TTEntity *> *) drawFromTopUntil: (TTEntityConditional) condition {
     return [self drawFromTopUntil: condition
                         inclusive: YES];
 }
 
-- (NSArray *) drawFromTopUntil: (TTEntityConditional) condition inclusive: (BOOL) inclusive {
+- (NSArray<__kindof TTEntity *> *) drawFromTopUntil: (TTEntityConditional) condition inclusive: (BOOL) inclusive {
     return [self drawUsingSelector: @selector(drawFromTop)
                              until: condition
                          inclusive: inclusive];

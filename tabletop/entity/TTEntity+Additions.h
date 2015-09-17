@@ -14,7 +14,7 @@
 
 @interface TTEntity (Additions)
 
-- (nonnull NSArray *) getAllTags;
+- (nonnull NSArray<__kindof TTTagComponent *> *) getAllTags;
 
 - (nullable TTTagComponent *) getTagWithName: (nonnull NSString *) tag;
 - (nullable TTPropertyComponent *) getPropertyWithName: (nonnull NSString *) name;

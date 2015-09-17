@@ -79,19 +79,19 @@
  
  @returns An NSArray of TTEntity objects located at the last indexes.
  */
-- (nonnull NSArray *) drawFromTop: (NSUInteger) amount;
+- (nonnull NSArray<__kindof TTEntity *> *) drawFromTop: (NSUInteger) amount;
 /**
  Draw an amount of cards (or as many possible) from the bottom and remove them from the deck.
  
  @returns An NSArray of TTEntity objects located at the first indexes.
  */
-- (nonnull NSArray *) drawFromBottom: (NSUInteger) amount;
+- (nonnull NSArray<__kindof TTEntity *> *) drawFromBottom: (NSUInteger) amount;
 /**
  Draw an amount of cards (or as many possible) from random positions and remove them from the deck.
  
  @returns An NSArray of TTEntity objects located at random indexes.
  */
-- (nonnull NSArray *) drawAtRandom: (NSUInteger) amount;
+- (nonnull NSArray<__kindof TTEntity *> *) drawAtRandom: (NSUInteger) amount;
 
 /**
  Send a card to the bottom of the deck.

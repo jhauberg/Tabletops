@@ -148,8 +148,8 @@ NSString* const kTTGameStateTableKey = @"table";
     return entity;
 }
 
-- (NSArray *) findEntitiesTagged: (NSString *) tag {
-    NSArray *entities = [self.table.group getEntitiesWithTag: tag];
+- (NSArray<__kindof TTEntity *> *) findEntitiesTagged: (NSString *) tag {
+    NSArray<__kindof TTEntity *> *entities = [self.table.group getEntitiesWithTag: tag];
     
     if (!entities || [entities count] == 0) {
         TTDebugWarning(@"Could not find any entities tagged with '%@'", tag);
@@ -158,8 +158,8 @@ NSString* const kTTGameStateTableKey = @"table";
     return entities;
 }
 
-- (NSArray *) findEntitiesNamed: (NSString *) name {
-    NSArray *entities = [self.table.group getEntitiesWithName: name];
+- (NSArray<__kindof TTEntity *> *) findEntitiesNamed: (NSString *) name {
+    NSArray<__kindof TTEntity *> *entities = [self.table.group getEntitiesWithName: name];
     
     if (!entities || [entities count] == 0) {
         TTDebugWarning(@"Could not find any entities named '%@'", name);

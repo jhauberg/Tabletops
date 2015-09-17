@@ -167,8 +167,8 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
             self.bottom];
 }
 
-- (NSArray *) drawFromTop: (NSUInteger) amount {
-    NSMutableArray *cards = [[NSMutableArray alloc] init];
+- (NSArray<__kindof TTEntity *> *) drawFromTop: (NSUInteger) amount {
+    NSMutableArray<__kindof TTEntity *> *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
         TTEntity *card = [self draw:
@@ -186,8 +186,8 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
             cards];
 }
 
-- (NSArray *) drawFromBottom: (NSUInteger) amount {
-    NSMutableArray *cards = [[NSMutableArray alloc] init];
+- (NSArray<__kindof TTEntity *> *) drawFromBottom: (NSUInteger) amount {
+    NSMutableArray<__kindof TTEntity *> *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
         TTEntity *card = [self draw:
@@ -210,8 +210,8 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
             arc4random_uniform((uint32_t)[_entities count])];
 }
 
-- (NSArray *) drawAtRandom: (NSUInteger) amount {
-    NSMutableArray *cards = [[NSMutableArray alloc] init];
+- (NSArray<__kindof TTEntity *> *) drawAtRandom: (NSUInteger) amount {
+    NSMutableArray<__kindof TTEntity *> *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
         TTEntity *card = [self drawAtRandom];

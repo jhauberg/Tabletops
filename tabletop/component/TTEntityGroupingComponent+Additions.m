@@ -37,7 +37,7 @@
     return entity;
 }
 
-- (NSArray *) getEntitiesWithName: (NSString *) name {
+- (NSArray<__kindof TTEntity *> *) getEntitiesWithName: (NSString *) name {
     return [self getEntitiesMatching:
             ^BOOL(TTEntity *entity) {
                 if ([entity.name isEqualToString: name]) {
@@ -48,10 +48,11 @@
             } inChildGroupings: YES];
 }
 
-- (NSArray *) getEntitiesWithTag: (NSString *) tag {
+- (NSArray<__kindof TTEntity *> *) getEntitiesWithTag: (NSString *) tag {
     return [self getEntitiesMatching:
             ^BOOL(TTEntity *entity) {
-                NSArray *tags = [entity getComponentsLikeType: [TTTagComponent class]];
+                NSArray *tags = [entity getComponentsLikeType:
+                                 [TTTagComponent class]];
 
                 for (TTTagComponent *tagComponent in tags) {
                     if ([tagComponent.tag isEqualToString: tag]) {

@@ -15,7 +15,7 @@ NSString* const kTTEntityNameKey = @"name";
 
 @implementation TTEntity {
  @private
-    NSMutableArray *_components;
+    NSMutableArray<__kindof TTEntityComponent *> *_components;
 }
 
 #pragma mark Convenience
@@ -24,7 +24,7 @@ NSString* const kTTEntityNameKey = @"name";
     return [[[self class] alloc] init];
 }
 
-+ (instancetype) entityWithComponents: (NSArray *) components {
++ (instancetype) entityWithComponents: (NSArray<__kindof TTEntityComponent *> *) components {
     return [[[self class] alloc] initWithComponents: components];
 }
 
@@ -33,7 +33,7 @@ NSString* const kTTEntityNameKey = @"name";
                  andComponents: nil];
 }
 
-+ (instancetype) entityWithName: (NSString *) name andComponents: (NSArray *) components {
++ (instancetype) entityWithName: (NSString *) name andComponents: (NSArray<__kindof TTEntityComponent *> *) components {
     TTEntity *entity = [self entityWithComponents: components];
 
     if (entity) {
@@ -48,14 +48,14 @@ NSString* const kTTEntityNameKey = @"name";
 - (instancetype) init {
     if ((self = [super init])) {
         if (!_components) {
-            _components = [[NSMutableArray alloc] init];
+            _components = [[NSMutableArray<__kindof TTEntityComponent *> alloc] init];
         }
     }
     
     return self;
 }
 
-- (instancetype) initWithComponents: (NSArray *) components {
+- (instancetype) initWithComponents: (NSArray<__kindof TTEntityComponent *> *) components {
     if ((self = [self init])) {
         [self addComponents: components];
     }
@@ -89,7 +89,7 @@ NSString* const kTTEntityNameKey = @"name";
 
 #pragma mark Component
 
-- (NSArray *) components {
+- (NSArray<__kindof TTEntityComponent *> *) components {
     return [NSArray arrayWithArray:
             _components];
 }
@@ -120,13 +120,13 @@ NSString* const kTTEntityNameKey = @"name";
     return YES;
 }
 
-- (BOOL) addComponents: (NSArray *) components {
+- (BOOL) addComponents: (NSArray<__kindof TTEntityComponent *> *) components {
     return [self addComponents: components
                     atomically: YES];
 }
 
-- (BOOL) addComponents: (NSArray *) components atomically: (BOOL) atomically {
-    NSMutableArray *addedComponents = atomically ? [[NSMutableArray alloc] init] : nil;
+- (BOOL) addComponents: (NSArray<__kindof TTEntityComponent *> *) components atomically: (BOOL) atomically {
+    NSMutableArray<__kindof TTEntityComponent *> *addedComponents = atomically ? [[NSMutableArray alloc] init] : nil;
     
     for (TTEntityComponent *component in components) {
         if ([self addComponent: component] && atomically) {
@@ -160,13 +160,13 @@ NSString* const kTTEntityNameKey = @"name";
     return YES;
 }
 
-- (BOOL) removeComponents: (NSArray *) components {
+- (BOOL) removeComponents: (NSArray<__kindof TTEntityComponent *> *) components {
     return [self removeComponents: components
                        atomically: YES];
 }
 
-- (BOOL) removeComponents: (NSArray *) components atomically: (BOOL) atomically {
-    NSMutableArray *removedComponents = atomically ? [[NSMutableArray alloc] init] : nil;
+- (BOOL) removeComponents: (NSArray<__kindof TTEntityComponent *> *) components atomically: (BOOL) atomically {
+    NSMutableArray<__kindof TTEntityComponent *> *removedComponents = atomically ? [[NSMutableArray alloc] init] : nil;
     
     for (TTEntityComponent *component in components) {
         if ([self removeComponent: component] && atomically) {
@@ -242,8 +242,8 @@ NSString* const kTTEntityNameKey = @"name";
     return nil;
 }
 
-- (NSArray *) getComponentsOfType: (Class) type {
-    NSMutableArray *components = [[NSMutableArray alloc] init];
+- (NSArray<__kindof TTEntityComponent *> *) getComponentsOfType: (Class) type {
+    NSMutableArray<__kindof TTEntityComponent *> *components = [[NSMutableArray alloc] init];
 
     for (TTEntityComponent *component in _components) {
         if (component.class == type) {
@@ -256,8 +256,8 @@ NSString* const kTTEntityNameKey = @"name";
             components];
 }
 
-- (NSArray *) getComponentsLikeType: (Class) type {
-    NSMutableArray *components = [[NSMutableArray alloc] init];
+- (NSArray<__kindof TTEntityComponent *> *) getComponentsLikeType: (Class) type {
+    NSMutableArray<__kindof TTEntityComponent *> *components = [[NSMutableArray alloc] init];
 
     for (TTEntityComponent *component in _components) {
         if ([component isKindOfClass: type]) {
@@ -294,7 +294,7 @@ NSString* const kTTEntityNameKey = @"name";
  */
 - (BOOL) isLike: (TTEntity *) otherEntity {
     if ([otherEntity isKindOfClass: [self class]]) {
-        NSArray *otherComponents = otherEntity.components;
+        NSArray<__kindof TTEntityComponent *> *otherComponents = otherEntity.components;
 
         if (_components.count == otherComponents.count) {
             for (NSUInteger i = 0; i < otherComponents.count; i++) {

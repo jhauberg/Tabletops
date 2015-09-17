@@ -26,7 +26,7 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent * __nonnull compo
 
  @returns A TTEntity object with components already added.
  */
-+ (nonnull instancetype) entityWithComponents: (nullable NSArray *) components;
++ (nonnull instancetype) entityWithComponents: (nullable NSArray<__kindof TTEntityComponent *> *) components;
 /**
  Create a new entity with a name.
 
@@ -38,12 +38,12 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent * __nonnull compo
 
  @returns A TTEntity object with components already added.
  */
-+ (nonnull instancetype) entityWithName: (nullable NSString *) name andComponents: (nullable NSArray *) components;
++ (nonnull instancetype) entityWithName: (nullable NSString *) name andComponents: (nullable NSArray<__kindof TTEntityComponent *> *) components;
 
 /**
  Get the components that are currently assigned to the entity.
  */
-@property (nonnull, readonly) NSArray *components;
+@property (nonnull, readonly) NSArray<__kindof TTEntityComponent *> *components;
 
 /**
  Get or set the name for this entity.
@@ -63,7 +63,7 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent * __nonnull compo
  
  @returns A TTEntity object with components already added.
  */
-- (nonnull instancetype) initWithComponents: (nullable NSArray *) components;
+- (nonnull instancetype) initWithComponents: (nullable NSArray<__kindof TTEntityComponent *> *) components;
 
 /**
  Add a component to the entity.
@@ -76,13 +76,13 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent * __nonnull compo
  
  @returns YES if the components were added, otherwise NO.
  */
-- (BOOL) addComponents: (nonnull NSArray *) components;
+- (BOOL) addComponents: (nonnull NSArray<__kindof TTEntityComponent *> *) components;
 /**
  Add multiple components to the entity.
  
  @returns YES if the components were added, otherwise NO. If specified as an atomic operation, only returns YES if *all* components were added.
  */
-- (BOOL) addComponents: (nonnull NSArray *) components atomically: (BOOL) atomically;
+- (BOOL) addComponents: (nonnull NSArray<__kindof TTEntityComponent *> *) components atomically: (BOOL) atomically;
 
 /**
  Remove a component from the entity.
@@ -95,13 +95,13 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent * __nonnull compo
  
  @returns YES if the components were removed, otherwise NO.
  */
-- (BOOL) removeComponents: (nonnull NSArray *) components;
+- (BOOL) removeComponents: (nonnull NSArray<__kindof TTEntityComponent *> *) components;
 /**
  Remove multiple components from the entity.
  
  @returns YES if the components were removed, otherwise NO. If specified as an atomic operation, only returns YES if *all* components were removed.
  */
-- (BOOL) removeComponents: (nonnull NSArray *) components atomically: (BOOL) atomically;
+- (BOOL) removeComponents: (nonnull NSArray<__kindof TTEntityComponent *> *) components atomically: (BOOL) atomically;
 /**
  Remove all components from the entity.
  
@@ -153,14 +153,14 @@ typedef BOOL (^TTEntityComponentConditional)(TTEntityComponent * __nonnull compo
 
  @returns An NSArray of TTEntityComponent objects that matches the specified type and is already added to the entity. An empty NSArray otherwise.
  */
-- (nonnull NSArray *) getComponentsOfType: (nonnull Class) type;
+- (nonnull NSArray<__kindof TTEntityComponent *> *) getComponentsOfType: (nonnull Class) type;
 
 /**
  Get all components of a given type (or subclass of).
 
  @returns An NSArray of TTEntityComponent objects that matches the specified type (or a subclass of) and is already added to the entity. An empty NSArray otherwise.
  */
-- (nonnull NSArray *) getComponentsLikeType: (nonnull Class) type;
+- (nonnull NSArray<__kindof TTEntityComponent *> *) getComponentsLikeType: (nonnull Class) type;
 
 /**
  Determine whether an entity is similar to the receiver.

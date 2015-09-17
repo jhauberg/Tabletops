@@ -81,7 +81,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return count;
 }
 
-- (NSArray *) entities {
+- (NSArray<__kindof TTEntity *> *) entities {
     return [NSArray arrayWithArray:
             _entities];
 }
@@ -116,13 +116,13 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return YES;
 }
 
-- (BOOL) addEntities: (NSArray *) entities {
+- (BOOL) addEntities: (NSArray<__kindof TTEntity *> *) entities {
     return [self addEntities: entities
                   atomically: YES];
 }
 
-- (BOOL) addEntities: (NSArray *) entities atomically: (BOOL) atomically {
-    NSMutableArray *addedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
+- (BOOL) addEntities: (NSArray<__kindof TTEntity *> *) entities atomically: (BOOL) atomically {
+    NSMutableArray<__kindof TTEntity *> *addedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
     
     for (TTEntity *entity in entities) {
         if ([self addEntity: entity] && atomically) {
@@ -159,8 +159,8 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
                      atomically: YES];
 }
 
-- (BOOL) removeEntities: (NSArray *) entities atomically: (BOOL) atomically {
-    NSMutableArray *removedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
+- (BOOL) removeEntities: (NSArray<__kindof TTEntity *> *) entities atomically: (BOOL) atomically {
+    NSMutableArray<__kindof TTEntity *> *removedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
     
     for (TTEntity *entity in [entities reverseObjectEnumerator]) {
         if ([self removeEntity: entity] && atomically) {
@@ -213,13 +213,13 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return NO;
 }
 
-- (BOOL) moveEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group {
+- (BOOL) moveEntities: (NSArray<__kindof TTEntity *> *) entities fromGroup: (TTEntityGroupingComponent *) group {
     return [self moveEntities: entities
                     fromGroup: group
                    atomically: YES];
 }
 
-- (BOOL) moveEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically {
+- (BOOL) moveEntities: (NSArray<__kindof TTEntity *> *) entities fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically {
     for (TTEntity *entity in entities) {
         if (![self moveEntity: entity
                     fromGroup: group
@@ -238,13 +238,13 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
                     fromGroup: group];
 }
 
-- (NSArray *) getEntitiesMatching: (TTEntityConditional) condition {
+- (NSArray<__kindof TTEntity *> *) getEntitiesMatching: (TTEntityConditional) condition {
     return [self getEntitiesMatching: condition
                     inChildGroupings: NO];
 }
 
-- (NSArray *) getEntitiesMatching: (TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper {
-    NSMutableArray *entities = [[NSMutableArray alloc] init];
+- (NSArray<__kindof TTEntity *> *) getEntitiesMatching: (TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper {
+    NSMutableArray<__kindof TTEntity *> *entities = [[NSMutableArray alloc] init];
 
     for (TTEntity *entity in _entities) {
         if (condition && condition(entity)) {
@@ -309,7 +309,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
      @[ propertyComponent ]];
 }
 
-- (void) sortByComponents: (NSArray *) propertyComponents {
+- (void) sortByComponents: (NSArray<__kindof TTPropertyComponent *> *) propertyComponents {
     [_entities sortUsingComparator:
      ^NSComparisonResult(id left, id right) {
          for (TTPropertyComponent *propertyComponent in propertyComponents) {

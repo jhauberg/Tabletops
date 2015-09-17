@@ -13,7 +13,7 @@
 - (nullable id) getEntityWithTag: (nonnull NSString *) tag;
 - (nullable id) getEntityWithName: (nonnull NSString *) name;
 
-- (nonnull NSArray *) getEntitiesWithTag: (nonnull NSString *) tag;
-- (nonnull NSArray *) getEntitiesWithName: (nonnull NSString *) name;
+- (nonnull NSArray<__kindof TTEntity *> *) getEntitiesWithTag: (nonnull NSString *) tag;
+- (nonnull NSArray<__kindof TTEntity *> *) getEntitiesWithName: (nonnull NSString *) name;
 
 @end

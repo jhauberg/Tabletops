@@ -70,10 +70,10 @@
 /**
  Find all entities on the table with a given tag. This searches through the entire table and all its groups.
  */
-- (nonnull NSArray *) findEntitiesTagged: (nonnull NSString *) tag;
+- (nonnull NSArray<__kindof TTEntity *> *) findEntitiesTagged: (nonnull NSString *) tag;
 /**
  Find all entities on the table with a given name. This searches through the entire table and all its groups.
  */
-- (nonnull NSArray *) findEntitiesNamed: (nonnull NSString *) name;
+- (nonnull NSArray<__kindof TTEntity *> *) findEntitiesNamed: (nonnull NSString *) name;
 
 @end
