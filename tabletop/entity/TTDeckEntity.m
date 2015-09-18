@@ -12,7 +12,7 @@ NSString* const kTTDeckEntityGroupKey = @"group";
 
 @implementation TTDeckEntity {
  @private
-    TTDeckGroupingComponent *_group;
+    TTDeckGroupingComponent<TTCardEntity *> *_group;
 }
 
 - (instancetype) initWithCoder: (NSCoder *) decoder {
@@ -37,7 +37,7 @@ NSString* const kTTDeckEntityGroupKey = @"group";
     return [super removeComponent: component];
 }
 
-- (TTDeckGroupingComponent *) group {
+- (TTDeckGroupingComponent<TTCardEntity *> *) group {
     if (!_group) {
         _group = [TTDeckGroupingComponent group];
 

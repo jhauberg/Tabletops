@@ -8,6 +8,7 @@
 
 #import "TTEntity.h"
 #import "TTDeckGroupingComponent.h"
+#import "TTCardEntity.h"
 
 /**
  Provides a common implementation of a deck entity.
@@ -19,6 +20,6 @@
  
  Note that this component is only created and assigned when first used.
  */
-@property (readonly) TTDeckGroupingComponent *group;
+@property (readonly) TTDeckGroupingComponent<TTCardEntity *> *group;
 
 @end

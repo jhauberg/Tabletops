@@ -81,12 +81,12 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return count;
 }
 
-- (NSArray<__kindof TTEntity *> *) entities {
+- (NSArray *) entities {
     return [NSArray arrayWithArray:
             _entities];
 }
 
-- (BOOL) addEntity: (TTEntity *) entity {
+- (BOOL) addEntity: (id) entity {
     if (!entity) {
         return NO;
     }
@@ -94,7 +94,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     if ([_entities containsObject: entity]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-        TTDebugWarning(@"Attempted to add '<%@: %p>%@' to '<%@: %p>' which already had this entity grouped. The entity was not added.", entity.class, entity, [entity performSelector: @selector(nameOrNothing)], self.class, self);
+        TTDebugWarning(@"Attempted to add '<%@: %p>%@' to '<%@: %p>' which already had this entity grouped. The entity was not added.", [entity class], entity, [entity performSelector: @selector(nameOrNothing)], self.class, self);
 #pragma clang diagnostic pop
         return NO;
     }
@@ -104,7 +104,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
         if ([existingEntity isLike: entity]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-            TTDebugWarning(@"Adding '<%@: %p>%@' to '<%@: %p>' which already has a similar entity ('<%@: %p>%@') grouped. The entity was added anyway. Are you sure this was intended?", entity.class, entity, [entity performSelector: @selector(nameOrNothing)], self.class, self, existingEntity.class, existingEntity, [existingEntity performSelector: @selector(nameOrNothing)]);
+            TTDebugWarning(@"Adding '<%@: %p>%@' to '<%@: %p>' which already has a similar entity ('<%@: %p>%@') grouped. The entity was added anyway. Are you sure this was intended?", [entity class], entity, [entity performSelector: @selector(nameOrNothing)], self.class, self, existingEntity.class, existingEntity, [existingEntity performSelector: @selector(nameOrNothing)]);
 #pragma clang diagnostic pop
             break;
         }
@@ -116,13 +116,13 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return YES;
 }
 
-- (BOOL) addEntities: (NSArray<__kindof TTEntity *> *) entities {
+- (BOOL) addEntities: (NSArray *) entities {
     return [self addEntities: entities
                   atomically: YES];
 }
 
-- (BOOL) addEntities: (NSArray<__kindof TTEntity *> *) entities atomically: (BOOL) atomically {
-    NSMutableArray<__kindof TTEntity *> *addedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
+- (BOOL) addEntities: (NSArray *) entities atomically: (BOOL) atomically {
+    NSMutableArray *addedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
     
     for (TTEntity *entity in entities) {
         if ([self addEntity: entity] && atomically) {
@@ -140,7 +140,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return YES;
 }
 
-- (BOOL) removeEntity: (TTEntity *) entity {
+- (BOOL) removeEntity: (id) entity {
     if (!entity) {
         return NO;
     }
@@ -160,7 +160,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
 }
 
 - (BOOL) removeEntities: (NSArray<__kindof TTEntity *> *) entities atomically: (BOOL) atomically {
-    NSMutableArray<__kindof TTEntity *> *removedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
+    NSMutableArray *removedEntities = atomically ? [[NSMutableArray alloc] init] : nil;
     
     for (TTEntity *entity in [entities reverseObjectEnumerator]) {
         if ([self removeEntity: entity] && atomically) {
@@ -183,13 +183,13 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
                      atomically: YES];
 }
 
-- (BOOL) moveEntity: (TTEntity *) entity fromGroup: (TTEntityGroupingComponent *) group {
+- (BOOL) moveEntity: (id) entity fromGroup: (TTEntityGroupingComponent *) group {
     return [self moveEntity: entity
                   fromGroup: group
                  atomically: YES];
 }
 
-- (BOOL) moveEntity: (TTEntity *) entity fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically {
+- (BOOL) moveEntity: (id) entity fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically {
     if (!entity) {
         return NO;
     }
@@ -213,13 +213,13 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     return NO;
 }
 
-- (BOOL) moveEntities: (NSArray<__kindof TTEntity *> *) entities fromGroup: (TTEntityGroupingComponent *) group {
+- (BOOL) moveEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group {
     return [self moveEntities: entities
                     fromGroup: group
                    atomically: YES];
 }
 
-- (BOOL) moveEntities: (NSArray<__kindof TTEntity *> *) entities fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically {
+- (BOOL) moveEntities: (NSArray *) entities fromGroup: (TTEntityGroupingComponent *) group atomically: (BOOL) atomically {
     for (TTEntity *entity in entities) {
         if (![self moveEntity: entity
                     fromGroup: group
@@ -238,13 +238,13 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
                     fromGroup: group];
 }
 
-- (NSArray<__kindof TTEntity *> *) getEntitiesMatching: (TTEntityConditional) condition {
+- (NSArray *) getEntitiesMatching: (TTEntityConditional) condition {
     return [self getEntitiesMatching: condition
                     inChildGroupings: NO];
 }
 
-- (NSArray<__kindof TTEntity *> *) getEntitiesMatching: (TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper {
-    NSMutableArray<__kindof TTEntity *> *entities = [[NSMutableArray alloc] init];
+- (NSArray *) getEntitiesMatching: (TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper {
+    NSMutableArray *entities = [[NSMutableArray alloc] init];
 
     for (TTEntity *entity in _entities) {
         if (condition && condition(entity)) {
@@ -309,13 +309,13 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
      @[ propertyComponent ]];
 }
 
-- (void) sortByComponents: (NSArray<__kindof TTPropertyComponent *> *) propertyComponents {
+- (void) sortByComponents: (NSArray *) propertyComponents {
     [_entities sortUsingComparator:
      ^NSComparisonResult(id left, id right) {
+         TTEntity *entity = (TTEntity *)left;
+         TTEntity *otherEntity = (TTEntity *)right;
+         
          for (TTPropertyComponent *propertyComponent in propertyComponents) {
-             TTEntity *entity = (TTEntity *)left;
-             TTEntity *otherEntity = (TTEntity *)right;
-            
              TTPropertyComponent *property = [entity getComponentLike: propertyComponent];
              TTPropertyComponent *otherProperty = [otherEntity getComponentLike: propertyComponent];
             

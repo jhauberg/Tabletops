@@ -40,7 +40,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     [encoder encodeBool: _drawsFaceUp forKey: kTTDeckGroupingComponentDrawsFaceUpKey];
 }
 
-- (BOOL) addEntity: (TTEntity *) entity {
+- (BOOL) addEntity: (id) entity {
     BOOL result = [super addEntity: entity];
     
     TTCardRepresentation *cardRepresentation = [entity getComponentOfType:
@@ -113,15 +113,15 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return comparisonResult;
 }
 
-- (TTEntity *) top {
+- (id) top {
     return [_entities lastObject];
 }
 
-- (TTEntity *) bottom {
+- (id) bottom {
     return [_entities firstObject];
 }
 
-- (TTEntity *) drawAtIndex: (NSUInteger) index {
+- (id) drawAtIndex: (NSUInteger) index {
     TTEntity *card = nil;
     
     if (index < _entities.count) {
@@ -144,7 +144,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return card;
 }
 
-- (TTEntity *) draw: (TTEntity *) card {
+- (id) draw: (TTEntity *) card {
     if (card) {
         NSUInteger indexOfCard = [_entities indexOfObject: card];
         
@@ -157,18 +157,46 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return nil;
 }
 
-- (TTEntity *) drawFromTop {
+- (NSArray *) drawUsingSelector: (SEL) selector until: (TTEntityConditional) condition inclusive: (BOOL) inclusive {
+    NSMutableArray *cards = [[NSMutableArray alloc] init];
+    
+    if ([self respondsToSelector: selector]) {
+        TTEntity *card = nil;
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        while (!condition((card = [self performSelector: selector]))) {
+#pragma clang diagnostic pop
+            if (!card) {
+                break;
+            }
+            
+            [cards addObject:
+             card];
+        }
+        
+        if (card && inclusive) {
+            [cards addObject:
+             card];
+        }
+    }
+    
+    return [NSArray arrayWithArray:
+            cards];
+}
+
+- (id) drawFromTop {
     return [self draw:
             self.top];
 }
 
-- (TTEntity *) drawFromBottom {
+- (id) drawFromBottom {
     return [self draw:
             self.bottom];
 }
 
-- (NSArray<__kindof TTEntity *> *) drawFromTop: (NSUInteger) amount {
-    NSMutableArray<__kindof TTEntity *> *cards = [[NSMutableArray alloc] init];
+- (NSArray *) drawFromTop: (NSUInteger) amount {
+    NSMutableArray *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
         TTEntity *card = [self draw:
@@ -186,8 +214,19 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
             cards];
 }
 
-- (NSArray<__kindof TTEntity *> *) drawFromBottom: (NSUInteger) amount {
-    NSMutableArray<__kindof TTEntity *> *cards = [[NSMutableArray alloc] init];
+- (NSArray *) drawFromTopUntil: (TTEntityConditional) condition {
+    return [self drawFromTopUntil: condition
+                        inclusive: YES];
+}
+
+- (NSArray *) drawFromTopUntil: (TTEntityConditional) condition inclusive: (BOOL) inclusive {
+    return [self drawUsingSelector: @selector(drawFromTop)
+                             until: condition
+                         inclusive: inclusive];
+}
+
+- (NSArray *) drawFromBottom: (NSUInteger) amount {
+    NSMutableArray *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
         TTEntity *card = [self draw:
@@ -205,13 +244,24 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
             cards];
 }
 
-- (TTEntity *) drawAtRandom {
+- (NSArray *) drawFromBottomUntil: (TTEntityConditional) condition {
+    return [self drawFromBottomUntil: condition
+                           inclusive: YES];
+}
+
+- (NSArray *) drawFromBottomUntil: (TTEntityConditional) condition inclusive: (BOOL) inclusive {
+    return [self drawUsingSelector: @selector(drawFromBottom)
+                             until: condition
+                         inclusive: inclusive];
+}
+
+- (id) drawAtRandom {
     return [self drawAtIndex:
             arc4random_uniform((uint32_t)[_entities count])];
 }
 
-- (NSArray<__kindof TTEntity *> *) drawAtRandom: (NSUInteger) amount {
-    NSMutableArray<__kindof TTEntity *> *cards = [[NSMutableArray alloc] init];
+- (NSArray *) drawAtRandom: (NSUInteger) amount {
+    NSMutableArray *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
         TTEntity *card = [self drawAtRandom];
@@ -228,7 +278,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
             cards];
 }
 
-- (BOOL) addEntityToBottom: (TTEntity *) entity {
+- (BOOL) addEntityToBottom: (id) entity {
     if ([self addEntity: entity]) {
         return [self sendToBottom: entity];
     }
@@ -236,7 +286,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return NO;
 }
 
-- (BOOL) sendToBottom: (TTEntity *) card {
+- (BOOL) sendToBottom: (id) card {
     if (!card) {
         return NO;
     }
@@ -252,7 +302,7 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
     return YES;
 }
 
-- (BOOL) bringToTop: (TTEntity *) card {
+- (BOOL) bringToTop: (id) card {
     if (!card) {
         return NO;
     }
