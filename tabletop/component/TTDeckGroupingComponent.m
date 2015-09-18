@@ -268,12 +268,12 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
 }
 
 - (void) shuffle {
-    if ([_entities count] > 0) {
-        for (NSUInteger i = 0; i < [_entities count]; ++i) {
-            NSUInteger remainingCount = [_entities count] - i;
-            NSUInteger exchangeIndex = i + arc4random_uniform((uint32_t)remainingCount);
+    if ([_entities count] > 1) {
+        for (NSUInteger currentIndex = 0; currentIndex < [_entities count]; ++currentIndex) {
+            NSUInteger remainingCount = [_entities count] - currentIndex;
+            NSUInteger exchangeIndex = currentIndex + arc4random_uniform((uint32_t)remainingCount);
             
-            [_entities exchangeObjectAtIndex: i
+            [_entities exchangeObjectAtIndex: currentIndex
                            withObjectAtIndex: exchangeIndex];
         }
     }
