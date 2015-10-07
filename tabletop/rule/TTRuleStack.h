@@ -26,7 +26,7 @@
 /**
  Get the rules in order of resolution; i.e. from top to bottom, so that the first element is the top (and most recently pushed) rule.
  */
-@property (nonnull, readonly) NSArray *rules;
+@property (nonnull, readonly) NSArray<__kindof TTRule *> *rules;
 
 /**
  Push a rule to the top of the stack.
@@ -74,7 +74,7 @@
 
  @returns YES if all the rules were added to the stack, NO otherwise.
  */
-- (BOOL) pushRules: (nonnull NSArray *) rules;
+- (BOOL) pushRules: (nonnull NSArray<__kindof TTRule *> *) rules;
 
 /**
  Push rules to the top of the stack in an ordered sequence, so that the first rule in the sequence will be resolved first.
@@ -83,7 +83,7 @@
  
  @returns YES if all the rules were added to the stack, NO otherwise.
  */
-- (BOOL) pushRuleSequence: (nonnull NSArray *) ruleSequence;
+- (BOOL) pushRuleSequence: (nonnull NSArray<__kindof TTRule *> *) ruleSequence;
 /**
  Push rules to the top of the stack in an ordered sequence, so that the first rule in the sequence will be resolved first. The rules will be resolved in response to another rule being resolved.
  
@@ -91,7 +91,7 @@
  
  @returns YES if all the rules were added to the stack, NO otherwise.
  */
-- (BOOL) pushRuleSequence: (nonnull NSArray *) ruleSequence before: (nonnull TTRule *) otherRule;
+- (BOOL) pushRuleSequence: (nonnull NSArray<__kindof TTRule *> *) ruleSequence before: (nonnull TTRule *) otherRule;
 /**
  Push rules to the top of the stack in an ordered sequence, so that the first rule in the sequence will be resolved first. The rules will be resolved in response to another rule having been resolved.
  
@@ -99,7 +99,7 @@
  
  @returns YES if all the rules were added to the stack, NO otherwise.
  */
-- (BOOL) pushRuleSequence: (nonnull NSArray *) ruleSequence after: (nonnull TTRule *) otherRule;
+- (BOOL) pushRuleSequence: (nonnull NSArray<__kindof TTRule *> *) ruleSequence after: (nonnull TTRule *) otherRule;
 
 /**
  Remove all rules from the stack.
@@ -112,7 +112,7 @@
 /**
  Remove all rules except the specified @c rules from the stack.
  */
-- (void) removeAllRulesExceptRules: (nonnull NSArray *) rules;
+- (void) removeAllRulesExceptRules: (nonnull NSArray<__kindof TTRule *> *) rules;
 
 /**
  Process and attempt to resolve all rules in the stack.

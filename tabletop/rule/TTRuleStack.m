@@ -12,7 +12,7 @@
 
 @implementation TTRuleStack {
  @private
-    NSMutableArray *_rules;
+    NSMutableArray<__kindof TTRule *> *_rules;
     
     BOOL _requiresResolution;
 }
@@ -35,10 +35,10 @@
     return _rules != nil ? [_rules count] : 0;
 }
 
-- (NSArray *) rules {
+- (NSArray<__kindof TTRule *> *) rules {
     if (_rules) {
-        NSMutableArray *reversedRules = [NSMutableArray arrayWithCapacity:
-                                         [_rules count]];
+        NSMutableArray<__kindof TTRule *> *reversedRules = [NSMutableArray arrayWithCapacity:
+                                                            [_rules count]];
 
         NSEnumerator *reverseEnumerator = [_rules reverseObjectEnumerator];
 
@@ -46,7 +46,8 @@
             [reversedRules addObject: rule];
         }
 
-        return [NSArray arrayWithArray: reversedRules];
+        return [NSArray arrayWithArray:
+                reversedRules];
     }
 
     return [NSArray array];
@@ -134,6 +135,10 @@
 
 - (BOOL) push: (TTRule *) rule before: (TTRule *) otherRule {
     if ([self push: rule]) {
+        if (rule.resolutionConditionBeforeBlock) {
+            TTDebugWarning(@"Rule '%@' was already conditionally resolvable before another rule. The previous condition is no longer being evaluated.", rule);
+        }
+
         rule.resolutionConditionBeforeBlock = [self conditionForRule: rule
                                                   thatRespondsToRule: otherRule];
 
@@ -151,6 +156,10 @@
 
 - (BOOL) push: (TTRule *) rule after: (TTRule *) otherRule {
     if ([self push: rule]) {
+        if (rule.resolutionConditionAfterBlock) {
+            TTDebugWarning(@"Rule '%@' was already conditionally resolvable after another rule. The previous condition is no longer being evaluated.", rule);
+        }
+
         rule.resolutionConditionAfterBlock = [self conditionForRule: rule
                                                  thatRespondsToRule: otherRule];
 
@@ -166,7 +175,7 @@
                         otherRuleName]];
 }
 
-- (BOOL) pushRules: (NSArray *) rules {
+- (BOOL) pushRules: (NSArray<__kindof TTRule *> *) rules {
     for (TTRule *rule in rules) {
         if (![self push: rule]) {
             return NO;
@@ -176,7 +185,7 @@
     return YES;
 }
 
-- (BOOL) pushRuleSequence: (NSArray *) ruleSequence {
+- (BOOL) pushRuleSequence: (NSArray<__kindof TTRule *> *) ruleSequence {
     if (ruleSequence == nil || [ruleSequence count] == 0) {
         return NO;
     }
@@ -190,7 +199,7 @@
     return YES;
 }
 
-- (BOOL) pushRuleSequence: (NSArray *) ruleSequence before: (TTRule *) otherRule {
+- (BOOL) pushRuleSequence: (NSArray<__kindof TTRule *> *) ruleSequence before: (TTRule *) otherRule {
     if (ruleSequence == nil || [ruleSequence count] == 0) {
         return NO;
     }
@@ -204,7 +213,7 @@
     return YES;
 }
 
-- (BOOL) pushRuleSequence: (NSArray *) ruleSequence after: (TTRule *) otherRule {
+- (BOOL) pushRuleSequence: (NSArray<__kindof TTRule *> *) ruleSequence after: (TTRule *) otherRule {
     if (ruleSequence == nil || [ruleSequence count] == 0) {
         return NO;
     }
@@ -223,7 +232,7 @@
         return;
     }
 
-    NSArray *rules = [NSArray arrayWithArray: _rules];
+    NSArray<__kindof TTRule *> *rules = [NSArray arrayWithArray: _rules];
 
     for (TTRule *otherRule in [rules reverseObjectEnumerator]) {
         if (otherRule == rule) {
@@ -289,7 +298,7 @@
 
     TTDebug(@"processing rules...");
 
-    NSArray *rules = [NSArray arrayWithArray: _rules];
+    NSArray<__kindof TTRule *> *rules = [NSArray arrayWithArray: _rules];
 
     // go through all processable rules, from top to bottom; first in, last out.
     for (TTRule *rule in [rules reverseObjectEnumerator]) {
@@ -355,7 +364,7 @@
         return;
     }
 
-    NSArray *rules = [NSArray arrayWithArray: _rules];
+    NSArray<__kindof TTRule *> *rules = [NSArray arrayWithArray: _rules];
 
     for (TTRule *otherRule in [rules reverseObjectEnumerator]) {
         if (otherRule == rule) {

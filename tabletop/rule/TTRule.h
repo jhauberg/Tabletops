@@ -16,12 +16,12 @@ typedef BOOL (^TTRuleResolutionConditionResponseBlock)(id __nullable state, TTRu
 typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nullable otherRule);
 
 /**
- Represents a rule that resolves given a state or context that satisfies a condition.
+ Represents a rule that can be resolved.
  */
 @interface TTRule : NSObject
 
 /**
- Create an empty rule.
+ Create a rule.
  */
 + (nonnull instancetype) rule;
 /**
@@ -45,13 +45,13 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nul
                          thatResolves: (nullable TTRuleResolutionConditionBlock) condition
                                    to: (nullable TTRuleResolutionBlock) resolution;
 /**
- Create a rule that will resolve before another rule if a condition is satisfied.
+ Create a rule that will resolve @a before another rule, if a condition is satisfied.
  */
 + (nonnull instancetype) ruleWithName: (nullable NSString *) name
                    thatResolvesBefore: (nullable TTRuleResolutionConditionResponseBlock) responseCondition
                                    to: (nullable TTRuleResolutionResponseBlock) resolution;
 /**
- Create a rule that will resolve before or after another rule if a condition is satisfied.
+ Create a rule that will resolve either @a before or @a after another rule, if a condition is satisfied.
  */
 + (nonnull instancetype) ruleWithName: (nullable NSString *) name
                    thatResolvesBefore: (nullable TTRuleResolutionConditionResponseBlock) responseConditionBefore
@@ -59,7 +59,7 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nul
                               orAfter: (nullable TTRuleResolutionConditionResponseBlock) responseConditionAfter
                                    to: (nullable TTRuleResolutionResponseBlock) resolutionAfter;
 /**
- Create a rule that will resolve after another rule if a condition is satisfied.
+ Create a rule that will resolve @a after another rule, if a condition is satisfied.
  */
 + (nonnull instancetype) ruleWithName: (nullable NSString *) name
                     thatResolvesAfter: (nullable TTRuleResolutionConditionResponseBlock) responseCondition
