@@ -10,9 +10,51 @@
 
 @implementation TTEntity (Additions)
 
++ (nonnull instancetype) entityWithProperties: (nullable NSDictionary *) properties {
+    TTEntity *entity = [self entity];
+    
+    if (entity) {
+        [entity addProperties: properties];
+    }
+    
+    return entity;
+}
+
++ (nonnull instancetype) entityWithName: (nullable NSString *) name andProperties: (nullable NSDictionary<NSString *, id<NSCoding, NSObject, NSCopying>> *) properties {
+    TTEntity *entity = [self entityWithProperties: properties];
+    
+    if (entity) {
+        entity.name = name;
+    }
+    
+    return entity;
+}
+
+- (BOOL) addProperties: (nullable NSDictionary<NSString *, id<NSCoding, NSObject, NSCopying>> *) properties {
+    BOOL didAddAllProperties = YES;
+    
+    if (properties) {
+        for (NSString *key in [properties allKeys]) {
+            TTPropertyComponent *property = [TTPropertyComponent propertyWithName: key
+                                                                         andValue: properties[key]];
+            
+            if (![self addComponent: property]) {
+                didAddAllProperties = NO;
+            }
+        }
+    }
+    
+    return didAddAllProperties;
+}
+
 - (NSArray<__kindof TTTagComponent *> *) getAllTags {
     return [self getComponentsLikeType:
             [TTTagComponent class]];
+}
+
+- (void) applyTagWithName: (nonnull NSString *) name {
+    [self addComponent:
+     [TTTagComponent componentWithTag: name]];
 }
 
 - (TTTagComponent *) getTagWithName: (NSString *) tag {

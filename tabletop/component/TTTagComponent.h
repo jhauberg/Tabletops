@@ -9,7 +9,7 @@
 #import "TTEntityComponent.h"
 
 /**
- Provides a way of adding additional tags to an entity.
+ Provides a way of applying tags to an entity.
  */
 @interface TTTagComponent : TTEntityComponent
 
