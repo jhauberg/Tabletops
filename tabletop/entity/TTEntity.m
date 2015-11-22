@@ -100,7 +100,9 @@ NSString* const kTTEntityNameKey = @"name";
     }
     
     if ([_components containsObject: component]) {
-        TTDebugWarning(@"Attempted to add '%@' to '<%@: %p>%@' which already had this component assigned. The component was not added.", component, self.class, self, [self nameOrNothing]);
+        TTDebugWarning(@"Attempted to add '%@' to '<%@: %p>%@' which already had this component assigned."
+                       @"The component was not added.",
+                       component, self.class, self, [self nameOrNothing]);
 
         return NO;
     }
@@ -108,7 +110,9 @@ NSString* const kTTEntityNameKey = @"name";
 #ifdef DEBUG
     for (TTEntityComponent *existingComponent in _components) {
         if ([existingComponent isLike: component]) {
-            TTDebugWarning(@"Adding '%@' to '<%@: %p>%@' which already has a similar component ('%@') assigned. The component was added anyway. Are you sure this was intended?", component, self.class, self, [self nameOrNothing], existingComponent);
+            TTDebugWarning(@"Adding '%@' to '<%@: %p>%@' which already has a similar component ('%@') assigned."
+                           @"The component was added anyway. Are you sure this was intended?",
+                           component, self.class, self, [self nameOrNothing], existingComponent);
             
             break;
         }
@@ -150,7 +154,9 @@ NSString* const kTTEntityNameKey = @"name";
     }
     
     if (![_components containsObject: component]) {
-        TTDebugWarning(@"Attempted to remove '%@' from '<%@: %p>%@' which did not have this component assigned. The component was not removed.", component, self.class, self, [self nameOrNothing]);
+        TTDebugWarning(@"Attempted to remove '%@' from '<%@: %p>%@' which did not have this component assigned."
+                       @"The component was not removed.",
+                       component, self.class, self, [self nameOrNothing]);
 
         return NO;
     }
@@ -275,7 +281,8 @@ NSString* const kTTEntityNameKey = @"name";
 /**
  Determines equality by comparing likeness and @c name.
  
- Two entities are considered equal if they have the same name, and if they both have the same amount of components assigned and all of those components are alike.
+ Two entities are considered equal if they have the same name, and if they both have the same amount of components
+ assigned and all of those components are alike.
  */
 - (BOOL) isEqual: (id) object {
     if ([self isLike: object]) {

@@ -15,7 +15,8 @@ NSString* const kTTCoinEntityRepresentationKey = @"representation";
     TTCoinRepresentation *_representation;
 }
 
-+ (instancetype) coinWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside {
++ (instancetype) coinWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside
+                       andBackside: (id<NSCoding, NSObject, NSCopying>) backside {
     TTCoinEntity *coin = [self entity];
 
     if (coin) {

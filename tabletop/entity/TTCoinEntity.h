@@ -14,7 +14,8 @@
  */
 @interface TTCoinEntity : TTEntity
 
-+ (instancetype) coinWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside;
++ (instancetype) coinWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside
+                       andBackside: (id<NSCoding, NSObject, NSCopying>) backside;
 
 /**
  Get the representation component. Can not be removed.

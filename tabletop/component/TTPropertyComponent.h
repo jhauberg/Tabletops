@@ -16,7 +16,8 @@
 /**
  Create a property component with a named property and an initial value.
  */
-+ (nonnull instancetype) propertyWithName: (nullable NSString *) name andValue: (nullable id<NSCoding, NSObject, NSCopying>) value;
++ (nonnull instancetype) propertyWithName: (nullable NSString *) name
+                                 andValue: (nullable id<NSCoding, NSObject, NSCopying>) value;
 
 /**
  Get or set the name of the property.
@@ -48,12 +49,15 @@
  
  @returns A TTPropertyComponent object with a named property/value.
  */
-- (nonnull instancetype) initWithName: (nullable NSString *) name andValue: (nullable id<NSCoding, NSObject, NSCopying>) value;
+- (nonnull instancetype) initWithName: (nullable NSString *) name
+                             andValue: (nullable id<NSCoding, NSObject, NSCopying>) value;
 
 /**
  Compare the receiver to another property component.
  
- @returns NSOrderedSame if the other property is considered equal to the receiver, NSOrderedAscending if the other property is considered greater than the receiver and NSOrderedDescending if the other property is considered less.
+ @returns NSOrderedSame if the other property is considered equal to the receiver, 
+          NSOrderedAscending if the other property is considered greater than the receiver and
+          NSOrderedDescending if the other property is considered less.
  */
 - (NSComparisonResult) compare: (nonnull TTPropertyComponent *) otherProperty;
 

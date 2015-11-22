@@ -9,7 +9,8 @@
 #import "TTEntityGroupingComponent.h"
 
 /**
- Provides a mechanism for going through entities in a specific and repeating order; e.g. an order of players going clockwise around the table.
+ Provides a mechanism for going through entities in a specific and repeating order;
+ e.g. an order of players going clockwise around the table.
  */
 @interface TTOrderGroupingComponent : TTEntityGroupingComponent
 

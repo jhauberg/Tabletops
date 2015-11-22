@@ -25,12 +25,14 @@
  
  @returns A TTEntity object with property components already added.
  */
-+ (nonnull instancetype) entityWithName: (nullable NSString *) name andProperties: (nullable NSDictionary<NSString *, id<NSCoding, NSObject, NSCopying>> *) properties;
++ (nonnull instancetype) entityWithName: (nullable NSString *) name
+                          andProperties: (nullable NSDictionary<NSString *, id<NSCoding, NSObject, NSCopying>> *) properties;
 
 /**
  Add multiple property components to the entity.
  
- @returns YES if all the property components were added, otherwise NO. Note that some of the properties may still have been added.
+ @returns YES if all the property components were added, otherwise NO. Note that some of the properties may
+          still have been added.
  */
 - (BOOL) addProperties: (nullable NSDictionary<NSString *, id<NSCoding, NSObject, NSCopying>> *) properties;
 

@@ -255,16 +255,16 @@ NSString* const kTTDeckGroupingComponentDrawsFaceUpKey = @"draws_face_up";
                          inclusive: inclusive];
 }
 
-- (id) drawAtRandom {
+- (id) drawAny {
     return [self drawAtIndex:
             arc4random_uniform((uint32_t)[_entities count])];
 }
 
-- (NSArray *) drawAtRandom: (NSUInteger) amount {
+- (NSArray *) drawAny: (NSUInteger) amount {
     NSMutableArray *cards = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < amount; i++) {
-        TTEntity *card = [self drawAtRandom];
+        TTEntity *card = [self drawAny];
         
         if (!card) {
             break;

@@ -24,7 +24,8 @@
  */
 @property (readonly) NSUInteger count;
 /**
- Get the rules in order of resolution; i.e. from top to bottom, so that the first element is the top (and most recently pushed) rule.
+ Get the rules in order of resolution; i.e. from top to bottom, so that the first element is the top (and most
+ recently pushed) rule.
  */
 @property (nonnull, readonly) NSArray<__kindof TTRule *> *rules;
 
@@ -37,15 +38,18 @@
 /**
  Push a rule to the top of the stack. The rule will be resolved in response to another rule being resolved.
  
- Note that if the rule already has a condition under which it should resolve, that condition will also be evaluated when determining whether or not the rule can resolve before another rule.
+ Note that if the rule already has a condition under which it should resolve, that condition will also be evaluated
+ when determining whether or not the rule can resolve before another rule.
  
  @returns YES if the rule was added to the top of the stack, NO otherwise.
  */
 - (BOOL) push: (nonnull TTRule *) rule before: (nonnull TTRule *) otherRule;
 /**
- Push a rule to the top of the stack. The rule will be resolved in response to another rule with the given name being resolved.
+ Push a rule to the top of the stack. The rule will be resolved in response to another rule with the given name
+ being resolved.
  
- Note that if the rule already has a condition under which it should resolve, that condition will also be evaluated when determining whether or not the rule can resolve before another rule.
+ Note that if the rule already has a condition under which it should resolve, that condition will also
+ be evaluated when determining whether or not the rule can resolve before another rule.
 
  @returns YES if the rule was added to the top of the stack, NO otherwise.
  */
@@ -53,15 +57,18 @@
 /**
  Push a rule to the top of the stack. The rule will be resolved in response to another rule having been resolved.
  
- Note that if the rule already has a condition under which it should resolve, that condition will also be evaluated when determining whether or not the rule can resolve after another rule.
+ Note that if the rule already has a condition under which it should resolve, that condition will also be evaluated
+ when determining whether or not the rule can resolve after another rule.
  
  @returns YES if the rule was added to the top of the stack, NO otherwise.
  */
 - (BOOL) push: (nonnull TTRule *) rule after: (nonnull TTRule *) otherRule;
 /**
- Push a rule to the top of the stack. The rule will be resolved in response to another rule with the given name having been resolved.
+ Push a rule to the top of the stack. The rule will be resolved in response to another rule with the given name
+ having been resolved.
  
- Note that if the rule already has a condition under which it should resolve, that condition will also be evaluated when determining whether or not the rule can resolve after another rule.
+ Note that if the rule already has a condition under which it should resolve, that condition will also be
+ evaluated when determining whether or not the rule can resolve after another rule.
 
  @returns YES if the rule was added to the top of the stack, NO otherwise.
  */
@@ -77,7 +84,8 @@
 - (BOOL) pushRules: (nonnull NSArray<__kindof TTRule *> *) rules;
 
 /**
- Push rules to the top of the stack in an ordered sequence, so that the first rule in the sequence will be resolved first.
+ Push rules to the top of the stack in an ordered sequence, so that the first rule in
+ the sequence will be resolved first.
  
  Note that even if this returns NO, some rules may have been added.
  
@@ -85,7 +93,8 @@
  */
 - (BOOL) pushRuleSequence: (nonnull NSArray<__kindof TTRule *> *) ruleSequence;
 /**
- Push rules to the top of the stack in an ordered sequence, so that the first rule in the sequence will be resolved first. The rules will be resolved in response to another rule being resolved.
+ Push rules to the top of the stack in an ordered sequence, so that the first rule in the sequence will be
+ resolved first. The rules will be resolved in response to another rule being resolved.
  
  Note that even if this returns NO, some rules may have been added.
  
@@ -93,7 +102,8 @@
  */
 - (BOOL) pushRuleSequence: (nonnull NSArray<__kindof TTRule *> *) ruleSequence before: (nonnull TTRule *) otherRule;
 /**
- Push rules to the top of the stack in an ordered sequence, so that the first rule in the sequence will be resolved first. The rules will be resolved in response to another rule having been resolved.
+ Push rules to the top of the stack in an ordered sequence, so that the first rule in the sequence will be
+ resolved first. The rules will be resolved in response to another rule having been resolved.
  
  Note that even if this returns NO, some rules may have been added.
  

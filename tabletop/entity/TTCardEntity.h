@@ -14,8 +14,11 @@
  */
 @interface TTCardEntity : TTEntity
 
-+ (instancetype) cardWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside;
-+ (instancetype) cardWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp;
++ (instancetype) cardWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside
+                       andBackside: (id<NSCoding, NSObject, NSCopying>) backside;
++ (instancetype) cardWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside
+                       andBackside: (id<NSCoding, NSObject, NSCopying>) backside
+             withFrontsideFacingUp: (BOOL) faceUp;
 
 /**
  Get the representation component. Can not be removed.

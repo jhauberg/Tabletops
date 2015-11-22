@@ -16,7 +16,8 @@
 /**
  Create a representation with a frontside and a backside.
  */
-+ (nonnull instancetype) representationWithFrontside: (nullable id<NSCoding, NSObject, NSCopying>) frontside andBackside: (nullable id<NSCoding, NSObject, NSCopying>) backside;
++ (nonnull instancetype) representationWithFrontside: (nullable id<NSCoding, NSObject, NSCopying>) frontside
+                                         andBackside: (nullable id<NSCoding, NSObject, NSCopying>) backside;
 
 /**
  Get or set the backside.
@@ -33,10 +34,12 @@
  */
 @property (readonly) BOOL isFlipped;
 
-- (nonnull instancetype) initWithFrontside: (nullable id<NSCoding, NSObject, NSCopying>) frontside andBackside: (nullable id<NSCoding, NSObject, NSCopying>) backside;
+- (nonnull instancetype) initWithFrontside: (nullable id<NSCoding, NSObject, NSCopying>) frontside
+                               andBackside: (nullable id<NSCoding, NSObject, NSCopying>) backside;
 
 /**
- Flip the coin, making it show its @c backside if it was showing its @c frontside before, or show its @c frontside if it was showing its @c backside before.
+ Flip the coin, making it show its @c backside if it was showing its @c frontside before, 
+ or show its @c frontside if it was showing its @c backside before.
  */
 - (void) flip;
 /**

@@ -16,7 +16,9 @@
 /**
  Create a representation with a frontside and a backside, with its frontside facing up or down initially.
  */
-+ (nonnull instancetype) representationWithFrontside: (nullable id<NSCoding, NSObject, NSCopying>) frontside andBackside: (nullable id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp;
++ (nonnull instancetype) representationWithFrontside: (nullable id<NSCoding, NSObject, NSCopying>) frontside
+                                         andBackside: (nullable id<NSCoding, NSObject, NSCopying>) backside
+                               withFrontsideFacingUp: (BOOL) faceUp;
 
 /**
  Determine whether the card is currently showing face up.
@@ -27,7 +29,9 @@
  */
 @property (readonly) BOOL isTapped;
 
-- (nonnull instancetype) initWithFrontside: (nullable id<NSCoding, NSObject, NSCopying>) frontside andBackside: (nullable id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp;
+- (nonnull instancetype) initWithFrontside: (nullable id<NSCoding, NSObject, NSCopying>) frontside
+                               andBackside: (nullable id<NSCoding, NSObject, NSCopying>) backside
+                     withFrontsideFacingUp: (BOOL) faceUp;
 
 /**
  Flip the card, making it face up if it was facing down before, or face down if it was facing up before.

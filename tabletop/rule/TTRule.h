@@ -66,29 +66,35 @@ typedef BOOL (^TTRuleResolutionResponseBlock)(id __nullable state, TTRule *__nul
                                    to: (nullable TTRuleResolutionResponseBlock) resolution;
 
 /**
- Get or set the action that should occur when the rule resolves. The action should return YES if the rule was resolved successfully, NO otherwise.
+ Get or set the action that should occur when the rule resolves.
+ The action should return YES if the rule was resolved successfully, NO otherwise.
  */
 @property (nullable, strong) TTRuleResolutionBlock resolutionBlock;
 /**
- Get or set a condition that returns YES if the rule should be resolved given the current state. NO otherwise.
+ Get or set a condition that returns YES if the rule should be resolved given the current state.
+ NO otherwise.
  */
 @property (nullable, strong) TTRuleResolutionConditionBlock resolutionConditionBlock;
 
 /**
- Get or set a condition that returns YES if the rule should be resolved as a response to another rule being resolved. NO otherwise.
+ Get or set a condition that returns YES if the rule should be resolved as a response to another rule being resolved.
+ NO otherwise.
  */
 @property (nullable, strong) TTRuleResolutionConditionResponseBlock resolutionConditionBeforeBlock;
 /**
- Get or set a condition that returns YES if the rule should be resolved as a response to another rule having been resolved. NO otherwise.
+ Get or set a condition that returns YES if the rule should be resolved as a response to another rule having been
+ resolved. NO otherwise.
  */
 @property (nullable, strong) TTRuleResolutionConditionResponseBlock resolutionConditionAfterBlock;
 
 /**
- Get or set the action that should occur when the rule resolves as a response to another rule being resolved. The action should return YES if the rule was resolved, NO otherwise.
+ Get or set the action that should occur when the rule resolves as a response to another rule being resolved.
+ The action should return YES if the rule was resolved, NO otherwise.
  */
 @property (nullable, strong) TTRuleResolutionResponseBlock resolutionBeforeBlock;
 /**
- Get or set the action that should occur when the rule is being resolved as a response to another rule having been resolved. The action should return YES if the rule was resolved, NO otherwise.
+ Get or set the action that should occur when the rule is being resolved as a response to another rule having been resolved.
+ The action should return YES if the rule was resolved, NO otherwise.
  */
 @property (nullable, strong) TTRuleResolutionResponseBlock resolutionAfterBlock;
 

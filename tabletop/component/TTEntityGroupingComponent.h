@@ -71,9 +71,11 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 /**
  Add multiple entities to the group, if specified, as an atomic operation.
  
- @returns YES if the entities were added, otherwise NO. If specified as an atomic operation, only returns YES if *all* the entities were added.
+ @returns YES if the entities were added, otherwise NO. If specified as an atomic operation,
+          only returns YES if *all* the entities were added.
  */
-- (BOOL) addEntities: (nonnull NSArray<__kindof ObjectType> *) entities atomically: (BOOL) atomically;
+- (BOOL) addEntities: (nonnull NSArray<__kindof ObjectType> *) entities
+          atomically: (BOOL) atomically;
 
 /**
  Remove an entity from the group.
@@ -90,9 +92,11 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 /**
  Remove multiple entities from the group.
  
- @returns YES if the entities were removed, otherwise NO. If specified as an atomic operation, only returns YES if *all* the entities were removed.
+ @returns YES if the entities were removed, otherwise NO. If specified as an atomic operation,
+          only returns YES if *all* the entities were removed.
  */
-- (BOOL) removeEntities: (nonnull NSArray<__kindof ObjectType> *) entities atomically: (BOOL) atomically;
+- (BOOL) removeEntities: (nonnull NSArray<__kindof ObjectType> *) entities
+             atomically: (BOOL) atomically;
 /**
  Remove all entities from the group.
  
@@ -111,19 +115,24 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
  
  @returns YES if the entity was moved, otherwise NO.
  */
-- (BOOL) moveEntity: (nonnull ObjectType) entity fromGroup: (nonnull TTEntityGroupingComponent *) group atomically: (BOOL) atomically;
+- (BOOL) moveEntity: (nonnull ObjectType) entity
+          fromGroup: (nonnull TTEntityGroupingComponent *) group
+         atomically: (BOOL) atomically;
 /**
  Move multiple entities from a group to the receiver group.
 
  @returns YES if the entities were moved, otherwise NO.
  */
-- (BOOL) moveEntities: (nonnull NSArray<__kindof ObjectType> *) entities fromGroup: (nonnull TTEntityGroupingComponent *) group;
+- (BOOL) moveEntities: (nonnull NSArray<__kindof ObjectType> *) entities
+            fromGroup: (nonnull TTEntityGroupingComponent *) group;
 /**
  Move multiple entities from a group to the receiver group, if specified, as an atomic operation.
 
  @returns YES if the entities were moved, otherwise NO.
  */
-- (BOOL) moveEntities: (nonnull NSArray<__kindof ObjectType> *) entities fromGroup: (nonnull TTEntityGroupingComponent *) group atomically: (BOOL) atomically;
+- (BOOL) moveEntities: (nonnull NSArray<__kindof ObjectType> *) entities
+            fromGroup: (nonnull TTEntityGroupingComponent *) group
+           atomically: (BOOL) atomically;
 /**
  Move all entities from a group to the receiver group.
 
@@ -132,7 +141,8 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 - (BOOL) moveAllEntitiesFromGroup: (nonnull TTEntityGroupingComponent *) group;
 
 /**
- Get all entities that matches a condition. This will search through child groups too (in case this group contains another group of entities).
+ Get all entities that matches a condition. This will search through child groups too (in case this group
+ contains another group of entities).
 
  @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
  */
@@ -142,7 +152,8 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 
  @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
  */
-- (nonnull NSArray<__kindof ObjectType> *) getEntitiesMatching: (nonnull TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper;
+- (nonnull NSArray<__kindof ObjectType> *) getEntitiesMatching: (nonnull TTEntityConditional) condition
+                                              inChildGroupings: (BOOL) searchDeeper;
 
 /**
  Sort entities by the default sorting behavior for the group.

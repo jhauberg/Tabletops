@@ -94,7 +94,10 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
     if ([_entities containsObject: entity]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-        TTDebugWarning(@"Attempted to add '<%@: %p>%@' to '<%@: %p>' which already had this entity grouped. The entity was not added.", [entity class], entity, [entity performSelector: @selector(nameOrNothing)], self.class, self);
+        TTDebugWarning(@"Attempted to add '<%@: %p>%@' to '<%@: %p>' which already had this entity grouped."
+                       @"The entity was not added.",
+                       [entity class], entity, [entity performSelector: @selector(nameOrNothing)],
+                       self.class, self);
 #pragma clang diagnostic pop
         return NO;
     }
@@ -104,7 +107,10 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
         if ([existingEntity isLike: entity]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-            TTDebugWarning(@"Adding '<%@: %p>%@' to '<%@: %p>' which already has a similar entity ('<%@: %p>%@') grouped. The entity was added anyway. Are you sure this was intended?", [entity class], entity, [entity performSelector: @selector(nameOrNothing)], self.class, self, existingEntity.class, existingEntity, [existingEntity performSelector: @selector(nameOrNothing)]);
+            TTDebugWarning(@"Adding '<%@: %p>%@' to '<%@: %p>' which already has a similar entity ('<%@: %p>%@') grouped."
+                           @"The entity was added anyway. Are you sure this was intended?",
+                           [entity class], entity, [entity performSelector: @selector(nameOrNothing)], self.class, self,
+                           existingEntity.class, existingEntity, [existingEntity performSelector: @selector(nameOrNothing)]);
 #pragma clang diagnostic pop
             break;
         }

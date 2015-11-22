@@ -12,14 +12,19 @@ NSString* const kTTCardRepresentationIsTappedKey = @"is_tapped";
 
 @implementation TTCardRepresentation
 
-+ (instancetype) representationWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp {
++ (instancetype) representationWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside
+                                 andBackside: (id<NSCoding, NSObject, NSCopying>) backside
+                       withFrontsideFacingUp: (BOOL) faceUp {
     return [[[self class] alloc] initWithFrontside: frontside
                                        andBackside: backside
                              withFrontsideFacingUp: faceUp];
 }
 
-- (instancetype) initWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside andBackside: (id<NSCoding, NSObject, NSCopying>) backside withFrontsideFacingUp: (BOOL) faceUp {
-    if ((self = [super initWithFrontside: frontside andBackside: backside])) {
+- (instancetype) initWithFrontside: (id<NSCoding, NSObject, NSCopying>) frontside
+                       andBackside: (id<NSCoding, NSObject, NSCopying>) backside
+             withFrontsideFacingUp: (BOOL) faceUp {
+    if ((self = [super initWithFrontside: frontside
+                             andBackside: backside])) {
         if (faceUp) {
             [self flipToFrontside];
         }
