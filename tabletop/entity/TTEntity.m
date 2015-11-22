@@ -320,6 +320,14 @@ NSString* const kTTEntityNameKey = @"name";
     return NO;
 }
 
+- (NSArray *) componentsSortedAlphabetically {
+    return [_components sortedArrayUsingComparator:
+            ^NSComparisonResult(TTEntityComponent *lhs, TTEntityComponent *rhs) {
+                return [NSStringFromClass([lhs class]) compare:
+                        NSStringFromClass([rhs class])];
+            }];
+}
+
 - (NSString *) nameOrNothing {
     return self.name ? [NSString stringWithFormat: @" \"%@\"", self.name] : @"";
 }
@@ -329,7 +337,7 @@ NSString* const kTTEntityNameKey = @"name";
                                     [NSString stringWithFormat: @"\n <%@%@: %p>",
                                      self.class, [self nameOrNothing], self]];
     
-    for (TTEntityComponent *component in _components) {
+    for (TTEntityComponent *component in [self componentsSortedAlphabetically]) {
         [description appendFormat:
          @"\n  ↳ %@", component];
     }
@@ -341,7 +349,7 @@ NSString* const kTTEntityNameKey = @"name";
 - (NSString *) shortDescription {
     NSMutableString *componentsDescription = [[NSMutableString alloc] init];
 
-    for (TTEntityComponent *component in _components) {
+    for (TTEntityComponent *component in [self componentsSortedAlphabetically]) {
         if ([componentsDescription length] > 0) {
             [componentsDescription appendString: @", "];
         } else {

@@ -380,7 +380,7 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
         } else {
             [entitiesDescription appendString: @"\n"];
         }
-        
+
         [entitiesDescription appendString:
          [NSString stringWithFormat: @"     ↳ %@", [entity shortDescription]]];
     }
