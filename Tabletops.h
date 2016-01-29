@@ -9,6 +9,9 @@
 #ifndef TABLETOPS_H
 #define TABLETOPS_H
 
+#define TABLETOPS_VERSION @"0.1.0"
+#define TABLETOPS_BUILD 1
+
 #ifdef DEBUG
   #ifndef SHOW_RUNTIME_WARNINGS
     #define SHOW_RUNTIME_WARNINGS 1
