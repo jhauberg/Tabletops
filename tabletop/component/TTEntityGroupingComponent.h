@@ -45,7 +45,7 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 @property (readonly) NSUInteger countIncludingChildGroupings;
 
 /**
- The entities within this group.
+ The entities contained in this group.
  */
 @property (nonnull, readonly) NSArray<__kindof ObjectType> *entities;
 
@@ -105,13 +105,13 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
 - (BOOL) removeAllEntities;
 
 /**
- Move an entity from a group to the receiver group.
+ Move an entity from another group to this group.
  
  @returns YES if the entity was moved, otherwise NO.
  */
 - (BOOL) moveEntity: (nonnull ObjectType) entity fromGroup: (nonnull TTEntityGroupingComponent *) group;
 /**
- Move an entity from a group to the receiver group, if specified, as an atomic operation.
+ Move an entity from another group to this group. If specified, as an atomic operation.
  
  @returns YES if the entity was moved, otherwise NO.
  */
@@ -119,14 +119,14 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
           fromGroup: (nonnull TTEntityGroupingComponent *) group
          atomically: (BOOL) atomically;
 /**
- Move multiple entities from a group to the receiver group.
+ Move multiple entities from another group to this group.
 
  @returns YES if the entities were moved, otherwise NO.
  */
 - (BOOL) moveEntities: (nonnull NSArray<__kindof ObjectType> *) entities
             fromGroup: (nonnull TTEntityGroupingComponent *) group;
 /**
- Move multiple entities from a group to the receiver group, if specified, as an atomic operation.
+ Move multiple entities from another group to this group. If specified, as an atomic operation.
 
  @returns YES if the entities were moved, otherwise NO.
  */
@@ -134,23 +134,31 @@ typedef BOOL (^TTEntityConditional)(TTEntity *__nonnull entity);
             fromGroup: (nonnull TTEntityGroupingComponent *) group
            atomically: (BOOL) atomically;
 /**
- Move all entities from a group to the receiver group.
+ Move all entities from another group to this group.
 
  @returns YES if the entities were moved, otherwise NO.
  */
 - (BOOL) moveAllEntitiesFromGroup: (nonnull TTEntityGroupingComponent *) group;
 
 /**
- Get all entities that matches a condition. This will search through child groups too (in case this group
- contains another group of entities).
+ Get the first entity that matches a condition.
+ */
+- (nonnull ObjectType) getEntityMatching: (nonnull TTEntityConditional) condition;
+/**
+ Get the first entity that matches a condition. If specified, also searches through child groups.
+ */
+- (nonnull ObjectType) getEntityMatching: (nonnull TTEntityConditional) condition
+                        inChildGroupings: (BOOL) searchDeeper;
+/**
+ Get all entities that matches a condition.
 
- @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
+ @returns An empty NSArray if @c condition is nil, or if no entities match the condition. Otherwise an NSArray containing all the matches.
  */
 - (nonnull NSArray<__kindof ObjectType> *) getEntitiesMatching: (nonnull TTEntityConditional) condition;
 /**
  Get all entities that matches a condition. If specified, also searches through child groups.
 
- @returns An empty NSArray if @c condition is nil, or if no entities match the condition, otherwise all the matches.
+ @returns An empty NSArray if @c condition is nil, or if no entities match the condition. Otherwise an NSArray containing all the matches.
  */
 - (nonnull NSArray<__kindof ObjectType> *) getEntitiesMatching: (nonnull TTEntityConditional) condition
                                               inChildGroupings: (BOOL) searchDeeper;

@@ -244,6 +244,16 @@ NSString* const kTTEntityGroupingComponentEntitiesKey = @"entities";
                     fromGroup: group];
 }
 
+- (id) getEntityMatching: (nonnull TTEntityConditional) condition {
+    return [self getEntityMatching: condition
+                  inChildGroupings: NO];
+}
+
+- (id) getEntityMatching: (nonnull TTEntityConditional) condition inChildGroupings: (BOOL) searchDeeper {
+    return [[self getEntitiesMatching: condition
+                     inChildGroupings: searchDeeper] firstObject];
+}
+
 - (NSArray *) getEntitiesMatching: (TTEntityConditional) condition {
     return [self getEntitiesMatching: condition
                     inChildGroupings: NO];

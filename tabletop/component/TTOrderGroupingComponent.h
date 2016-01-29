@@ -50,7 +50,7 @@
 - (void) reset;
 
 /**
- Make the specified entity be the first in the order of entities. This also resets the order.
+ Make the specified entity be the first in the order of entities. Note that this resets the order.
  */
 - (void) makeEntityFirstInOrder: (nonnull TTEntity *) entity;
 

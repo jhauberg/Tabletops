@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "TTEntity.h"
+
 #import "TTPropertyComponent.h"
 #import "TTTagComponent.h"
 
@@ -43,7 +44,17 @@
  */
 - (nonnull NSArray<__kindof TTTagComponent *> *) getAllTags;
 
+/**
+ Get a tag component with the specified tag name.
+ 
+ @returns The first TTTagComponent object that has a matching tag name. Nil if none was found.
+ */
 - (nullable TTTagComponent *) getTagWithName: (nonnull NSString *) tag;
+/**
+ Get a property component with the specified name.
+ 
+ @returns The first TTPropertyComponent object that has a matching name. Nil if none was found.
+ */
 - (nullable TTPropertyComponent *) getPropertyWithName: (nonnull NSString *) name;
 
 /**

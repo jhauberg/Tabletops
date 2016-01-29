@@ -33,7 +33,7 @@ NSString* const kTTCounterComponentStepKey = @"step";
 #ifdef DEBUG
         if ([amount doubleValue] < 0) {
             TTDebugWarning(@"Attempting to increment '%@' by a negative value ('%@') will cause a decrement instead."
-                           @"Are you sure this is intended?",
+                           @"Are you sure this wass intended?",
                            self, amount);
         }
 #endif
@@ -55,7 +55,7 @@ NSString* const kTTCounterComponentStepKey = @"step";
 #ifdef DEBUG
         if ([amount doubleValue] < 0) {
             TTDebugWarning(@"Attempting to decrement '%@' by a negative value ('%@') causes an increment instead."
-                           @"Are you sure this is intended?",
+                           @"Are you sure this was intended?",
                            self, amount);
         }
 #endif
