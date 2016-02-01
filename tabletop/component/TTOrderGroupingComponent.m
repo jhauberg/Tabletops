@@ -33,15 +33,15 @@ NSString* const kTTOrderGroupingComponentStartingEntityKey = @"starting_entity";
     [encoder encodeObject: _startingEntity forKey: kTTOrderGroupingComponentStartingEntityKey];
 }
 
-- (TTEntity *) current {
+- (id) current {
     return _currentEntity;
 }
 
-- (TTEntity *) first {
+- (id) first {
     return _startingEntity;
 }
 
-- (TTEntity *) last {
+- (id) last {
     TTEntity *last = nil;
 
     if (self.count > 0) {
@@ -57,7 +57,7 @@ NSString* const kTTOrderGroupingComponentStartingEntityKey = @"starting_entity";
     return last;
 }
 
-- (TTEntity *) previous {
+- (id) previous {
     TTEntity *previous = nil;
 
     if (!self.isEmpty) {
@@ -73,7 +73,7 @@ NSString* const kTTOrderGroupingComponentStartingEntityKey = @"starting_entity";
     return previous;
 }
 
-- (TTEntity *) next {
+- (id) next {
     TTEntity *next = nil;
 
     if (!self.isEmpty) {
@@ -101,7 +101,7 @@ NSString* const kTTOrderGroupingComponentStartingEntityKey = @"starting_entity";
     _currentEntity = _startingEntity;
 }
 
-- (void) makeEntityFirstInOrder: (TTEntity *) entity {
+- (void) makeEntityFirstInOrder: (id) entity {
     if ([_entities containsObject: entity]) {
         _startingEntity = entity;
 
@@ -109,7 +109,7 @@ NSString* const kTTOrderGroupingComponentStartingEntityKey = @"starting_entity";
     }
 }
 
-- (BOOL) addEntity: (TTEntity *) entity {
+- (BOOL) addEntity: (id) entity {
     if ([super addEntity: entity]) {
         if (!_startingEntity) {
             _startingEntity = entity;
@@ -123,7 +123,7 @@ NSString* const kTTOrderGroupingComponentStartingEntityKey = @"starting_entity";
     return NO;
 }
 
-- (BOOL) removeEntity: (TTEntity *) entity {
+- (BOOL) removeEntity: (id) entity {
     if ([super removeEntity: entity]) {
         if (_currentEntity == entity) {
             _currentEntity = self.next;

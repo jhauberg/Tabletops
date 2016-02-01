@@ -12,28 +12,28 @@
  Provides a mechanism for going through entities in a specific and repeating order;
  e.g. an order of players going clockwise around the table.
  */
-@interface TTOrderGroupingComponent : TTEntityGroupingComponent
+@interface TTOrderGroupingComponent<ObjectType : TTEntity *> : TTEntityGroupingComponent<ObjectType>
 
 /**
  Get the current entity in the order.
  */
-@property (nullable, readonly) TTEntity *current;
+@property (nullable, readonly) ObjectType current;
 /**
  Get the previous entity in the order.
  */
-@property (nullable, readonly) TTEntity *previous;
+@property (nullable, readonly) ObjectType previous;
 /**
  Get the next entity in the order.
  */
-@property (nullable, readonly) TTEntity *next;
+@property (nullable, readonly) ObjectType next;
 /**
  Get the last entity in the order. The @c last entity is always the entity just before the @c first entity.
  */
-@property (nullable, readonly) TTEntity *last;
+@property (nullable, readonly) ObjectType last;
 /**
  Get the first and starting entity in the order.
  */
-@property (nullable, readonly) TTEntity *first;
+@property (nullable, readonly) ObjectType first;
 
 /**
  Advance the order to the @c next entity.
@@ -52,6 +52,6 @@
 /**
  Make the specified entity be the first in the order of entities. Note that this resets the order.
  */
-- (void) makeEntityFirstInOrder: (nonnull TTEntity *) entity;
+- (void) makeEntityFirstInOrder: (nonnull ObjectType) entity;
 
 @end

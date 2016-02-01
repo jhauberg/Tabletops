@@ -13,20 +13,20 @@
  
  A pile can be drawn from (similar to a deck), but always randomly.
  */
-@interface TTPileGroupingComponent : TTEntityGroupingComponent
+@interface TTPileGroupingComponent<ObjectType : TTEntity *> : TTEntityGroupingComponent<ObjectType>
 
 /**
  Draw an entity and remove it from the pile.
 
  @returns A randomly picked entity, if any. Nil otherwise.
  */
-- (nullable TTEntity *) draw;
+- (nullable ObjectType) draw;
 
 /**
  Draw several entities and remove them from the pile.
 
  @returns An NSArray of up to @c amount of randomly picked entities, if any. An empty array otherwise.
  */
-- (nonnull NSArray *) draw: (NSUInteger) amount;
+- (nonnull NSArray<__kindof ObjectType> *) draw: (NSUInteger) amount;
 
 @end

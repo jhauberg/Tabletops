@@ -10,7 +10,7 @@
 
 @implementation TTPileGroupingComponent
 
-- (TTEntity *) draw {
+- (id) draw {
     TTEntity *entity = nil;
 
     if (_entities.count > 0) {
