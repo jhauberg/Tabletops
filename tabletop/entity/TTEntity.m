@@ -100,7 +100,7 @@ NSString* const kTTEntityNameKey = @"name";
     }
     
     if ([_components containsObject: component]) {
-        TTDebugWarning(@"Attempted to add '%@' to '<%@: %p>%@' which already had this component assigned."
+        TTDebugWarning(@"Attempted to add '%@' to '<%@: %p>%@' which already had this component assigned. "
                        @"The component was not added.",
                        component, self.class, self, [self nameOrNothing]);
 
@@ -110,7 +110,7 @@ NSString* const kTTEntityNameKey = @"name";
 #ifdef DEBUG
     for (TTEntityComponent *existingComponent in _components) {
         if ([existingComponent isLike: component]) {
-            TTDebugWarning(@"Adding '%@' to '<%@: %p>%@' which already has a similar component ('%@') assigned."
+            TTDebugWarning(@"Adding '%@' to '<%@: %p>%@' which already has a similar component ('%@') assigned. "
                            @"The component was added anyway. Are you sure this was intended?",
                            component, self.class, self, [self nameOrNothing], existingComponent);
             
@@ -154,7 +154,7 @@ NSString* const kTTEntityNameKey = @"name";
     }
     
     if (![_components containsObject: component]) {
-        TTDebugWarning(@"Attempted to remove '%@' from '<%@: %p>%@' which did not have this component assigned."
+        TTDebugWarning(@"Attempted to remove '%@' from '<%@: %p>%@' which did not have this component assigned. "
                        @"The component was not removed.",
                        component, self.class, self, [self nameOrNothing]);
 
