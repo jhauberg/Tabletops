@@ -109,6 +109,11 @@ NSString* const kTTOrderGroupingComponentStartingEntityKey = @"starting_entity";
     }
 }
 
+- (void) makeRandomEntityFirstInOrder {
+    [self makeEntityFirstInOrder:
+     self.entities[arc4random_uniform((u_int32_t)_entities.count)]];
+}
+
 - (BOOL) addEntity: (id) entity {
     if ([super addEntity: entity]) {
         if (!_startingEntity) {

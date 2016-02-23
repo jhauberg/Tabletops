@@ -50,8 +50,13 @@
 - (void) reset;
 
 /**
- Make the specified entity be the first in the order of entities. Note that this resets the order.
+ Make the specified entity be the first in the order of entities. Note that this resets the current order.
  */
 - (void) makeEntityFirstInOrder: (nonnull ObjectType) entity;
+
+/**
+ Make a random entity be the first in the order of entities. Note that this resets the current order.
+ */
+- (void) makeRandomEntityFirstInOrder;
 
 @end
